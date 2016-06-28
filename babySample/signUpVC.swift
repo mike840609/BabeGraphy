@@ -8,8 +8,8 @@
 
 import UIKit
 
-class signUpVC: UIViewController , UITextFieldDelegate{
-
+class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    
     @IBOutlet weak var avaImg: UIImageView!
     
     @IBOutlet weak var emailTxt: SkyFloatingLabelTextFieldWithIcon!
@@ -29,12 +29,58 @@ class signUpVC: UIViewController , UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.setTextTheme()
         self.emailTxt.becomeFirstResponder()
+        
+        // 手勢添加
+        let avaTap = UITapGestureRecognizer(target: self, action: #selector(signUpVC.loadImg))
+        avaTap.numberOfTapsRequired = 1
+        avaImg.userInteractionEnabled = true
+        avaImg.addGestureRecognizer(avaTap)
+        
+        
+        
+        // image radious
+        avaImg.layer.cornerRadius = avaImg.frame.size.width/2
+        avaImg.clipsToBounds = true
+        
+        // 鍵盤高度適應
+        let hideTap = UITapGestureRecognizer(target: self, action: #selector(signUpVC.hideKeyboardTap(_:)))
+        hideTap.numberOfTapsRequired = 1
+        self.view.userInteractionEnabled = true
+        self.view.addGestureRecognizer(hideTap)
+        
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(signUpVC.showKeyboard(_:)), name: UIKeyboardWillShowNotification, object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(signUpVC.hideKeyboard(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        
     }
-
-
+    
+    // MARK: - Customer function
+    
+    
+    // 點擊隱藏鍵盤
+    func hideKeyboardTap(recoginizer:UITapGestureRecognizer){
+        self.view.endEditing(true)
+    }
+    
+    // MARK: - Image Picker
+    func loadImg(){
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .PhotoLibrary
+        picker.allowsEditing = true
+        presentViewController(picker, animated: true, completion: nil)
+    }
+    
+    // connect selected image to our imageView
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        avaImg.image = info[UIImagePickerControllerEditedImage] as? UIImage
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // MARK: - Styling the text fields to the Skyscanner theme
+    
     func setTextTheme(){
         
         self.signBtn.layer.borderColor = lightGreyColor.CGColor
@@ -43,7 +89,8 @@ class signUpVC: UIViewController , UITextFieldDelegate{
         
         
         self.applySkyscannerThemeWithIcon(self.emailTxt)
-//        self.emailTxt.iconText = "\u{f007}"
+        //  self.emailTxt.iconText = "\u{f007}"
+        //  self.emailTxt.iconText = "\u{f01c}"
         self.emailTxt.iconText = "\u{f1d8}"
         self.emailTxt.placeholder = "Account"
         self.emailTxt.selectedTitle = "enter your email address"
@@ -89,7 +136,7 @@ class signUpVC: UIViewController , UITextFieldDelegate{
         
     }
     
-    // MARK: - Styling the text fields to the Skyscanner theme
+    
     func applySkyscannerThemeWithIcon(textField: SkyFloatingLabelTextFieldWithIcon) {
         self.applySkyscannerTheme(textField)
         textField.iconColor = lightGreyColor
@@ -110,7 +157,7 @@ class signUpVC: UIViewController , UITextFieldDelegate{
         textField.placeholderFont = UIFont(name: "AppleSDGothicNeo-Light", size: 18)
         textField.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 18)
     }
-
+    
     
     // MARK: - loginBtn pressed 登入
     var isSignUpBtnPressed = false

@@ -178,10 +178,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="67Y-Cc-dxz">
-                                <rect key="frame" x="36" y="244" width="303" height="265"/>
+                                <rect key="frame" x="32" y="233" width="311" height="265"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G8v-wQ-Np3" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="303" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Wel-cX-9cS"/>
                                         </constraints>
@@ -189,7 +189,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uJx-4B-smV" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="45" width="303" height="40"/>
+                                        <rect key="frame" x="0.0" y="45" width="311" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="xe9-WC-dLg"/>
                                         </constraints>
@@ -197,7 +197,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i3F-yn-Tz8" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="90" width="303" height="40"/>
+                                        <rect key="frame" x="0.0" y="90" width="311" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="NOO-2n-QKQ"/>
                                         </constraints>
@@ -205,7 +205,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjg-6c-lwJ" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="135" width="303" height="40"/>
+                                        <rect key="frame" x="0.0" y="135" width="311" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="fgM-CF-t4U"/>
                                         </constraints>
@@ -213,7 +213,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cqi-ER-DvA" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="180" width="303" height="40"/>
+                                        <rect key="frame" x="0.0" y="180" width="311" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="6dG-kf-mmU"/>
                                         </constraints>
@@ -221,7 +221,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gCB-ex-sTS" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="225" width="303" height="40"/>
+                                        <rect key="frame" x="0.0" y="225" width="311" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Tbe-fD-VPh"/>
                                         </constraints>
@@ -231,12 +231,21 @@
                                 </subviews>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder2" translatesAutoresizingMaskIntoConstraints="NO" id="7lF-uP-dLk">
-                                <rect key="frame" x="125" y="99" width="125" height="125"/>
+                                <rect key="frame" x="125" y="84" width="125" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="1s9-2A-IRD"/>
                                     <constraint firstAttribute="width" constant="125" id="23a-7h-m3V"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHG-ds-eMX">
+                                <rect key="frame" x="81" y="20" width="213" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="2Xb-MT-nCp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="23"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="u1U-rw-Gig">
                                 <rect key="frame" x="77" y="622" width="221" height="30"/>
                                 <subviews>
@@ -279,7 +288,7 @@
                                 </variation>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRx-XX-mfB">
-                                <rect key="frame" x="24" y="539" width="327" height="45"/>
+                                <rect key="frame" x="20" y="532" width="335" height="45"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -289,37 +298,28 @@
                                     <action selector="signUpBtn_down:" destination="3kI-La-gdj" eventType="touchDown" id="v06-U5-c0s"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHG-ds-eMX">
-                                <rect key="frame" x="85" y="35" width="205" height="56"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="2Xb-MT-nCp"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="23"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="mRx-XX-mfB" firstAttribute="top" secondItem="67Y-Cc-dxz" secondAttribute="bottom" constant="30" id="0fk-XX-6oE"/>
+                            <constraint firstItem="mRx-XX-mfB" firstAttribute="top" secondItem="67Y-Cc-dxz" secondAttribute="bottom" constant="34" id="0fk-XX-6oE"/>
                             <constraint firstItem="u1U-rw-Gig" firstAttribute="leading" secondItem="njb-7u-LrV" secondAttribute="leadingMargin" constant="32" id="1Rg-nm-ceZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="u1U-rw-Gig" secondAttribute="trailing" constant="35" id="29U-BW-rCU"/>
                             <constraint firstItem="u1U-rw-Gig" firstAttribute="centerX" secondItem="njb-7u-LrV" secondAttribute="centerX" id="3VO-35-qDa"/>
                             <constraint firstItem="mRx-XX-mfB" firstAttribute="centerX" secondItem="njb-7u-LrV" secondAttribute="centerX" id="9CQ-qW-pdT"/>
                             <constraint firstItem="7lF-uP-dLk" firstAttribute="centerX" secondItem="njb-7u-LrV" secondAttribute="centerX" id="9jD-so-dcU"/>
-                            <constraint firstItem="mRx-XX-mfB" firstAttribute="leading" secondItem="njb-7u-LrV" secondAttribute="leadingMargin" constant="8" id="LnU-YJ-kWx"/>
+                            <constraint firstItem="mRx-XX-mfB" firstAttribute="leading" secondItem="njb-7u-LrV" secondAttribute="leadingMargin" constant="4" id="LnU-YJ-kWx"/>
                             <constraint firstItem="u1U-rw-Gig" firstAttribute="centerX" secondItem="67Y-Cc-dxz" secondAttribute="centerX" id="OPV-5P-zaM"/>
                             <constraint firstItem="u1U-rw-Gig" firstAttribute="centerX" secondItem="njb-7u-LrV" secondAttribute="centerX" id="OZT-A0-Vwx"/>
                             <constraint firstItem="u1U-rw-Gig" firstAttribute="leading" secondItem="njb-7u-LrV" secondAttribute="leadingMargin" constant="48" id="PE9-pS-00V"/>
-                            <constraint firstItem="67Y-Cc-dxz" firstAttribute="leading" secondItem="njb-7u-LrV" secondAttribute="leadingMargin" constant="20" id="cKF-Rt-Mvp"/>
-                            <constraint firstItem="67Y-Cc-dxz" firstAttribute="top" secondItem="7lF-uP-dLk" secondAttribute="bottom" constant="20" id="cOk-Ir-l4T"/>
-                            <constraint firstItem="jHG-ds-eMX" firstAttribute="top" secondItem="7ka-Ai-usG" secondAttribute="bottom" constant="15" id="dnq-lQ-gar"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="67Y-Cc-dxz" secondAttribute="trailing" constant="20" id="hT6-RV-H6S"/>
+                            <constraint firstItem="67Y-Cc-dxz" firstAttribute="leading" secondItem="njb-7u-LrV" secondAttribute="leadingMargin" constant="16" id="cKF-Rt-Mvp"/>
+                            <constraint firstItem="67Y-Cc-dxz" firstAttribute="top" secondItem="7lF-uP-dLk" secondAttribute="bottom" constant="24" id="cOk-Ir-l4T"/>
+                            <constraint firstItem="jHG-ds-eMX" firstAttribute="top" secondItem="7ka-Ai-usG" secondAttribute="bottom" id="dnq-lQ-gar"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="67Y-Cc-dxz" secondAttribute="trailing" constant="16" id="hT6-RV-H6S"/>
                             <constraint firstAttribute="trailingMargin" secondItem="u1U-rw-Gig" secondAttribute="trailing" constant="48" id="juP-hn-vpu"/>
                             <constraint firstItem="yhL-2e-n0e" firstAttribute="top" secondItem="u1U-rw-Gig" secondAttribute="bottom" constant="20" id="kJd-fs-4om"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="mRx-XX-mfB" secondAttribute="trailing" constant="8" id="o0C-dz-99Q"/>
-                            <constraint firstItem="jHG-ds-eMX" firstAttribute="leading" secondItem="njb-7u-LrV" secondAttribute="leadingMargin" constant="69" id="o1W-Wj-gx0"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="jHG-ds-eMX" secondAttribute="trailing" constant="69" id="qV9-wQ-Bxk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mRx-XX-mfB" secondAttribute="trailing" constant="4" id="o0C-dz-99Q"/>
+                            <constraint firstItem="jHG-ds-eMX" firstAttribute="leading" secondItem="njb-7u-LrV" secondAttribute="leadingMargin" constant="65" id="o1W-Wj-gx0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="jHG-ds-eMX" secondAttribute="trailing" constant="65" id="qV9-wQ-Bxk"/>
                             <constraint firstAttribute="trailingMargin" secondItem="u1U-rw-Gig" secondAttribute="trailing" constant="49" id="qWm-hm-ObX"/>
                             <constraint firstItem="u1U-rw-Gig" firstAttribute="top" secondItem="mRx-XX-mfB" secondAttribute="bottom" constant="9" id="r8C-3q-Qya"/>
                             <constraint firstItem="u1U-rw-Gig" firstAttribute="leading" secondItem="njb-7u-LrV" secondAttribute="leadingMargin" constant="35" id="ufA-lc-cyN"/>
