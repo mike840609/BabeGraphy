@@ -1,0 +1,24 @@
+PODS:
+  - Alamofire (3.4.0)
+  - Fusuma (0.5.0)
+  - HanekeSwift (0.10.1)
+  - SKPhotoBrowser (1.9.1)
+  - SwiftyJSON (2.3.2)
+
+DEPENDENCIES:
+  - Alamofire (~> 3.4)
+  - Fusuma (= 0.5.0)
+  - HanekeSwift (= 0.10.1)
+  - SKPhotoBrowser (= 1.9.1)
+  - SwiftyJSON (= 2.3.2)
+
+SPEC CHECKSUMS:
+  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  Fusuma: 9471a5f60c89f4633ae644ff29479fad65d64d0b
+  HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
+  SKPhotoBrowser: 45fad9ae67bdd24217d7808f91245c9b16fe3df9
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+
+PODFILE CHECKSUM: e610a3d06534dee7700131f9fd976eed4549316a
+
+COCOAPODS: 1.0.1

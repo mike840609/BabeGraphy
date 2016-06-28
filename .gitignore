@@ -1,0 +1,26 @@
+*.xcworkspace/
+xcuserdata/
+
+.DS_Store
+.localized
+build/
+xcuserdata/
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.pbxuser
+
+
+## Build generated
+build/
+DerivedData/
+
+# CocoaPods
+
+Pods/
+
+# Carthage
+
+Carthage/Checkouts
+Carthage/Build
+
