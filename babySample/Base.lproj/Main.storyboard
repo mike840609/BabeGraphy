@@ -177,53 +177,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="67Y-Cc-dxz">
-                                <rect key="frame" x="36" y="244" width="303" height="260"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="67Y-Cc-dxz">
+                                <rect key="frame" x="36" y="244" width="303" height="265"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G8v-wQ-Np3" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="303" height="35"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="303" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="Wel-cX-9cS"/>
+                                            <constraint firstAttribute="height" constant="40" id="Wel-cX-9cS"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uJx-4B-smV" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="45" width="303" height="35"/>
+                                        <rect key="frame" x="0.0" y="45" width="303" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="xe9-WC-dLg"/>
+                                            <constraint firstAttribute="height" constant="40" id="xe9-WC-dLg"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i3F-yn-Tz8" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="90" width="303" height="35"/>
+                                        <rect key="frame" x="0.0" y="90" width="303" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="NOO-2n-QKQ"/>
+                                            <constraint firstAttribute="height" constant="40" id="NOO-2n-QKQ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjg-6c-lwJ" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="135" width="303" height="35"/>
+                                        <rect key="frame" x="0.0" y="135" width="303" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="fgM-CF-t4U"/>
+                                            <constraint firstAttribute="height" constant="40" id="fgM-CF-t4U"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cqi-ER-DvA" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="180" width="303" height="35"/>
+                                        <rect key="frame" x="0.0" y="180" width="303" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="6dG-kf-mmU"/>
+                                            <constraint firstAttribute="height" constant="40" id="6dG-kf-mmU"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gCB-ex-sTS" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="225" width="303" height="35"/>
+                                        <rect key="frame" x="0.0" y="225" width="303" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="Tbe-fD-VPh"/>
+                                            <constraint firstAttribute="height" constant="40" id="Tbe-fD-VPh"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -279,11 +279,15 @@
                                 </variation>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRx-XX-mfB">
-                                <rect key="frame" x="24" y="534" width="327" height="45"/>
+                                <rect key="frame" x="24" y="539" width="327" height="45"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="signUpBtn_UpInside:" destination="3kI-La-gdj" eventType="touchUpInside" id="FXm-Sd-lsA"/>
+                                    <action selector="signUpBtn_down:" destination="3kI-La-gdj" eventType="touchDown" id="v06-U5-c0s"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHG-ds-eMX">
                                 <rect key="frame" x="85" y="35" width="205" height="56"/>
@@ -345,6 +349,7 @@
                         <outlet property="fullnameTxt" destination="tjg-6c-lwJ" id="33U-Kh-NwS"/>
                         <outlet property="passwordTxt" destination="uJx-4B-smV" id="pRs-Sw-NMN"/>
                         <outlet property="repeatPassword" destination="i3F-yn-Tz8" id="lZS-lw-7u8"/>
+                        <outlet property="signBtn" destination="mRx-XX-mfB" id="iEt-M9-OFP"/>
                         <outlet property="webTxt" destination="gCB-ex-sTS" id="Eoi-pl-1bZ"/>
                     </connections>
                 </viewController>

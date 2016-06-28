@@ -42,16 +42,15 @@ class LoginController: UIViewController,UITextFieldDelegate{
         
         self.applySkyscannerThemeWithIcon(self.idText)
         self.idText.iconText = "\u{f007}"
-        self.idText.placeholder = NSLocalizedString("Email", tableName: "SkyFloatingLabelTextField", comment: "placeholder for the departure city field")
-        self.idText.selectedTitle = NSLocalizedString("Email", tableName: "SkyFloatingLabelTextField", comment: "title for the departure city field")
-        self.idText.title = NSLocalizedString("Email", tableName: "SkyFloatingLabelTextField", comment: "title for the departure city field")
+        self.idText.placeholder = "Email"
+        self.idText.selectedTitle = "your email address"
+        self.idText.title = "Email"
         
         self.applySkyscannerThemeWithIcon(self.pwdText)
         self.pwdText.iconText = "\u{f084}"
-        self.pwdText.placeholder = NSLocalizedString("Password", tableName: "SkyFloatingLabelTextField", comment: "placeholder for the arrival city field")
-        self.pwdText.selectedTitle = NSLocalizedString("Password", tableName: "SkyFloatingLabelTextField", comment: "title for the arrival city field")
-        self.pwdText.title = NSLocalizedString("Password", tableName: "SkyFloatingLabelTextField", comment: "title for the arrival city field")
-        
+        self.pwdText.placeholder = "Password"
+        self.pwdText.selectedTitle = "your Password"
+        self.pwdText.title = "Password"
         self.idText.delegate = self
         self.pwdText.delegate = self
         
@@ -224,7 +223,7 @@ class LoginController: UIViewController,UITextFieldDelegate{
                 self.idText.errorMessage = nil
             }
             else if(!isValidEmail(email)) {
-                self.idText.errorMessage = NSLocalizedString("Email not valid", tableName: "SkyFloatingLabelTextField", comment: " ")
+                self.idText.errorMessage = "Email not valid"
                 
             } else {
                 self.idText.errorMessage = nil
