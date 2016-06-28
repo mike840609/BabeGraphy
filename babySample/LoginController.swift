@@ -26,8 +26,15 @@ class LoginController: UIViewController,UITextFieldDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // set theme
         self.setTextTheme()
         self.idText.becomeFirstResponder()
+        
+        // recognizer
+        let hideTap = UITapGestureRecognizer(target: self, action: #selector(LoginController.hideKeyboardTap(_:)))
+        hideTap.numberOfTapsRequired = 1
+        self.view.userInteractionEnabled = true
+        self.view.addGestureRecognizer(hideTap)
     }
     
     func setTextTheme(){
@@ -55,6 +62,12 @@ class LoginController: UIViewController,UITextFieldDelegate{
         self.pwdText.delegate = self
         
     }
+    
+    // 點擊隱藏鍵盤
+    func hideKeyboardTap(recoginizer:UITapGestureRecognizer){
+        self.view.endEditing(true)
+    }
+    
     // MARK: - Styling the text fields to the Skyscanner theme
     func applySkyscannerThemeWithIcon(textField: SkyFloatingLabelTextFieldWithIcon) {
         self.applySkyscannerTheme(textField)

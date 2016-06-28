@@ -40,7 +40,6 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         avaImg.addGestureRecognizer(avaTap)
         
         
-        
         // image radious
         avaImg.layer.cornerRadius = avaImg.frame.size.width/2
         avaImg.clipsToBounds = true
