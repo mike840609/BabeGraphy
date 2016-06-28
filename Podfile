@@ -9,5 +9,10 @@ target 'babySample' do
 	pod 'SKPhotoBrowser', '1.9.1'
 	pod 'Fusuma', '0.5.0'
 	pod 'HanekeSwift', '0.10.1'
+    pod 'FontAwesome.swift’, ‘0.7.3’
+ 
+
+
+
 	
 end

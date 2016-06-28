@@ -5,6 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="fontawesome-webfont.ttf">
+            <string>FontAwesome</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Login Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -269,6 +274,9 @@
                                                 <exclude reference="4Lp-Q9-SgD"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="SignInBtn:" destination="3kI-La-gdj" eventType="touchUpInside" id="uNI-qj-GDT"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -298,6 +306,30 @@
                                     <action selector="signUpBtn_down:" destination="3kI-La-gdj" eventType="touchDown" id="v06-U5-c0s"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ouZ-gf-ahM">
+                                <rect key="frame" x="16" y="29" width="62" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="62" id="3KC-Ta-8xI"/>
+                                    <constraint firstAttribute="height" constant="38" id="B0t-mv-I3l"/>
+                                    <constraint firstAttribute="height" constant="38" id="Sa5-5p-iAz"/>
+                                    <constraint firstAttribute="width" constant="62" id="cNR-V6-7bq"/>
+                                    <constraint firstAttribute="width" constant="62" id="veg-aU-Sgw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.12941176469999999" green="0.74117647060000003" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="3KC-Ta-8xI"/>
+                                        <exclude reference="B0t-mv-I3l"/>
+                                        <exclude reference="veg-aU-Sgw"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="SignInBtn:" destination="3kI-La-gdj" eventType="touchUpInside" id="eti-EU-x8r"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -307,10 +339,13 @@
                             <constraint firstItem="u1U-rw-Gig" firstAttribute="centerX" secondItem="njb-7u-LrV" secondAttribute="centerX" id="3VO-35-qDa"/>
                             <constraint firstItem="mRx-XX-mfB" firstAttribute="centerX" secondItem="njb-7u-LrV" secondAttribute="centerX" id="9CQ-qW-pdT"/>
                             <constraint firstItem="7lF-uP-dLk" firstAttribute="centerX" secondItem="njb-7u-LrV" secondAttribute="centerX" id="9jD-so-dcU"/>
+                            <constraint firstItem="ouZ-gf-ahM" firstAttribute="top" secondItem="7ka-Ai-usG" secondAttribute="bottom" constant="9" id="BiD-9e-SM5"/>
+                            <constraint firstItem="ouZ-gf-ahM" firstAttribute="leading" secondItem="njb-7u-LrV" secondAttribute="leadingMargin" id="KjT-zI-RbY"/>
                             <constraint firstItem="mRx-XX-mfB" firstAttribute="leading" secondItem="njb-7u-LrV" secondAttribute="leadingMargin" constant="4" id="LnU-YJ-kWx"/>
                             <constraint firstItem="u1U-rw-Gig" firstAttribute="centerX" secondItem="67Y-Cc-dxz" secondAttribute="centerX" id="OPV-5P-zaM"/>
                             <constraint firstItem="u1U-rw-Gig" firstAttribute="centerX" secondItem="njb-7u-LrV" secondAttribute="centerX" id="OZT-A0-Vwx"/>
                             <constraint firstItem="u1U-rw-Gig" firstAttribute="leading" secondItem="njb-7u-LrV" secondAttribute="leadingMargin" constant="48" id="PE9-pS-00V"/>
+                            <constraint firstItem="ouZ-gf-ahM" firstAttribute="centerY" secondItem="jHG-ds-eMX" secondAttribute="centerY" id="Uci-Xa-QKp"/>
                             <constraint firstItem="67Y-Cc-dxz" firstAttribute="leading" secondItem="njb-7u-LrV" secondAttribute="leadingMargin" constant="16" id="cKF-Rt-Mvp"/>
                             <constraint firstItem="67Y-Cc-dxz" firstAttribute="top" secondItem="7lF-uP-dLk" secondAttribute="bottom" constant="24" id="cOk-Ir-l4T"/>
                             <constraint firstItem="jHG-ds-eMX" firstAttribute="top" secondItem="7ka-Ai-usG" secondAttribute="bottom" id="dnq-lQ-gar"/>
@@ -344,6 +379,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="avaImg" destination="7lF-uP-dLk" id="jq0-lp-UwN"/>
+                        <outlet property="backBtn" destination="ouZ-gf-ahM" id="wNX-cT-VpS"/>
                         <outlet property="bioTxt" destination="cqi-ER-DvA" id="F5y-5D-oyK"/>
                         <outlet property="emailTxt" destination="G8v-wQ-Np3" id="f9o-Ht-lRy"/>
                         <outlet property="fullnameTxt" destination="tjg-6c-lwJ" id="33U-Kh-NwS"/>

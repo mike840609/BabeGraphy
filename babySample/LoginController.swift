@@ -28,7 +28,7 @@ class LoginController: UIViewController,UITextFieldDelegate{
         
         // set theme
         self.setTextTheme()
-        self.idText.becomeFirstResponder()
+//        self.idText.becomeFirstResponder()
         
         // recognizer
         let hideTap = UITapGestureRecognizer(target: self, action: #selector(LoginController.hideKeyboardTap(_:)))

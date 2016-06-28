@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FontAwesome_swift
+
 
 class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
@@ -20,7 +22,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
     @IBOutlet weak var webTxt: SkyFloatingLabelTextFieldWithIcon!
     
     @IBOutlet weak var signBtn: UIButton!
-    
+    @IBOutlet weak var backBtn: UIButton!
     
     let lightGreyColor = UIColor(red: 197/255, green: 205/255, blue: 205/255, alpha: 1.0)
     let darkGreyColor = UIColor(red: 52/255, green: 42/255, blue: 61/255, alpha: 1.0)
@@ -31,7 +33,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         super.viewDidLoad()
         
         self.setTextTheme()
-        self.emailTxt.becomeFirstResponder()
+//        self.emailTxt.becomeFirstResponder()
         
         // 手勢添加
         let avaTap = UITapGestureRecognizer(target: self, action: #selector(signUpVC.loadImg))
@@ -82,6 +84,10 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
     
     func setTextTheme(){
         
+        backBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
+        backBtn.setTitle(String.fontAwesomeIconWithCode("fa-chevron-left"), forState: .Normal)
+
+        
         self.signBtn.layer.borderColor = lightGreyColor.CGColor
         self.signBtn.layer.borderWidth = 1
         self.signBtn.setTitleColor(overcastBlueColor, forState: .Highlighted)
@@ -102,7 +108,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         self.passwordTxt.title = "Password"
         
         self.applySkyscannerThemeWithIcon(self.repeatPassword)
-        self.repeatPassword.iconText = "\u{f084}"
+        self.repeatPassword.iconText = "\u{f046}"
         self.repeatPassword.placeholder = "Repeat password"
         self.repeatPassword.selectedTitle = "enter your Password"
         self.repeatPassword.title = "confirm password"
@@ -300,6 +306,11 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
             self.hideTitleVisibleFromFields()
         }
         
+    }
+    
+    @IBAction func SignInBtn(sender: AnyObject) {
+        self.view.endEditing(true)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 }
