@@ -8,6 +8,8 @@
 
 import UIKit
 import FontAwesome_swift
+import Alamofire
+import SwiftyJSON
 
 
 class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate{
@@ -205,6 +207,10 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
             self.validateEmailTextFieldWithText(textField.text)
         }
         
+        if (textField == self.passwordTxt){
+            self.validatePasswordTextField(textField.text)
+        }
+        
         let nextTag = textField.tag + 1
         
         if let nextResponder = textField.superview?.viewWithTag(nextTag) as UIResponder! {
@@ -225,6 +231,32 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
             self.validateEmailTextFieldWithText(txtAfterUpdate as String)
             
         }
+        
+        
+         if (textField == self.passwordTxt){
+            
+            var txtAfterUpdate:NSString = passwordTxt.text! as NSString
+            txtAfterUpdate = txtAfterUpdate.stringByReplacingCharactersInRange(range, withString: string)
+            
+            self.validatePasswordTextField(txtAfterUpdate as String)
+        }
+        
+        
+        if (textField == self.repeatPassword){
+            
+            
+            var txtAfterUpdate:NSString = repeatPassword.text! as NSString
+            txtAfterUpdate = txtAfterUpdate.stringByReplacingCharactersInRange(range, withString: string)
+            
+            
+            self.validateRepeatPasswordTextField(txtAfterUpdate as String)
+            
+            
+            
+        }
+        
+        
+        
         return true
         
     }
@@ -240,10 +272,81 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
             } else {
                 self.emailTxt.errorMessage = nil
             }
-        } else {
+        }else {
             self.emailTxt.errorMessage = nil
         }
     }
+    
+    
+    func  validatePasswordTextField(password: String?){
+        
+        
+        
+        
+        if let password = password {
+            
+            
+//            print("Password is same: \(isSamePassword(password))")
+//            print("Password count: \(password.characters.count)")
+//            print("Password:\(password)")
+            
+            if(password.characters.count == 0) {
+                self.passwordTxt.errorMessage = nil
+                
+            }
+                
+            
+            else if password.characters.count>0 && password.characters.count<8{
+                self.passwordTxt.errorMessage = NSLocalizedString("Password should be at least 8 characters", tableName: "SkyFloatingLabelTextField", comment: " ")
+            }
+                
+            
+            
+            else {
+                self.passwordTxt.errorMessage = nil
+            }
+            
+            
+            
+        }
+        
+        else {
+            self.passwordTxt.errorMessage = nil
+        }
+        
+        
+    }
+    
+    
+    
+    func  validateRepeatPasswordTextField(repeat_password: String?){
+        
+        
+        if let repeat_password = repeat_password {
+            
+            if (!isSamePassword(repeat_password)){
+                self.repeatPassword.errorMessage = NSLocalizedString("Password should be the same", tableName: "SkyFloatingLabelTextField", comment: " ")
+            }
+            else {
+                
+                
+                self.repeatPassword.errorMessage = nil
+            }
+
+        }
+        
+        
+        else {
+            self.repeatPassword.errorMessage = nil
+        }
+        
+        
+        
+    }
+    
+    
+    
+    
     
     func isValidEmail(str:String?) -> Bool {
         
@@ -253,6 +356,25 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         return emailTest.evaluateWithObject(str)
         
     }
+    
+    
+    func  isSamePassword(repeat_password:String?) -> Bool {
+        
+        if let password = passwordTxt.text{
+            
+        return repeat_password == password
+        
+        }
+        
+        else {
+            return false
+        }
+        
+    }
+    
+    
+    
+    
     
     // MARK: - IBAction
     
@@ -304,7 +426,88 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         
         if(!self.showingTitleInProgress) {
             self.hideTitleVisibleFromFields()
+            
         }
+        
+        print("signup pressed")
+        
+        
+        
+        
+        let signupinfo = ["email":emailTxt.text!,"password":passwordTxt.text!,"name":fullnameTxt.text!]
+        
+        
+        Alamofire.request(.POST,"http://140.136.155.143/api/auth/signup",parameters: signupinfo)
+            .validate()
+            .responseJSON{
+                response in
+                
+                switch response.result{
+                    
+                    
+                // 註冊成功後直接登入
+                case .Success:
+                    let json = JSON(response.result.value!)
+                    print(json)
+                    
+                    if let accessToken = json["token"].string {
+                        
+                        print ("成功取得token,並存取")
+                        
+                        
+                        let alert = UIAlertController(title: "註冊成功！", message: nil, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        alert.addAction(OKAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                        // 存取token
+                        NSUserDefaults.standardUserDefaults().setObject(accessToken, forKey: "AccessToken")
+                        NSUserDefaults.standardUserDefaults().synchronize()
+                        
+                    }
+                    
+                case .Failure(let error):
+                    
+                    
+                    if error.code == -1004 {
+                        let alert = UIAlertController(title: "連線失敗", message: nil, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        alert.addAction(OKAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                        
+                    }else{
+                        
+                        print(error)
+                        let statusCode = response.response!.statusCode
+                        
+                        
+                        switch(statusCode){
+                            
+                        case 401: let alert = UIAlertController(title: "帳號或密碼錯誤", message: nil, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        alert.addAction(OKAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                            
+                            
+                        case 422: let alert = UIAlertController(title: "填寫欄位有缺少", message: nil, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        alert.addAction(OKAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                            
+                        default: let alert = UIAlertController(title: "伺服器可能出現問題", message: nil, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        alert.addAction(OKAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                            
+                        }
+                    
+                
+                    }
+                    
+                }
+                
+                
+        }
+        
         
     }
     
