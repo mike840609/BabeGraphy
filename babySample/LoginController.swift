@@ -147,6 +147,11 @@ class LoginController: UIViewController,UITextFieldDelegate{
                         NSUserDefaults.standardUserDefaults().setObject(accessToken, forKey: "AccessToken")
                         NSUserDefaults.standardUserDefaults().synchronize()
                         
+                        // 頁面轉跳
+                        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                        appDelegate.login()
+
+                        
                     }
                 //登入失敗做的事情
                 case .Failure(let error):
