@@ -429,6 +429,84 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
             
         }
         
+        print("signup pressed")
+        
+        
+        
+        
+        let signupinfo = ["email":emailTxt.text!,"password":passwordTxt.text!,"name":fullnameTxt.text!]
+        
+        
+        Alamofire.request(.POST,"http://140.136.155.143/api/auth/signup",parameters: signupinfo)
+            .validate()
+            .responseJSON{
+                response in
+                
+                switch response.result{
+                    
+                    
+                // 註冊成功後直接登入
+                case .Success:
+                    let json = JSON(response.result.value!)
+                    print(json)
+                    
+                    if let accessToken = json["token"].string {
+                        
+                        print ("成功取得token,並存取")
+                        
+                        
+                        let alert = UIAlertController(title: "註冊成功！", message: nil, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        alert.addAction(OKAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                        // 存取token
+                        NSUserDefaults.standardUserDefaults().setObject(accessToken, forKey: "AccessToken")
+                        NSUserDefaults.standardUserDefaults().synchronize()
+                        
+                    }
+                    
+                case .Failure(let error):
+                    
+                    
+                    if error.code == -1004 {
+                        let alert = UIAlertController(title: "連線失敗", message: nil, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        alert.addAction(OKAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                        
+                    }else{
+                        
+                        print(error)
+                        let statusCode = response.response!.statusCode
+                        
+                        
+                        switch(statusCode){
+                            
+                        case 401: let alert = UIAlertController(title: "帳號或密碼錯誤", message: nil, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        alert.addAction(OKAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                            
+                            
+                        case 422: let alert = UIAlertController(title: "填寫欄位有缺少", message: nil, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        alert.addAction(OKAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                            
+                        default: let alert = UIAlertController(title: "伺服器可能出現問題", message: nil, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        alert.addAction(OKAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                            
+                        }
+                    
+                
+                    }
+                    
+                }
+                
+                
+        }
         
         
     }
