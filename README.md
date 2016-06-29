@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- iOS 8.0+ / watchOS 2.0+
+- iOS 9.0+ / watchOS 2.0+
 - Xcode 7.3+
 
 ## Installation
@@ -29,6 +29,7 @@ $ brew install carthage
 - [Alamofire](https://github.com/Alamofire/Alamofire)
 - [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)
 - [SkyFloatingLabelTextField](https://github.com/Skyscanner/SkyFloatingLabelTextField)
+- [FontAwesome.swift](https://github.com/thii/FontAwesome.swift)
 
 
 ## Supporting Files 
@@ -39,6 +40,6 @@ $ brew install carthage
 
 ## Contributors
 
-- test ok 
+
 
 ## License
