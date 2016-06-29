@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // auto login
-                login()
+//                login()
         
         return true
     }

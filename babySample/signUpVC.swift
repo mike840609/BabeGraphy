@@ -35,7 +35,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         super.viewDidLoad()
         
         self.setTextTheme()
-//        self.emailTxt.becomeFirstResponder()
+        //        self.emailTxt.becomeFirstResponder()
         
         // 手勢添加
         let avaTap = UITapGestureRecognizer(target: self, action: #selector(signUpVC.loadImg))
@@ -54,8 +54,8 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         self.view.userInteractionEnabled = true
         self.view.addGestureRecognizer(hideTap)
         
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(signUpVC.showKeyboard(_:)), name: UIKeyboardWillShowNotification, object: nil)
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(signUpVC.hideKeyboard(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(signUpVC.showKeyboard(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(signUpVC.hideKeyboard(_:)), name: UIKeyboardWillHideNotification, object: nil)
         
     }
     
@@ -88,7 +88,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         
         backBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
         backBtn.setTitle(String.fontAwesomeIconWithCode("fa-chevron-left"), forState: .Normal)
-
+        
         
         self.signBtn.layer.borderColor = lightGreyColor.CGColor
         self.signBtn.layer.borderWidth = 1
@@ -233,7 +233,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         }
         
         
-         if (textField == self.passwordTxt){
+        if (textField == self.passwordTxt){
             
             var txtAfterUpdate:NSString = passwordTxt.text! as NSString
             txtAfterUpdate = txtAfterUpdate.stringByReplacingCharactersInRange(range, withString: string)
@@ -286,22 +286,22 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         if let password = password {
             
             
-//            print("Password is same: \(isSamePassword(password))")
-//            print("Password count: \(password.characters.count)")
-//            print("Password:\(password)")
+            //            print("Password is same: \(isSamePassword(password))")
+            //            print("Password count: \(password.characters.count)")
+            //            print("Password:\(password)")
             
             if(password.characters.count == 0) {
                 self.passwordTxt.errorMessage = nil
                 
             }
                 
-            
+                
             else if password.characters.count>0 && password.characters.count<8{
                 self.passwordTxt.errorMessage = NSLocalizedString("Password should be at least 8 characters", tableName: "SkyFloatingLabelTextField", comment: " ")
             }
                 
-            
-            
+                
+                
             else {
                 self.passwordTxt.errorMessage = nil
             }
@@ -309,7 +309,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
             
             
         }
-        
+            
         else {
             self.passwordTxt.errorMessage = nil
         }
@@ -332,10 +332,10 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                 
                 self.repeatPassword.errorMessage = nil
             }
-
+            
         }
-        
-        
+            
+            
         else {
             self.repeatPassword.errorMessage = nil
         }
@@ -362,10 +362,10 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         
         if let password = passwordTxt.text{
             
-        return repeat_password == password
-        
+            return repeat_password == password
+            
         }
-        
+            
         else {
             return false
         }
@@ -456,7 +456,13 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                         
                         
                         let alert = UIAlertController(title: "註冊成功！", message: nil, preferredStyle: .Alert)
-                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        // let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        
+                        let OKAction = UIAlertAction(title: "OK!", style: .Default, handler: { (UIAlertAction) in
+                            let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                            appDelegate.login()
+                        })
+                        
                         alert.addAction(OKAction)
                         self.presentViewController(alert, animated: true, completion: nil)
                         // 存取token
@@ -499,8 +505,8 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                         self.presentViewController(alert, animated: true, completion: nil)
                             
                         }
-                    
-                
+                        
+                        
                     }
                     
                 }
