@@ -28,7 +28,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
     let darkGreyColor = UIColor(red: 52/255, green: 42/255, blue: 61/255, alpha: 1.0)
     let overcastBlueColor = UIColor(red: 0, green: 187/255, blue: 204/255, alpha: 1.0)
     
-    
+    // testing the branch
     override func viewDidLoad() {
         super.viewDidLoad()
         
