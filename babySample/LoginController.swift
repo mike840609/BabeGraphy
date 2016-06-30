@@ -174,7 +174,7 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
                         self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
                             
                             
-                        case 422: let alert = UIAlertController(title: "填寫欄位有缺少,或有不符合規則參數", message: nil, preferredStyle: .Alert)
+                        case 422: let alert = UIAlertController(title: "填寫欄位有缺少", message: nil, preferredStyle: .Alert)
                         let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
                         alert.addAction(OKAction)
                         self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)

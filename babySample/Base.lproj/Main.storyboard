@@ -15,7 +15,7 @@
         <!--Login Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginController" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginController" id="BYZ-38-t0r" customClass="LoginController" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -685,9 +685,6 @@
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder2" translatesAutoresizingMaskIntoConstraints="NO" id="6Oh-uJ-ab7">
-                                    <rect key="frame" x="20" y="16" width="110" height="110"/>
-                                </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nln-0i-sum">
                                     <rect key="frame" x="160" y="91" width="184" height="30"/>
                                     <color key="backgroundColor" red="0.80776928449999996" green="0.85248912519999998" blue="0.87579467529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -695,6 +692,9 @@
                                     <state key="normal" title="Edit Profile">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="followBtn_clicked:" destination="f2C-ZB-ORx" eventType="touchUpInside" id="Euw-6B-Pw2"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Firstname Lastname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGH-FN-3J3">
                                     <rect key="frame" x="23" y="142" width="331" height="21"/>
@@ -721,7 +721,11 @@
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder2" translatesAutoresizingMaskIntoConstraints="NO" id="6Oh-uJ-ab7">
+                                    <rect key="frame" x="20" y="16" width="110" height="110"/>
+                                </imageView>
                             </subviews>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="ysd-cA-TGp" firstAttribute="trailing" secondItem="Nln-0i-sum" secondAttribute="trailing" id="0ad-U5-VeT"/>
                                 <constraint firstItem="G3v-TE-QMx" firstAttribute="centerX" secondItem="ysd-cA-TGp" secondAttribute="centerX" id="1mQ-NQ-lDs"/>
@@ -761,14 +765,37 @@
                                 <constraint firstItem="hms-nh-my7" firstAttribute="leading" secondItem="E6r-KW-xGz" secondAttribute="trailing" constant="11" id="ziR-DJ-5k3"/>
                                 <constraint firstAttribute="trailingMargin" secondItem="ysd-cA-TGp" secondAttribute="trailing" constant="23" id="ztq-nC-F8m"/>
                             </constraints>
+                            <connections>
+                                <outlet property="avaImg" destination="6Oh-uJ-ab7" id="up3-gM-Jea"/>
+                                <outlet property="bioLbl" destination="yVJ-lz-am2" id="wRU-qR-MSa"/>
+                                <outlet property="editBtn" destination="Nln-0i-sum" id="2ij-dA-X2J"/>
+                                <outlet property="followers" destination="CWt-Xq-Gdo" id="HdZ-np-45U"/>
+                                <outlet property="followersTitle" destination="hms-nh-my7" id="LFU-TE-nP4"/>
+                                <outlet property="followingTitle" destination="ysd-cA-TGp" id="ZEg-YX-eKp"/>
+                                <outlet property="followings" destination="G3v-TE-QMx" id="PUy-9S-rr2"/>
+                                <outlet property="fullnameLbl" destination="pGH-FN-3J3" id="ZXA-ak-fKf"/>
+                                <outlet property="postTitle" destination="E6r-KW-xGz" id="wm6-4I-ooY"/>
+                                <outlet property="posts" destination="hxn-og-6FA" id="ZLF-UC-WxK"/>
+                                <outlet property="webTxt" destination="xRJ-ng-fLB" id="Iz2-pX-jQu"/>
+                            </connections>
                         </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="QyW-p6-boT" id="nPX-PF-cmd"/>
                             <outlet property="delegate" destination="QyW-p6-boT" id="Gsc-kn-mx5"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="VlZ-Ih-rTV"/>
+                    <navigationItem key="navigationItem" id="VlZ-Ih-rTV">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="Jql-cT-9vP">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="logout:" destination="QyW-p6-boT" id="1AC-Xc-sU0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="logoutBtn" destination="Jql-cT-9vP" id="klX-HX-gk1"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gTO-jH-vIQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
