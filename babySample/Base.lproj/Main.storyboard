@@ -597,7 +597,6 @@
         <!--More-->
         <scene sceneID="WkI-LC-hah">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="J4v-Df-44Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ELX-xm-Q6S" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="More" image="more_icon" id="giv-IK-sA1"/>
                     <toolbarItems/>
@@ -611,6 +610,7 @@
                         <segue destination="QyW-p6-boT" kind="relationship" relationship="rootViewController" id="Vfc-FV-wFH"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J4v-Df-44Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3204.75" y="3546.5"/>
         </scene>

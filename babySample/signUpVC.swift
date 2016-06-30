@@ -10,9 +10,10 @@ import UIKit
 import FontAwesome_swift
 import Alamofire
 import SwiftyJSON
+import NVActivityIndicatorView
 
 
-class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate,NVActivityIndicatorViewable{
     
     @IBOutlet weak var avaImg: UIImageView!
     
@@ -421,8 +422,8 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         }
         
         print("signup pressed")
-        
-        
+        // loading animation
+        startActivityAnimating("Loading...", type: .BallClipRotateMultiple, color: UIColor.whiteColor(), padding: 0)
         
         
         let signupinfo = ["email":emailTxt.text!,"password":passwordTxt.text!,"name":fullnameTxt.text!]
@@ -444,7 +445,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                     if let accessToken = json["token"].string {
                         
                         print ("成功取得token,並存取")
-                        
+                        self.stopActivityAnimating()
                         
                         let alert = UIAlertController(title: "註冊成功！", message: nil, preferredStyle: .Alert)
                         // let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
@@ -460,6 +461,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                         NSUserDefaults.standardUserDefaults().setObject(accessToken, forKey: "AccessToken")
                         NSUserDefaults.standardUserDefaults().synchronize()
                         
+                        
                     }
                     
                 case .Failure(let error):
@@ -473,18 +475,18 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                         case 401: let alert = UIAlertController(title: "帳號或密碼錯誤", message: nil, preferredStyle: .Alert)
                         let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
                         alert.addAction(OKAction)
-                        self.presentViewController(alert, animated: true, completion: nil)
+                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
                             
                             
                         case 422: let alert = UIAlertController(title: "填寫欄位有缺少", message: nil, preferredStyle: .Alert)
                         let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
                         alert.addAction(OKAction)
-                        self.presentViewController(alert, animated: true, completion: nil)
+                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
                             
                         default: let alert = UIAlertController(title: "伺服器可能出現問題", message: nil, preferredStyle: .Alert)
                         let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
                         alert.addAction(OKAction)
-                        self.presentViewController(alert, animated: true, completion: nil)
+                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
                             
                         }
                     }else if error.code == -1004{
@@ -492,13 +494,13 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                         let alert = UIAlertController(title: "連線失敗", message: nil, preferredStyle: .Alert)
                         let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
                         alert.addAction(OKAction)
-                        self.presentViewController(alert, animated: true, completion: nil)
+                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
                         
                     }else{
                         let alert = UIAlertController(title: "網路問題", message: nil, preferredStyle: .Alert)
                         let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
                         alert.addAction(OKAction)
-                        self.presentViewController(alert, animated: true, completion: nil)
+                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
                     }
                 }
         }

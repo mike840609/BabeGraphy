@@ -3,6 +3,7 @@ PODS:
   - FontAwesome.swift (0.7.3)
   - Fusuma (0.5.0)
   - HanekeSwift (0.10.1)
+  - NVActivityIndicatorView (2.7)
   - SKPhotoBrowser (1.9.1)
   - SwiftyJSON (2.3.2)
 
@@ -11,6 +12,7 @@ DEPENDENCIES:
   - FontAwesome.swift (= 0.7.3)
   - Fusuma (= 0.5.0)
   - HanekeSwift (= 0.10.1)
+  - NVActivityIndicatorView
   - SKPhotoBrowser (= 1.9.1)
   - SwiftyJSON (= 2.3.2)
 
@@ -19,9 +21,10 @@ SPEC CHECKSUMS:
   FontAwesome.swift: f694fe0f667d6d3390b5919cdb0556a27b75d427
   Fusuma: 9471a5f60c89f4633ae644ff29479fad65d64d0b
   HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
+  NVActivityIndicatorView: dc80f18fb27ac92f0aa87246cc13dc39ed3e9ee0
   SKPhotoBrowser: 45fad9ae67bdd24217d7808f91245c9b16fe3df9
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: e7eb427b729904a665d8bfdf71f7c5ec62aba8e2
+PODFILE CHECKSUM: 29ff630804ad93653f66aee85c8ae0a3aea9f1a8
 
 COCOAPODS: 1.0.1

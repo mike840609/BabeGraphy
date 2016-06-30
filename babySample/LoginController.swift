@@ -10,8 +10,10 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import NVActivityIndicatorView
 
-class LoginController: UIViewController,UITextFieldDelegate{
+
+class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorViewable{
     
     @IBOutlet weak var idText: SkyFloatingLabelTextFieldWithIcon!
     @IBOutlet weak var pwdText: SkyFloatingLabelTextFieldWithIcon!
@@ -126,13 +128,13 @@ class LoginController: UIViewController,UITextFieldDelegate{
         
         print("\n\(id)\n\(pwd)")
         
-        
+        // startAnimation
+        startActivityAnimating("Loading...", type: .BallClipRotateMultiple, color: UIColor.whiteColor(), padding: 0)
         
         // 使用 Alamofire 呼叫 API 登入後取得 Token
         let logininfo = ["email":id,"password":pwd]
         Alamofire.request(.POST, "http://140.136.155.143/api/auth/login", parameters:logininfo)
-            .validate()
-            .responseJSON{ response in
+            .validate().responseJSON{ response in
                 
                 switch response.result{
                     
@@ -141,7 +143,7 @@ class LoginController: UIViewController,UITextFieldDelegate{
                     let json = JSON(response.result.value!)
                     print(json)
                     
-                    
+                    self.stopActivityAnimating()
                     if let accessToken = json["token"].string {
                         
                         print ("成功取得token,並存取")
@@ -161,40 +163,40 @@ class LoginController: UIViewController,UITextFieldDelegate{
                 // 登入失敗做的事情 沒有碰到網路
                 case .Failure(let error):
                     
-                        // 我們 server 的問題回報  確定碰到網路 網站回覆行為
-                        if let statusCode = response.response?.statusCode{
-
-                            switch(statusCode){
-                                
-                            case 401: let alert = UIAlertController(title: "帳號或密碼錯誤", message: nil, preferredStyle: .Alert)
-                            let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
-                            alert.addAction(OKAction)
-                            self.presentViewController(alert, animated: true, completion: nil)
-                                
-                                
-                            case 422: let alert = UIAlertController(title: "填寫欄位有缺少", message: nil, preferredStyle: .Alert)
-                            let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
-                            alert.addAction(OKAction)
-                            self.presentViewController(alert, animated: true, completion: nil)
-                                
-                            default: let alert = UIAlertController(title: "伺服器可能出現問題", message: nil, preferredStyle: .Alert)
-                            let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
-                            alert.addAction(OKAction)
-                            self.presentViewController(alert, animated: true, completion: nil)
-                                
-                            }
-                        }else if error.code == -1004{
+                    // 我們 server 的問題回報  確定碰到網路 網站回覆行為
+                    if let statusCode = response.response?.statusCode{
+                        
+                        switch(statusCode){
                             
-                            let alert = UIAlertController(title: "連線失敗", message: nil, preferredStyle: .Alert)
-                            let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
-                            alert.addAction(OKAction)
-                            self.presentViewController(alert, animated: true, completion: nil)
-
-                        }else{
-                            let alert = UIAlertController(title: "網路問題", message: nil, preferredStyle: .Alert)
-                            let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
-                            alert.addAction(OKAction)
-                            self.presentViewController(alert, animated: true, completion: nil)
+                        case 401: let alert = UIAlertController(title: "帳號或密碼錯誤", message: nil, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        alert.addAction(OKAction)
+                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
+                            
+                            
+                        case 422: let alert = UIAlertController(title: "填寫欄位有缺少,或有不符合規則參數", message: nil, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        alert.addAction(OKAction)
+                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
+                            
+                        default: let alert = UIAlertController(title: "伺服器可能出現問題", message: nil, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        alert.addAction(OKAction)
+                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
+                            
+                        }
+                    }else if error.code == -1004{
+                        
+                        let alert = UIAlertController(title: "連線失敗", message: nil, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        alert.addAction(OKAction)
+                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
+                        
+                    }else{
+                        let alert = UIAlertController(title: "網路問題", message: nil, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        alert.addAction(OKAction)
+                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
                     }
                 }
         }
