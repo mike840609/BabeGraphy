@@ -22,6 +22,8 @@
 		4D3749FA1D087CC500F57F68 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3749F91D087CC500F57F68 /* LoginController.swift */; };
 		4D3749FE1D0884B900F57F68 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D3749FD1D0884B900F57F68 /* fontawesome-webfont.ttf */; };
 		4D4B00601D0C5048007E45A9 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4B005F1D0C5048007E45A9 /* FeedController.swift */; };
+		4D6B1AA81D2546FD00405E2B /* homeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B1AA71D2546FD00405E2B /* homeVC.swift */; };
+		4D6B1AAA1D2548D000405E2B /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B1AA91D2548D000405E2B /* headerView.swift */; };
 		4D9761491D227F4F00FE9C80 /* signUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9761481D227F4F00FE9C80 /* signUpVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,8 @@
 		4D3749F91D087CC500F57F68 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		4D3749FD1D0884B900F57F68 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "fontawesome-webfont.ttf"; path = "../fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		4D4B005F1D0C5048007E45A9 /* FeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedController.swift; path = SkyFloatingLabelTextField/FeedController.swift; sourceTree = "<group>"; };
+		4D6B1AA71D2546FD00405E2B /* homeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = homeVC.swift; sourceTree = "<group>"; };
+		4D6B1AA91D2548D000405E2B /* headerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
 		4D9761481D227F4F00FE9C80 /* signUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signUpVC.swift; sourceTree = "<group>"; };
 		8C2472A7F6351D4CF62F0C27 /* Pods_babySample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_babySample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7AA36BF83BDFB32C5035B72 /* Pods-babySample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-babySample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-babySample/Pods-babySample.debug.xcconfig"; sourceTree = "<group>"; };
@@ -106,6 +110,8 @@
 				4D3749DB1D07FFD100F57F68 /* AppDelegate.swift */,
 				4D3749F91D087CC500F57F68 /* LoginController.swift */,
 				4D9761481D227F4F00FE9C80 /* signUpVC.swift */,
+				4D6B1AA71D2546FD00405E2B /* homeVC.swift */,
+				4D6B1AA91D2548D000405E2B /* headerView.swift */,
 				4D2D44CA1D0DB74500E6CE0D /* NewsFeed */,
 				4D3749DF1D07FFD100F57F68 /* Main.storyboard */,
 				4D3749E51D07FFD100F57F68 /* Assets.xcassets */,
@@ -267,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D4B00601D0C5048007E45A9 /* FeedController.swift in Sources */,
+				4D6B1AA81D2546FD00405E2B /* homeVC.swift in Sources */,
 				4D2D44C71D0DA5BE00E6CE0D /* Extensions.swift in Sources */,
 				4D3749F81D087C8000F57F68 /* UITextField+fixCaretPosition.swift in Sources */,
 				4D3749F71D087C8000F57F68 /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */,
@@ -276,6 +283,7 @@
 				4D2D44C51D0DA51000E6CE0D /* FeedCell.swift in Sources */,
 				4D3749DC1D07FFD100F57F68 /* AppDelegate.swift in Sources */,
 				4D3749FA1D087CC500F57F68 /* LoginController.swift in Sources */,
+				4D6B1AAA1D2548D000405E2B /* headerView.swift in Sources */,
 				4D2D44C91D0DA6D000E6CE0D /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

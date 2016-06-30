@@ -291,29 +291,20 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
             //            print("Password:\(password)")
             
             if(password.characters.count == 0) {
+                
                 self.passwordTxt.errorMessage = nil
                 
-            }
-                
-                
-            else if password.characters.count>0 && password.characters.count<8{
+            }else if password.characters.count>0 && password.characters.count<8{
+             
                 self.passwordTxt.errorMessage = NSLocalizedString("Password should be at least 8 characters", tableName: "SkyFloatingLabelTextField", comment: " ")
-            }
+            }else{
                 
-                
-                
-            else {
                 self.passwordTxt.errorMessage = nil
             }
             
-            
-            
-        }
-            
-        else {
+        }else {
             self.passwordTxt.errorMessage = nil
         }
-        
         
     }
     
@@ -474,18 +465,9 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                 case .Failure(let error):
                     
                     
-                    if error.code == -1004 {
-                        let alert = UIAlertController(title: "連線失敗", message: nil, preferredStyle: .Alert)
-                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
-                        alert.addAction(OKAction)
-                        self.presentViewController(alert, animated: true, completion: nil)
-                        
-                    }else{
-                        
-                        print(error)
-                        let statusCode = response.response!.statusCode
-                        
-                        
+                    // 我們 server 的問題回報  確定碰到網路 網站回覆行為
+                    if let statusCode = response.response?.statusCode{
+        
                         switch(statusCode){
                             
                         case 401: let alert = UIAlertController(title: "帳號或密碼錯誤", message: nil, preferredStyle: .Alert)
@@ -505,17 +487,23 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                         self.presentViewController(alert, animated: true, completion: nil)
                             
                         }
+                    }else if error.code == -1004{
                         
+                        let alert = UIAlertController(title: "連線失敗", message: nil, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        alert.addAction(OKAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
                         
+                    }else{
+                        let alert = UIAlertController(title: "網路問題", message: nil, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
+                        alert.addAction(OKAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
                     }
-                    
                 }
-                
-                
         }
-        
-        
     }
+
     
     @IBAction func SignInBtn(sender: AnyObject) {
         self.view.endEditing(true)
