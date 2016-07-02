@@ -26,6 +26,10 @@
 		4D6B1AAA1D2548D000405E2B /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B1AA91D2548D000405E2B /* headerView.swift */; };
 		4D9761491D227F4F00FE9C80 /* signUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9761481D227F4F00FE9C80 /* signUpVC.swift */; };
 		4DAFE8BE1D2588810000334F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFE8BD1D2588810000334F /* Constants.swift */; };
+		4DE338861D27ED46001373E3 /* uploadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE338851D27ED46001373E3 /* uploadVC.swift */; };
+		4DE3388A1D27F455001373E3 /* MaterialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE338871D27F455001373E3 /* MaterialButton.swift */; };
+		4DE3388B1D27F455001373E3 /* MaterialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE338881D27F455001373E3 /* MaterialView.swift */; };
+		4DE3388C1D27F455001373E3 /* MateriaTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE338891D27F455001373E3 /* MateriaTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +54,10 @@
 		4D6B1AA91D2548D000405E2B /* headerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
 		4D9761481D227F4F00FE9C80 /* signUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signUpVC.swift; sourceTree = "<group>"; };
 		4DAFE8BD1D2588810000334F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4DE338851D27ED46001373E3 /* uploadVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = uploadVC.swift; sourceTree = "<group>"; };
+		4DE338871D27F455001373E3 /* MaterialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialButton.swift; sourceTree = "<group>"; };
+		4DE338881D27F455001373E3 /* MaterialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialView.swift; sourceTree = "<group>"; };
+		4DE338891D27F455001373E3 /* MateriaTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MateriaTextField.swift; sourceTree = "<group>"; };
 		8C2472A7F6351D4CF62F0C27 /* Pods_babySample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_babySample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7AA36BF83BDFB32C5035B72 /* Pods-babySample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-babySample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-babySample/Pods-babySample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,12 +118,12 @@
 				4D3749FC1D087D6400F57F68 /* Supporting Files */,
 				4D3749F21D087C8000F57F68 /* SkyFloatingLabelTextField */,
 				4D2D44CA1D0DB74500E6CE0D /* NewsFeed */,
-				4DAFE8BD1D2588810000334F /* Constants.swift */,
 				4D3749DB1D07FFD100F57F68 /* AppDelegate.swift */,
 				4D3749F91D087CC500F57F68 /* LoginController.swift */,
 				4D9761481D227F4F00FE9C80 /* signUpVC.swift */,
 				4D6B1AA71D2546FD00405E2B /* homeVC.swift */,
 				4D6B1AA91D2548D000405E2B /* headerView.swift */,
+				4DE338851D27ED46001373E3 /* uploadVC.swift */,
 				4D3749DF1D07FFD100F57F68 /* Main.storyboard */,
 				4D3749E51D07FFD100F57F68 /* Assets.xcassets */,
 				4D3749E71D07FFD100F57F68 /* LaunchScreen.storyboard */,
@@ -138,6 +146,10 @@
 		4D3749FC1D087D6400F57F68 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4DAFE8BD1D2588810000334F /* Constants.swift */,
+				4DE338871D27F455001373E3 /* MaterialButton.swift */,
+				4DE338881D27F455001373E3 /* MaterialView.swift */,
+				4DE338891D27F455001373E3 /* MateriaTextField.swift */,
 				4D3749FD1D0884B900F57F68 /* fontawesome-webfont.ttf */,
 			);
 			name = "Supporting Files";
@@ -278,17 +290,21 @@
 				4D4B00601D0C5048007E45A9 /* FeedController.swift in Sources */,
 				4D6B1AA81D2546FD00405E2B /* homeVC.swift in Sources */,
 				4D2D44C71D0DA5BE00E6CE0D /* Extensions.swift in Sources */,
+				4DE338861D27ED46001373E3 /* uploadVC.swift in Sources */,
 				4D3749F81D087C8000F57F68 /* UITextField+fixCaretPosition.swift in Sources */,
 				4D3749F71D087C8000F57F68 /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */,
 				4D3749E41D07FFD100F57F68 /* babySample.xcdatamodeld in Sources */,
 				4D9761491D227F4F00FE9C80 /* signUpVC.swift in Sources */,
 				4D3749F61D087C8000F57F68 /* SkyFloatingLabelTextField.swift in Sources */,
 				4D2D44C51D0DA51000E6CE0D /* FeedCell.swift in Sources */,
+				4DE3388A1D27F455001373E3 /* MaterialButton.swift in Sources */,
 				4D3749DC1D07FFD100F57F68 /* AppDelegate.swift in Sources */,
 				4D3749FA1D087CC500F57F68 /* LoginController.swift in Sources */,
 				4DAFE8BE1D2588810000334F /* Constants.swift in Sources */,
 				4D6B1AAA1D2548D000405E2B /* headerView.swift in Sources */,
 				4D2D44C91D0DA6D000E6CE0D /* Post.swift in Sources */,
+				4DE3388B1D27F455001373E3 /* MaterialView.swift in Sources */,
+				4DE3388C1D27F455001373E3 /* MateriaTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

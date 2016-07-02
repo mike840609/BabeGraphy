@@ -31,7 +31,7 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
         
         // set theme
         self.setTextTheme()
-        //        self.idText.becomeFirstResponder()
+        //self.idText.becomeFirstResponder()
         
         // recognizer
         let hideTap = UITapGestureRecognizer(target: self, action: #selector(LoginController.hideKeyboardTap(_:)))
@@ -130,6 +130,15 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
         
         // startAnimation
         startActivityAnimating("Loading...", type: .BallClipRotateMultiple, color: UIColor.whiteColor(), padding: 0)
+        
+        
+        //        let frame = CGRect(x: UIScreen.mainScreen().bounds.width / 2, y: UIScreen.mainScreen().bounds.height/2, width: 100 , height: 100)
+        //        let activityIndicatorView = NVActivityIndicatorView(frame: frame,
+        //                                                            type: .BallClipRotateMultiple)
+        //        activityIndicatorView.startAnimation()
+        
+        
+        
         
         // 使用 Alamofire 呼叫 API 登入後取得 Token
         let logininfo = ["email":id,"password":pwd]
