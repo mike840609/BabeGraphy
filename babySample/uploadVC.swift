@@ -22,6 +22,7 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationItem.title = "Upload"
         
         // disable publish btn
@@ -64,6 +65,7 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
         
         print("Image selected")
         picImg.image = image
+        
     }
     
     func fusumaVideoCompleted(withFileURL fileURL: NSURL) {
@@ -79,6 +81,7 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
     }
     
     func fusumaDismissedWithImage(image: UIImage) {
+        
         
         print("Called just after dismissed FusumaViewController")
     }
@@ -105,6 +108,7 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
     }
     
     func fusumaClosed() {
+        
         
         print("Called when the close button is pressed")
     }

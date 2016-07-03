@@ -1,30 +1,30 @@
 PODS:
-  - Alamofire (3.4.0)
+  - Alamofire (3.4.1)
   - FontAwesome.swift (0.7.3)
-  - Fusuma (0.5.0)
+  - Fusuma (0.5.1)
   - HanekeSwift (0.10.1)
-  - NVActivityIndicatorView (2.7)
+  - NVActivityIndicatorView (2.8)
   - SKPhotoBrowser (1.9.1)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
   - FontAwesome.swift (= 0.7.3)
-  - Fusuma (= 0.5.0)
+  - Fusuma (= 0.5.1)
   - HanekeSwift (= 0.10.1)
   - NVActivityIndicatorView
   - SKPhotoBrowser (= 1.9.1)
   - SwiftyJSON (= 2.3.2)
 
 SPEC CHECKSUMS:
-  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   FontAwesome.swift: f694fe0f667d6d3390b5919cdb0556a27b75d427
-  Fusuma: 9471a5f60c89f4633ae644ff29479fad65d64d0b
+  Fusuma: b6b727aabfbf3fd40419393aa25959910d6598d1
   HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
-  NVActivityIndicatorView: dc80f18fb27ac92f0aa87246cc13dc39ed3e9ee0
+  NVActivityIndicatorView: 6aba1dbbd893f615a9452c9e66ae46473e1ce092
   SKPhotoBrowser: 45fad9ae67bdd24217d7808f91245c9b16fe3df9
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 29ff630804ad93653f66aee85c8ae0a3aea9f1a8
+PODFILE CHECKSUM: 4e35196a261fb335161945616a98b27e051b805f
 
 COCOAPODS: 1.0.1

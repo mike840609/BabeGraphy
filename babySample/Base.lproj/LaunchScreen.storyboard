@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,12 +17,114 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zQx-wM-fTy">
+                                <rect key="frame" x="172" y="111" width="257" height="134"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="BabeGraphy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVp-XU-E0X">
+                                        <rect key="frame" x="18" y="0.0" width="221" height="114"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="HQG-MF-257"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="29"/>
+                                        <color key="textColor" red="0.96470588239999999" green="0.039215686270000001" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Let's create beautiful memories together." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PSS-03-xfs">
+                                        <rect key="frame" x="0.0" y="114" width="257" height="20"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="PSS-03-xfs" firstAttribute="leading" secondItem="zQx-wM-fTy" secondAttribute="leading" id="VL8-MF-WDq"/>
+                                    <constraint firstAttribute="trailing" secondItem="PSS-03-xfs" secondAttribute="trailing" id="bXd-pZ-ExS"/>
+                                    <constraint firstAttribute="height" constant="134" id="m0m-G2-Mtf"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="m0m-G2-Mtf"/>
+                                        <exclude reference="VL8-MF-WDq"/>
+                                        <exclude reference="bXd-pZ-ExS"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="m0m-G2-Mtf"/>
+                                        <include reference="VL8-MF-WDq"/>
+                                        <include reference="bXd-pZ-ExS"/>
+                                    </mask>
+                                </variation>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2016年 BabyGraphy. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XhS-sG-wGm">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="iUm-LT-Eeb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="iUm-LT-Eeb"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="iUm-LT-Eeb"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XhS-sG-wGm" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="EMf-Ou-p9h"/>
+                            <constraint firstItem="XhS-sG-wGm" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="Rzm-GJ-aV0"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="XhS-sG-wGm" secondAttribute="bottom" constant="8" id="WRN-G7-ApN"/>
+                            <constraint firstItem="zQx-wM-fTy" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="140" id="f2Q-si-TF5"/>
+                            <constraint firstItem="zQx-wM-fTy" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="30" id="gBg-WM-mO4">
+                                <variation key="widthClass=compact" constant="15"/>
+                            </constraint>
+                            <constraint firstAttribute="trailingMargin" secondItem="zQx-wM-fTy" secondAttribute="trailing" constant="30" id="kXn-VS-N7L">
+                                <variation key="widthClass=compact" constant="15"/>
+                            </constraint>
+                            <constraint firstItem="XhS-sG-wGm" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="l6R-TD-E6w"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="XhS-sG-wGm"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="f2Q-si-TF5"/>
+                                <exclude reference="gBg-WM-mO4"/>
+                                <exclude reference="kXn-VS-N7L"/>
+                                <exclude reference="EMf-Ou-p9h"/>
+                                <exclude reference="Rzm-GJ-aV0"/>
+                                <exclude reference="l6R-TD-E6w"/>
+                                <exclude reference="WRN-G7-ApN"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="XhS-sG-wGm"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="f2Q-si-TF5"/>
+                                <include reference="gBg-WM-mO4"/>
+                                <include reference="kXn-VS-N7L"/>
+                                <include reference="EMf-Ou-p9h"/>
+                                <include reference="Rzm-GJ-aV0"/>
+                                <include reference="l6R-TD-E6w"/>
+                                <include reference="WRN-G7-ApN"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="51.75" y="374.5"/>
         </scene>
     </scenes>
 </document>
