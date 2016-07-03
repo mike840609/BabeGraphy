@@ -426,7 +426,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         startActivityAnimating("Loading...", type: .BallClipRotateMultiple, color: UIColor.whiteColor(), padding: 0)
         
         
-        let signupinfo = ["email":emailTxt.text!,"password":passwordTxt.text!,"name":fullnameTxt.text!]
+        let signupinfo = ["email":emailTxt.text!,"password":passwordTxt.text!,"name":fullnameTxt.text!,"userbio":bioTxt.text!,"userweb":webTxt.text!]
         
         
         Alamofire.request(.POST,"http://140.136.155.143/api/auth/signup",parameters: signupinfo)
