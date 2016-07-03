@@ -30,14 +30,10 @@ class homeVC: UICollectionViewController {
         let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
         logoutBtn.setTitleTextAttributes(attributes, forState: .Normal)
         logoutBtn.title = String.fontAwesomeIconWithName(.SignOut)
-        
-        
-        
     }
     
     
-    
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
     
     // header View
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
@@ -70,18 +66,20 @@ class homeVC: UICollectionViewController {
                     guard let id:String = json["data"][0]["id"].stringValue,
                         let name:String = json["data"][0]["name"].stringValue,
                         let email:String = json["data"][0]["email"].stringValue,
-                        let follower:String = json["data"][0]["follower_count"].stringValue,
-                        let following:String = json["data"][0]["followed_count"].stringValue
+                        let follower_count:String = json["data"][0]["follower_count"].stringValue,
+                        let following_count:String = json["data"][0]["followed_count"].stringValue,
+                        let posts_count:String = json["data"][0]["posts_count"].stringValue
                         else {return}
                     
                     
                     
                     header.fullnameLbl.text = name.uppercaseString
                     header.posts.text  = "0"
-                    header.followers.text = follower
-                    header.followings.text = following
+                    header.followers.text = follower_count
+                    header.followings.text = following_count
+                    header.posts.text = posts_count
                     
-                    print("id:\(id)\n name:\(name)\n email:\(email)\n follower:\(follower)\n following:\(following)\n==========================================")
+                    print(" id:\(id)\n name:\(name)\n email:\(email)\nposts\(posts_count)\n follower:\(follower_count)\n following:\(following_count)\n==========================================")
                     
                     
                 case .Failure(let error):

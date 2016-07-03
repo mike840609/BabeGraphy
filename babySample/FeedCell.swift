@@ -13,6 +13,13 @@ var imageCache = NSCache()
 // MARK: - CUSTOMER Cell
 class FeedCell: UICollectionViewCell {
     
+    var feedController: FeedController?
+    
+    func animate() {
+        feedController?.animateImageView(statusImg)
+    }
+
+    
     var post:Post?{
         didSet{
             
@@ -88,6 +95,7 @@ class FeedCell: UICollectionViewCell {
         imageView.image = UIImage(named: "zuckdog")
         imageView.contentMode = .ScaleAspectFill
         imageView.layer.masksToBounds = true
+        imageView.userInteractionEnabled = true
         return imageView
     }()
     
@@ -165,9 +173,8 @@ class FeedCell: UICollectionViewCell {
         if let likes = post?.numLikes,let comments = post?.numComments{
             likesCommentsLabel.text = "\(likes) Likes  \(comments) Comments"
         }
-        
-        
     }
+    
     
     func setupViews(){
         
@@ -183,6 +190,9 @@ class FeedCell: UICollectionViewCell {
         addSubview(likeButton)
         addSubview(commentButton)
         addSubview(shareButton)
+        
+        
+        statusImg.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animate)))
         
         setupStatusImageViewLoader()
         
