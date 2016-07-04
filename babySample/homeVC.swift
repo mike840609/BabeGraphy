@@ -16,6 +16,8 @@ class homeVC: UICollectionViewController {
     
     @IBOutlet weak var logoutBtn: UIBarButtonItem!
     
+    // 儲存個人資訊
+    var user : SwiftyJSON.JSON?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,37 +57,42 @@ class homeVC: UICollectionViewController {
         
         //        print(AccessToken)
         
-            Alamofire.request(.GET, "http://140.136.155.143/api/user/token/\(AccessToken!)").validate().responseJSON{ (response) in
+        Alamofire.request(.GET, "http://140.136.155.143/api/user/token/\(AccessToken!)").validate().responseJSON{ (response) in
+            
+            switch response.result{
+            case .Success(let json):
                 
-                switch response.result{
-                case .Success(let json):
-                    let json = SwiftyJSON.JSON(json)
-                    
-                    
-                    // optional chainging
-                    guard let id:String = json["data"][0]["id"].stringValue,
-                        let name:String = json["data"][0]["name"].stringValue,
-                        let email:String = json["data"][0]["email"].stringValue,
-                        let follower_count:String = json["data"][0]["follower_count"].stringValue,
-                        let following_count:String = json["data"][0]["followed_count"].stringValue,
-                        let posts_count:String = json["data"][0]["posts_count"].stringValue
-                        else {return}
-                    
-                    
-                    
-                    header.fullnameLbl.text = name.uppercaseString
-                    header.posts.text  = "0"
-                    header.followers.text = follower_count
-                    header.followings.text = following_count
-                    header.posts.text = posts_count
-                    
-                    print(" id:\(id)\n name:\(name)\n email:\(email)\nposts\(posts_count)\n follower:\(follower_count)\n following:\(following_count)\n==========================================")
-                    
-                    
-                case .Failure(let error):
-                    print(error.localizedDescription)
-                    
-                }
+                let json = SwiftyJSON.JSON(json)
+                
+                self.user = json
+                
+                // optional chainging
+                guard let id:String = json["data"][0]["id"].stringValue,
+                    let name:String = json["data"][0]["name"].stringValue,
+                    let email:String = json["data"][0]["email"].stringValue,
+                    let follower_count:String = json["data"][0]["follower_count"].stringValue,
+                    let following_count:String = json["data"][0]["followed_count"].stringValue,
+                    let posts_count:String = json["data"][0]["posts_count"].stringValue
+                    else {return}
+                
+                
+                
+                header.fullnameLbl.text = name.uppercaseString
+                header.followers.text = follower_count
+                header.followings.text = following_count
+                header.posts.text = posts_count
+                
+                // 設定navigation 標題
+                self.navigationItem.title = name.uppercaseString
+                
+                print(" id:\(id)\n name:\(name)\n email:\(email)\n posts\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")
+                
+                //self.getInfo()
+                
+            case .Failure(let error):
+                print(error.localizedDescription)
+                
+            }
         }
         
         
@@ -111,8 +118,15 @@ class homeVC: UICollectionViewController {
     // MARK: - Customer Function
     func getInfo(){
         
+        guard let id:String = user?["data"][0]["id"].stringValue,
+            let name:String = user?["data"][0]["name"].stringValue,
+            let email:String = user?["data"][0]["email"].stringValue,
+            let follower_count:String = user?["data"][0]["follower_count"].stringValue,
+            let following_count:String = user?["data"][0]["followed_count"].stringValue,
+            let posts_count:String = user?["data"][0]["posts_count"].stringValue
+            else {return}
         
-        
+        print(" id:\(id)\n name:\(name)\n email:\(email)\n posts\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")
         
     }
     

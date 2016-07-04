@@ -4,6 +4,7 @@ PODS:
   - Fusuma (0.5.1)
   - HanekeSwift (0.10.1)
   - NVActivityIndicatorView (2.8)
+  - PMAlertController (1.0.4)
   - SKPhotoBrowser (1.9.1)
   - SwiftyJSON (2.3.2)
 
@@ -13,6 +14,7 @@ DEPENDENCIES:
   - Fusuma (= 0.5.1)
   - HanekeSwift (= 0.10.1)
   - NVActivityIndicatorView
+  - PMAlertController (= 1.0.4)
   - SKPhotoBrowser (= 1.9.1)
   - SwiftyJSON (= 2.3.2)
 
@@ -22,9 +24,10 @@ SPEC CHECKSUMS:
   Fusuma: b6b727aabfbf3fd40419393aa25959910d6598d1
   HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
   NVActivityIndicatorView: 6aba1dbbd893f615a9452c9e66ae46473e1ce092
+  PMAlertController: 7f969c937a80bea634a5bf957b66943b493e1aca
   SKPhotoBrowser: 45fad9ae67bdd24217d7808f91245c9b16fe3df9
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 4e35196a261fb335161945616a98b27e051b805f
+PODFILE CHECKSUM: 6d46e0c4b4d66f52689696329d6a914101215560
 
 COCOAPODS: 1.0.1

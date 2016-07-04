@@ -11,6 +11,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import NVActivityIndicatorView
+import PMAlertController
 
 
 class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorViewable{
@@ -132,14 +133,6 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
         startActivityAnimating("Loading...", type: .BallClipRotateMultiple, color: UIColor.whiteColor(), padding: 0)
         
         
-        //        let frame = CGRect(x: UIScreen.mainScreen().bounds.width / 2, y: UIScreen.mainScreen().bounds.height/2, width: 100 , height: 100)
-        //        let activityIndicatorView = NVActivityIndicatorView(frame: frame,
-        //                                                            type: .BallClipRotateMultiple)
-        //        activityIndicatorView.startAnimation()
-        
-        
-        
-        
         // 使用 Alamofire 呼叫 API 登入後取得 Token
         let logininfo = ["email":id,"password":pwd]
         Alamofire.request(.POST, "http://140.136.155.143/api/auth/login", parameters:logininfo)
@@ -161,9 +154,15 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
                         NSUserDefaults.standardUserDefaults().setObject(accessToken, forKey: "AccessToken")
                         NSUserDefaults.standardUserDefaults().synchronize()
                         
-                        // 頁面轉跳
-                        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                        appDelegate.login()
+                        // 過場動畫
+                        let alertVC = PMAlertController(title: "登入成功", description: "恭喜您,登入成功,讓我們共同創造美好的回憶", image: UIImage(named: "success.png"), style: .Alert)
+                        alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: {
+                            
+                            // 頁面轉跳
+                            let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                            appDelegate.login()}))
+                        
+                        self.presentViewController(alertVC, animated: true, completion:self.stopActivityAnimating )
                         
                     }
                     
@@ -177,35 +176,38 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
                         
                         switch(statusCode){
                             
-                        case 401: let alert = UIAlertController(title: "帳號或密碼錯誤", message: nil, preferredStyle: .Alert)
-                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
-                        alert.addAction(OKAction)
-                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
+                        case 401:
                             
+                            let alertVC = PMAlertController(title: "帳號或密碼錯誤", description: "請重新輸入帳號密碼", image: UIImage(named: "error.png"), style: .Alert)
+                            alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
+                            self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
                             
-                        case 422: let alert = UIAlertController(title: "填寫欄位有缺少", message: nil, preferredStyle: .Alert)
-                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
-                        alert.addAction(OKAction)
-                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
+                        case 422:
                             
-                        default: let alert = UIAlertController(title: "伺服器可能出現問題", message: nil, preferredStyle: .Alert)
-                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
-                        alert.addAction(OKAction)
-                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
+                            let alertVC = PMAlertController(title: "填寫欄位有缺少", description: "請確認欄位填寫正確", image: UIImage(named: "list-4.png"), style: .Alert)
+                            alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
+                            self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
+                            
+                        default:
+                            
+                            let alertVC = PMAlertController(title: "伺服器問題", description: "抱歉我們伺服器出現問題,請等待我們修復", image: UIImage(named: "server-2.png"), style: .Alert)
+                            alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
+                            self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
                             
                         }
                     }else if error.code == -1004{
                         
-                        let alert = UIAlertController(title: "連線失敗", message: nil, preferredStyle: .Alert)
-                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
-                        alert.addAction(OKAction)
-                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
+                        let alertVC = PMAlertController(title: "連線失敗", description: "網路發生問題", image: UIImage(named: "cloud-computing-2.png"), style: .Alert)
+                        alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
+                        self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
+                        
                         
                     }else{
-                        let alert = UIAlertController(title: "網路問題", message: nil, preferredStyle: .Alert)
-                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
-                        alert.addAction(OKAction)
-                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
+                        
+                        let alertVC = PMAlertController(title: "網路問題", description: "網路發生問題", image: UIImage(named: "cloud-computing-2.png"), style: .Alert)
+                        alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
+                        self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
+                        
                     }
                 }
         }

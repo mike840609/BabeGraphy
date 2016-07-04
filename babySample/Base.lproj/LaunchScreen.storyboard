@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -15,14 +16,14 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zQx-wM-fTy">
-                                <rect key="frame" x="172" y="111" width="257" height="134"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zQx-wM-fTy">
+                                <rect key="frame" x="172" y="111" width="257" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="BabeGraphy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVp-XU-E0X">
-                                        <rect key="frame" x="18" y="0.0" width="221" height="114"/>
+                                        <rect key="frame" x="18" y="0.0" width="221" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="HQG-MF-257"/>
                                         </constraints>
@@ -31,7 +32,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Let's create beautiful memories together." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PSS-03-xfs">
-                                        <rect key="frame" x="0.0" y="114" width="257" height="20"/>
+                                        <rect key="frame" x="0.0" y="100" width="257" height="20"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -63,7 +64,7 @@
                                     <constraint firstAttribute="height" constant="21" id="iUm-LT-Eeb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -96,12 +97,12 @@
                                 <exclude reference="XhS-sG-wGm"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="f2Q-si-TF5"/>
-                                <exclude reference="gBg-WM-mO4"/>
-                                <exclude reference="kXn-VS-N7L"/>
                                 <exclude reference="EMf-Ou-p9h"/>
                                 <exclude reference="Rzm-GJ-aV0"/>
                                 <exclude reference="l6R-TD-E6w"/>
+                                <exclude reference="f2Q-si-TF5"/>
+                                <exclude reference="gBg-WM-mO4"/>
+                                <exclude reference="kXn-VS-N7L"/>
                                 <exclude reference="WRN-G7-ApN"/>
                             </mask>
                         </variation>
@@ -110,12 +111,12 @@
                                 <include reference="XhS-sG-wGm"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="f2Q-si-TF5"/>
-                                <include reference="gBg-WM-mO4"/>
-                                <include reference="kXn-VS-N7L"/>
                                 <include reference="EMf-Ou-p9h"/>
                                 <include reference="Rzm-GJ-aV0"/>
                                 <include reference="l6R-TD-E6w"/>
+                                <include reference="f2Q-si-TF5"/>
+                                <include reference="gBg-WM-mO4"/>
+                                <include reference="kXn-VS-N7L"/>
                                 <include reference="WRN-G7-ApN"/>
                             </mask>
                         </variation>

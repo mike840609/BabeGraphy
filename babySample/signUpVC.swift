@@ -11,6 +11,7 @@ import FontAwesome_swift
 import Alamofire
 import SwiftyJSON
 import NVActivityIndicatorView
+import PMAlertController
 
 
 class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate,NVActivityIndicatorViewable{
@@ -88,7 +89,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
     func setTextTheme(){
         
         backBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
-        backBtn.setTitle(String.fontAwesomeIconWithCode("fa-chevron-left"), forState: .Normal)
+        backBtn.setTitle(String.fontAwesomeIconWithCode("fa-chevron-down"), forState: .Normal)
         
         
         self.signBtn.layer.borderColor = lightGreyColor.CGColor
@@ -281,22 +282,14 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
     
     func  validatePasswordTextField(password: String?){
         
-        
-        
-        
         if let password = password {
-            
-            
-            //            print("Password is same: \(isSamePassword(password))")
-            //            print("Password count: \(password.characters.count)")
-            //            print("Password:\(password)")
             
             if(password.characters.count == 0) {
                 
                 self.passwordTxt.errorMessage = nil
                 
             }else if password.characters.count>0 && password.characters.count<8{
-             
+                
                 self.passwordTxt.errorMessage = NSLocalizedString("Password should be at least 8 characters", tableName: "SkyFloatingLabelTextField", comment: " ")
             }else{
                 
@@ -445,21 +438,20 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                     if let accessToken = json["token"].string {
                         
                         print ("成功取得token,並存取")
-                        self.stopActivityAnimating()
                         
-                        let alert = UIAlertController(title: "註冊成功！", message: nil, preferredStyle: .Alert)
-                        // let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
-                        
-                        let OKAction = UIAlertAction(title: "OK!", style: .Default, handler: { (UIAlertAction) in
-                            let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                            appDelegate.login()
-                        })
-                        
-                        alert.addAction(OKAction)
-                        self.presentViewController(alert, animated: true, completion: nil)
                         // 存取token
                         NSUserDefaults.standardUserDefaults().setObject(accessToken, forKey: "AccessToken")
                         NSUserDefaults.standardUserDefaults().synchronize()
+                        
+                        
+                        let alertVC = PMAlertController(title: "註冊成功", description: "恭喜您,註冊成功", image: UIImage(named: "user-43.png"), style: .Alert)
+                        
+                        alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: {
+                            let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                            appDelegate.login()
+                        }))
+                        
+                        self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
                         
                         
                     }
@@ -469,43 +461,46 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                     
                     // 我們 server 的問題回報  確定碰到網路 網站回覆行為
                     if let statusCode = response.response?.statusCode{
-        
+                        
                         switch(statusCode){
                             
-                        case 401: let alert = UIAlertController(title: "帳號或密碼錯誤", message: nil, preferredStyle: .Alert)
-                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
-                        alert.addAction(OKAction)
-                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
+                        case 401:
                             
+                            let alertVC = PMAlertController(title: "帳號或密碼錯誤", description: "請重新輸入帳號密碼", image: UIImage(named: "error.png"), style: .Alert)
+                            alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
+                            self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
                             
-                        case 422: let alert = UIAlertController(title: "填寫欄位有缺少,或有不符合規則參數", message: nil, preferredStyle: .Alert)
-                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
-                        alert.addAction(OKAction)
-                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
+                        case 422:
                             
-                        default: let alert = UIAlertController(title: "伺服器可能出現問題", message: nil, preferredStyle: .Alert)
-                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
-                        alert.addAction(OKAction)
-                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
+                            let alertVC = PMAlertController(title: "填寫欄位有缺少", description: "請確認欄位填寫正確", image: UIImage(named: "list-4.png"), style: .Alert)
+                            alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
+                            self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
+                            
+                        default:
+                            
+                            let alertVC = PMAlertController(title: "伺服器問題", description: "抱歉我們伺服器出現問題,請等待我們修復", image: UIImage(named: "server-2.png"), style: .Alert)
+                            alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
+                            self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
                             
                         }
                     }else if error.code == -1004{
                         
-                        let alert = UIAlertController(title: "連線失敗", message: nil, preferredStyle: .Alert)
-                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
-                        alert.addAction(OKAction)
-                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
+                        let alertVC = PMAlertController(title: "連線失敗", description: "網路發生問題", image: UIImage(named: "cloud-computing-2.png"), style: .Alert)
+                        alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
+                        self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
+                        
                         
                     }else{
-                        let alert = UIAlertController(title: "網路問題", message: nil, preferredStyle: .Alert)
-                        let OKAction = UIAlertAction(title: "OK!", style: UIAlertActionStyle.Default, handler: nil)
-                        alert.addAction(OKAction)
-                        self.presentViewController(alert, animated: true, completion: self.stopActivityAnimating)
+                        
+                        let alertVC = PMAlertController(title: "網路問題", description: "網路發生問題", image: UIImage(named: "cloud-computing-2.png"), style: .Alert)
+                        alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
+                        self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
+                        
                     }
                 }
         }
     }
-
+    
     
     @IBAction func SignInBtn(sender: AnyObject) {
         self.view.endEditing(true)

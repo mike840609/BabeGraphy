@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="FontAwesome.otf">
+        <mutableArray key="fontawesome-webfont.ttf">
             <string>FontAwesome</string>
         </mutableArray>
     </customFonts>
@@ -301,13 +301,26 @@
                                     </mask>
                                 </variation>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRx-XX-mfB">
+                                <rect key="frame" x="32" y="572" width="311" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="aRl-ap-E7T"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
+                                <state key="normal" title="Sign Up">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signUpBtn_UpInside:" destination="3kI-La-gdj" eventType="touchUpInside" id="FXm-Sd-lsA"/>
+                                    <action selector="signUpBtn_down:" destination="3kI-La-gdj" eventType="touchDown" id="v06-U5-c0s"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ouZ-gf-ahM">
-                                <rect key="frame" x="16" y="20" width="49" height="38"/>
+                                <rect key="frame" x="306" y="20" width="53" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="62" id="3KC-Ta-8xI"/>
                                     <constraint firstAttribute="height" constant="38" id="B0t-mv-I3l"/>
-                                    <constraint firstAttribute="height" constant="38" id="Sa5-5p-iAz"/>
-                                    <constraint firstAttribute="width" constant="49" id="cNR-V6-7bq"/>
+                                    <constraint firstAttribute="height" constant="38" id="dYa-OI-iug"/>
                                     <constraint firstAttribute="width" constant="62" id="veg-aU-Sgw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="15"/>
@@ -325,34 +338,20 @@
                                     <action selector="SignInBtn:" destination="3kI-La-gdj" eventType="touchUpInside" id="eti-EU-x8r"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRx-XX-mfB">
-                                <rect key="frame" x="32" y="572" width="311" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="aRl-ap-E7T"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
-                                <state key="normal" title="Sign Up">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="signUpBtn_UpInside:" destination="3kI-La-gdj" eventType="touchUpInside" id="FXm-Sd-lsA"/>
-                                    <action selector="signUpBtn_down:" destination="3kI-La-gdj" eventType="touchDown" id="v06-U5-c0s"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="u1U-rw-Gig" firstAttribute="leading" secondItem="njb-7u-LrV" secondAttribute="leadingMargin" constant="32" id="1Rg-nm-ceZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="u1U-rw-Gig" secondAttribute="trailing" constant="35" id="29U-BW-rCU"/>
                             <constraint firstItem="u1U-rw-Gig" firstAttribute="centerX" secondItem="njb-7u-LrV" secondAttribute="centerX" id="3VO-35-qDa"/>
+                            <constraint firstItem="ouZ-gf-ahM" firstAttribute="top" secondItem="7ka-Ai-usG" secondAttribute="bottom" id="4Ai-Sa-8ZT"/>
+                            <constraint firstItem="ouZ-gf-ahM" firstAttribute="leading" secondItem="jHG-ds-eMX" secondAttribute="trailing" constant="8" symbolic="YES" id="8Mm-Bc-hOR"/>
                             <constraint firstItem="7lF-uP-dLk" firstAttribute="centerX" secondItem="njb-7u-LrV" secondAttribute="centerX" id="9jD-so-dcU"/>
-                            <constraint firstItem="ouZ-gf-ahM" firstAttribute="top" secondItem="7ka-Ai-usG" secondAttribute="bottom" id="BiD-9e-SM5"/>
                             <constraint firstItem="mRx-XX-mfB" firstAttribute="trailing" secondItem="67Y-Cc-dxz" secondAttribute="trailing" id="Hxt-jx-kgE"/>
-                            <constraint firstItem="ouZ-gf-ahM" firstAttribute="leading" secondItem="njb-7u-LrV" secondAttribute="leadingMargin" id="KjT-zI-RbY"/>
                             <constraint firstItem="u1U-rw-Gig" firstAttribute="centerX" secondItem="67Y-Cc-dxz" secondAttribute="centerX" id="OPV-5P-zaM"/>
                             <constraint firstItem="u1U-rw-Gig" firstAttribute="centerX" secondItem="njb-7u-LrV" secondAttribute="centerX" id="OZT-A0-Vwx"/>
                             <constraint firstItem="u1U-rw-Gig" firstAttribute="leading" secondItem="njb-7u-LrV" secondAttribute="leadingMargin" constant="48" id="PE9-pS-00V"/>
-                            <constraint firstItem="ouZ-gf-ahM" firstAttribute="centerY" secondItem="jHG-ds-eMX" secondAttribute="centerY" id="Uci-Xa-QKp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ouZ-gf-ahM" secondAttribute="trailing" id="Q3o-Vj-6Bg"/>
                             <constraint firstItem="67Y-Cc-dxz" firstAttribute="leading" secondItem="njb-7u-LrV" secondAttribute="leadingMargin" constant="16" id="cKF-Rt-Mvp"/>
                             <constraint firstItem="67Y-Cc-dxz" firstAttribute="top" secondItem="7lF-uP-dLk" secondAttribute="bottom" constant="28" id="cOk-Ir-l4T"/>
                             <constraint firstItem="jHG-ds-eMX" firstAttribute="top" secondItem="7ka-Ai-usG" secondAttribute="bottom" id="dnq-lQ-gar"/>
@@ -438,7 +437,7 @@
             </objects>
             <point key="canvasLocation" x="3954.75" y="383.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Album-->
         <scene sceneID="Uez-in-5W7">
             <objects>
                 <viewController id="jG5-t4-Dr4" sceneMemberID="viewController">
@@ -451,7 +450,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="xzA-6w-7AC"/>
+                    <navigationItem key="navigationItem" title="Album" id="xzA-6w-7AC"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qXQ-1c-uQK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -623,7 +622,7 @@
             </objects>
             <point key="canvasLocation" x="3204.75" y="1940.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Friend-->
         <scene sceneID="elG-0s-GOU">
             <objects>
                 <viewController id="6ZP-Jm-5TD" sceneMemberID="viewController">
@@ -636,7 +635,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="7vi-rv-S1Z"/>
+                    <navigationItem key="navigationItem" title="Friend" id="7vi-rv-S1Z"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ea1-ER-nZr" userLabel="First Responder" sceneMemberID="firstResponder"/>
