@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-
+import PMAlertController
 
 class homeVC: UICollectionViewController {
     
@@ -55,8 +55,6 @@ class homeVC: UICollectionViewController {
             
         }
         
-        //        print(AccessToken)
-        
         Alamofire.request(.GET, "http://140.136.155.143/api/user/token/\(AccessToken!)").validate().responseJSON{ (response) in
             
             switch response.result{
@@ -75,6 +73,13 @@ class homeVC: UICollectionViewController {
                     let posts_count:String = json["data"][0]["posts_count"].stringValue
                     else {return}
                 
+                // 暫時用字串長度來檢查 自動登出
+                if id.characters.count < 3{
+                    let alertVC = PMAlertController(title: "重複登入", description: "您的帳號已經從遠方登入,請重新登入", image: UIImage(named: "warning.png"), style: .Alert)
+                    alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action:{self.logout()}))
+                    self.presentViewController(alertVC, animated: true, completion:nil)
+                    
+                }
                 
                 
                 header.fullnameLbl.text = name.uppercaseString
@@ -87,7 +92,7 @@ class homeVC: UICollectionViewController {
                 
                 print(" id:\(id)\n name:\(name)\n email:\(email)\n posts\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")
                 
-                //self.getInfo()
+                // self.getInfo()
                 
             case .Failure(let error):
                 print(error.localizedDescription)
@@ -124,7 +129,7 @@ class homeVC: UICollectionViewController {
             let follower_count:String = user?["data"][0]["follower_count"].stringValue,
             let following_count:String = user?["data"][0]["followed_count"].stringValue,
             let posts_count:String = user?["data"][0]["posts_count"].stringValue
-            else {return}
+            else {return} // 沒值 else 依舊進去步了
         
         print(" id:\(id)\n name:\(name)\n email:\(email)\n posts\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")
         
@@ -140,6 +145,16 @@ class homeVC: UICollectionViewController {
         let appDelegate : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.window?.rootViewController = signin
         
+    }
+    
+    // logout all controller can use it
+    func logout(){
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(ACCESS_TOKEN)
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
+        let signin = self.storyboard?.instantiateViewControllerWithIdentifier("LoginController") as! LoginController
+        let appDelegate : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.window?.rootViewController = signin
     }
     
     

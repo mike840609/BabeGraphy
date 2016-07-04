@@ -134,6 +134,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+//    func logout() {
+//        
+//        NSUserDefaults.standardUserDefaults().removeObjectForKey(ACCESS_TOKEN)
+//        NSUserDefaults.standardUserDefaults().synchronize()
+//        
+//        let loginVC = LoginController()
+//        let rootNavigationViewController = UINavigationController(rootViewController: loginVC)
+//        
+//        self.window!.rootViewController = rootNavigationViewController
+//        
+//    }
+    
     
 }
 
