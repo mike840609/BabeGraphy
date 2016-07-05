@@ -44,6 +44,8 @@
 		4D5449741D2A467C006461DC /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D5449731D2A467C006461DC /* warning.png */; };
 		4D6B1AA81D2546FD00405E2B /* homeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B1AA71D2546FD00405E2B /* homeVC.swift */; };
 		4D6B1AAA1D2548D000405E2B /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B1AA91D2548D000405E2B /* headerView.swift */; };
+		4D923B961D2BFDA7000400B9 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D923B941D2BFDA7000400B9 /* FBSDKCoreKit.framework */; };
+		4D923B971D2BFDA7000400B9 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D923B951D2BFDA7000400B9 /* FBSDKLoginKit.framework */; };
 		4D9761491D227F4F00FE9C80 /* signUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9761481D227F4F00FE9C80 /* signUpVC.swift */; };
 		4DAFE8BE1D2588810000334F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFE8BD1D2588810000334F /* Constants.swift */; };
 		4DE338861D27ED46001373E3 /* uploadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE338851D27ED46001373E3 /* uploadVC.swift */; };
@@ -92,6 +94,9 @@
 		4D5449731D2A467C006461DC /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning.png; sourceTree = "<group>"; };
 		4D6B1AA71D2546FD00405E2B /* homeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = homeVC.swift; sourceTree = "<group>"; };
 		4D6B1AA91D2548D000405E2B /* headerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
+		4D923B901D2B9807000400B9 /* babySample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "babySample-Bridging-Header.h"; sourceTree = "<group>"; };
+		4D923B941D2BFDA7000400B9 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		4D923B951D2BFDA7000400B9 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		4D9761481D227F4F00FE9C80 /* signUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signUpVC.swift; sourceTree = "<group>"; };
 		4DAFE8BD1D2588810000334F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4DE338851D27ED46001373E3 /* uploadVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = uploadVC.swift; sourceTree = "<group>"; };
@@ -108,6 +113,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F2039D6DC947AA6FB6E13B4 /* Pods_babySample.framework in Frameworks */,
+				4D923B961D2BFDA7000400B9 /* FBSDKCoreKit.framework in Frameworks */,
+				4D923B971D2BFDA7000400B9 /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +162,7 @@
 		4D3749DA1D07FFD100F57F68 /* babySample */ = {
 			isa = PBXGroup;
 			children = (
+				4D923B8A1D2B9628000400B9 /* FbKit */,
 				4D54494C1D2A20A1006461DC /* Icon */,
 				4D3749FC1D087D6400F57F68 /* Supporting Files */,
 				4D3749F21D087C8000F57F68 /* SkyFloatingLabelTextField */,
@@ -170,6 +178,7 @@
 				4D3749E71D07FFD100F57F68 /* LaunchScreen.storyboard */,
 				4D3749EA1D07FFD100F57F68 /* Info.plist */,
 				4D3749E21D07FFD100F57F68 /* babySample.xcdatamodeld */,
+				4D923B901D2B9807000400B9 /* babySample-Bridging-Header.h */,
 			);
 			path = babySample;
 			sourceTree = "<group>";
@@ -221,6 +230,15 @@
 				4D5449711D2A2FB0006461DC /* user-43.png */,
 			);
 			path = Icon;
+			sourceTree = "<group>";
+		};
+		4D923B8A1D2B9628000400B9 /* FbKit */ = {
+			isa = PBXGroup;
+			children = (
+				4D923B941D2BFDA7000400B9 /* FBSDKCoreKit.framework */,
+				4D923B951D2BFDA7000400B9 /* FBSDKLoginKit.framework */,
+			);
+			path = FbKit;
 			sourceTree = "<group>";
 		};
 		C9087353A80D5D3050AB8CF2 /* Frameworks */ = {
@@ -508,10 +526,17 @@
 			baseConfigurationReference = B7AA36BF83BDFB32C5035B72 /* Pods-babySample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/babySample/FbKit",
+				);
 				INFOPLIST_FILE = babySample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.superlevin.mike840609.babySample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "babySample/babySample-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -520,10 +545,16 @@
 			baseConfigurationReference = 297DCA1CA735E14A1236D0C9 /* Pods-babySample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/babySample/FbKit",
+				);
 				INFOPLIST_FILE = babySample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.superlevin.mike840609.babySample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "babySample/babySample-Bridging-Header.h";
 			};
 			name = Release;
 		};

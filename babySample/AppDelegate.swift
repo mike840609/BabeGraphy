@@ -25,11 +25,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.statusBarStyle = .LightContent
         
         
+        // facebook delegate
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        
         // auto login
-         login() 
+        login()
         
         return true
     }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        
+        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
+    
     
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -134,17 +144,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-//    func logout() {
-//        
-//        NSUserDefaults.standardUserDefaults().removeObjectForKey(ACCESS_TOKEN)
-//        NSUserDefaults.standardUserDefaults().synchronize()
-//        
-//        let loginVC = LoginController()
-//        let rootNavigationViewController = UINavigationController(rootViewController: loginVC)
-//        
-//        self.window!.rootViewController = rootNavigationViewController
-//        
-//    }
+    //    func logout() {
+    //
+    //        NSUserDefaults.standardUserDefaults().removeObjectForKey(ACCESS_TOKEN)
+    //        NSUserDefaults.standardUserDefaults().synchronize()
+    //
+    //        let loginVC = LoginController()
+    //        let rootNavigationViewController = UINavigationController(rootViewController: loginVC)
+    //
+    //        self.window!.rootViewController = rootNavigationViewController
+    //        
+    //    }
     
     
 }

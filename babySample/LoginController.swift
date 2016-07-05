@@ -39,6 +39,12 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
         hideTap.numberOfTapsRequired = 1
         self.view.userInteractionEnabled = true
         self.view.addGestureRecognizer(hideTap)
+        
+        // 有fb_token 直接去抓資料
+        if let _ = FBSDKAccessToken.currentAccessToken() {
+            getFBUserData()
+        }
+
     }
     
     func setTextTheme(){
@@ -101,7 +107,7 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
     var isLoginBtnPressed = false
     var showingTitleInProgress = false
     
-    @IBAction func loginBtndDown(sender:AnyObject){
+    @IBAction func loginBtnDown(sender:AnyObject){
         
         self.isLoginBtnPressed = true
         
@@ -118,7 +124,7 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
         
     }
     
-    @IBAction func loginBtndUpInside(sender:AnyObject){
+    @IBAction func loginBtnUpInside(sender:AnyObject){
         self.isLoginBtnPressed = false
         if(!self.showingTitleInProgress) {
             self.hideTitleVisibleFromFields()
@@ -214,6 +220,44 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
         }
     }
     
+    // MARK: - FBLogin
+    @IBAction func fbBtn_click(sender: AnyObject) {
+        
+        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        fbLoginManager.logInWithReadPermissions(["email"], fromViewController: self) { (result, error) -> Void in
+            if (error == nil){
+                let fbloginresult : FBSDKLoginManagerLoginResult = result
+                if(fbloginresult.grantedPermissions.contains("email"))
+                {
+                    self.getFBUserData()
+                }
+            }
+        }
+    }
+    
+    
+    func getFBUserData(){
+        if((FBSDKAccessToken.currentAccessToken()) != nil){
+            FBSDKGraphRequest(graphPath: "me",
+                parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).startWithCompletionHandler({ (connection, result, error) -> Void in
+                    if (error == nil){
+                        
+                        print("FB_token:\n\(FBSDKAccessToken.currentAccessToken().tokenString)\n")
+                        
+                        let user = JSON(result)
+                        
+                        print(user["email"].string)
+                        print(user["id"].string)
+                        print(user["name"].string)
+                        print(user["picture"]["data"]["url"].string)
+                        
+                    }
+                })
+        }
+    }
+
+    
+    
     func showingTitleInAnimationComplete() {
         // If a field is not filled out, display the highlighted title for 0.3 seco
         let displayTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(0.3 * Double(NSEC_PER_SEC)))
@@ -231,6 +275,8 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
         self.idText.highlighted = false
         self.pwdText.highlighted = false
     }
+    
+    
     
     // MARK: - Delegate
     

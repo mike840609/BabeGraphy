@@ -49,8 +49,8 @@
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="loginBtndDown:" destination="BYZ-38-t0r" eventType="touchDown" id="jom-5t-LH6"/>
-                                    <action selector="loginBtndUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="brD-bJ-9Wy"/>
+                                    <action selector="loginBtnDown:" destination="BYZ-38-t0r" eventType="touchDown" id="Mwm-3q-q18"/>
+                                    <action selector="loginBtnUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ers-uc-qq8"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BabeGraphy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eo6-be-bza">
@@ -87,6 +87,9 @@
                                 <state key="normal" title="SIGN in with Facebook">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="fbBtn_click:" destination="BYZ-38-t0r" eventType="touchUpInside" id="61B-kr-OG4"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mTS-OV-3nO" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
                                 <rect key="frame" x="46" y="294" width="283" height="40"/>
