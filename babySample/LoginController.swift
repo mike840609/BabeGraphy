@@ -12,6 +12,8 @@ import Alamofire
 import SwiftyJSON
 import NVActivityIndicatorView
 import PMAlertController
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 
 class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorViewable{
