@@ -163,7 +163,8 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
                         NSUserDefaults.standardUserDefaults().synchronize()
                         
                         // 過場動畫
-                        let alertVC = PMAlertController(title: "登入成功", description: "恭喜您,讓我們共同創造美好的回憶", image: UIImage(named: "success.png"), style: .Alert)
+                        // let alertVC = PMAlertController(title: "登入成功", description: "恭喜您,讓我們共同創造美好的回憶", image: UIImage(named: "success.png"), style: .Alert)
+                        let alertVC = PMAlertController(title: "登入成功", description: "恭喜您,讓我們共同創造美好的回憶", image: UIImage(named: "shield-1.png"), style: .Alert)
                         alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: {
                             
                             // 頁面轉跳

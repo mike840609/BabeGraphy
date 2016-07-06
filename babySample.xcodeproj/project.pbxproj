@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3F2039D6DC947AA6FB6E13B4 /* Pods_babySample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2472A7F6351D4CF62F0C27 /* Pods_babySample.framework */; };
+		4D1258A01D2CC4D100A7B6B9 /* followersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D12589F1D2CC4D100A7B6B9 /* followersVC.swift */; };
+		4D1258A41D2CD55600A7B6B9 /* shield-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D1258A31D2CD55600A7B6B9 /* shield-1.png */; };
+		4D1258A61D2CD94000A7B6B9 /* tabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1258A51D2CD94000A7B6B9 /* tabVC.swift */; };
+		4D1258A81D2CD96800A7B6B9 /* navVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1258A71D2CD96800A7B6B9 /* navVC.swift */; };
 		4D2D44C51D0DA51000E6CE0D /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2D44C41D0DA51000E6CE0D /* FeedCell.swift */; };
 		4D2D44C71D0DA5BE00E6CE0D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2D44C61D0DA5BE00E6CE0D /* Extensions.swift */; };
 		4D2D44C91D0DA6D000E6CE0D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2D44C81D0DA6D000E6CE0D /* Post.swift */; };
@@ -54,6 +58,10 @@
 
 /* Begin PBXFileReference section */
 		297DCA1CA735E14A1236D0C9 /* Pods-babySample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-babySample.release.xcconfig"; path = "Pods/Target Support Files/Pods-babySample/Pods-babySample.release.xcconfig"; sourceTree = "<group>"; };
+		4D12589F1D2CC4D100A7B6B9 /* followersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = followersVC.swift; sourceTree = "<group>"; };
+		4D1258A31D2CD55600A7B6B9 /* shield-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shield-1.png"; sourceTree = "<group>"; };
+		4D1258A51D2CD94000A7B6B9 /* tabVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tabVC.swift; sourceTree = "<group>"; };
+		4D1258A71D2CD96800A7B6B9 /* navVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = navVC.swift; sourceTree = "<group>"; };
 		4D2D44C41D0DA51000E6CE0D /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		4D2D44C61D0DA5BE00E6CE0D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4D2D44C81D0DA6D000E6CE0D /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -165,6 +173,9 @@
 				4D6B1AA71D2546FD00405E2B /* homeVC.swift */,
 				4D6B1AA91D2548D000405E2B /* headerView.swift */,
 				4DE338851D27ED46001373E3 /* uploadVC.swift */,
+				4D12589F1D2CC4D100A7B6B9 /* followersVC.swift */,
+				4D1258A51D2CD94000A7B6B9 /* tabVC.swift */,
+				4D1258A71D2CD96800A7B6B9 /* navVC.swift */,
 				4D3749DF1D07FFD100F57F68 /* Main.storyboard */,
 				4D3749E51D07FFD100F57F68 /* Assets.xcassets */,
 				4D3749E71D07FFD100F57F68 /* LaunchScreen.storyboard */,
@@ -218,6 +229,7 @@
 				4D54496D1D2A2970006461DC /* server-2.png */,
 				4D54496B1D2A292F006461DC /* cloud-computing-2.png */,
 				4D54496F1D2A29B7006461DC /* list-4.png */,
+				4D1258A31D2CD55600A7B6B9 /* shield-1.png */,
 				4D5449711D2A2FB0006461DC /* user-43.png */,
 			);
 			path = Icon;
@@ -314,6 +326,7 @@
 				4D54495B1D2A20A1006461DC /* add.png in Resources */,
 				4D54495E1D2A20A1006461DC /* error.png in Resources */,
 				4D3749E11D07FFD100F57F68 /* Main.storyboard in Resources */,
+				4D1258A41D2CD55600A7B6B9 /* shield-1.png in Resources */,
 				4D5449671D2A20A1006461DC /* user.png in Resources */,
 				4D5449611D2A20A1006461DC /* like.png in Resources */,
 				4D5449621D2A20A1006461DC /* list.png in Resources */,
@@ -381,9 +394,12 @@
 				4DE338861D27ED46001373E3 /* uploadVC.swift in Sources */,
 				4D3749F81D087C8000F57F68 /* UITextField+fixCaretPosition.swift in Sources */,
 				4D3749F71D087C8000F57F68 /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */,
+				4D1258A01D2CC4D100A7B6B9 /* followersVC.swift in Sources */,
 				4D3749E41D07FFD100F57F68 /* babySample.xcdatamodeld in Sources */,
 				4D9761491D227F4F00FE9C80 /* signUpVC.swift in Sources */,
 				4D3749F61D087C8000F57F68 /* SkyFloatingLabelTextField.swift in Sources */,
+				4D1258A81D2CD96800A7B6B9 /* navVC.swift in Sources */,
+				4D1258A61D2CD94000A7B6B9 /* tabVC.swift in Sources */,
 				4D2D44C51D0DA51000E6CE0D /* FeedCell.swift in Sources */,
 				4DE3388A1D27F455001373E3 /* MaterialButton.swift in Sources */,
 				4D3749DC1D07FFD100F57F68 /* AppDelegate.swift in Sources */,

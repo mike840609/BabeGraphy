@@ -13,11 +13,16 @@ import PMAlertController
 
 class homeVC: UICollectionViewController {
     
-    
     @IBOutlet weak var logoutBtn: UIBarButtonItem!
     
     // 儲存個人資訊
     var user : SwiftyJSON.JSON?
+    
+    // 儲存照片
+    var picArray = [String]()
+    
+    // pull to refresher
+    var refresher:UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +37,15 @@ class homeVC: UICollectionViewController {
         let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
         logoutBtn.setTitleTextAttributes(attributes, forState: .Normal)
         logoutBtn.title = String.fontAwesomeIconWithName(.SignOut)
+        
+        
+        // pull to refresh
+        refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(homeVC.refresh), forControlEvents: UIControlEvents.ValueChanged)
+        collectionView?.addSubview(refresher)
+        
+        // 到 server 抓資訊
+        self.getInfo()
     }
     
     
@@ -55,6 +69,8 @@ class homeVC: UICollectionViewController {
             
         }
         
+        
+        // token 有抓到 向 server 請求
         Alamofire.request(.GET, "http://140.136.155.143/api/user/token/\(AccessToken!)").validate().responseJSON{ (response) in
             
             switch response.result{
@@ -65,27 +81,26 @@ class homeVC: UICollectionViewController {
                 self.user = json
                 
                 // optional chainging
-                guard let id:String = json["data"][0]["id"].stringValue,
-                    let name:String = json["data"][0]["name"].stringValue,
-                    let email:String = json["data"][0]["email"].stringValue,
-                    let follower_count:String = json["data"][0]["follower_count"].stringValue,
-                    let following_count:String = json["data"][0]["followed_count"].stringValue,
-                    let posts_count:String = json["data"][0]["posts_count"].stringValue
-                    else {return}
-                
-                // 暫時用字串長度來檢查 自動登出
-                if id.characters.count < 3{
-                    let alertVC = PMAlertController(title: "重複登入", description: "您的帳號已經從遠方登入,請重新登入", image: UIImage(named: "warning.png"), style: .Alert)
-                    alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action:{self.logout()}))
-                    self.presentViewController(alertVC, animated: true, completion:nil)
-                    
+                guard let id:String = json["data"][0]["id"].string,
+                    let name:String = json["data"][0]["name"].string,
+                    let email:String = json["data"][0]["email"].string,
+                    let follower_count:Int = json["data"][0]["follower_count"].int,
+                    let following_count:Int = json["data"][0]["followed_count"].int,
+                    let posts_count:Int = json["data"][0]["posts_count"].int
+                    else {
+                        
+                        // 重複登入 轉跳 登入頁面
+                        let alertVC = PMAlertController(title: "重複登入", description: "您的帳號已經從遠方登入,請重新登入", image: UIImage(named: "warning.png"), style: .Alert)
+                        alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action:{self.logout()}))
+                        self.presentViewController(alertVC, animated: true, completion:nil)
+                        break
                 }
                 
                 
                 header.fullnameLbl.text = name.uppercaseString
-                header.followers.text = follower_count
-                header.followings.text = following_count
-                header.posts.text = posts_count
+                header.followers.text = String(follower_count)
+                header.followings.text = String(following_count)
+                header.posts.text = String(posts_count)
                 
                 // 設定navigation 標題
                 self.navigationItem.title = name.uppercaseString
@@ -101,6 +116,28 @@ class homeVC: UICollectionViewController {
         }
         
         
+        // 添加手勢 postBtn , followerBtn ,followingBtn
+        
+        // tap post
+        let postsTap = UITapGestureRecognizer(target: self, action: #selector(homeVC.postsTap))
+        postsTap.numberOfTapsRequired = 1
+        header.posts.userInteractionEnabled = true
+        header.posts.addGestureRecognizer(postsTap)
+        
+        // tap followers
+        let followersTap = UITapGestureRecognizer(target: self, action: #selector(homeVC.followersTap))
+        followersTap.numberOfTapsRequired = 1
+        header.followers.userInteractionEnabled = true
+        header.followers.addGestureRecognizer(followersTap)
+        
+        
+        // tap following
+        let followingTap = UITapGestureRecognizer(target: self, action: #selector(homeVC.followingTap))
+        followingTap.numberOfTapsRequired = 1
+        header.followings.userInteractionEnabled = true
+        header.followings.addGestureRecognizer(followingTap)
+        
+        
         return header
     }
     
@@ -113,6 +150,7 @@ class homeVC: UICollectionViewController {
         
     }
     
+    
     // config cell
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath)
@@ -121,19 +159,63 @@ class homeVC: UICollectionViewController {
     }
     
     // MARK: - Customer Function
+    
+    // 更新 collectionView 並停止更新動畫
+    func refresh(){
+        collectionView?.reloadData()
+        refresher.endRefreshing()
+    }
+
+    
+    
     func getInfo(){
         
-        guard let id:String = user?["data"][0]["id"].stringValue,
-            let name:String = user?["data"][0]["name"].stringValue,
-            let email:String = user?["data"][0]["email"].stringValue,
-            let follower_count:String = user?["data"][0]["follower_count"].stringValue,
-            let following_count:String = user?["data"][0]["followed_count"].stringValue,
-            let posts_count:String = user?["data"][0]["posts_count"].stringValue
-            else {return} // 沒值 else 依舊進去步了
+        guard let id:String = user?["data"][0]["id"].string,
+            let name:String = user?["data"][0]["name"].string,
+            let email:String = user?["data"][0]["email"].string,
+            let follower_count:Int = user?["data"][0]["follower_count"].int,
+            let following_count:Int = user?["data"][0]["followed_count"].int,
+            let posts_count:Int = user?["data"][0]["posts_count"].int
+            else {return}
         
         print(" id:\(id)\n name:\(name)\n email:\(email)\n posts\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")
         
     }
+    
+    // 點擊回到 index 0
+    func postsTap() {
+        if !picArray.isEmpty {
+            let index = NSIndexPath(forItem: 0 ,inSection: 0)
+            self.collectionView?.scrollToItemAtIndexPath(index, atScrollPosition: .Top, animated: true)
+        }
+    }
+    
+    // 追蹤者 的 tableView
+    func followersTap(){
+        
+        show = "followers"
+        
+        // instance storyboard
+        let followers = self.storyboard?.instantiateViewControllerWithIdentifier("followersVC") as! followersVC
+        
+        // present
+        self.navigationController?.pushViewController(followers, animated: true)
+    }
+    
+     // 追蹤中 的 tableView
+    func followingTap(){
+        
+        show = "followings"
+        
+        // instance storyboard
+        let followings = self.storyboard?.instantiateViewControllerWithIdentifier("followersVC") as! followersVC
+        
+        // present
+        self.navigationController?.pushViewController(followings, animated: true)
+        
+    }
+    
+    
     
     // MARK: - IBAction
     @IBAction func logout(sender: AnyObject) {

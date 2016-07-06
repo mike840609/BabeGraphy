@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="FontAwesome.otf">
+        <mutableArray key="fontawesome-webfont.ttf">
             <string>FontAwesome</string>
         </mutableArray>
     </customFonts>
@@ -463,7 +463,7 @@
         <!--News Feed-->
         <scene sceneID="bMW-bR-p4l">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RMm-u7-CHm" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RMm-u7-CHm" customClass="navVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="News Feed" image="news_feed_icon" selectedImage="news_feed_icon" id="ItP-W0-3gD"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -480,10 +480,10 @@
             </objects>
             <point key="canvasLocation" x="3181.5" y="376"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--TabVC-->
         <scene sceneID="uem-Fr-lOa">
             <objects>
-                <tabBarController storyboardIdentifier="tabBar" automaticallyAdjustsScrollViewInsets="NO" id="Xjw-Bf-mLo" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBar" automaticallyAdjustsScrollViewInsets="NO" id="Xjw-Bf-mLo" customClass="tabVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="tWI-F3-tyj">
@@ -505,7 +505,7 @@
         <!--Album-->
         <scene sceneID="7dv-Aj-Azh">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KvY-bE-FQN" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KvY-bE-FQN" customClass="navVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Album" image="picture-icon" id="r1D-wY-zSO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2rm-sO-tda">
@@ -608,7 +608,7 @@
         <!--Camera-->
         <scene sceneID="pTy-um-UrY">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OEH-zX-Z6N" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OEH-zX-Z6N" customClass="navVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Camera" image="camera-icon" id="9gK-hQ-6vr"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -648,7 +648,7 @@
         <!--Friend-->
         <scene sceneID="KXc-w1-7MC">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ttc-Dt-5VM" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ttc-Dt-5VM" customClass="navVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Friend" image="requests_icon" id="8kh-gk-Z8b"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -668,7 +668,7 @@
         <!--More-->
         <scene sceneID="WkI-LC-hah">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ELX-xm-Q6S" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ELX-xm-Q6S" customClass="navVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="More" image="more_icon" id="giv-IK-sA1"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -884,6 +884,61 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gTO-jH-vIQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3954.5" y="3546.5"/>
+        </scene>
+        <!--FollowersVC-->
+        <scene sceneID="13Z-8p-Bw8">
+            <objects>
+                <tableViewController storyboardIdentifier="followersVC" id="QgU-rM-gMJ" customClass="followersVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="gb6-z7-TmV" customClass="followersCell">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="80" id="1by-7x-oGC">
+                                <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1by-7x-oGC" id="Rhg-sc-i4a">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="placeholder2" translatesAutoresizingMaskIntoConstraints="NO" id="OHZ-nB-rCQ">
+                                            <rect key="frame" x="8" y="10" width="60" height="60"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1Y-aU-YUY">
+                                            <rect key="frame" x="87" y="25" width="110" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBK-kc-ITw">
+                                            <rect key="frame" x="269" y="25" width="98" height="30"/>
+                                            <color key="backgroundColor" red="0.80776928449999996" green="0.85248912519999998" blue="0.87579467529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <state key="normal" title="FOLLOWING">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="followBtn_click:" destination="1by-7x-oGC" eventType="touchUpInside" id="mIM-XL-wSk"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="avaImg" destination="OHZ-nB-rCQ" id="FSk-dt-Yth"/>
+                                    <outlet property="followBtn" destination="XBK-kc-ITw" id="Ai1-Pk-zpF"/>
+                                    <outlet property="usernameLbl" destination="w1Y-aU-YUY" id="cHg-px-mca"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="QgU-rM-gMJ" id="mjJ-Qd-nXU"/>
+                            <outlet property="delegate" destination="QgU-rM-gMJ" id="1me-Q7-fK2"/>
+                        </connections>
+                    </tableView>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G7f-8N-xYr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4532.5" y="3546.5"/>
         </scene>
     </scenes>
     <resources>
