@@ -105,7 +105,7 @@ class homeVC: UICollectionViewController {
                 // 設定navigation 標題
                 self.navigationItem.title = name.uppercaseString
                 
-                print(" id:\(id)\n name:\(name)\n email:\(email)\n posts\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")
+                print(" id:\(id)\n name:\(name)\n email:\(email)\n posts:\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")
                 
                 // self.getInfo()
                 

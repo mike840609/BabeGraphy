@@ -151,15 +151,17 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
                 // 登入成功做的事情
                 case .Success:
                     let json = JSON(response.result.value!)
-                    print(json)
                     
                     self.stopActivityAnimating()
-                    if let accessToken = json["token"].string {
+                    
+                    if let accessToken = json["token"].string{
+                        
+                        print(json)
                         
                         print ("成功取得token,並存取")
                         
-                        // 存取token
-                        NSUserDefaults.standardUserDefaults().setObject(accessToken, forKey: "AccessToken")
+                        // 存取token 以及基本資料
+                        NSUserDefaults.standardUserDefaults().setObject(accessToken, forKey: ACCESS_TOKEN)
                         NSUserDefaults.standardUserDefaults().synchronize()
                         
                         // 過場動畫
@@ -335,9 +337,7 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
         
         let emailRegEx = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        
         return emailTest.evaluateWithObject(str)
-        
     }
 }
 

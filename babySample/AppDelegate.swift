@@ -19,13 +19,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        
+        window = UIWindow(frame:UIScreen.mainScreen().bounds)
+        window?.makeKeyAndVisible()
+        
+        // navigation bar
         UINavigationBar.appearance()
         // UINavigationBar.appearance().barTintColor = UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1)
         UINavigationBar.appearance().barTintColor = UIColor(red: 1.0, green: 0.5, blue: 0.67, alpha: 0.3)
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
         
+        // status bar
         application.statusBarStyle = .LightContent
         
+
         
         // facebook delegate
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -136,9 +143,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // remember AccessToken login
         let AccessToken:String? = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken")
-        print("Auto login ")
+        print("Auto login \n\(AccessToken)\n")
         // if logged in
         if AccessToken != nil {
+            
             let storyboard:UIStoryboard = UIStoryboard(name:"Main",bundle: nil)
             let myTabBar = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! UITabBarController
             window?.rootViewController = myTabBar

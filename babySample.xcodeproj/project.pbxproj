@@ -54,6 +54,9 @@
 		4DE3388A1D27F455001373E3 /* MaterialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE338871D27F455001373E3 /* MaterialButton.swift */; };
 		4DE3388B1D27F455001373E3 /* MaterialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE338881D27F455001373E3 /* MaterialView.swift */; };
 		4DE3388C1D27F455001373E3 /* MateriaTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE338891D27F455001373E3 /* MateriaTextField.swift */; };
+		4DE7A6171D2FC16500753A1C /* followersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE7A6161D2FC16500753A1C /* followersCell.swift */; };
+		4DEA614C1D2D3FA300C242B8 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEA614B1D2D3FA300C242B8 /* image.png */; };
+		4DEA614E1D2D415E00C242B8 /* key.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEA614D1D2D415E00C242B8 /* key.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +109,9 @@
 		4DE338871D27F455001373E3 /* MaterialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialButton.swift; sourceTree = "<group>"; };
 		4DE338881D27F455001373E3 /* MaterialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialView.swift; sourceTree = "<group>"; };
 		4DE338891D27F455001373E3 /* MateriaTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MateriaTextField.swift; sourceTree = "<group>"; };
+		4DE7A6161D2FC16500753A1C /* followersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = followersCell.swift; sourceTree = "<group>"; };
+		4DEA614B1D2D3FA300C242B8 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
+		4DEA614D1D2D415E00C242B8 /* key.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = key.png; sourceTree = "<group>"; };
 		8C2472A7F6351D4CF62F0C27 /* Pods_babySample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_babySample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7AA36BF83BDFB32C5035B72 /* Pods-babySample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-babySample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-babySample/Pods-babySample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,6 +180,7 @@
 				4D6B1AA91D2548D000405E2B /* headerView.swift */,
 				4DE338851D27ED46001373E3 /* uploadVC.swift */,
 				4D12589F1D2CC4D100A7B6B9 /* followersVC.swift */,
+				4DE7A6161D2FC16500753A1C /* followersCell.swift */,
 				4D1258A51D2CD94000A7B6B9 /* tabVC.swift */,
 				4D1258A71D2CD96800A7B6B9 /* navVC.swift */,
 				4D3749DF1D07FFD100F57F68 /* Main.storyboard */,
@@ -231,6 +238,8 @@
 				4D54496F1D2A29B7006461DC /* list-4.png */,
 				4D1258A31D2CD55600A7B6B9 /* shield-1.png */,
 				4D5449711D2A2FB0006461DC /* user-43.png */,
+				4DEA614B1D2D3FA300C242B8 /* image.png */,
+				4DEA614D1D2D415E00C242B8 /* key.png */,
 			);
 			path = Icon;
 			sourceTree = "<group>";
@@ -310,6 +319,7 @@
 				4D5449631D2A20A1006461DC /* navigation.png in Resources */,
 				4D3749E91D07FFD100F57F68 /* LaunchScreen.storyboard in Resources */,
 				4D5449721D2A2FB0006461DC /* user-43.png in Resources */,
+				4DEA614C1D2D3FA300C242B8 /* image.png in Resources */,
 				4D54495F1D2A20A1006461DC /* info.png in Resources */,
 				4D54495C1D2A20A1006461DC /* calendar.png in Resources */,
 				4D5449681D2A20A1006461DC /* users.png in Resources */,
@@ -322,6 +332,7 @@
 				4D54496E1D2A2970006461DC /* server-2.png in Resources */,
 				4D3749E61D07FFD100F57F68 /* Assets.xcassets in Resources */,
 				4D5449701D2A29B7006461DC /* list-4.png in Resources */,
+				4DEA614E1D2D415E00C242B8 /* key.png in Resources */,
 				4D5449641D2A20A1006461DC /* picture.png in Resources */,
 				4D54495B1D2A20A1006461DC /* add.png in Resources */,
 				4D54495E1D2A20A1006461DC /* error.png in Resources */,
@@ -391,6 +402,7 @@
 				4D4B00601D0C5048007E45A9 /* FeedController.swift in Sources */,
 				4D6B1AA81D2546FD00405E2B /* homeVC.swift in Sources */,
 				4D2D44C71D0DA5BE00E6CE0D /* Extensions.swift in Sources */,
+				4DE7A6171D2FC16500753A1C /* followersCell.swift in Sources */,
 				4DE338861D27ED46001373E3 /* uploadVC.swift in Sources */,
 				4D3749F81D087C8000F57F68 /* UITextField+fixCaretPosition.swift in Sources */,
 				4D3749F71D087C8000F57F68 /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */,
@@ -455,6 +467,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -477,6 +490,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
 		};
@@ -501,6 +515,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -516,6 +531,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;
 		};
@@ -525,6 +541,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = babySample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -532,6 +549,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
 		};
@@ -541,12 +559,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = babySample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.superlevin.mike840609.babySample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;
 		};

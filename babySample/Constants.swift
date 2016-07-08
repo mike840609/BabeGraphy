@@ -9,4 +9,7 @@
 import Foundation
 
 let ACCESS_TOKEN = "AccessToken"
+let USER_ID = "id"
+let USER_NAME = "name"
+let USER_EMAIL = "email"
 

@@ -8,6 +8,7 @@
 
 import UIKit
 import Fusuma
+import PMAlertController
 
 class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
     
@@ -33,7 +34,7 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
         removeBtn.hidden = true
         
         // no image
-        picImg.image = UIImage(named: "upload")
+        picImg.image = UIImage(named: "image.png")
         
         // hide kyeboard tap
         let hideTap = UITapGestureRecognizer(target: self, action: #selector(uploadVC.hideKeyboardTap))
@@ -47,6 +48,8 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
         picImg.userInteractionEnabled = true
         picImg.addGestureRecognizer(picTap)
         
+        // first show  引導使用者 使用圖片
+        showFusuma()
         
     }
     
@@ -90,21 +93,27 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
         
         print("Camera roll unauthorized")
         
-        let alert = UIAlertController(title: "Access Requested", message: "Saving image needs to access your photo album", preferredStyle: .Alert)
+        let alertVC = PMAlertController(title: "存取相簿", description: "請授與我們您的相簿存取權限,謝謝您", image: UIImage(named: "key.png"), style: .Alert)
         
-        alert.addAction(UIAlertAction(title: "Settings", style: .Default, handler: { (action) -> Void in
-            
+        alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: { 
             if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
                 UIApplication.sharedApplication().openURL(url)
             }
-            
         }))
+        alertVC.addAction(PMAlertAction(title: "Cancel", style: .Cancel, action: nil))
+        self.presentViewController(alertVC, animated: true, completion: nil)
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
-            
-        }))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+//        let alert = UIAlertController(title: "Access Requested", message: "Saving image needs to access your photo album", preferredStyle: .Alert)
+//        alert.addAction(UIAlertAction(title: "Settings", style: .Default, handler: { (action) -> Void in
+//            if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
+//                UIApplication.sharedApplication().openURL(url)
+//            }
+//        }))
+//        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+//        }))
+//        self.presentViewController(alert, animated: true, completion: nil)
+        
     }
     
     func fusumaClosed() {
