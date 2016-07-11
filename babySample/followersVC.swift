@@ -15,6 +15,9 @@ import Haneke
 // 要顯示 storyBoardId
 var show:String?
 
+// 儲存用戶名的陣列
+var guestname = [String]()
+
 class followersVC: UITableViewController {
     
     
@@ -105,16 +108,42 @@ class followersVC: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! followersCell
         
-        cell.usernameLbl.text = follow[indexPath.item]["user_to_id"].string
         
+        if cell.usernameLbl.text == user!["data"][0][JSON_NAME].string{
+            cell.followBtn.hidden = true
+        }
+        
+        
+        cell.usernameLbl.text = follow[indexPath.item]["following_user_name"].string
+        cell.followUserId = follow[indexPath.item]["user_to_id"].string
         cell.avaImg.hnk_setImageFromURL(NSURL(string: "http://www.sitesnobrasil.com/imagens-fotos/mulheres/l/lisa-simpson.png")!)
+        cell.followBtn.setTitle("FOLLOWING", forState: .Normal)
         
-
+        cell.followBtn.backgroundColor = .greenColor()
+        
+        
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+//        // recall cell to call further cell's data
+//        let cell = tableView.cellForRowAtIndexPath(indexPath) as! followersCell
+//        
+//        // 判斷欄位是否是使用者本身
+//        if cell.usernameLbl.text! == user!["data"]["0"][JSON_NAME].string{
+//            
+//            let home = self.storyboard?.instantiateViewControllerWithIdentifier("homeVC") as! homeVC
+//            self.navigationController?.pushViewController(home, animated: true)
+//            
+//        }else{
+//            
+//            guestname.append(cell.usernameLbl.text!)
+//            let guest = self.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
+//            self.navigationController?.pushViewController(guest, animated: true)
+//            
+//        }
+
         
     }
     

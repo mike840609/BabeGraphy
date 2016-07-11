@@ -7,30 +7,86 @@
 //
 
 import UIKit
+import Alamofire
 
 class followersCell: UITableViewCell {
-
+    
     @IBOutlet weak var avaImg: UIImageView!
     @IBOutlet weak var usernameLbl: UILabel!
     @IBOutlet weak var followBtn: UIButton!
+    
+    
+    var followUserId:String?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
     }
-
+    
     
     @IBAction func followBtn_click(sender: AnyObject) {
         
+        
+        
         let title = followBtn.titleForState(.Normal)
         
-        // 
+        guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey(ACCESS_TOKEN) else{
+            return
+        }
+        
+        // 標題而執行動作
+        
+        // 追蹤
         if title == "FOLLOW"{
             
-        }else{
+            Alamofire.request(.POST, "http://140.136.155.143/api/connection/connect",parameters: ["token":AccessToken, "user_to_id": followUserId!]).validate().responseJSON(completionHandler: { (response) in
+                
+                switch response.result{
+                    
+                case .Success(let json):
+                    
+                    print(json)
+                    print(self.followUserId!)
+                    
+                    self.followBtn.backgroundColor = UIColor.greenColor()
+                    self.followBtn.setTitle("FOLLOWING", forState: .Normal)
+                    
+                case .Failure(let error):
+                    print(error.localizedDescription)
+                    
+                }
+            })
+            
             
         }
         
-    }
+        // 取消追蹤
+        if title == "FOLLOWING"{
+            
+            Alamofire.request(.POST, "http://140.136.155.143/api/connection/delete",parameters: ["token":AccessToken, "user_to_id": followUserId!]).validate().responseJSON(completionHandler: { (response) in
+                
+                switch response.result{
+                    
+                case .Success(let json):
+                    
+                    print(self.followUserId!)
+                    
+                    print(json)
+                    
+                    self.followBtn.setTitle("FOLLOW", forState: .Normal)
+                    self.followBtn.backgroundColor = .lightGrayColor()
+                    
+                    
+                case .Failure(let error):
+                    print(error.localizedDescription)
 
+                    
+                }
+            })
+
+            
+        }
+    }
+    
 }
