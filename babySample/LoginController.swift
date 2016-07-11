@@ -240,7 +240,7 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
         }
     }
     
-    
+    // FACEBOOK API
     func getFBUserData(){
         if((FBSDKAccessToken.currentAccessToken()) != nil){
             FBSDKGraphRequest(graphPath: "me",

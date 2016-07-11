@@ -50,7 +50,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         avaImg.layer.cornerRadius = avaImg.frame.size.width/2
         avaImg.clipsToBounds = true
         
-        // 鍵盤高度適應
+        // 鍵盤隱藏
         let hideTap = UITapGestureRecognizer(target: self, action: #selector(signUpVC.hideKeyboardTap(_:)))
         hideTap.numberOfTapsRequired = 1
         self.view.userInteractionEnabled = true
@@ -75,6 +75,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         picker.delegate = self
         picker.sourceType = .PhotoLibrary
         picker.allowsEditing = true
+        picker.navigationBar.tintColor = UIColor.whiteColor()
         presentViewController(picker, animated: true, completion: nil)
     }
     
@@ -246,22 +247,19 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         
         if (textField == self.repeatPassword){
             
-            
             var txtAfterUpdate:NSString = repeatPassword.text! as NSString
             txtAfterUpdate = txtAfterUpdate.stringByReplacingCharactersInRange(range, withString: string)
             
             
             self.validateRepeatPasswordTextField(txtAfterUpdate as String)
             
-            
-            
         }
         
-        
-        
         return true
-        
     }
+    
+    
+    
     
     func validateEmailTextFieldWithText(email: String?) {
         if let email = email {
@@ -311,21 +309,12 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
             
             if (!isSamePassword(repeat_password)){
                 self.repeatPassword.errorMessage = NSLocalizedString("Password should be the same", tableName: "SkyFloatingLabelTextField", comment: " ")
-            }
-            else {
-                
-                
+            }else{
                 self.repeatPassword.errorMessage = nil
             }
-            
-        }
-            
-            
-        else {
+        }else {
             self.repeatPassword.errorMessage = nil
         }
-        
-        
         
     }
     
@@ -349,12 +338,9 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
             
             return repeat_password == password
             
-        }
-            
-        else {
+        }else {
             return false
         }
-        
     }
     
     

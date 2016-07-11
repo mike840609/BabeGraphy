@@ -11,12 +11,13 @@ import Alamofire
 import SwiftyJSON
 import PMAlertController
 
+
+// 儲存個人資訊
+var user : SwiftyJSON.JSON?
+
 class homeVC: UICollectionViewController {
     
     @IBOutlet weak var logoutBtn: UIBarButtonItem!
-    
-    // 儲存個人資訊
-    var user : SwiftyJSON.JSON?
     
     // 儲存照片
     var picArray = [String]()
@@ -78,15 +79,15 @@ class homeVC: UICollectionViewController {
                 
                 let json = SwiftyJSON.JSON(json)
                 
-                self.user = json
+                user = json
                 
                 // optional chainging
-                guard let id:String = json["data"][0]["id"].string,
-                    let name:String = json["data"][0]["name"].string,
-                    let email:String = json["data"][0]["email"].string,
-                    let follower_count:Int = json["data"][0]["follower_count"].int,
-                    let following_count:Int = json["data"][0]["followed_count"].int,
-                    let posts_count:Int = json["data"][0]["posts_count"].int
+                guard let id:String = json["data"][0][JSON_ID].string,
+                    let name:String = json["data"][0][JSON_NAME].string,
+                    let email:String = json["data"][0][JSON_EMAIL].string,
+                    let follower_count:Int = json["data"][0][JSON_FOLLOWER].int,
+                    let following_count:Int = json["data"][0][JSON_FOLLOWEING].int,
+                    let posts_count:Int = json["data"][0][JSON_POST].int
                     else {
                         
                         // 重複登入 轉跳 登入頁面
@@ -101,6 +102,13 @@ class homeVC: UICollectionViewController {
                 header.followers.text = String(follower_count)
                 header.followings.text = String(following_count)
                 header.posts.text = String(posts_count)
+                
+                if let bio = json["data"][0][JSON_BIO].string{
+                    header.bioLbl.text = bio
+                }
+                if let web = json["data"][0][JSON_WEB].string{
+                    header.webTxt.text = web
+                }
                 
                 // 設定navigation 標題
                 self.navigationItem.title = name.uppercaseString
@@ -170,12 +178,12 @@ class homeVC: UICollectionViewController {
     
     func getInfo(){
         
-        guard let id:String = user?["data"][0]["id"].string,
-            let name:String = user?["data"][0]["name"].string,
-            let email:String = user?["data"][0]["email"].string,
-            let follower_count:Int = user?["data"][0]["follower_count"].int,
-            let following_count:Int = user?["data"][0]["followed_count"].int,
-            let posts_count:Int = user?["data"][0]["posts_count"].int
+        guard let id:String = user?["data"][0][JSON_ID].string,
+            let name:String = user?["data"][0][JSON_NAME].string,
+            let email:String = user?["data"][0][JSON_EMAIL].string,
+            let follower_count:Int = user?["data"][0][JSON_FOLLOWER].int,
+            let following_count:Int = user?["data"][0][JSON_FOLLOWEING].int,
+            let posts_count:Int = user?["data"][0][JSON_POST].int
             else {return}
         
         print(" id:\(id)\n name:\(name)\n email:\(email)\n posts\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")

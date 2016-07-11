@@ -13,3 +13,24 @@ let USER_ID = "id"
 let USER_NAME = "name"
 let USER_EMAIL = "email"
 
+
+
+//  json name
+
+// user info
+let JSON_ID = "id"
+let JSON_NAME = "name"
+let JSON_EMAIL = "email"
+let JSON_BIO = "bio"
+let JSON_WEB = "web"
+let JSON_FOLLOWER = "follower_count"
+let JSON_FOLLOWEING = "following_count"
+let JSON_POST = "posts_count"
+
+// JSON TOKEN
+
+let JSON_ACCESS_TOKEN = "access_token"
+
+let JSON_API_TOKEN = "api_accesstoken"
+let JSON_FB_TOKEN = "facebook_accesstoken"
+

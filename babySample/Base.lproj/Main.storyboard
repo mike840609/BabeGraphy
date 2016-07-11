@@ -23,22 +23,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="48N-jk-hgm" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
-                                <rect key="frame" x="46" y="207" width="283" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="htJ-jv-L6N"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="selectedLineHeight">
-                                        <real key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZl-XV-NiP">
                                 <rect key="frame" x="36" y="394" width="303" height="37"/>
                                 <constraints>
@@ -138,6 +122,22 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="48N-jk-hgm" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
+                                <rect key="frame" x="46" y="207" width="283" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="htJ-jv-L6N"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="selectedLineHeight">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -786,6 +786,7 @@
                                     </state>
                                     <connections>
                                         <action selector="followBtn_clicked:" destination="f2C-ZB-ORx" eventType="touchUpInside" id="Euw-6B-Pw2"/>
+                                        <segue destination="xlt-Z1-sed" kind="presentation" id="K0E-1w-8tc"/>
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Firstname Lastname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGH-FN-3J3">
@@ -938,7 +939,205 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G7f-8N-xYr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4532.5" y="3546.5"/>
+            <point key="canvasLocation" x="4490.5" y="3546.5"/>
+        </scene>
+        <!--EditVC-->
+        <scene sceneID="6a8-Ay-Xhu">
+            <objects>
+                <viewController id="A0i-jS-qDV" customClass="EditVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="duY-ej-yWT"/>
+                        <viewControllerLayoutGuide type="bottom" id="PoN-ic-kky"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mtj-GF-T9G">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder2" translatesAutoresizingMaskIntoConstraints="NO" id="RIj-Cv-apb">
+                                <rect key="frame" x="255" y="72" width="100" height="106"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GuJ-sK-iyQ" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
+                                <rect key="frame" x="13" y="89" width="234" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="selectedLineHeight">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fvp-b3-uLG" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
+                                <rect key="frame" x="13" y="138" width="234" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="selectedLineHeight">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PKN-LH-pIL" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
+                                <rect key="frame" x="13" y="193" width="342" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="y0g-2K-geo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="selectedLineHeight">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RoC-Se-Qtj" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
+                                <rect key="frame" x="13" y="255" width="342" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="R8D-t7-7zJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="selectedLineHeight">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other social network connect" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bdv-fz-MzH">
+                                <rect key="frame" x="13" y="394" width="229" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="HhU-lc-ayI"/>
+                                    <constraint firstAttribute="width" constant="229" id="SOU-BY-ehx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRT-32-wA2">
+                                <rect key="frame" x="53" y="467" width="269" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="0ek-Mh-iPv"/>
+                                </constraints>
+                                <state key="normal" title="CONNECT Facebook">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="ConnectFB_click:" destination="A0i-jS-qDV" eventType="touchUpInside" id="Zuw-J2-hhN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qVa-jM-1ca">
+                                <rect key="frame" x="53" y="544" width="269" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="A7j-KR-5eu"/>
+                                </constraints>
+                                <state key="normal" title="CONNECT Instagram">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="ConnectIG_click:" destination="A0i-jS-qDV" eventType="touchUpInside" id="mWz-2A-Q3b"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jKX-fd-cZE" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
+                                <rect key="frame" x="13" y="313" width="342" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="H9o-gi-buV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="selectedLineHeight">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RoC-Se-Qtj" firstAttribute="leading" secondItem="jKX-fd-cZE" secondAttribute="leading" id="0CG-wm-0MV"/>
+                            <constraint firstItem="RIj-Cv-apb" firstAttribute="leading" secondItem="GuJ-sK-iyQ" secondAttribute="trailing" constant="8" symbolic="YES" id="5HP-xB-0C9"/>
+                            <constraint firstItem="GuJ-sK-iyQ" firstAttribute="leading" secondItem="mtj-GF-T9G" secondAttribute="leadingMargin" constant="-3" id="5hd-2J-VVL"/>
+                            <constraint firstItem="rRT-32-wA2" firstAttribute="leading" secondItem="mtj-GF-T9G" secondAttribute="leadingMargin" constant="37" id="6up-fm-cck"/>
+                            <constraint firstItem="GuJ-sK-iyQ" firstAttribute="leading" secondItem="Fvp-b3-uLG" secondAttribute="leading" id="CNd-rj-hfm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qVa-jM-1ca" secondAttribute="trailing" constant="37" id="EiF-bm-hXW"/>
+                            <constraint firstItem="PKN-LH-pIL" firstAttribute="leading" secondItem="RoC-Se-Qtj" secondAttribute="leading" id="FK0-Hd-0LH"/>
+                            <constraint firstItem="PKN-LH-pIL" firstAttribute="top" secondItem="Fvp-b3-uLG" secondAttribute="bottom" constant="15" id="FXg-Sq-FUI"/>
+                            <constraint firstItem="rRT-32-wA2" firstAttribute="top" secondItem="Bdv-fz-MzH" secondAttribute="bottom" constant="30" id="HTF-lq-pX5"/>
+                            <constraint firstItem="RIj-Cv-apb" firstAttribute="leading" secondItem="Fvp-b3-uLG" secondAttribute="trailing" constant="8" symbolic="YES" id="MXp-ve-zuz"/>
+                            <constraint firstItem="Bdv-fz-MzH" firstAttribute="top" secondItem="jKX-fd-cZE" secondAttribute="bottom" constant="41" id="QOY-Dg-48n"/>
+                            <constraint firstItem="jKX-fd-cZE" firstAttribute="top" secondItem="RoC-Se-Qtj" secondAttribute="bottom" constant="18" id="RCE-UB-zw6"/>
+                            <constraint firstItem="Fvp-b3-uLG" firstAttribute="bottom" secondItem="RIj-Cv-apb" secondAttribute="bottom" id="ScW-IT-hme"/>
+                            <constraint firstItem="RoC-Se-Qtj" firstAttribute="top" secondItem="PKN-LH-pIL" secondAttribute="bottom" constant="22" id="Tz7-l7-wG9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RIj-Cv-apb" secondAttribute="trailing" constant="4" id="UaA-d6-cfY"/>
+                            <constraint firstItem="Fvp-b3-uLG" firstAttribute="leading" secondItem="PKN-LH-pIL" secondAttribute="leading" id="WOg-wg-KXq"/>
+                            <constraint firstItem="Fvp-b3-uLG" firstAttribute="top" secondItem="GuJ-sK-iyQ" secondAttribute="bottom" constant="9" id="WPx-2a-27x"/>
+                            <constraint firstItem="RIj-Cv-apb" firstAttribute="top" secondItem="duY-ej-yWT" secondAttribute="bottom" constant="8" symbolic="YES" id="b5k-x4-Tsq"/>
+                            <constraint firstItem="jKX-fd-cZE" firstAttribute="leading" secondItem="Bdv-fz-MzH" secondAttribute="leading" id="bMS-fg-dBb"/>
+                            <constraint firstItem="qVa-jM-1ca" firstAttribute="leading" secondItem="mtj-GF-T9G" secondAttribute="leadingMargin" constant="37" id="hXa-6P-Nfk"/>
+                            <constraint firstItem="qVa-jM-1ca" firstAttribute="top" secondItem="rRT-32-wA2" secondAttribute="bottom" constant="40" id="jON-y7-UfY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rRT-32-wA2" secondAttribute="trailing" constant="37" id="nDU-yC-riS"/>
+                            <constraint firstItem="PoN-ic-kky" firstAttribute="top" secondItem="qVa-jM-1ca" secondAttribute="bottom" constant="86" id="q2R-vC-lAW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="5Za-eN-O97">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="EiP-I5-HtQ">
+                            <connections>
+                                <action selector="cancelBtn_click:" destination="A0i-jS-qDV" id="scB-sT-TIU"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="sD2-74-nn0">
+                            <connections>
+                                <action selector="saveBtn_click:" destination="A0i-jS-qDV" id="aiz-YI-9Jd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="FbBtn" destination="rRT-32-wA2" id="9sv-hv-iNd"/>
+                        <outlet property="IgBtn" destination="qVa-jM-1ca" id="34X-CV-iIo"/>
+                        <outlet property="avaImg" destination="RIj-Cv-apb" id="4aq-Hz-LiL"/>
+                        <outlet property="bioTxt" destination="RoC-Se-Qtj" id="OIn-1b-MWc"/>
+                        <outlet property="cancelBtn" destination="EiP-I5-HtQ" id="L1G-RC-zOb"/>
+                        <outlet property="fullnameTxt" destination="PKN-LH-pIL" id="Ecf-li-aNC"/>
+                        <outlet property="passwordTxt" destination="GuJ-sK-iyQ" id="xaC-6U-ffK"/>
+                        <outlet property="repeatPassword" destination="Fvp-b3-uLG" id="oJw-j8-P5X"/>
+                        <outlet property="saveBtn" destination="sD2-74-nn0" id="Z15-gU-wcV"/>
+                        <outlet property="webTxt" destination="jKX-fd-cZE" id="QcQ-mh-1bb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ufb-RK-A3L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5049.5" y="4371.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="oZC-rX-oFh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xlt-Z1-sed" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qrq-EK-Kbn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="A0i-jS-qDV" kind="relationship" relationship="rootViewController" id="Y31-xp-X4R"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GFh-P6-JMJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4490.5" y="4371.5"/>
         </scene>
     </scenes>
     <resources>
