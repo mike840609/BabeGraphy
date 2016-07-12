@@ -25,6 +25,14 @@ class homeVC: UICollectionViewController {
     // pull to refresher
     var refresher:UIRefreshControl!
     
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        // 初始化user
+        getInfo()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,8 +53,10 @@ class homeVC: UICollectionViewController {
         refresher.addTarget(self, action: #selector(homeVC.refresh), forControlEvents: UIControlEvents.ValueChanged)
         collectionView?.addSubview(refresher)
         
-        // 到 server 抓資訊
-        self.getInfo()
+        // 更新通知 =====================================
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.reload), name: "reload", object: nil)
+        
+        
     }
     
     
@@ -168,25 +178,76 @@ class homeVC: UICollectionViewController {
     
     // MARK: - Customer Function
     
+    func reload(notification:NSNotification){
+        collectionView?.reloadData()
+    }
+    
     // 更新 collectionView 並停止更新動畫
     func refresh(){
         collectionView?.reloadData()
         refresher.endRefreshing()
     }
-
+    
     
     
     func getInfo(){
         
-        guard let id:String = user?["data"][0][JSON_ID].string,
-            let name:String = user?["data"][0][JSON_NAME].string,
-            let email:String = user?["data"][0][JSON_EMAIL].string,
-            let follower_count:Int = user?["data"][0][JSON_FOLLOWER].int,
-            let following_count:Int = user?["data"][0][JSON_FOLLOWEING].int,
-            let posts_count:Int = user?["data"][0][JSON_POST].int
-            else {return}
         
-        print(" id:\(id)\n name:\(name)\n email:\(email)\n posts\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")
+        // 抓不到token ,token過期 ,重新登入一次
+        guard let AccessToken:String? = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {
+            
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(ACCESS_TOKEN)
+            NSUserDefaults.standardUserDefaults().synchronize()
+            
+            // 轉跳登入畫面
+            let signin = self.storyboard?.instantiateViewControllerWithIdentifier("LoginController") as! LoginController
+            let appDelegate : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.window?.rootViewController = signin
+            
+        }
+        
+        
+        // token 有抓到 向 server 請求
+        Alamofire.request(.GET, "http://140.136.155.143/api/user/token/\(AccessToken!)").validate().responseJSON{ (response) in
+            
+            switch response.result{
+            case .Success(let json):
+                
+                let json = SwiftyJSON.JSON(json)
+                
+                user = json
+                
+                // optional chainging
+                guard let id:String = json["data"][0][JSON_ID].string,
+                    let name:String = json["data"][0][JSON_NAME].string,
+                    let email:String = json["data"][0][JSON_EMAIL].string,
+                    let follower_count:Int = json["data"][0][JSON_FOLLOWER].int,
+                    let following_count:Int = json["data"][0][JSON_FOLLOWEING].int,
+                    let posts_count:Int = json["data"][0][JSON_POST].int
+                    else {
+                        
+                        // 重複登入 轉跳 登入頁面
+                        let alertVC = PMAlertController(title: "重複登入", description: "您的帳號已經從遠方登入,請重新登入", image: UIImage(named: "warning.png"), style: .Alert)
+                        alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action:{self.logout()}))
+                        self.presentViewController(alertVC, animated: true, completion:nil)
+                        break
+                }
+                
+                
+                
+                // 設定navigation 標題
+                self.navigationItem.title = name.uppercaseString
+                
+                print(" id:\(id)\n name:\(name)\n email:\(email)\n posts:\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")
+                
+                
+            case .Failure(let error):
+                print(error.localizedDescription)
+                
+            }
+            
+            
+        }
         
     }
     
@@ -210,7 +271,7 @@ class homeVC: UICollectionViewController {
         self.navigationController?.pushViewController(followers, animated: true)
     }
     
-     // 追蹤中 的 tableView
+    // 追蹤中 的 tableView
     func followingTap(){
         
         show = "followings"

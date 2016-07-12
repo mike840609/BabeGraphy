@@ -15,6 +15,12 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     
     
     // MARK: - Life Cycle
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        navigationController?.hidesBarsOnSwipe = true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -170,5 +176,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
             
         }
     }
+    
+    
 }
 

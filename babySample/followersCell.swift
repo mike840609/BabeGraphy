@@ -39,7 +39,7 @@ class followersCell: UITableViewCell {
         
         // 追蹤
         if title == "FOLLOW"{
-            
+    
             Alamofire.request(.POST, "http://140.136.155.143/api/connection/connect",parameters: ["token":AccessToken, "user_to_id": followUserId!]).validate().responseJSON(completionHandler: { (response) in
                 
                 switch response.result{
@@ -58,6 +58,9 @@ class followersCell: UITableViewCell {
                 }
             })
             
+            // 推播更新通知 homeVC
+            NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
+
             
         }
         
@@ -80,12 +83,11 @@ class followersCell: UITableViewCell {
                     
                 case .Failure(let error):
                     print(error.localizedDescription)
-
-                    
                 }
             })
+            // 推播更新通知 homeVC
+            NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
 
-            
         }
     }
     

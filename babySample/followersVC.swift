@@ -73,6 +73,7 @@ class followersVC: UITableViewController {
                 for (_,subJson):(String, SwiftyJSON.JSON) in json {
                     
                     print(subJson["user_to_id"].string)
+                    
                     self.follow.append(subJson)
                     
                 }
