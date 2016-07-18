@@ -45,7 +45,9 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
         // 有fb_token 直接去抓資料
         if let _ = FBSDKAccessToken.currentAccessToken() {
             getFBUserData()
+            
         }
+        
 
     }
     
@@ -256,11 +258,16 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
                         print(user["name"].string)
                         print(user["picture"]["data"]["url"].string)
                         
+                        print("\n\n")
+                        print(result)
+                        
+                        
                     }
                 })
         }
     }
 
+    
     
     
     func showingTitleInAnimationComplete() {

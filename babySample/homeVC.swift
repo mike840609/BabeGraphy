@@ -10,6 +10,8 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import PMAlertController
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 
 // 儲存個人資訊
@@ -307,7 +309,6 @@ class homeVC: UICollectionViewController {
         let appDelegate : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.window?.rootViewController = signin
     }
-    
     
     
 }
