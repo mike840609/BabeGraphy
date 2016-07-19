@@ -55,6 +55,7 @@ class userVC: UITableViewController, UISearchBarDelegate  {
     
     
     // MARK: - SearchBar
+    
     func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
         Alamofire.request(.POST, "http://140.136.155.143/api/user/search",parameters: ["email":searchBar.text!]).responseJSON { (json) in

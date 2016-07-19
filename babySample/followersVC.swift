@@ -31,6 +31,13 @@ class followersVC: UITableViewController {
     // var follow = [JSON]()
     var follow: Array<SwiftyJSON.JSON> = []
     
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        usernameArray.removeAll(keepCapacity: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,7 +56,32 @@ class followersVC: UITableViewController {
     
     // MARK: - Customer function
     func loadFollowers(){
+        guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else{ return }
         
+        Alamofire.request(.POST, "http://140.136.155.143/api/connection/search_followers",parameters:["token":AccessToken]).validate().responseJSON { (response) in
+            
+            switch response.result{
+                
+            case .Success(let json):
+                print(json)
+                
+                let json = SwiftyJSON.JSON(json)
+                
+                // 走訪陣列
+                for (_,subJson):(String, SwiftyJSON.JSON) in json {
+                    
+                    print(subJson["user_from_id"].string)
+                    
+                    self.follow.append(subJson)
+                    
+                }
+                
+                self.tableView.reloadData()
+                
+            case .Failure(let error):
+                print(error)
+            }
+        }
         
         
     }
@@ -109,42 +141,58 @@ class followersVC: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! followersCell
         
-        
-        if cell.usernameLbl.text == user!["data"][0][JSON_NAME].string{
-            cell.followBtn.hidden = true
+        if show == "followers"{
+            
+            if cell.usernameLbl.text == user!["data"][0][JSON_NAME].string{
+                cell.followBtn.hidden = true
+            }
+            
+            cell.usernameLbl.text = follow[indexPath.item]["following_user_name"].string
+            cell.followUserId = follow[indexPath.item]["user_to_id"].string
+            cell.avaImg.hnk_setImageFromURL(NSURL(string: "http://www.sitesnobrasil.com/imagens-fotos/mulheres/l/lisa-simpson.png")!)
+            cell.followBtn.setTitle("FOLLOWERS", forState: .Normal)
+            
+            cell.followBtn.backgroundColor = .greenColor()
+
         }
         
         
-        cell.usernameLbl.text = follow[indexPath.item]["following_user_name"].string
-        cell.followUserId = follow[indexPath.item]["user_to_id"].string
-        cell.avaImg.hnk_setImageFromURL(NSURL(string: "http://www.sitesnobrasil.com/imagens-fotos/mulheres/l/lisa-simpson.png")!)
-        cell.followBtn.setTitle("FOLLOWING", forState: .Normal)
-        
-        cell.followBtn.backgroundColor = .greenColor()
-        
+        if show == "followings"{
+            
+            if cell.usernameLbl.text == user!["data"][0][JSON_NAME].string{
+                cell.followBtn.hidden = true
+            }
+            
+            cell.usernameLbl.text = follow[indexPath.item]["following_user_name"].string
+            cell.followUserId = follow[indexPath.item]["user_to_id"].string
+            cell.avaImg.hnk_setImageFromURL(NSURL(string: "http://www.sitesnobrasil.com/imagens-fotos/mulheres/l/lisa-simpson.png")!)
+            cell.followBtn.setTitle("FOLLOWING", forState: .Normal)
+            
+            cell.followBtn.backgroundColor = .greenColor()
+        }
         
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-//        // recall cell to call further cell's data
-//        let cell = tableView.cellForRowAtIndexPath(indexPath) as! followersCell
-//        
-//        // 判斷欄位是否是使用者本身
-//        if cell.usernameLbl.text! == user!["data"]["0"][JSON_NAME].string{
-//            
-//            let home = self.storyboard?.instantiateViewControllerWithIdentifier("homeVC") as! homeVC
-//            self.navigationController?.pushViewController(home, animated: true)
-//            
-//        }else{
-//            
-//            guestname.append(cell.usernameLbl.text!)
-//            let guest = self.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
-//            self.navigationController?.pushViewController(guest, animated: true)
-//            
-//        }
-
+        //        // recall cell to call further cell's data
+        //        let cell = tableView.cellForRowAtIndexPath(indexPath) as! followersCell
+        //
+        //        // 判斷欄位是否是使用者本身
+        //        if cell.usernameLbl.text! == user!["data"]["0"][JSON_NAME].string{
+        //
+        //            let home = self.storyboard?.instantiateViewControllerWithIdentifier("homeVC") as! homeVC
+        //            self.navigationController?.pushViewController(home, animated: true)
+        //
+        //        }else{
+        //
+        //            guestname.append(cell.usernameLbl.text!)
+        //            let guest = self.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
+        //            self.navigationController?.pushViewController(guest, animated: true)
+        //            
+        //        }
+        
         
     }
     
