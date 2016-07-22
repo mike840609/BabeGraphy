@@ -52,6 +52,8 @@
 		4D9761491D227F4F00FE9C80 /* signUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9761481D227F4F00FE9C80 /* signUpVC.swift */; };
 		4DAA53691D3202510099B78E /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA53681D3202510099B78E /* EditVC.swift */; };
 		4DAFE8BE1D2588810000334F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFE8BD1D2588810000334F /* Constants.swift */; };
+		4DBA164C1D41EB6E009F35FC /* guestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBA164B1D41EB6E009F35FC /* guestVC.swift */; };
+		4DBA164E1D41F204009F35FC /* pictureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBA164D1D41F204009F35FC /* pictureCell.swift */; };
 		4DDA2C891D3552560015C9FE /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDA2C881D3552560015C9FE /* AboutVC.swift */; };
 		4DE338861D27ED46001373E3 /* uploadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE338851D27ED46001373E3 /* uploadVC.swift */; };
 		4DE3388A1D27F455001373E3 /* MaterialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE338871D27F455001373E3 /* MaterialButton.swift */; };
@@ -110,6 +112,8 @@
 		4D9761481D227F4F00FE9C80 /* signUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signUpVC.swift; sourceTree = "<group>"; };
 		4DAA53681D3202510099B78E /* EditVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
 		4DAFE8BD1D2588810000334F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4DBA164B1D41EB6E009F35FC /* guestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = guestVC.swift; sourceTree = "<group>"; };
+		4DBA164D1D41F204009F35FC /* pictureCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pictureCell.swift; sourceTree = "<group>"; };
 		4DDA2C881D3552560015C9FE /* AboutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
 		4DE338851D27ED46001373E3 /* uploadVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = uploadVC.swift; sourceTree = "<group>"; };
 		4DE338871D27F455001373E3 /* MaterialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialButton.swift; sourceTree = "<group>"; };
@@ -183,6 +187,8 @@
 				4D3749F91D087CC500F57F68 /* LoginController.swift */,
 				4D9761481D227F4F00FE9C80 /* signUpVC.swift */,
 				4D6B1AA71D2546FD00405E2B /* homeVC.swift */,
+				4DBA164B1D41EB6E009F35FC /* guestVC.swift */,
+				4DBA164D1D41F204009F35FC /* pictureCell.swift */,
 				4DAA53681D3202510099B78E /* EditVC.swift */,
 				4D6B1AA91D2548D000405E2B /* headerView.swift */,
 				4DE338851D27ED46001373E3 /* uploadVC.swift */,
@@ -429,6 +435,8 @@
 				4D3749FA1D087CC500F57F68 /* LoginController.swift in Sources */,
 				4DAFE8BE1D2588810000334F /* Constants.swift in Sources */,
 				4D6B1AAA1D2548D000405E2B /* headerView.swift in Sources */,
+				4DBA164E1D41F204009F35FC /* pictureCell.swift in Sources */,
+				4DBA164C1D41EB6E009F35FC /* guestVC.swift in Sources */,
 				4DDA2C891D3552560015C9FE /* AboutVC.swift in Sources */,
 				4D2D44C91D0DA6D000E6CE0D /* Post.swift in Sources */,
 				4DE3388B1D27F455001373E3 /* MaterialView.swift in Sources */,

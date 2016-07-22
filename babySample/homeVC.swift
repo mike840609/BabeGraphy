@@ -14,7 +14,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 
 
-// 儲存個人資訊
+// 儲存個人資訊 直接將整筆 json 存下來
 var user : SwiftyJSON.JSON?
 
 class homeVC: UICollectionViewController {
@@ -79,7 +79,6 @@ class homeVC: UICollectionViewController {
             let signin = self.storyboard?.instantiateViewControllerWithIdentifier("LoginController") as! LoginController
             let appDelegate : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.window?.rootViewController = signin
-            
         }
         
         

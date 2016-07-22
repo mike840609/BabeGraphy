@@ -15,8 +15,6 @@ import Haneke
 // 要顯示 storyBoardId
 var show:String?
 
-// 儲存用戶名的陣列
-var guestname = [String]()
 
 class followersVC: UITableViewController {
     
@@ -72,7 +70,6 @@ class followersVC: UITableViewController {
                     
                     print(subJson)
                     
-//                    print(subJson["user_id"].string)
                     
                     self.follow.append(subJson)
                     
@@ -107,8 +104,6 @@ class followersVC: UITableViewController {
                 for (_,subJson):(String, SwiftyJSON.JSON) in json["data"] {
                     
                     print(subJson)
-                    
-//                    print(subJson["user_id"].string)
                     
                     self.follow.append(subJson)
                     
@@ -183,22 +178,28 @@ class followersVC: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        //        // recall cell to call further cell's data
-        //        let cell = tableView.cellForRowAtIndexPath(indexPath) as! followersCell
-        //
-        //        // 判斷欄位是否是使用者本身
-        //        if cell.usernameLbl.text! == user!["data"]["0"][JSON_NAME].string{
-        //
-        //            let home = self.storyboard?.instantiateViewControllerWithIdentifier("homeVC") as! homeVC
-        //            self.navigationController?.pushViewController(home, animated: true)
-        //
-        //        }else{
-        //
-        //            guestname.append(cell.usernameLbl.text!)
-        //            let guest = self.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
-        //            self.navigationController?.pushViewController(guest, animated: true)
-        //            
-        //        }
+                // recall cell to call further cell's data
+                let cell = tableView.cellForRowAtIndexPath(indexPath) as! followersCell
+        
+                // 判斷欄位是否是使用者本身
+                if cell.followUserId == user!["data"]["0"][JSON_ID].string{
+        
+                    let home = self.storyboard?.instantiateViewControllerWithIdentifier("homeVC") as! homeVC
+                    self.navigationController?.pushViewController(home, animated: true)
+        
+                }else{
+                    
+                    guestname.append(cell.usernameLbl.text!)
+                    
+                    print("\n\n",follow[indexPath.item])
+                    
+                    // 把要造訪的user 直接 append 到陣列中 供後面 guestVC用
+                    guestJSON.append(follow[indexPath.item])
+                
+                    let guest = self.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
+                    self.navigationController?.pushViewController(guest, animated: true)
+                    
+                }
         
         
     }

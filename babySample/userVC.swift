@@ -18,14 +18,15 @@ class userVC: UITableViewController, UISearchBarDelegate  {
     
     var searchBar = UISearchBar()
     
+    
+    
+    
     var usernameArray = [String]()
-    
-    
     var collectionView : UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         searchBar.delegate = self
         searchBar.sizeToFit()
         searchBar.tintColor = UIColor.groupTableViewBackgroundColor()
@@ -42,10 +43,7 @@ class userVC: UITableViewController, UISearchBarDelegate  {
     
     // MARK: - Customer Function
     func loadUsers() {
-        //
-        //        Alamofire.request(.POST, "http://140.136.155.143/api/user/search",parameters: ["email":])
-        
-        
+    
     }
     
     func collectionViewLaunch() {
@@ -144,18 +142,20 @@ class userVC: UITableViewController, UISearchBarDelegate  {
     // selected tableView cell - selected user
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-//        // calling cell again to call cell data
-//        let cell = tableView.cellForRowAtIndexPath(indexPath) as! followersCell
-//        
-//        // if user tapped on his name go home, else go guest
-//        if cell.usernameLbl.text! == PFUser.currentUser()?.username {
-//            let home = self.storyboard?.instantiateViewControllerWithIdentifier("homeVC") as! homeVC
-//            self.navigationController?.pushViewController(home, animated: true)
-//        } else {
-//            guestname.append(cell.usernameLbl.text!)
-//            let guest = self.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
-//            self.navigationController?.pushViewController(guest, animated: true)
-//        }
+        /*
+        // calling cell again to call cell data
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! followersCell
+
+        // if user tapped on his name go home, else go guest
+        if cell.usernameLbl.text! == user!["data"][0][JSON_ID].string {
+            let home = self.storyboard?.instantiateViewControllerWithIdentifier("homeVC") as! homeVC
+            self.navigationController?.pushViewController(home, animated: true)
+        } else {
+            guestname.append(cell.usernameLbl.text!)
+            let guest = self.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
+            self.navigationController?.pushViewController(guest, animated: true)
+        }
+ */
         
     }
     

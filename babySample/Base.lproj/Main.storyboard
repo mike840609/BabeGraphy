@@ -440,26 +440,6 @@
             </objects>
             <point key="canvasLocation" x="3954.75" y="383.5"/>
         </scene>
-        <!--Album-->
-        <scene sceneID="Uez-in-5W7">
-            <objects>
-                <viewController id="jG5-t4-Dr4" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Dld-qq-rtV"/>
-                        <viewControllerLayoutGuide type="bottom" id="lVU-qp-5Lt"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="KzR-wp-pbA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Album" id="xzA-6w-7AC"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qXQ-1c-uQK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4736.5" y="1176.5"/>
-        </scene>
         <!--News Feed-->
         <scene sceneID="bMW-bR-p4l">
             <objects>
@@ -1174,10 +1154,10 @@
             </objects>
             <point key="canvasLocation" x="4490.5" y="4371.5"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--GuestVC-->
         <scene sceneID="cB2-Vj-HyS">
             <objects>
-                <collectionViewController storyboardIdentifier="guestVC" id="08v-SS-Knf" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="guestVC" id="08v-SS-Knf" customClass="guestVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="WhR-Bp-tkt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1188,7 +1168,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="9rH-Iu-Qk3" customClass="picturCell" customModule="babySample" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="9rH-Iu-Qk3" customClass="pictureCell" customModule="babySample" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="280" width="106" height="106"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1202,7 +1182,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <outlet property="picImg" destination="KQ5-pF-gRi" id="XAD-jV-EDr"/>
+                                    <outlet property="picImg" destination="KQ5-pF-gRi" id="5oa-Zb-xEQ"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
