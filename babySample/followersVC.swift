@@ -68,9 +68,11 @@ class followersVC: UITableViewController {
                 let json = SwiftyJSON.JSON(json)
                 
                 // 走訪陣列
-                for (_,subJson):(String, SwiftyJSON.JSON) in json {
+                for (_,subJson):(String, SwiftyJSON.JSON) in json["data"] {
                     
-                    print(subJson["user_from_id"].string)
+                    print(subJson)
+                    
+//                    print(subJson["user_id"].string)
                     
                     self.follow.append(subJson)
                     
@@ -102,9 +104,11 @@ class followersVC: UITableViewController {
                 let json = SwiftyJSON.JSON(json)
                 
                 // 走訪陣列
-                for (_,subJson):(String, SwiftyJSON.JSON) in json {
+                for (_,subJson):(String, SwiftyJSON.JSON) in json["data"] {
                     
-                    print(subJson["user_to_id"].string)
+                    print(subJson)
+                    
+//                    print(subJson["user_id"].string)
                     
                     self.follow.append(subJson)
                     
@@ -147,10 +151,13 @@ class followersVC: UITableViewController {
                 cell.followBtn.hidden = true
             }
             
-            cell.usernameLbl.text = follow[indexPath.item]["following_user_name"].string
-            cell.followUserId = follow[indexPath.item]["user_to_id"].string
+            cell.usernameLbl.text = follow[indexPath.item]["username"].string
+            cell.followUserId = follow[indexPath.item]["user_id"].string
             cell.avaImg.hnk_setImageFromURL(NSURL(string: "http://www.sitesnobrasil.com/imagens-fotos/mulheres/l/lisa-simpson.png")!)
             cell.followBtn.setTitle("FOLLOWERS", forState: .Normal)
+            
+            // 圖片網址 未使用
+            print(follow[indexPath.item]["profile_picture"].string)
             
             cell.followBtn.backgroundColor = .greenColor()
 
@@ -163,8 +170,8 @@ class followersVC: UITableViewController {
                 cell.followBtn.hidden = true
             }
             
-            cell.usernameLbl.text = follow[indexPath.item]["following_user_name"].string
-            cell.followUserId = follow[indexPath.item]["user_to_id"].string
+            cell.usernameLbl.text = follow[indexPath.item]["username"].string
+            cell.followUserId = follow[indexPath.item]["user_id"].string
             cell.avaImg.hnk_setImageFromURL(NSURL(string: "http://www.sitesnobrasil.com/imagens-fotos/mulheres/l/lisa-simpson.png")!)
             cell.followBtn.setTitle("FOLLOWING", forState: .Normal)
             
