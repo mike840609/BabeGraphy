@@ -43,10 +43,9 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
         self.view.addGestureRecognizer(hideTap)
         
         // 有fb_token 直接去抓資料
-        if let _ = FBSDKAccessToken.currentAccessToken() {
-            getFBUserData()
-            
-        }
+//        if let _ = FBSDKAccessToken.currentAccessToken() {
+//            getFBUserData()
+//        }
         
 
     }
@@ -191,31 +190,26 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
                         switch(statusCode){
                             
                         case 401:
-                            
                             let alertVC = PMAlertController(title: "帳號或密碼錯誤", description: "請重新輸入帳號密碼", image: UIImage(named: "error.png"), style: .Alert)
                             alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
                             self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
                             
                         case 422:
-                            
                             let alertVC = PMAlertController(title: "填寫欄位有缺少", description: "請確認欄位填寫正確", image: UIImage(named: "list-4.png"), style: .Alert)
                             alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
                             self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
                             
                         default:
-                            
                             let alertVC = PMAlertController(title: "伺服器問題", description: "抱歉我們伺服器出現問題,請等待我們修復", image: UIImage(named: "server-2.png"), style: .Alert)
                             alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
                             self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
                             
                         }
                     }else if error.code == -1004{
-                        
                         let alertVC = PMAlertController(title: "連線失敗", description: "網路發生問題", image: UIImage(named: "cloud-computing-2.png"), style: .Alert)
                         alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
                         self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
-                        
-                        
+                    
                     }else{
                         
                         let alertVC = PMAlertController(title: "網路問題", description: "網路發生問題", image: UIImage(named: "cloud-computing-2.png"), style: .Alert)
@@ -242,24 +236,26 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
         }
     }
     
+    
     // FACEBOOK API
     func getFBUserData(){
         if((FBSDKAccessToken.currentAccessToken()) != nil){
             FBSDKGraphRequest(graphPath: "me",
                 parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).startWithCompletionHandler({ (connection, result, error) -> Void in
+                    
                     if (error == nil){
-                        
-                        print("FB_token:\n\(FBSDKAccessToken.currentAccessToken().tokenString)\n")
                         
                         let user = JSON(result)
                         
+                        print("FB_token:\n\(FBSDKAccessToken.currentAccessToken().tokenString)")
                         print(user["email"].string)
                         print(user["id"].string)
                         print(user["name"].string)
                         print(user["picture"]["data"]["url"].string)
                         
                         print("\n\n")
-                        print(result)
+                        
+                        fb_sugnup(user)
                         
                         
                     }
