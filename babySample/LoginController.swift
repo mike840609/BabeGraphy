@@ -15,6 +15,8 @@ import PMAlertController
 import FBSDKCoreKit
 import FBSDKLoginKit
 
+let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+
 
 class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorViewable{
     
@@ -43,11 +45,11 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
         self.view.addGestureRecognizer(hideTap)
         
         // 有fb_token 直接去抓資料
-//        if let _ = FBSDKAccessToken.currentAccessToken() {
-//            getFBUserData()
-//        }
+        //        if let _ = FBSDKAccessToken.currentAccessToken() {
+        //            getFBUserData()
+        //        }
         
-
+        
     }
     
     func setTextTheme(){
@@ -209,7 +211,7 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
                         let alertVC = PMAlertController(title: "連線失敗", description: "網路發生問題", image: UIImage(named: "cloud-computing-2.png"), style: .Alert)
                         alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
                         self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
-                    
+                        
                     }else{
                         
                         let alertVC = PMAlertController(title: "網路問題", description: "網路發生問題", image: UIImage(named: "cloud-computing-2.png"), style: .Alert)
@@ -224,14 +226,12 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
     // MARK: - FBLogin
     @IBAction func fbBtn_click(sender: AnyObject) {
         
-        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
         fbLoginManager.logInWithReadPermissions(["email"], fromViewController: self) { (result, error) -> Void in
+            
             if (error == nil){
-                let fbloginresult : FBSDKLoginManagerLoginResult = result
-                if(fbloginresult.grantedPermissions.contains("email"))
-                {
-                    self.getFBUserData()
-                }
+                
+                print(result)
+                self.getFBUserData()
             }
         }
     }
@@ -252,17 +252,16 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
                         print(user["id"].string)
                         print(user["name"].string)
                         print(user["picture"]["data"]["url"].string)
-                        
                         print("\n\n")
                         
-                        fb_sugnup(user)
-                        
+                        // 登入過fb 換發 server token
+                        self.fb_sugnup(user)
                         
                     }
                 })
         }
     }
-
+    
     
     
     
@@ -341,6 +340,108 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
         let emailRegEx = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluateWithObject(str)
+    }
+    
+    
+    
+    // fb 登入
+    func fb_sugnup(json:SwiftyJSON.JSON){
+        
+        startActivityAnimating("Loading...", type: .BallClipRotateMultiple, color: UIColor.whiteColor(), padding: 0)
+        
+        let name = json["last_name"].stringValue + json["first_name"].stringValue
+        let email = json["email"].stringValue
+        let fb_id = json["id"].stringValue
+        let picture = json["picture"]["data"]["url"].stringValue
+        let fb_token = FBSDKAccessToken.currentAccessToken().tokenString
+        
+        
+        Alamofire.request(.POST, "http://140.136.155.143/api/auth/fb_signup",parameters: ["fb_id":fb_id ,"name":name ,"picture": picture , "email":email , "fb_token":fb_token]).responseJSON { (response) in
+            
+            switch response.result{
+            case .Success(let json):
+                
+                let json = SwiftyJSON.JSON(json)
+                print(json)
+                
+                // 判斷是否註冊 註冊過直接call fb 登入api 換發token
+                if json["status_code"].int == 500{
+                    print("註冊過 轉跳登入")
+                    
+                    
+                    Alamofire.request(.POST, "http://140.136.155.143/api/auth/fb_login",parameters: ["email":email,"fb_id":fb_id]).responseJSON(completionHandler: { (response) in
+                        
+                        switch response.result{
+                            
+                        case .Success(let json):
+                            
+                            let json = SwiftyJSON.JSON(json)
+                            let accessToken = json["token"].string
+                            
+                            print(accessToken)
+                            
+                            // save token
+                            NSUserDefaults.standardUserDefaults().setObject(accessToken, forKey: ACCESS_TOKEN)
+                            NSUserDefaults.standardUserDefaults().synchronize()
+                            
+                            
+                            let alertVC = PMAlertController(title: "Facebook 登入成功", description: "恭喜您,讓我們共同創造美好的回憶", image: UIImage(named: "shield-1.png"), style: .Alert)
+                            
+                            alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: {
+                                
+                                // 頁面轉跳
+                                let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                                appDelegate.login()
+                            }))
+                            
+                            self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
+                            
+                            
+                            
+                        case .Failure(let error):
+                            print(error.localizedDescription)
+                            
+                            let alertVC = PMAlertController(title: "Server發生問題", description: "抱歉我們正在努力修復中 請耐心等候", image: UIImage(named: "cloud-computing-2.png"), style: .Alert)
+                            alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
+                            self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
+                            
+                        }
+                        
+                    })
+                }
+                
+                // 沒登入過 直接call    fb 註冊 api
+                let accessToken = json["token"].string
+                
+                print(accessToken)
+                
+                NSUserDefaults.standardUserDefaults().setObject(accessToken, forKey: ACCESS_TOKEN)
+                NSUserDefaults.standardUserDefaults().synchronize()
+                
+                
+                let alertVC = PMAlertController(title: "Facebook 註冊成功", description: "恭喜您,讓我們共同創造美好的回憶", image: UIImage(named: "shield-1.png"), style: .Alert)
+                
+                alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: {
+                    
+                    // 頁面轉跳
+                    let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    appDelegate.login()
+                }))
+                
+                self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
+                
+                
+            case .Failure(let error):
+                
+                print(error.localizedDescription)
+                
+                let alertVC = PMAlertController(title: "Server發生問題", description: "抱歉我們正在努力修復中 請耐心等候", image: UIImage(named: "cloud-computing-2.png"), style: .Alert)
+                alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
+                self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
+                
+                
+            }
+        }
     }
 }
 

@@ -301,12 +301,22 @@ class homeVC: UICollectionViewController {
     
     // logout all controller can use it
     func logout(){
+
+        // 清空server token
         NSUserDefaults.standardUserDefaults().removeObjectForKey(ACCESS_TOKEN)
         NSUserDefaults.standardUserDefaults().synchronize()
         
+        // facebook logout 暫時不清空 只單用server token 判斷
+        
+        
+        
+        // View Segue
         let signin = self.storyboard?.instantiateViewControllerWithIdentifier("LoginController") as! LoginController
         let appDelegate : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.window?.rootViewController = signin
+
+        
+
     }
     
     
