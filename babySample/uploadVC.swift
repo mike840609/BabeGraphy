@@ -8,7 +8,10 @@
 
 import UIKit
 import Fusuma
+import Alamofire
+import SwiftyJSON
 import PMAlertController
+
 
 class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
     
@@ -95,7 +98,7 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
         
         let alertVC = PMAlertController(title: "存取相簿", description: "請授與我們您的相簿存取權限,謝謝您", image: UIImage(named: "key.png"), style: .Alert)
         
-        alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: { 
+        alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: {
             if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
                 UIApplication.sharedApplication().openURL(url)
             }
@@ -104,15 +107,15 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
         self.presentViewController(alertVC, animated: true, completion: nil)
         
         
-//        let alert = UIAlertController(title: "Access Requested", message: "Saving image needs to access your photo album", preferredStyle: .Alert)
-//        alert.addAction(UIAlertAction(title: "Settings", style: .Default, handler: { (action) -> Void in
-//            if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
-//                UIApplication.sharedApplication().openURL(url)
-//            }
-//        }))
-//        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
-//        }))
-//        self.presentViewController(alert, animated: true, completion: nil)
+        //        let alert = UIAlertController(title: "Access Requested", message: "Saving image needs to access your photo album", preferredStyle: .Alert)
+        //        alert.addAction(UIAlertAction(title: "Settings", style: .Default, handler: { (action) -> Void in
+        //            if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
+        //                UIApplication.sharedApplication().openURL(url)
+        //            }
+        //        }))
+        //        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+        //        }))
+        //        self.presentViewController(alert, animated: true, completion: nil)
         
     }
     
@@ -127,7 +130,6 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
     
     // MARK: - Customer function
     // hide kyeboard function
-    
     func showFusuma(){
         
         let fusuma = FusumaViewController()
@@ -139,14 +141,68 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
         self.view.endEditing(true)
     }
     
+    // 新增po文
+    func post(content:String){
+        
+        // 抓不到token ,token過期 ,重新登入一次
+        guard let AccessToken:String? = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {
+            
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(ACCESS_TOKEN)
+            NSUserDefaults.standardUserDefaults().synchronize()
+            
+            // 轉跳登入畫面
+            let alertVC = PMAlertController(title: "登入時效過期", description: "您的帳號已經從遠方登入,或者登入時效過期", image: UIImage(named: "warning.png"), style: .Alert)
+            alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action:{
+                let signin = self.storyboard?.instantiateViewControllerWithIdentifier("LoginController") as! LoginController
+                let appDelegate : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                appDelegate.window?.rootViewController = signin
+                
+            }))
+            presentViewController(alertVC, animated: true, completion:nil)
+        }
+        
+        
+        Alamofire.request(.POST, "http://140.136.155.143/api/post/store",parameters: ["token":AccessToken!,"content":content]).responseJSON { (response) in
+            
+            switch response.result{
+                
+            case .Success(let json):
+                
+                print(json)
+                
+                let alertVC = PMAlertController(title: "Po 文成功", description: "恭喜您,新增貼文成功", image: UIImage(named: "like_.png"), style: .Alert)
+                
+                // 轉跳 feed Controller
+                alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action:{
+                    let tabbar = self.storyboard?.instantiateViewControllerWithIdentifier("tabBar") as! tabVC
+                    let appDelegate : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    appDelegate.window?.rootViewController = tabbar
+                    
+                }))
+                
+                self.presentViewController(alertVC, animated: true, completion:nil)
+                
+                
+            case .Failure(let error):
+                print(error.localizedDescription)
+                
+            }
+        }
+    }
     
-    // MARK: - IBAction
+    
+    // MARK: - IBAction ================================================================================
     
     @IBAction func removeBtn_click(sender: AnyObject) {
         self.viewDidLoad()
     }
     
     @IBAction func publishBtn_click(sender: AnyObject) {
+        
+        print("post to server")
+        
+        post(titleTxt.text)
+        
         self.view.endEditing(true)
         
     }
