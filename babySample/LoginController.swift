@@ -378,7 +378,7 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
                             let json = SwiftyJSON.JSON(json)
                             let accessToken = json["token"].string
                             
-                            print(accessToken)
+                            print(json)
                             
                             // save token
                             NSUserDefaults.standardUserDefaults().setObject(accessToken, forKey: ACCESS_TOKEN)

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Haneke
 
 //  MARK: - FontColor
 extension UIColor{
@@ -35,3 +36,20 @@ extension UIView{
         
     }
 }
+
+// MARK: - hnk 
+// MARK: - Autolayoutextention
+// UIImageView 自動大小(程式碼佈局) haneke_swift
+extension UIImageView {
+    
+    func hnk_setImageFromURLAutoSize(url: NSURL) {
+        var format: Format<UIImage>? = nil
+        if frame.size == CGSize.zero {
+            format = Format<UIImage>(name: "original")
+        }
+        // 先清空圖片 避免reuse cell 時 有之前的圖片
+        image = nil
+        hnk_setImageFromURL(url, format: format)
+    }
+}
+

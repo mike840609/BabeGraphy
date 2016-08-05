@@ -7,12 +7,18 @@
 //
 import Foundation
 import UIKit
+import Alamofire
+import PMAlertController
+import Haneke
+import SwiftyJSON
 
 private let reuseIdentifier = "Cell"
 let posts = Posts()
 
 class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLayout {
     
+    // local var 第一優先權 測試用
+    // var posts = [Post]()
     
     // MARK: - Life Cycle
     
@@ -27,12 +33,11 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         
         // Mark: - CollectionView Set
         navigationItem.title = "BabeGraphy"
-        
         collectionView!.alwaysBounceVertical = true
-        
         collectionView!.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        
         self.collectionView!.registerClass(FeedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        getFeedPost()
         
     }
     
@@ -46,6 +51,8 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.numberOfPosts()
+        
+      
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -53,6 +60,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         let feedCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! FeedCell
         
         feedCell.post = posts[indexPath]
+        
         feedCell.feedController = self
         
         return feedCell
@@ -175,6 +183,49 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
             })
             
         }
+    }
+    
+    // GetFeedData
+    func getFeedPost(){
+        
+        guard let AccessToken:String? = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {return}
+        
+        Alamofire.request(.POST, "http://140.136.155.143/api/post/feed",parameters: ["token":AccessToken!])
+            .responseJSON { (response) in
+                switch response.result{
+                case .Success(let json):
+
+                    
+                    let json = SwiftyJSON.JSON(json)
+                    
+                    for (_,subJson):(String, SwiftyJSON.JSON) in json[0] {
+                        
+                        /*
+                        let post = Post()
+                        
+                        post.name = subJson["author_name"].string
+                        post.created_at = subJson["created_at"].string
+                        post.statusText = subJson["content"].string
+                        
+                        post.numLikes = 1541
+                        post.numComments = 124
+                        
+                        self.posts.append(post)
+                        */
+                        
+                        print(subJson,"\n\n")
+                        
+                        
+                    }
+
+                    
+                case .Failure(let error):
+                    print(error.localizedDescription)
+                }
+                
+        }
+        collectionView?.reloadData()
+        
     }
     
     

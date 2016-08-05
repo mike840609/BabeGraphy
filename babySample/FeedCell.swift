@@ -18,7 +18,7 @@ class FeedCell: UICollectionViewCell {
     func animate() {
         feedController?.animateImageView(statusImg)
     }
-
+    
     
     var post:Post?{
         didSet{
@@ -28,29 +28,34 @@ class FeedCell: UICollectionViewCell {
             
             if let statusImageUrl = post?.statusImgUrl{
                 
+                statusImg.hnk_setImageFromURLAutoSize(NSURL(string:statusImageUrl)!)
+                loader.stopAnimating()
+                
                 // Cache check
-                if let image = imageCache.objectForKey(statusImageUrl) as? UIImage{
-                    statusImg.image = image
-                    loader.stopAnimating()
-                }else{
-                    NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: statusImageUrl)!,completionHandler: {
-                        (data,response,error) -> Void in
-                        if error != nil{
-                            print(error)
-                            return
-                        }
-                        
-                        let image = UIImage(data: data!)
-                        
-                        imageCache.setObject(image!, forKey: statusImageUrl)
-                        
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.statusImg.image = image
-                            self.loader.stopAnimating()
-                        })
-                    }).resume()
-                    
-                }
+                /*
+                 if let image = imageCache.objectForKey(statusImageUrl) as? UIImage{
+                 statusImg.image = image
+                 loader.stopAnimating()
+                 }else{
+                 NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: statusImageUrl)!,completionHandler: {
+                 (data,response,error) -> Void in
+                 if error != nil{
+                 print(error)
+                 return
+                 }
+                 
+                 let image = UIImage(data: data!)
+                 
+                 imageCache.setObject(image!, forKey: statusImageUrl)
+                 
+                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                 self.statusImg.image = image
+                 self.loader.stopAnimating()
+                 })
+                 }).resume()
+                 
+                 }
+                 */
                 
                 
             }

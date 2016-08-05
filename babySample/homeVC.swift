@@ -137,7 +137,13 @@ class homeVC: UICollectionViewController {
                 // 設定navigation 標題
                 self.navigationItem.title = name.uppercaseString
                 
+                // 存取 user id 以供未來使用
+                NSUserDefaults.standardUserDefaults().setObject(id, forKey:USER_ID)
+                NSUserDefaults.standardUserDefaults().synchronize()
+
+                
                 print(" id:\(id)\n name:\(name)\n email:\(email)\n posts:\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")
+                
                 
                 // self.getInfo()
                 

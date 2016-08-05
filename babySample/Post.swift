@@ -16,6 +16,9 @@ class Post{
     var numLikes:Int?
     var numComments:Int?
     var statusImgUrl:String?
+    
+    var created_at:String?
+    
 }
 
 class Posts {

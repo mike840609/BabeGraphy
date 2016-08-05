@@ -150,7 +150,8 @@ class guestVC: UICollectionViewController {
                 header.bioLbl.text = json["userbio"].stringValue
                 header.webTxt.text = json["userweb"].stringValue
                 
-
+                // 判斷追蹤按鈕 狀態
+                
                 
                 
             case .Failure(let error):

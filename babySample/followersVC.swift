@@ -103,7 +103,7 @@ class followersVC: UITableViewController {
                 // 走訪陣列
                 for (_,subJson):(String, SwiftyJSON.JSON) in json["data"] {
                     
-                    print(subJson)
+//                    print(subJson)
                     
                     self.follow.append(subJson)
                     
@@ -152,7 +152,7 @@ class followersVC: UITableViewController {
             cell.followBtn.setTitle("FOLLOWERS", forState: .Normal)
             
             // 圖片網址 未使用
-            print(follow[indexPath.item]["profile_picture"].string)
+            //print(follow[indexPath.item]["profile_picture"].string)
             
             cell.followBtn.backgroundColor = .greenColor()
 
