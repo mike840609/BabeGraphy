@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="FontAwesome.otf">
+        <mutableArray key="fontawesome-webfont.ttf">
             <string>FontAwesome</string>
         </mutableArray>
     </customFonts>
@@ -906,7 +906,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="98" id="dcs-BT-kHc"/>
                                             </constraints>
-                                            <state key="normal" title="FOLLOWING">
+                                            <state key="normal" title="FOLLOW">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>

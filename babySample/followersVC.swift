@@ -30,10 +30,22 @@ class followersVC: UITableViewController {
     var follow: Array<SwiftyJSON.JSON> = []
     
     
+    // 用來儲存我使用者追蹤中的使用者 比對使用
+    var myFollowingList : Array<SwiftyJSON.JSON> = []
+    
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
+        // 清空陣列緩存
         usernameArray.removeAll(keepCapacity: false)
+        myFollowingList.removeAll(keepCapacity: false)
+        
+        // 載入追蹤者名單
+        if show == "followers"{
+            loadUserFollowingsList()
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -103,13 +115,42 @@ class followersVC: UITableViewController {
                 // 走訪陣列
                 for (_,subJson):(String, SwiftyJSON.JSON) in json["data"] {
                     
-//                    print(subJson)
+                    //                    print(subJson)
                     
                     self.follow.append(subJson)
                     
                 }
                 
                 self.tableView.reloadData()
+                
+            case .Failure(let error):
+                
+                let alertVC = PMAlertController(title: "抱歉發生了某些問題", description: error.localizedDescription , image: UIImage(named: "error.png"), style: .Alert)
+                alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
+                self.presentViewController(alertVC, animated: true, completion: nil)
+                
+            }
+        }
+        
+    }
+    
+    // 追蹤中名單
+    func loadUserFollowingsList(){
+        
+        guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else{ return }
+        
+        Alamofire.request(.POST, "http://140.136.155.143/api/connection/search_following",parameters: ["token":AccessToken]).validate().responseJSON { (response) in
+            
+            switch response.result{
+                
+            case .Success(let json):
+                
+                let json = SwiftyJSON.JSON(json)
+                
+                // 走訪陣列
+                for (_,subJson):(String, SwiftyJSON.JSON) in json["data"] {
+                    self.myFollowingList.append(subJson)
+                }
                 
             case .Failure(let error):
                 
@@ -140,6 +181,7 @@ class followersVC: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! followersCell
         
+        // 每一筆都要判斷是否有追蹤
         if show == "followers"{
             
             if cell.usernameLbl.text == user!["data"][0][JSON_NAME].string{
@@ -149,16 +191,31 @@ class followersVC: UITableViewController {
             cell.usernameLbl.text = follow[indexPath.item]["username"].string
             cell.followUserId = follow[indexPath.item]["user_id"].string
             cell.avaImg.hnk_setImageFromURL(NSURL(string: "http://www.sitesnobrasil.com/imagens-fotos/mulheres/l/lisa-simpson.png")!)
-            cell.followBtn.setTitle("FOLLOWERS", forState: .Normal)
+            
+            // 追蹤按鈕判斷
+            // 所有追蹤者 皆跟追蹤中的名單比對
+            // 效率不好 會跑到 O(n^2) 效能需要改善
+            for item in myFollowingList {
+                
+                if (item["user_id"].string == follow[indexPath.item]["user_id"].string){
+                    
+                    cell.followBtn.setTitle("FOLLOWING", forState: .Normal)
+                    cell.followBtn.backgroundColor = .greenColor()
+                }
+                
+            }
+            
+            
+            
             
             // 圖片網址 未使用
             //print(follow[indexPath.item]["profile_picture"].string)
             
-            cell.followBtn.backgroundColor = .greenColor()
-
+            
+            
         }
         
-        
+        // 必定所有使用者都是追蹤中的 不需額外判斷
         if show == "followings"{
             
             if cell.usernameLbl.text == user!["data"][0][JSON_NAME].string{
@@ -178,28 +235,28 @@ class followersVC: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-                // recall cell to call further cell's data
-                let cell = tableView.cellForRowAtIndexPath(indexPath) as! followersCell
+        // recall cell to call further cell's data
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! followersCell
         
-                // 判斷欄位是否是使用者本身
-                if cell.followUserId == user!["data"]["0"][JSON_ID].string{
-        
-                    let home = self.storyboard?.instantiateViewControllerWithIdentifier("homeVC") as! homeVC
-                    self.navigationController?.pushViewController(home, animated: true)
-        
-                }else{
-                    
-                    guestname.append(cell.usernameLbl.text!)
-                    
-                    print("\n\n",follow[indexPath.item])
-                    
-                    // 把要造訪的user 直接 append 到陣列中 供後面 guestVC用
-                    guestJSON.append(follow[indexPath.item])
-                
-                    let guest = self.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
-                    self.navigationController?.pushViewController(guest, animated: true)
-                    
-                }
+        // 判斷欄位是否是使用者本身
+        if cell.followUserId == user!["data"]["0"][JSON_ID].string{
+            
+            let home = self.storyboard?.instantiateViewControllerWithIdentifier("homeVC") as! homeVC
+            self.navigationController?.pushViewController(home, animated: true)
+            
+        }else{
+            
+            guestname.append(cell.usernameLbl.text!)
+            
+            print("\n\n",follow[indexPath.item])
+            
+            // 把要造訪的user 直接 append 到陣列中 供後面 guestVC用
+            guestJSON.append(follow[indexPath.item])
+            
+            let guest = self.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
+            self.navigationController?.pushViewController(guest, animated: true)
+            
+        }
         
         
     }
