@@ -17,6 +17,7 @@ import Haneke
 var guestname = [String]()
 var guestJSON : Array<SwiftyJSON.JSON> = []
 
+
 private let reuseIdentifier = "Cell"
 
 
@@ -30,16 +31,17 @@ class guestVC: UICollectionViewController {
     // hold data from server
     var postsJSON: Array<SwiftyJSON.JSON> = []
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // print(guestJSON.last)
+        // 該為使用者的資訊 user_id , profile_picture , username
+        print(guestJSON.last)
         
         // CollectionView UI
         self.collectionView?.alwaysBounceVertical = true
         self.collectionView?.backgroundColor = .whiteColor()
-
+        
         
         // top title
         self.navigationItem.title = guestJSON.last!["username"].string
@@ -62,9 +64,11 @@ class guestVC: UICollectionViewController {
         
         // call load posts func
         loadPosts()
-
+        
+//        FollowingStatusCheck()
+        
     }
-
+    
     
     // back function
     func back(sender: UIBarButtonItem) {
@@ -78,7 +82,7 @@ class guestVC: UICollectionViewController {
         }
     }
     
-
+    
     // refresh function
     func refresh() {
         collectionView?.reloadData()
@@ -96,10 +100,10 @@ class guestVC: UICollectionViewController {
     }
     
     
-
+    
     // MARK: UICollectionViewDataSource
-
-
+    
+    
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return postsJSON.count
     }
@@ -107,18 +111,18 @@ class guestVC: UICollectionViewController {
     // Customer func - cell size
     
     /*
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayOut:UICollectionViewLayout , sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize{
-        let size = CGSize(width: self.view.frame.width/3, height:  self.view.frame.width/3)
-        return size
-        
-    }
-    */
+     func collectionView(collectionView: UICollectionView, layout collectionViewLayOut:UICollectionViewLayout , sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize{
+     let size = CGSize(width: self.view.frame.width/3, height:  self.view.frame.width/3)
+     return size
+     
+     }
+     */
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! pictureCell
-
-    
+        
+        
         return cell
     }
     
@@ -127,6 +131,7 @@ class guestVC: UICollectionViewController {
     // header View
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
+        // guest user id
         let id = guestJSON.last!["user_id"].string
         
         let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "Header", forIndexPath: indexPath) as! headerView
@@ -138,10 +143,10 @@ class guestVC: UICollectionViewController {
                 
             case .Success(let json):
                 
-                print(json)
+                // print("guestUserIfon:\n",json)
                 
                 let json = SwiftyJSON.JSON(json)
-        
+                
                 header.fullnameLbl.text = json[JSON_NAME].stringValue.uppercaseString
                 header.followers.text = json[JSON_FOLLOWER].stringValue
                 header.followings.text = json[JSON_FOLLOWEING].stringValue
@@ -150,16 +155,26 @@ class guestVC: UICollectionViewController {
                 header.bioLbl.text = json["userbio"].stringValue
                 header.webTxt.text = json["userweb"].stringValue
                 
-                // 判斷追蹤按鈕 狀態
-                
+
                 
                 
             case .Failure(let error):
                 print(error.localizedDescription)
                 
             }
+            
+            // 判斷追蹤按鈕 狀態
+            self.FollowingStatusCheck(header)
+            
+//            if (self.FollowingStatusCheck()){
+//                header.editBtn.setTitle("FOLLOWING", forState: .Normal)
+//                header.editBtn.backgroundColor = UIColor.greenColor()
+//            }else{
+//                header.editBtn.setTitle("FOLLOW", forState: .Normal)
+//                header.editBtn.backgroundColor = UIColor.lightGrayColor()
+//            }
         }
-
+        
         // 添加手勢 postBtn , followerBtn ,followingBtn
         
         // tap post
@@ -216,5 +231,40 @@ class guestVC: UICollectionViewController {
     }
     
     
-
+    // 使用者是否追蹤此人 追蹤按鈕
+    func FollowingStatusCheck(header:headerView) {
+        
+        guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else{ return }
+        
+        Alamofire.request(.POST, "http://140.136.155.143/api/connection/search_following",parameters:["token":AccessToken]).validate().responseJSON { (response) in
+            
+            switch response.result{
+                
+            case .Success(let json):
+                
+                let json = SwiftyJSON.JSON(json)
+                
+                // guest
+                let gusetId = guestJSON.last!["user_id"].string
+                
+                for (_,subJson):(String, SwiftyJSON.JSON) in json["data"] {
+                    
+                    // 找到追蹤者 改變旗標 並且 直接結束方法
+                    if subJson["user_id"].string == gusetId{
+                        print("following this user")
+                        header.editBtn.setTitle("FOLLOWING", forState: .Normal)
+                        header.editBtn.backgroundColor = UIColor.greenColor()
+                        return
+                    }
+                }
+                
+            case .Failure(let error):
+                print(error)
+            }
+        }
+        
+        
+    }
+    
+    
 }
