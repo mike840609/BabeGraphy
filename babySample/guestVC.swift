@@ -31,6 +31,9 @@ class guestVC: UICollectionViewController {
     // hold data from server
     var postsJSON: Array<SwiftyJSON.JSON> = []
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
