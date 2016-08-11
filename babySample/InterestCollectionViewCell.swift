@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Haneke
 
 class InterestCollectionViewCell: UICollectionViewCell {
     
@@ -25,7 +26,7 @@ class InterestCollectionViewCell: UICollectionViewCell {
     private func updateUI()
     {
         interestTitleLabel?.text! = interest.title
-        featuredImageView?.image! = interest.featuredImage
+        featuredImageView.hnk_setImageFromURL(interest.featuredImage!)
     }
     
     override func layoutSubviews() {

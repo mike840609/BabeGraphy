@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="fontawesome-webfont.ttf">
+        <mutableArray key="FontAwesome.otf">
             <string>FontAwesome</string>
         </mutableArray>
     </customFonts>
@@ -617,7 +617,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="p6.png" translatesAutoresizingMaskIntoConstraints="NO" id="zjZ-oi-832">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="p8.png" translatesAutoresizingMaskIntoConstraints="NO" id="zjZ-oi-832">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QYJ-TB-sJz">
@@ -643,7 +643,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="280" height="380"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="r1.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ewx-Rh-apD">
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ewx-Rh-apD">
                                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="380"/>
                                                             </imageView>
                                                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gzx-xS-sti">
@@ -1516,10 +1516,9 @@
         <image name="camera-icon" width="32" height="32"/>
         <image name="more_icon" width="30" height="30"/>
         <image name="news_feed_icon" width="30" height="30"/>
-        <image name="p6.png" width="2500" height="1667"/>
+        <image name="p8.png" width="1400" height="1050"/>
         <image name="picture-icon" width="32" height="32"/>
         <image name="placeholder2" width="600" height="600"/>
-        <image name="r1.png" width="1500" height="1026"/>
         <image name="requests_icon" width="30" height="30"/>
         <image name="upload" width="512" height="512"/>
     </resources>
