@@ -15,6 +15,7 @@
 		4D2D44C51D0DA51000E6CE0D /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2D44C41D0DA51000E6CE0D /* FeedCell.swift */; };
 		4D2D44C71D0DA5BE00E6CE0D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2D44C61D0DA5BE00E6CE0D /* Extensions.swift */; };
 		4D2D44C91D0DA6D000E6CE0D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2D44C81D0DA6D000E6CE0D /* Post.swift */; };
+		4D33C0771D5D865100CEEDFB /* NetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D33C0761D5D865100CEEDFB /* NetData.swift */; };
 		4D3749DC1D07FFD100F57F68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3749DB1D07FFD100F57F68 /* AppDelegate.swift */; };
 		4D3749E11D07FFD100F57F68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D3749DF1D07FFD100F57F68 /* Main.storyboard */; };
 		4D3749E41D07FFD100F57F68 /* babySample.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4D3749E21D07FFD100F57F68 /* babySample.xcdatamodeld */; };
@@ -78,6 +79,7 @@
 		4D2D44C41D0DA51000E6CE0D /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		4D2D44C61D0DA5BE00E6CE0D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4D2D44C81D0DA6D000E6CE0D /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		4D33C0761D5D865100CEEDFB /* NetData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetData.swift; sourceTree = "<group>"; };
 		4D3749D81D07FFD100F57F68 /* babySample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = babySample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D3749DB1D07FFD100F57F68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D3749E01D07FFD100F57F68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 		4D3749FC1D087D6400F57F68 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4D33C0761D5D865100CEEDFB /* NetData.swift */,
 				4DAFE8BD1D2588810000334F /* Constants.swift */,
 				4DE338871D27F455001373E3 /* MaterialButton.swift */,
 				4DE338881D27F455001373E3 /* MaterialView.swift */,
@@ -471,6 +474,7 @@
 				4D3749F81D087C8000F57F68 /* UITextField+fixCaretPosition.swift in Sources */,
 				4D3749F71D087C8000F57F68 /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */,
 				4D1258A01D2CC4D100A7B6B9 /* followersVC.swift in Sources */,
+				4D33C0771D5D865100CEEDFB /* NetData.swift in Sources */,
 				4D3749E41D07FFD100F57F68 /* babySample.xcdatamodeld in Sources */,
 				4D9761491D227F4F00FE9C80 /* signUpVC.swift in Sources */,
 				4D3749F61D087C8000F57F68 /* SkyFloatingLabelTextField.swift in Sources */,

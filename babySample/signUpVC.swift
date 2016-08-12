@@ -56,8 +56,14 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         self.view.userInteractionEnabled = true
         self.view.addGestureRecognizer(hideTap)
         
+        
+        // 監聽是否註冊成功 回傳 token 並執行 uploadUserImage function
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(signUpVC.uploadUserImage), name: "uploadUserImage", object: nil)
+        
         //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(signUpVC.showKeyboard(_:)), name: UIKeyboardWillShowNotification, object: nil)
         //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(signUpVC.hideKeyboard(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        
+        
         
     }
     
@@ -344,7 +350,108 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
     }
     
     
+    func uploadUserImage(){
+        
+        print("Use Token to upload image")
+        
+        // 抓取  Token
+        guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey(ACCESS_TOKEN) else{ return }
+        
+        // 壓縮比例
+        guard let imageTemp = avaImg.image else {return}
+        let image : NSData = UIImageJPEGRepresentation(imageTemp, 0.5)!
+        
+        // 亂數生成成雜湊字串
+        let uuid = NSUUID().UUIDString
+        
+        
+        let parameters = [
+            "pic" : NetData(data: image, mimeType: .ImageJpeg, filename: "\(uuid).jpg"),
+            "otherParm" :"Value",
+            //"token" : AccessToken
+        ]
+        
+        
+        // 這邊替換成大頭貼儲存的網址
+        let urlRequest = self.urlRequestWithComponents("http://140.136.155.143/api/user/upload", parameters: parameters)
+        
+        
+        // Url & NSData
+        Alamofire.upload(urlRequest.0, data: urlRequest.1)
+            .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
+                print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+            }
+            .responseJSON { response in
+                debugPrint(response)
+        }
+        
+        
+        // 彈跳視窗 ＆ 轉跳畫面
+        let alertVC = PMAlertController(title: "註冊成功", description: "恭喜您,註冊成功", image: UIImage(named: "user-43.png"), style: .Alert)
+        
+        alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: {
+            let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.login()
+        }))
+        
+        self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
+    }
     
+    
+    
+    // this function to help upload photo
+    // 1.url 2.NSData
+    func urlRequestWithComponents(urlString:String, parameters:NSDictionary) -> (URLRequestConvertible, NSData) {
+        
+        // create url request to send
+        let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
+        mutableURLRequest.HTTPMethod = Alamofire.Method.POST.rawValue
+        
+        //let boundaryConstant = "myRandomBoundary12345"
+        let boundaryConstant = "NET-POST-boundary-\(arc4random())-\(arc4random())"
+        let contentType = "multipart/form-data;boundary="+boundaryConstant
+        mutableURLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        
+        
+        // create upload data to send
+        let uploadData = NSMutableData()
+        
+        // add parameters
+        for (key, value) in parameters {
+            
+            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            
+            if value is NetData {
+                
+                // add image
+                let postData = value as! NetData
+                
+                
+                // append content disposition
+                let filenameClause = " filename=\"\(postData.filename)\""
+                let contentDispositionString = "Content-Disposition: form-data; name=\"\(key)\";\(filenameClause)\r\n"
+                let contentDispositionData = contentDispositionString.dataUsingEncoding(NSUTF8StringEncoding)
+                uploadData.appendData(contentDispositionData!)
+                
+                
+                // append content type
+                //uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!) // mark this.
+                let contentTypeString = "Content-Type: \(postData.mimeType.getString())\r\n\r\n"
+                let contentTypeData = contentTypeString.dataUsingEncoding(NSUTF8StringEncoding)
+                uploadData.appendData(contentTypeData!)
+                uploadData.appendData(postData.data)
+                
+            }else{
+                uploadData.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n\(value)".dataUsingEncoding(NSUTF8StringEncoding)!)
+            }
+        }
+        uploadData.appendData("\r\n--\(boundaryConstant)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        
+        
+        // return URLRequestConvertible and NSData
+        return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
+    }
     
     
     // MARK: - IBAction
@@ -429,16 +536,21 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                         NSUserDefaults.standardUserDefaults().setObject(accessToken, forKey: "AccessToken")
                         NSUserDefaults.standardUserDefaults().synchronize()
                         
+                        // 通知已經拿到 token
+                        NSNotificationCenter.defaultCenter().postNotificationName("uploadUserImage", object: nil)
                         
-                        let alertVC = PMAlertController(title: "註冊成功", description: "恭喜您,註冊成功", image: UIImage(named: "user-43.png"), style: .Alert)
-                        
-                        alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: {
-                            let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                            appDelegate.login()
-                        }))
-                        
-                        self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
-                        
+                        /*
+                         // 彈跳視窗 ＆ 轉跳畫面
+                         let alertVC = PMAlertController(title: "註冊成功", description: "恭喜您,註冊成功", image: UIImage(named: "user-43.png"), style: .Alert)
+                         
+                         alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: {
+                         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                         appDelegate.login()
+                         }))
+                         
+                         
+                         self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
+                         */
                         
                     }
                     
