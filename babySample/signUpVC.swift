@@ -58,12 +58,10 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         
         
         // 監聽是否註冊成功 回傳 token 並執行 uploadUserImage function
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(signUpVC.uploadUserImage), name: "uploadUserImage", object: nil)
+        //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(signUpVC.uploadUserImage), name: "uploadUserImage", object: nil)
         
         //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(signUpVC.showKeyboard(_:)), name: UIKeyboardWillShowNotification, object: nil)
         //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(signUpVC.hideKeyboard(_:)), name: UIKeyboardWillHideNotification, object: nil)
-        
-        
         
     }
     
@@ -325,9 +323,6 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
     }
     
     
-    
-    
-    
     func isValidEmail(str:String?) -> Bool {
         
         let emailRegEx = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
@@ -365,15 +360,20 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         let uuid = NSUUID().UUIDString
         
         
-        let parameters = [
+        var parameterTemp = [
             "pic" : NetData(data: image, mimeType: .ImageJpeg, filename: "\(uuid).jpg"),
-            "otherParm" :"Value",
             "token" : AccessToken
         ]
         
+        // 未來可以加入其他資訊
+        // parameterTemp["userId"] = "27"
+        // parameterTemp["body"] = "This is the body text."
+        
         
         // 這邊替換成大頭貼儲存的網址
-        let urlRequest = self.urlRequestWithComponents("http://140.136.155.143/api/user/upload", parameters: parameters)
+        let urlRequest = urlRequestWithComponents(
+            "http://140.136.155.143/api/user/upload",
+            parameters: parameterTemp)
         
         
         // Url & NSData
@@ -384,9 +384,11 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
             .responseJSON { response in
                 
                 switch response.result{
+                    
                 case.Success(let json):
                     
                     print(json)
+                    
                     
                     // 彈跳視窗 ＆ 轉跳畫面
                     let alertVC = PMAlertController(title: "註冊成功", description: "恭喜您,註冊成功", image: UIImage(named: "user-43.png"), style: .Alert)
@@ -396,8 +398,11 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                         appDelegate.login()
                     }))
                     
+                    // 清空字典
+                    parameterTemp = [:]
+                    
                     self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
-                
+                    
                 case.Failure(let error):
                     print(error)
                 }
@@ -411,11 +416,10 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
     // 1.url 2.NSData
     func urlRequestWithComponents(urlString:String, parameters:NSDictionary) -> (URLRequestConvertible, NSData) {
         
-        // create url request to send
         let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
         mutableURLRequest.HTTPMethod = Alamofire.Method.POST.rawValue
         
-        //let boundaryConstant = "myRandomBoundary12345"
+        
         let boundaryConstant = "NET-POST-boundary-\(arc4random())-\(arc4random())"
         let contentType = "multipart/form-data;boundary="+boundaryConstant
         mutableURLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
@@ -433,7 +437,6 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                 
                 // add image
                 let postData = value as! NetData
-                
                 
                 // append content disposition
                 let filenameClause = " filename=\"\(postData.filename)\""
@@ -453,11 +456,9 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                 uploadData.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n\(value)".dataUsingEncoding(NSUTF8StringEncoding)!)
             }
         }
+        
         uploadData.appendData("\r\n--\(boundaryConstant)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
         
-        
-        
-        // return URLRequestConvertible and NSData
         return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
     }
     
@@ -516,6 +517,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         }
         
         print("signup pressed")
+        
         // loading animation
         startActivityAnimating("Loading...", type: .BallClipRotateMultiple, color: UIColor.whiteColor(), padding: 0)
         
@@ -545,20 +547,8 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                         NSUserDefaults.standardUserDefaults().synchronize()
                         
                         // 通知已經拿到 token
-                        NSNotificationCenter.defaultCenter().postNotificationName("uploadUserImage", object: nil)
-                        
-                        /*
-                         // 彈跳視窗 ＆ 轉跳畫面
-                         let alertVC = PMAlertController(title: "註冊成功", description: "恭喜您,註冊成功", image: UIImage(named: "user-43.png"), style: .Alert)
-                         
-                         alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: {
-                         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                         appDelegate.login()
-                         }))
-                         
-                         
-                         self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
-                         */
+                        // NSNotificationCenter.defaultCenter().postNotificationName("uploadUserImage", object: nil)
+                        self.uploadUserImage()
                         
                     }
                     
