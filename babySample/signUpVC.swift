@@ -368,7 +368,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         let parameters = [
             "pic" : NetData(data: image, mimeType: .ImageJpeg, filename: "\(uuid).jpg"),
             "otherParm" :"Value",
-            //"token" : AccessToken
+            "token" : AccessToken
         ]
         
         
@@ -382,19 +382,27 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                 print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
             }
             .responseJSON { response in
-                debugPrint(response)
+                
+                switch response.result{
+                case.Success(let json):
+                    
+                    print(json)
+                    
+                    // 彈跳視窗 ＆ 轉跳畫面
+                    let alertVC = PMAlertController(title: "註冊成功", description: "恭喜您,註冊成功", image: UIImage(named: "user-43.png"), style: .Alert)
+                    
+                    alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: {
+                        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                        appDelegate.login()
+                    }))
+                    
+                    self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
+                
+                case.Failure(let error):
+                    print(error)
+                }
+                //debugPrint(response)
         }
-        
-        
-        // 彈跳視窗 ＆ 轉跳畫面
-        let alertVC = PMAlertController(title: "註冊成功", description: "恭喜您,註冊成功", image: UIImage(named: "user-43.png"), style: .Alert)
-        
-        alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: {
-            let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.login()
-        }))
-        
-        self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
     }
     
     
