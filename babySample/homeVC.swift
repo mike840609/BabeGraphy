@@ -376,6 +376,12 @@ class homeVC: UICollectionViewController {
     func avaTap (){
         
         let ava = self.storyboard?.instantiateViewControllerWithIdentifier("avaVC") as! avaVC
+        
+        // pass url
+        if let url = user!["data"][0]["avatar"].string{
+            ava.avaUrl = url
+        }
+
         let navigationController = UINavigationController(rootViewController: ava)
         
         self.presentViewController(navigationController, animated: true, completion: nil)

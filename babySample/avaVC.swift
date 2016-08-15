@@ -11,6 +11,10 @@ import Haneke
 
 class avaVC: UIViewController {
     
+    // url temp
+    var avaUrl: String?
+    
+    
     @IBOutlet weak var avaImg: UIImageView!
     
     
@@ -20,10 +24,8 @@ class avaVC: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-     
-        let avaUrl = user!["data"][0]["avatar"].string
-        avaImg.hnk_setImageFromURL(NSURL(string: avaUrl!)!)
         
+        avaImg.hnk_setImageFromURL(NSURL(string: avaUrl!)!)
     }
     
 }
