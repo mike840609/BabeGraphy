@@ -101,6 +101,7 @@ class homeVC: UICollectionViewController {
             switch response.result{
             case .Success(let json):
                 
+                
                 let json = SwiftyJSON.JSON(json)
                 
                 user = json
@@ -132,6 +133,11 @@ class homeVC: UICollectionViewController {
                 }
                 if let web = json["data"][0][JSON_WEB].string{
                     header.webTxt.text = web
+                }
+            
+                // 解包圖片
+                if let avaImg = json["data"][0]["avatar"].string{
+                    header.avaImg.hnk_setImageFromURL(NSURL(string: avaImg)!)
                 }
                 
                 // 設定navigation 標題
@@ -174,6 +180,13 @@ class homeVC: UICollectionViewController {
         followingTap.numberOfTapsRequired = 1
         header.followings.userInteractionEnabled = true
         header.followings.addGestureRecognizer(followingTap)
+        
+        // show img
+        let avaTap = UITapGestureRecognizer(target: self, action: #selector(homeVC.avaTap))
+        avaTap.numberOfTapsRequired = 1
+        header.avaImg.userInteractionEnabled = true
+        header.avaImg.addGestureRecognizer(avaTap)
+        
         
         
         return header
@@ -360,6 +373,14 @@ class homeVC: UICollectionViewController {
     }
     
     
+    func avaTap (){
+        
+        let ava = self.storyboard?.instantiateViewControllerWithIdentifier("avaVC") as! avaVC
+        let navigationController = UINavigationController(rootViewController: ava)
+        
+        self.presentViewController(navigationController, animated: true, completion: nil)
+        
+    }
     
     // MARK: - IBAction
     @IBAction func logout(sender: AnyObject) {

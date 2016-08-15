@@ -8,6 +8,9 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
+import Haneke
+
 
 class EditVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
@@ -34,19 +37,9 @@ class EditVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerDel
     // MARK: - Life Cycle
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-                
-        if let fullname = user!["data"][0][JSON_NAME].string{
-            fullnameTxt.text = fullname
-        }
         
-        if let bio = user!["data"][0][JSON_BIO].string{
-            bioTxt.text = bio
-        }
-        
-        if let web = user!["data"][0][JSON_WEB].string{
-            webTxt.text = web
-        }
-        
+        loadUserInfo()
+
     }
     
     override func viewDidLoad() {
@@ -71,11 +64,28 @@ class EditVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerDel
         self.view.userInteractionEnabled = true
         self.view.addGestureRecognizer(hideTap)
         
-        
-        
     }
     
     // MARK: - Customer function
+    
+    func loadUserInfo() {
+        if let fullname = user!["data"][0][JSON_NAME].string{
+            fullnameTxt.text = fullname
+        }
+        
+        if let bio = user!["data"][0][JSON_BIO].string{
+            bioTxt.text = bio
+        }
+        
+        if let web = user!["data"][0][JSON_WEB].string{
+            webTxt.text = web
+        }
+        
+        if let avaUrl = user!["data"][0]["avatar"].string{
+            avaImg.hnk_setImageFromURL(NSURL(string: avaUrl)!)
+        }
+        
+    }
     
     
     // 點擊隱藏鍵盤
