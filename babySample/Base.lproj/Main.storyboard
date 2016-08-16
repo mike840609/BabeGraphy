@@ -1391,16 +1391,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TNH-Rg-g1B">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RNT-6v-LOP">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f1r-Fu-vrU">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="nSd-aL-rzB">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TNH-Rg-g1B">
                                 <rect key="frame" x="0.0" y="146" width="375" height="375"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="RNT-6v-LOP" firstAttribute="leading" secondItem="TNH-Rg-g1B" secondAttribute="leading" id="6Ch-8K-41S"/>
+                            <constraint firstItem="RNT-6v-LOP" firstAttribute="trailing" secondItem="TNH-Rg-g1B" secondAttribute="trailing" id="Icf-aX-pjB"/>
+                            <constraint firstItem="RNT-6v-LOP" firstAttribute="top" secondItem="IuX-Zn-4bN" secondAttribute="bottom" id="Jup-rc-t6b"/>
                             <constraint firstItem="TNH-Rg-g1B" firstAttribute="leading" secondItem="KlI-cr-XJo" secondAttribute="leading" id="beG-IU-TN0"/>
                             <constraint firstItem="TNH-Rg-g1B" firstAttribute="top" secondItem="IuX-Zn-4bN" secondAttribute="bottom" constant="82" id="cfV-r8-NPr"/>
                             <constraint firstItem="TNH-Rg-g1B" firstAttribute="centerY" secondItem="KlI-cr-XJo" secondAttribute="centerY" id="dig-Ky-vRX"/>
                             <constraint firstAttribute="trailing" secondItem="TNH-Rg-g1B" secondAttribute="trailing" id="rEH-Ll-CqH"/>
+                            <constraint firstItem="RNT-6v-LOP" firstAttribute="bottom" secondItem="gmR-Wk-clP" secondAttribute="top" id="sLc-EC-aBJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fYw-07-x5E">
@@ -1414,6 +1429,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="avaImg" destination="TNH-Rg-g1B" id="3ru-yl-xuL"/>
+                        <outlet property="backgroundImg" destination="RNT-6v-LOP" id="WMH-Cn-c3u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EbB-iY-k2d" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -81,6 +81,7 @@ class EditVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerDel
             webTxt.text = web
         }
         
+        // 若是有設定新照片 user!["data"][0]["avatar"] 會被設定成 nil  在這裡會解包失敗
         if let avaUrl = user!["data"][0]["avatar"].string{
             avaImg.hnk_setImageFromURL(NSURL(string: avaUrl)!)
         }
@@ -95,15 +96,32 @@ class EditVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerDel
     
     // MARK: - Image Picker
     func loadImg(){
+        
         let picker = UIImagePickerController()
+        
         picker.delegate = self
+        
         picker.sourceType = .PhotoLibrary
+        
         picker.allowsEditing = true
         
         picker.navigationBar.tintColor = UIColor.whiteColor()
         
         presentViewController(picker, animated: true, completion: nil)
     }
+    
+    // connect selected image to our imageView
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+        // 把舊的照片值清掉 避免重複讀取 無法設定照片
+        user!["data"][0]["avatar"] = nil
+        
+        avaImg.image = info[UIImagePickerControllerEditedImage] as? UIImage
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+
     
     // MARK: - Styling the text fields to the Skyscanner theme
     func setTextTheme(){
@@ -320,12 +338,21 @@ class EditVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerDel
     @IBAction func cancelBtn_click(sender: AnyObject) {
         
         self.view.endEditing(true)
+        
         self.dismissViewControllerAnimated(true, completion: nil)
 
     }
     
     
     @IBAction func saveBtn_click(sender: AnyObject) {
+        
+        guard let imageTemp = avaImg.image else {return}
+        
+        ApiService.shareInstance.avaImgupload(imageTemp)
+        
+        self.view.endEditing(true)
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
         
     }
     

@@ -142,8 +142,9 @@ class userVC: UITableViewController, UISearchBarDelegate  {
     // selected tableView cell - selected user
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        /*
+        
         // calling cell again to call cell data
+        /*
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! followersCell
 
         // if user tapped on his name go home, else go guest
@@ -155,7 +156,8 @@ class userVC: UITableViewController, UISearchBarDelegate  {
             let guest = self.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
             self.navigationController?.pushViewController(guest, animated: true)
         }
- */
+        */
+ 
         
     }
     

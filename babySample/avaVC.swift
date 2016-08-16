@@ -16,6 +16,7 @@ class avaVC: UIViewController {
     
     
     @IBOutlet weak var avaImg: UIImageView!
+    @IBOutlet weak var backgroundImg: UIImageView!
     
     
     @IBAction func dismiss(sender: AnyObject) {
@@ -24,8 +25,12 @@ class avaVC: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+//        backgroundImg.hnk_setImageFromURL(NSURL(string: avaUrl!)!)
         
-        avaImg.hnk_setImageFromURL(NSURL(string: avaUrl!)!)
+        if let url = avaUrl  {
+            avaImg.hnk_setImageFromURL(NSURL(string:url)!)
+        }
+        
     }
     
 }

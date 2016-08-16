@@ -31,7 +31,6 @@ class homeVC: UICollectionViewController {
     var refresher:UIRefreshControl!
     
     
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
@@ -137,7 +136,9 @@ class homeVC: UICollectionViewController {
             
                 // 解包圖片
                 if let avaImg = json["data"][0]["avatar"].string{
+                    // 快取
                     header.avaImg.hnk_setImageFromURL(NSURL(string: avaImg)!)
+                    
                 }
                 
                 // 設定navigation 標題
