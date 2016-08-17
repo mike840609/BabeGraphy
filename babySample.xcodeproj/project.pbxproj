@@ -69,6 +69,7 @@
 		4DE7A6171D2FC16500753A1C /* followersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE7A6161D2FC16500753A1C /* followersCell.swift */; };
 		4DEA614C1D2D3FA300C242B8 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEA614B1D2D3FA300C242B8 /* image.png */; };
 		4DEA614E1D2D415E00C242B8 /* key.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEA614D1D2D415E00C242B8 /* key.png */; };
+		4DFD19081D64C00D003CEF78 /* file-14.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFD19071D64C00D003CEF78 /* file-14.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -136,6 +137,7 @@
 		4DE7A6161D2FC16500753A1C /* followersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = followersCell.swift; sourceTree = "<group>"; };
 		4DEA614B1D2D3FA300C242B8 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
 		4DEA614D1D2D415E00C242B8 /* key.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = key.png; sourceTree = "<group>"; };
+		4DFD19071D64C00D003CEF78 /* file-14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file-14.png"; sourceTree = "<group>"; };
 		8C2472A7F6351D4CF62F0C27 /* Pods_babySample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_babySample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7AA36BF83BDFB32C5035B72 /* Pods-babySample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-babySample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-babySample/Pods-babySample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -250,6 +252,7 @@
 		4D54494C1D2A20A1006461DC /* Icon */ = {
 			isa = PBXGroup;
 			children = (
+				4DFD19071D64C00D003CEF78 /* file-14.png */,
 				4D5449731D2A467C006461DC /* warning.png */,
 				4D54494D1D2A20A1006461DC /* add.png */,
 				4D54494E1D2A20A1006461DC /* calendar.png */,
@@ -408,6 +411,7 @@
 				4D1258A41D2CD55600A7B6B9 /* shield-1.png in Resources */,
 				4D5449671D2A20A1006461DC /* user.png in Resources */,
 				4DC6699B1D5C51C4006CBF6A /* p8.png in Resources */,
+				4DFD19081D64C00D003CEF78 /* file-14.png in Resources */,
 				4D5449611D2A20A1006461DC /* like_.png in Resources */,
 				4D5449621D2A20A1006461DC /* list.png in Resources */,
 			);

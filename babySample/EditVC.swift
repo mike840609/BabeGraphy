@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Haneke
+import PMAlertController
 
 
 class EditVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate{
@@ -86,6 +87,31 @@ class EditVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerDel
             avaImg.hnk_setImageFromURL(NSURL(string: avaUrl)!)
         }
         
+    }
+    // 個人資料修改
+    func userUpdate (){
+        
+        //http://140.136.155.143/api/user/update
+        //parameter : token , password, name, about(optional) , website(optional)
+        
+        guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey(ACCESS_TOKEN) else{ return }
+        
+        // Nil Coalescing Operator
+        let name =  fullnameTxt?.text ?? ""
+        let bio = bioTxt?.text ?? ""
+        let web = webTxt?.text ?? ""
+        
+        let parameters = ["token":AccessToken, "name": name , "about":bio , "website": web]
+        
+         Alamofire.request(.POST, "http://140.136.155.143/api/user/update",parameters: parameters).validate().response { request, response, data, error in
+            
+            if error == nil{
+                
+                print("修改成功")
+                
+                NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
+            }
+        }
     }
     
     
@@ -348,7 +374,11 @@ class EditVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerDel
         
         guard let imageTemp = avaImg.image else {return}
         
+        // parse  profile image
         ApiService.shareInstance.avaImgupload(imageTemp)
+        
+        // parse user info
+        userUpdate()
         
         self.view.endEditing(true)
         self.dismissViewControllerAnimated(true, completion: nil)

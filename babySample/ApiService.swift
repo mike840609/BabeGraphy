@@ -65,9 +65,7 @@ class ApiService: NSObject {
                             
                             // 清除圖片快取
                             Shared.imageCache.removeAll()
-                            
-                            
-                            
+
                             // 更新 user 頁面
                             NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
                             
@@ -87,6 +85,9 @@ class ApiService: NSObject {
         }
         
     }
+    
+    
+
     
     
     
