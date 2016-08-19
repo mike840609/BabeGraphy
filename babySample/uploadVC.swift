@@ -161,6 +161,8 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
             presentViewController(alertVC, animated: true, completion:nil)
         }
         
+        guard let post_image = picImg.image else { return}
+        
         
         Alamofire.request(.POST, "http://140.136.155.143/api/post/store",parameters: ["token":AccessToken!,"content":content]).responseJSON { (response) in
             
@@ -168,7 +170,15 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
                 
             case .Success(let json):
                 
+                let json = SwiftyJSON.JSON(json)
+    
                 print(json)
+                
+                guard let post_id = json["_id"].string else { return}
+                
+                // 照片上傳
+                 ApiService.shareInstance.postPhotoUpload(post_id, image: post_image)
+                
                 
                 let alertVC = PMAlertController(title: "Po 文成功", description: "恭喜您,新增貼文成功", image: UIImage(named: "like_.png"), style: .Alert)
                 

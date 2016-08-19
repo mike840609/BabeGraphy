@@ -25,16 +25,12 @@ class ApiService: NSObject {
     func avaImgupload(image:UIImage)   {
         
         guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey(ACCESS_TOKEN) else{ return }
-        
         let image : NSData = UIImageJPEGRepresentation(image, 0.5)!
-        
         let uuid = NSUUID().UUIDString
-        
         let parameterTemp = [
             "pic" : NetData(data: image, mimeType: .ImageJpeg, filename: "\(uuid).jpg"),
             "token" : AccessToken
         ]
-        
         let urlRequest = urlRequestWithComponents(
             "http://140.136.155.143/api/user/upload",
             parameters: parameterTemp)
@@ -68,25 +64,54 @@ class ApiService: NSObject {
 
                             // 更新 user 頁面
                             NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
-                            
-                            
-                            
+
                         case .Failure(let error):
                             print(error.localizedDescription)
                             
                         }
                     }
                     
-                    
                 case.Failure(let error):
                     print(error)
+                }
+        }
+    }
+    
+    
+    // post photo upload
+    func postPhotoUpload (post_id:String, image:UIImage){
+        
+        guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey(ACCESS_TOKEN) else{ return }
+        let image : NSData = UIImageJPEGRepresentation(image, 0.5)!
+        let uuid = NSUUID().UUIDString
+        let parameterTemp = [
+            "pic": NetData(data: image, mimeType: .ImageJpeg, filename: "\(uuid).jpg"),
+            "post_id": post_id,
+            "token" : AccessToken
+        ]
+        
+        // 新增 api/post/upload  parameter: token , post_id
+        let urlRequest = urlRequestWithComponents(
+            "http://140.136.155.143/api/post/upload",
+            parameters: parameterTemp)
+        
+        Alamofire.upload(urlRequest.0, data: urlRequest.1)
+            .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
+                print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+            }
+            .responseJSON { response in
+                
+                switch response.result{
                     
+                case.Success(let json):
+                    print(json)
+                    
+                case .Failure(let error):
+                    print(error)
                 }
         }
         
     }
-    
-    
 
     
     
