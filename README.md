@@ -30,19 +30,21 @@ $ brew install carthage
 - [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)
 - [SkyFloatingLabelTextField](https://github.com/Skyscanner/SkyFloatingLabelTextField)
 - [FontAwesome.swift](https://github.com/thii/FontAwesome.swift)
-- [SKPhotoBrowser]
-- [Fusuma]
-- [NVActivityIndicatorView]
-- [PMAlertController]
-- [FBSDKLoginKit]
-- [FBSDKCoreKit]
+- [SKPhotoBrowser](https://github.com/suzuki-0000/SKPhotoBrowser)
+- [Fusuma](https://github.com/ytakzk/Fusuma)
+- [NVActivityIndicatorView](https://github.com/ninjaprox/NVActivityIndicatorView)
+- [PMAlertController](https://github.com/Codeido/PMAlertController)
+- [FBSDKLoginKit](https://cocoapods.org/pods/FBSDKLoginKit)
+- [FBSDKCoreKit](https://cocoapods.org/pods/FBSDKCoreKit)
 
 
 
 ## Supporting Files 
 - [fontawesome](http://fontawesome.io/)
 
+
 ## ScreenShot
+
 
 
 ## Contributors
@@ -50,3 +52,5 @@ $ brew install carthage
 
 
 ## License
+Created by 蔡鈞 on 2016/7/2.
+Copyright © 2016年 蔡鈞. All rights reserved.
