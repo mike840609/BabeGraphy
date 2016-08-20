@@ -30,6 +30,13 @@ $ brew install carthage
 - [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)
 - [SkyFloatingLabelTextField](https://github.com/Skyscanner/SkyFloatingLabelTextField)
 - [FontAwesome.swift](https://github.com/thii/FontAwesome.swift)
+- [SKPhotoBrowser]
+- [Fusuma]
+- [NVActivityIndicatorView]
+- [PMAlertController]
+- [FBSDKLoginKit]
+- [FBSDKCoreKit]
+
 
 
 ## Supporting Files 
