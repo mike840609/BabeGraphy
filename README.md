@@ -33,6 +33,7 @@ https://github.com/Cassiszuoan/laravel-restapi
 - [FontAwesome.swift](https://github.com/thii/FontAwesome.swift)
 - [SKPhotoBrowser](https://github.com/suzuki-0000/SKPhotoBrowser)
 - [Fusuma](https://github.com/ytakzk/Fusuma)
+- [HanekeSwift](https://github.com/Haneke/HanekeSwift)
 - [NVActivityIndicatorView](https://github.com/ninjaprox/NVActivityIndicatorView)
 - [PMAlertController](https://github.com/Codeido/PMAlertController)
 - [FBSDKLoginKit](https://cocoapods.org/pods/FBSDKLoginKit)
