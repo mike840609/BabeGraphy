@@ -19,8 +19,6 @@ class ApiService: NSObject {
     
     static let shareInstance = ApiService()
     
-    
-    
     // 相片上傳
     func avaImgupload(image:UIImage)   {
         
@@ -60,11 +58,16 @@ class ApiService: NSObject {
                             user = json
                             
                             // 清除圖片快取
+                            //dispatch_async(dispatch_get_main_queue(), {
                             Shared.imageCache.removeAll()
-
+                            //})
+                            
+                            
+                            
+                            
                             // 更新 user 頁面
-                            NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
-
+                            NSNotificationCenter.defaultCenter().postNotificationName("reload&CacheUpdate", object: nil)
+                            
                         case .Failure(let error):
                             print(error.localizedDescription)
                             
@@ -112,7 +115,7 @@ class ApiService: NSObject {
         }
         
     }
-
+    
     
     
     

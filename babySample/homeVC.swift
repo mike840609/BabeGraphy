@@ -12,12 +12,18 @@ import SwiftyJSON
 import PMAlertController
 import FBSDKCoreKit
 import FBSDKLoginKit
+import Haneke
 
 
 // 儲存個人資訊 直接將整筆 json 存下來
 var user : SwiftyJSON.JSON?
 
+// temp image
+var tempimage:UIImage?
+
 class homeVC: UICollectionViewController {
+    
+    
     
     @IBOutlet weak var logoutBtn: UIBarButtonItem!
     
@@ -30,6 +36,7 @@ class homeVC: UICollectionViewController {
     // pull to refresher
     var refresher:UIRefreshControl!
     
+
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
@@ -38,7 +45,7 @@ class homeVC: UICollectionViewController {
         // getInfo()
         
         // 獲取所有使用者的貼文
-         getPost()
+        //getPost()
     }
     
     override func viewDidLoad() {
@@ -64,7 +71,6 @@ class homeVC: UICollectionViewController {
         // 更新通知 =====================================
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.reload), name: "reload", object: nil)
         
-        
     }
     
     
@@ -77,14 +83,6 @@ class homeVC: UICollectionViewController {
         
         // 抓不到token ,token過期 ,重新登入一次
         guard let AccessToken:String? = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {
-            
-            //            NSUserDefaults.standardUserDefaults().removeObjectForKey(ACCESS_TOKEN)
-            //            NSUserDefaults.standardUserDefaults().synchronize()
-            //
-            //            // 轉跳登入畫面
-            //            let signin = self.storyboard?.instantiateViewControllerWithIdentifier("LoginController") as! LoginController
-            //            let appDelegate : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            //            appDelegate.window?.rootViewController = signin
             
             // 重複登入 轉跳 登入頁面
             let alertVC = PMAlertController(title: "重複登入", description: "您的帳號已經從遠方登入,請重新登入", image: UIImage(named: "warning.png"), style: .Alert)
@@ -133,12 +131,22 @@ class homeVC: UICollectionViewController {
                 if let web = json["data"][0][JSON_WEB].string{
                     header.webTxt.text = web
                 }
-            
+                
                 // 解包圖片
                 if let avaImg = json["data"][0]["avatar"].string{
                     // 快取
-                    header.avaImg.hnk_setImageFromURL(NSURL(string: avaImg)!)
+                    // header.avaImg.hnk_setImageFromURL(NSURL(string: avaImg)!)
                     
+                    // 非同步載入
+                    let url = NSURL(string: avaImg)
+                    
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                        let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
+                        dispatch_async(dispatch_get_main_queue(), {
+                            header.avaImg.image = UIImage(data: data!)
+                            tempimage = UIImage(data: data!)
+                        });
+                    }
                 }
                 
                 // 設定navigation 標題
@@ -147,9 +155,9 @@ class homeVC: UICollectionViewController {
                 // 存取 user id 以供未來使用
                 NSUserDefaults.standardUserDefaults().setObject(id, forKey:USER_ID)
                 NSUserDefaults.standardUserDefaults().synchronize()
-
                 
-                print(" id:\(id)\n name:\(name)\n email:\(email)\n posts:\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")
+                
+                //print(" id:\(id)\n name:\(name)\n email:\(email)\n posts:\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")
                 
                 
                 // self.getInfo()
@@ -217,6 +225,7 @@ class homeVC: UICollectionViewController {
         collectionView?.reloadData()
     }
     
+    
     // 更新 collectionView 並停止更新動畫
     func refresh(){
         
@@ -270,6 +279,7 @@ class homeVC: UICollectionViewController {
                 }
                 
                 print("all user's post:" , self.user_posts.count)
+                
                 print("=====================================================\n\n")
                 
             case .Failure(let error):
@@ -277,64 +287,6 @@ class homeVC: UICollectionViewController {
                 
             }
         }
-        
-        
-        // header 資訊
-        //    func getInfo(){
-        //
-        //        // 抓不到token ,token過期 ,重新登入一次
-        //        guard let AccessToken:String? = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {
-        //
-        //            NSUserDefaults.standardUserDefaults().removeObjectForKey(ACCESS_TOKEN)
-        //            NSUserDefaults.standardUserDefaults().synchronize()
-        //
-        //            // 轉跳登入畫面
-        //            let signin = self.storyboard?.instantiateViewControllerWithIdentifier("LoginController") as! LoginController
-        //            let appDelegate : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        //            appDelegate.window?.rootViewController = signin
-        //
-        //        }
-        //
-        //
-        //        // token 有抓到 向 server 請求
-        //        Alamofire.request(.GET, "http://140.136.155.143/api/user/token/\(AccessToken!)").validate().responseJSON{ (response) in
-        //
-        //            switch response.result{
-        //            case .Success(let json):
-        //
-        //                let json = SwiftyJSON.JSON(json)
-        //
-        //                user = json
-        //
-        //                // optional chainging
-        //                guard let id:String = json["data"][0][JSON_ID].string,
-        //                    let name:String = json["data"][0][JSON_NAME].string,
-        //                    let email:String = json["data"][0][JSON_EMAIL].string,
-        //                    let follower_count:Int = json["data"][0][JSON_FOLLOWER].int,
-        //                    let following_count:Int = json["data"][0][JSON_FOLLOWEING].int,
-        //                    let posts_count:Int = json["data"][0][JSON_POST].int
-        //                    else {
-        //
-        //                        // 重複登入 轉跳 登入頁面
-        //                        let alertVC = PMAlertController(title: "重複登入", description: "您的帳號已經從遠方登入,請重新登入", image: UIImage(named: "warning.png"), style: .Alert)
-        //                        alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action:{self.logout()}))
-        //                        self.presentViewController(alertVC, animated: true, completion:nil)
-        //                        break
-        //                }
-        //
-        //                // 設定navigation 標題
-        //                self.navigationItem.title = name.uppercaseString
-        //
-        //                print(" id:\(id)\n name:\(name)\n email:\(email)\n posts:\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")
-        //
-        //
-        //            case .Failure(let error):
-        //                print(error.localizedDescription)
-        //
-        //            }
-        //        }
-        //    }
-        
         
     }
     
@@ -379,10 +331,15 @@ class homeVC: UICollectionViewController {
         let ava = self.storyboard?.instantiateViewControllerWithIdentifier("avaVC") as! avaVC
         
         // pass url
+        /*
         if let url = user!["data"][0]["avatar"].string{
             ava.avaUrl = url
         }
-
+        */
+        
+        // image pass
+        ava.ava = tempimage
+        
         let navigationController = UINavigationController(rootViewController: ava)
         
         self.presentViewController(navigationController, animated: true, completion: nil)

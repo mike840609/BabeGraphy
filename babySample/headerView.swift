@@ -61,6 +61,7 @@ class headerView: UICollectionReusableView {
         */
         
         // round ava
+        avaImg.contentMode = .ScaleAspectFill
         avaImg.layer.cornerRadius = avaImg.frame.size.width / 2
         avaImg.clipsToBounds = true
         

@@ -56,6 +56,7 @@ class EditVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerDel
         avaImg.addGestureRecognizer(avaTap)
         
         // image radious
+        avaImg.contentMode = .ScaleAspectFill
         avaImg.layer.cornerRadius = avaImg.frame.size.width/2
         avaImg.clipsToBounds = true
         
@@ -83,9 +84,16 @@ class EditVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerDel
         }
         
         // 若是有設定新照片 user!["data"][0]["avatar"] 會被設定成 nil  在這裡會解包失敗
-        if let avaUrl = user!["data"][0]["avatar"].string{
-            avaImg.hnk_setImageFromURL(NSURL(string: avaUrl)!)
+        if let img = tempimage{
+            avaImg.image = img
         }
+        
+        /*
+        if let avaUrl = user!["data"][0]["avatar"].string{
+             avaImg.hnk_setImageFromURL(NSURL(string: avaUrl)!)
+            
+        }
+         */
         
     }
     // 個人資料修改

@@ -13,12 +13,12 @@ import Haneke
 import SwiftyJSON
 
 private let reuseIdentifier = "Cell"
-let posts = Posts()
+//let posts = Posts()
 
 class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLayout {
     
     // local var 第一優先權 測試用
-    // var posts = [Post]()
+    var posts = [Post]()
     
     // MARK: - Life Cycle
     
@@ -30,6 +30,9 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // 抓取動態牆資料
+        getFeedPost()
+        
         
         // Mark: - CollectionView Set
         navigationItem.title = "BabeGraphy"
@@ -37,7 +40,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         collectionView!.backgroundColor = UIColor(white: 0.95, alpha: 1)
         self.collectionView!.registerClass(FeedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
-        getFeedPost()
+        
         
     }
     
@@ -50,7 +53,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     // MARK: UICollectionViewDataSource
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return posts.numberOfPosts()
+        return posts.count
         
       
     }
@@ -59,7 +62,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         
         let feedCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! FeedCell
         
-        feedCell.post = posts[indexPath]
+        feedCell.post = posts[indexPath.item]
         
         feedCell.feedController = self
         
@@ -68,7 +71,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        if let statusText = posts[indexPath].statusText{
+        if let statusText = posts[indexPath.item].statusText{
             
             let rect = NSString(string: statusText).boundingRectWithSize(CGSizeMake(view.frame.width, 1000), options: NSStringDrawingOptions.UsesFontLeading.union(NSStringDrawingOptions.UsesLineFragmentOrigin), attributes: [NSFontAttributeName:UIFont.systemFontOfSize(14)], context: nil)
             
@@ -195,12 +198,12 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                 switch response.result{
                 case .Success(let json):
 
-                    
+
                     let json = SwiftyJSON.JSON(json)
                     
                     for (_,subJson):(String, SwiftyJSON.JSON) in json[0] {
                         
-                        /*
+                        
                         let post = Post()
                         
                         post.name = subJson["author_name"].string
@@ -211,7 +214,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                         post.numComments = 124
                         
                         self.posts.append(post)
-                        */
+                        
                         
                         print(subJson,"\n\n")
                         
