@@ -54,4 +54,14 @@ extension UIImageView {
 }
 
 
-
+extension NSDate
+{
+    convenience
+    init(dateString:String) {
+        let dateStringFormatter = NSDateFormatter()
+        dateStringFormatter.dateFormat = "yyyyMMdd"
+        dateStringFormatter.locale = NSLocale(localeIdentifier: "fr_CH_POSIX")
+        let d = dateStringFormatter.dateFromString(dateString)!
+        self.init(timeInterval:0, sinceDate:d)
+    }
+}

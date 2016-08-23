@@ -17,16 +17,16 @@ private let reuseIdentifier = "Cell"
 
 class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLayout {
     
-    // local var 第一優先權 測試用
+    // local var 測試用
     var posts = [Post]()
     
     // MARK: - Life Cycle
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        
         navigationController?.hidesBarsOnSwipe = true
     }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,16 +46,12 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     
     // release memory
     override func didReceiveMemoryWarning() {
-        
     }
     
     
     // MARK: UICollectionViewDataSource
-    
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.count
-        
-      
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -71,24 +67,24 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        if let statusText = posts[indexPath.item].statusText{
+        if let statusText = posts[indexPath.item].content{
             
             let rect = NSString(string: statusText).boundingRectWithSize(CGSizeMake(view.frame.width, 1000), options: NSStringDrawingOptions.UsesFontLeading.union(NSStringDrawingOptions.UsesLineFragmentOrigin), attributes: [NSFontAttributeName:UIFont.systemFontOfSize(14)], context: nil)
             
-            let knownHeight: CGFloat = 8 + 44 + 4 + 4 + 200 + 8 + 24 + 8 + 44
+            let knownHeight: CGFloat = 8 + 44 + 4 + 4 + 300 + 8 + 24 + 8 + 44
             
             return CGSizeMake(view.frame.width, rect.height + knownHeight + 16)
         }
         
-        return CGSizeMake(view.frame.width, 500)
+        return CGSizeMake(view.frame.width, 300)
     }
     
     // Rotation autolayout
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         collectionView?.collectionViewLayout.invalidateLayout()
-        
     }
+    
     
     let blackBackgroundView = UIView()
     let zoomImageView = UIImageView()
@@ -163,7 +159,6 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         if let startingFrame = statusImageView!.superview?.convertRect(statusImageView!.frame, toView: nil){
             
             
-            
             UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .CurveEaseOut, animations: {
                 
                 // 漸變動畫
@@ -198,27 +193,30 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                 switch response.result{
                 case .Success(let json):
 
-
                     let json = SwiftyJSON.JSON(json)
                     
                     for (_,subJson):(String, SwiftyJSON.JSON) in json[0] {
                         
-                        
                         let post = Post()
                         
-                        post.name = subJson["author_name"].string
+                        post.author_name = subJson["author_name"].string
                         post.created_at = subJson["created_at"].string
-                        post.statusText = subJson["content"].string
+                        post.updated_at = subJson["updated_at"].string
+                        
+                        post.content = subJson["content"].string
+                        post.imgurl = subJson["imgurl"].string
+                        
                         
                         post.numLikes = 1541
                         post.numComments = 124
+                        
                         
                         self.posts.append(post)
                         
                         
                         print(subJson,"\n\n")
                         
-                        
+                        self.collectionView?.reloadData()
                     }
 
                     
@@ -227,10 +225,8 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                 }
                 
         }
-        collectionView?.reloadData()
         
     }
-    
     
 }
 

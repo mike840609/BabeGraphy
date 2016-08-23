@@ -9,18 +9,23 @@
 import UIKit
 
 class Post{
-    var name:String?
+    
+    var author_name:String?
     var profileImageName:String?
-    var statusText:String?
-    var statusImageName:String?
+    var content:String?
+    var imgurl:String?
+    
     var numLikes:Int?
     var numComments:Int?
-    var statusImgUrl:String?
+
+    
     var location: Location?
-    
-    
+
     var created_at:String?
+    var updated_at:String?
     
+    // post id
+    var _id:String?
     
     
 }

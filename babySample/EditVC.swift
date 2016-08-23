@@ -148,7 +148,9 @@ class EditVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerDel
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         // 把舊的照片值清掉 避免重複讀取 無法設定照片
-        user!["data"][0]["avatar"] = nil
+        // user!["data"][0]["avatar"] = nil
+        
+        tempimage = info[UIImagePickerControllerEditedImage] as? UIImage
         
         avaImg.image = info[UIImagePickerControllerEditedImage] as? UIImage
         

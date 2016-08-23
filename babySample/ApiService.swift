@@ -117,7 +117,28 @@ class ApiService: NSObject {
     }
     
     
-    
+    // Get facebook photo path
+    func getFBphotos() -> SwiftyJSON.JSON {
+        
+        var json: SwiftyJSON.JSON!
+        
+        let graphRequest  = FBSDKGraphRequest(graphPath: "me" as String, parameters: ["fields":"photos{images}"])
+        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+            
+            if ((error) != nil)
+            {
+                print(error)
+                return
+            }
+            else
+            {
+                json = SwiftyJSON.JSON(result)
+                print(json)
+            }
+        })
+        
+        return json
+    }
     
     
     // helper

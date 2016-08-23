@@ -26,39 +26,11 @@ class FeedCell: UICollectionViewCell {
             statusImg.image = nil
             loader.startAnimating()
             
-            if let statusImageUrl = post?.statusImgUrl{
-                
+            if let statusImageUrl = post?.imgurl{
                 statusImg.hnk_setImageFromURLAutoSize(NSURL(string:statusImageUrl)!)
                 loader.stopAnimating()
-                
-                // Cache check
-                /*
-                 if let image = imageCache.objectForKey(statusImageUrl) as? UIImage{
-                 statusImg.image = image
-                 loader.stopAnimating()
-                 }else{
-                 NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: statusImageUrl)!,completionHandler: {
-                 (data,response,error) -> Void in
-                 if error != nil{
-                 print(error)
-                 return
-                 }
-                 
-                 let image = UIImage(data: data!)
-                 
-                 imageCache.setObject(image!, forKey: statusImageUrl)
-                 
-                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                 self.statusImg.image = image
-                 self.loader.stopAnimating()
-                 })
-                 }).resume()
-                 
-                 }
-                 */
-                
-                
             }
+            
             setupNameLocationStatusAndProfileImage()
         }
     }
@@ -97,7 +69,6 @@ class FeedCell: UICollectionViewCell {
     
     let statusImg:UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "zuckdog")
         imageView.contentMode = .ScaleAspectFill
         imageView.layer.masksToBounds = true
         imageView.userInteractionEnabled = true
@@ -139,20 +110,54 @@ class FeedCell: UICollectionViewCell {
     // Set Cell Content
     func setupNameLocationStatusAndProfileImage(){
         
-        if let name = post?.name{
+        // 解包 姓名 創建時間
+        if let name = post?.author_name, let created_at = post?.created_at{
             
             let attributedText = NSMutableAttributedString(
                 string: name,
                 attributes: [NSFontAttributeName:UIFont.boldSystemFontOfSize(14)])
             
+            // 計算和現在的時間差
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            
+            let from =  dateFormatter.dateFromString( created_at )
+            let now = NSDate()
+            let components : NSCalendarUnit = [.Second, .Minute, .Hour, .Day, .WeekOfMonth]
+            let difference = NSCalendar.currentCalendar().components(components, fromDate: from!, toDate: now, options: [])
+            
+            
+            var time_after_cal:String = String()
+            
+            if difference.second <= 0 {
+                time_after_cal = "  just now"
+            }
+            if difference.second > 0 && difference.minute == 0 {
+                time_after_cal = "  \(difference.second) 秒前."
+            }
+            if difference.minute > 0 && difference.hour == 0 {
+                time_after_cal = "  \(difference.minute) 分鐘前."
+            }
+            if difference.hour > 0 && difference.day == 0 {
+                time_after_cal = "  \(difference.hour) 小時前."
+            }
+            if difference.day > 0 && difference.weekOfMonth == 0 {
+                time_after_cal = "  \(difference.day) 天前."
+            }
+            if difference.weekOfMonth > 0 {
+                time_after_cal = "  \(difference.weekOfMonth) 週前"
+            }
+
+            
             attributedText.appendAttributedString(NSAttributedString(
-                string: "\n15分鐘 台北市 ",
+                string: time_after_cal,
                 attributes:[NSFontAttributeName:UIFont.boldSystemFontOfSize(12),
                     NSForegroundColorAttributeName:UIColor.rgb(155, green: 161, blue: 175)]))
             
+            
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineSpacing = 4
-            
+    
             attributedText.addAttribute(NSParagraphStyleAttributeName,
                                         value: paragraphStyle,
                                         range: NSMakeRange(0,attributedText.string.characters.count))
@@ -164,17 +169,18 @@ class FeedCell: UICollectionViewCell {
             nameLabel.attributedText = attributedText
         }
         
-        if let statusText = post?.statusText{
-            statusTextView.text = statusText
+        if let content = post?.content{
+            statusTextView.text = content
         }
         
         if let profileImagename = post?.profileImageName{
             profileImageView.image = UIImage(named:profileImagename)
         }
         
-        if let statusImageName = post?.statusImageName{
-            statusImg.image = UIImage(named: statusImageName)
+        if let imgurl = post?.imgurl{
+            statusImg.hnk_setImageFromURLAutoSize(NSURL(string: imgurl )!)
         }
+        
         if let likes = post?.numLikes,let comments = post?.numComments{
             likesCommentsLabel.text = "\(likes) Likes  \(comments) Comments"
         }
@@ -213,7 +219,7 @@ class FeedCell: UICollectionViewCell {
         
         
         addConstraintWithFormat("V:|-12-[v0]", views: nameLabel)
-        addConstraintWithFormat("V:|-8-[v0(44)]-4-[v1]-4-[v2(200)]-8-[v3(24)]-8-[v4(0.4)][v5(44)]|", views: profileImageView,statusTextView,statusImg,likesCommentsLabel,dividerLineView,likeButton)
+        addConstraintWithFormat("V:|-8-[v0(44)]-4-[v1]-4-[v2(300)]-8-[v3(24)]-8-[v4(0.4)][v5(44)]|", views: profileImageView,statusTextView,statusImg,likesCommentsLabel,dividerLineView,likeButton)
         addConstraintWithFormat("V:[v0(44)]|", views: commentButton)
         addConstraintWithFormat("V:[v0(44)]|", views: shareButton)
         

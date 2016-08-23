@@ -157,7 +157,7 @@ class homeVC: UICollectionViewController {
                 NSUserDefaults.standardUserDefaults().synchronize()
                 
                 
-                //print(" id:\(id)\n name:\(name)\n email:\(email)\n posts:\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")
+                print(" id:\(id)\n name:\(name)\n email:\(email)\n posts:\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")
                 
                 
                 // self.getInfo()
