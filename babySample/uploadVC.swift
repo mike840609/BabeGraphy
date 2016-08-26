@@ -16,6 +16,7 @@ import PMAlertController
 class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
     
     
+    
     @IBOutlet weak var picImg: UIImageView!
     @IBOutlet weak var titleTxt: UITextView!
     
@@ -107,16 +108,6 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
         self.presentViewController(alertVC, animated: true, completion: nil)
         
         
-        //        let alert = UIAlertController(title: "Access Requested", message: "Saving image needs to access your photo album", preferredStyle: .Alert)
-        //        alert.addAction(UIAlertAction(title: "Settings", style: .Default, handler: { (action) -> Void in
-        //            if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
-        //                UIApplication.sharedApplication().openURL(url)
-        //            }
-        //        }))
-        //        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
-        //        }))
-        //        self.presentViewController(alert, animated: true, completion: nil)
-        
     }
     
     func fusumaClosed() {
@@ -176,8 +167,11 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
                 
                 guard let post_id = json["_id"].string else { return}
                 
+                
+                
                 // 照片上傳
-                 ApiService.shareInstance.postPhotoUpload(post_id, image: post_image)
+                ApiService.shareInstance.postPhotoUpload(post_id, image: post_image)
+                
                 
                 
                 let alertVC = PMAlertController(title: "Po 文成功", description: "恭喜您,新增貼文成功", image: UIImage(named: "like_.png"), style: .Alert)

@@ -53,7 +53,10 @@ extension UIImageView {
     }
 }
 
+// 
 
+
+// 時間換算
 extension NSDate
 {
     convenience

@@ -11,7 +11,7 @@ import UIKit
 class Post{
     
     var author_name:String?
-    var profileImageName:String?
+    var author_imgurl:String?
     var content:String?
     var imgurl:String?
     

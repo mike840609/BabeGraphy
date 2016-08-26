@@ -554,6 +554,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                     
                 case .Failure(let error):
                     
+                    print(error)
                     
                     // 我們 server 的問題回報  確定碰到網路 網站回覆行為
                     if let statusCode = response.response?.statusCode{
@@ -569,6 +570,12 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
                         case 422:
                             
                             let alertVC = PMAlertController(title: "填寫欄位有缺少", description: "請確認欄位填寫正確", image: UIImage(named: "list-4.png"), style: .Alert)
+                            alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
+                            self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
+                            
+                        case 500:
+                            
+                            let alertVC = PMAlertController(title: "帳號已被使用", description: "請換一組註冊帳號", image: UIImage(named: "notepad-2.png"), style: .Alert)
                             alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: nil))
                             self.presentViewController(alertVC, animated: true, completion: self.stopActivityAnimating)
                             

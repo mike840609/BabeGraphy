@@ -15,12 +15,14 @@ class FeedCell: UICollectionViewCell {
     
     var feedController: FeedController?
     
+    
     func animate() {
         feedController?.animateImageView(statusImg)
     }
     
     
     var post:Post?{
+        
         didSet{
             
             statusImg.image = nil
@@ -173,8 +175,9 @@ class FeedCell: UICollectionViewCell {
             statusTextView.text = content
         }
         
-        if let profileImagename = post?.profileImageName{
-            profileImageView.image = UIImage(named:profileImagename)
+        if let author_imgurl = post?.author_imgurl{
+//            profileImageView.image = UIImage(named:profileImagename)
+            profileImageView.hnk_setImageFromURLAutoSize(NSURL(string: author_imgurl)!)
         }
         
         if let imgurl = post?.imgurl{
@@ -216,14 +219,15 @@ class FeedCell: UICollectionViewCell {
         
         // button constraints Button Equal another
         addConstraintWithFormat("H:|[v0(v2)][v1(v2)][v2]|", views: likeButton,commentButton,shareButton)
-        
-        
         addConstraintWithFormat("V:|-12-[v0]", views: nameLabel)
+        
+        
         addConstraintWithFormat("V:|-8-[v0(44)]-4-[v1]-4-[v2(300)]-8-[v3(24)]-8-[v4(0.4)][v5(44)]|", views: profileImageView,statusTextView,statusImg,likesCommentsLabel,dividerLineView,likeButton)
         addConstraintWithFormat("V:[v0(44)]|", views: commentButton)
         addConstraintWithFormat("V:[v0(44)]|", views: shareButton)
         
     }
+    
     
     let loader = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
     

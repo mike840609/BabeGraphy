@@ -13,12 +13,15 @@ import Haneke
 import SwiftyJSON
 
 private let reuseIdentifier = "Cell"
-//let posts = Posts()
+
 
 class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLayout {
     
     // local var 測試用
     var posts = [Post]()
+    
+    var refresher:UIRefreshControl!
+    
     
     // MARK: - Life Cycle
     override func viewWillAppear(animated: Bool) {
@@ -33,6 +36,9 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         // 抓取動態牆資料
         getFeedPost()
         
+        refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(self.refresh), forControlEvents: UIControlEvents.ValueChanged)
+        collectionView?.addSubview(refresher)
         
         // Mark: - CollectionView Set
         navigationItem.title = "BabeGraphy"
@@ -125,7 +131,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                 
             }
             // Zoomin 動畫
-            zoomImageView.backgroundColor = UIColor.redColor()
+            // zoomImageView.backgroundColor = UIColor.redColor()
             zoomImageView.frame = startingFrame
             zoomImageView.userInteractionEnabled = true
             zoomImageView.image = statusImageView.image
@@ -192,6 +198,8 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
             .responseJSON { (response) in
                 switch response.result{
                 case .Success(let json):
+                    
+                    self.posts.removeAll(keepCapacity: false)
 
                     let json = SwiftyJSON.JSON(json)
                     
@@ -200,6 +208,8 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                         let post = Post()
                         
                         post.author_name = subJson["author_name"].string
+                        post.author_imgurl = subJson["author_imgurl"].string
+                        
                         post.created_at = subJson["created_at"].string
                         post.updated_at = subJson["updated_at"].string
                         
@@ -226,6 +236,16 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                 
         }
         
+    }
+    
+    func refresh(){
+        
+        
+        
+        
+        getFeedPost()
+        
+        refresher.endRefreshing()
     }
     
 }

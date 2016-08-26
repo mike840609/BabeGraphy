@@ -355,7 +355,7 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
         let picture = json["picture"]["data"]["url"].stringValue
         let fb_token = FBSDKAccessToken.currentAccessToken().tokenString
         
-        
+        //  用 fb 資訊 註冊
         Alamofire.request(.POST, "http://140.136.155.143/api/auth/fb_signup",parameters: ["fb_id":fb_id ,"name":name ,"picture": picture , "email":email , "fb_token":fb_token]).responseJSON { (response) in
             
             switch response.result{
@@ -366,8 +366,8 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
                 
                 // 判斷是否註冊 註冊過直接call fb 登入api 換發token
                 if json["status_code"].int == 500{
-                    print("註冊過 轉跳登入")
                     
+                    print("註冊過 轉跳登入")
                     
                     Alamofire.request(.POST, "http://140.136.155.143/api/auth/fb_login",parameters: ["email":email,"fb_id":fb_id]).responseJSON(completionHandler: { (response) in
                         
@@ -410,13 +410,16 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
                     })
                 }
                 
-                // 沒登入過 直接call    fb 註冊 api
+
                 let accessToken = json["token"].string
                 
                 print(accessToken)
                 
                 NSUserDefaults.standardUserDefaults().setObject(accessToken, forKey: ACCESS_TOKEN)
                 NSUserDefaults.standardUserDefaults().synchronize()
+                
+                
+            
                 
                 
                 let alertVC = PMAlertController(title: "Facebook 註冊成功", description: "恭喜您,讓我們共同創造美好的回憶", image: UIImage(named: "shield-1.png"), style: .Alert)

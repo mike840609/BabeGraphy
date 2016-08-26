@@ -38,6 +38,8 @@ class ApiService: NSObject {
         Alamofire.upload(urlRequest.0, data: urlRequest.1)
             .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
                 print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+                
+                
             }
             .responseJSON { response in
                 
@@ -101,6 +103,7 @@ class ApiService: NSObject {
         Alamofire.upload(urlRequest.0, data: urlRequest.1)
             .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
                 print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+                
             }
             .responseJSON { response in
                 
@@ -108,7 +111,6 @@ class ApiService: NSObject {
                     
                 case.Success(let json):
                     print(json)
-                    
                 case .Failure(let error):
                     print(error)
                 }
