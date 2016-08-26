@@ -5,12 +5,13 @@
 //  Created by 蔡鈞 on 2016/6/11.
 //  Copyright © 2016年 蔡鈞. All rights reserved.
 //
-import Foundation
+
 import UIKit
 import Alamofire
 import PMAlertController
 import Haneke
 import SwiftyJSON
+import NVActivityIndicatorView
 
 private let reuseIdentifier = "Cell"
 
@@ -22,6 +23,10 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     
     var refresher:UIRefreshControl!
     
+    // 紀錄是否更新照片 以及正在瀏覽的頁面
+    var populatingPhotos = false
+    
+    let PhotoBrowserFooterViewIdentifier = "PhotoBrowserFooterView"
     
     // MARK: - Life Cycle
     override func viewWillAppear(animated: Bool) {
@@ -46,16 +51,55 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         collectionView!.backgroundColor = UIColor(white: 0.95, alpha: 1)
         self.collectionView!.registerClass(FeedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
-        
-        
+        // 底部載入
+        setFooterView()
+
     }
     
     // release memory
     override func didReceiveMemoryWarning() {
     }
     
+    // MARK: scrollView
+    // load more data
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        if scrollView.contentOffset.y + view.frame.size.height > scrollView.contentSize.height * 0.8{
+            loadmore()
+        }
+        
+    }
+    
+    func loadmore (){
+        
+        if populatingPhotos {
+            return
+        }
+        
+        populatingPhotos = false
+        
+        // 載入更多資訊
+        
+        populatingPhotos = true
+        
+    }
+    
+    func setFooterView()  {
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.footerReferenceSize = CGSize(width: collectionView!.bounds.size.width, height: 100.0)
+        collectionView!.collectionViewLayout = layout
+        
+        collectionView?.registerClass(PhotoBrowserCollectionViewLoadingCell.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: PhotoBrowserFooterViewIdentifier)
+    }
+    
     
     // MARK: UICollectionViewDataSource
+    
+    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        return collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: PhotoBrowserFooterViewIdentifier, forIndexPath: indexPath) as UICollectionReusableView
+    }
+    
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.count
     }
@@ -89,6 +133,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         collectionView?.collectionViewLayout.invalidateLayout()
+        
     }
     
     
@@ -200,7 +245,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                 case .Success(let json):
                     
                     self.posts.removeAll(keepCapacity: false)
-
+                    
                     let json = SwiftyJSON.JSON(json)
                     
                     for (_,subJson):(String, SwiftyJSON.JSON) in json[0] {
@@ -228,7 +273,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                         
                         self.collectionView?.reloadData()
                     }
-
+                    
                     
                 case .Failure(let error):
                     print(error.localizedDescription)
@@ -239,13 +284,29 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     }
     
     func refresh(){
-        
-        
-        
-        
         getFeedPost()
-        
         refresher.endRefreshing()
+    }
+    
+    
+    // footer loading
+    class PhotoBrowserCollectionViewLoadingCell: UICollectionReusableView {
+        
+        let spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+        
+        required init(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)!
+        }
+        
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            
+            spinner.color = UIColor.grayColor()
+            
+            spinner.startAnimating()
+            spinner.center = self.center
+            addSubview(spinner)
+        }
     }
     
 }

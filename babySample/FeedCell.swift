@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
+
 
 var imageCache = NSCache()
 
 // MARK: - CUSTOMER Cell
-class FeedCell: UICollectionViewCell {
+class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
+    
     
     var feedController: FeedController?
     
@@ -28,9 +31,10 @@ class FeedCell: UICollectionViewCell {
             statusImg.image = nil
             loader.startAnimating()
             
+            
             if let statusImageUrl = post?.imgurl{
                 statusImg.hnk_setImageFromURLAutoSize(NSURL(string:statusImageUrl)!)
-                loader.stopAnimating()
+                 loader.stopAnimating()
             }
             
             setupNameLocationStatusAndProfileImage()
@@ -149,7 +153,7 @@ class FeedCell: UICollectionViewCell {
             if difference.weekOfMonth > 0 {
                 time_after_cal = "  \(difference.weekOfMonth) 週前"
             }
-
+            
             
             attributedText.appendAttributedString(NSAttributedString(
                 string: time_after_cal,
@@ -159,7 +163,7 @@ class FeedCell: UICollectionViewCell {
             
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineSpacing = 4
-    
+            
             attributedText.addAttribute(NSParagraphStyleAttributeName,
                                         value: paragraphStyle,
                                         range: NSMakeRange(0,attributedText.string.characters.count))
@@ -176,7 +180,7 @@ class FeedCell: UICollectionViewCell {
         }
         
         if let author_imgurl = post?.author_imgurl{
-//            profileImageView.image = UIImage(named:profileImagename)
+            //            profileImageView.image = UIImage(named:profileImagename)
             profileImageView.hnk_setImageFromURLAutoSize(NSURL(string: author_imgurl)!)
         }
         
@@ -229,15 +233,27 @@ class FeedCell: UICollectionViewCell {
     }
     
     
-    let loader = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+     let loader = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+    
+    
+    //let activityIndicatorView = NVActivityIndicatorView(frame: CGRect(x: 0 , y: 0, width: 50, height: 50),type: NVActivityIndicatorType.BallBeat)
     
     func setupStatusImageViewLoader() {
-        loader.hidesWhenStopped = true
-        loader.startAnimating()
-        loader.color = UIColor.blackColor()
-        statusImg.addSubview(loader)
-        statusImg.addConstraintWithFormat("H:|[v0]|", views: loader)
-        statusImg.addConstraintWithFormat("V:|[v0]|", views: loader)
+        
+//        activityIndicatorView.hidesWhenStopped = true
+//        activityIndicatorView.startAnimation()
+//        activityIndicatorView.color = UIColor.lightGrayColor()
+//        
+//        statusImg.addSubview(activityIndicatorView)
+//        statusImg.addConstraintWithFormat("H:|-125-[v0]-125-|", views: activityIndicatorView)
+//        statusImg.addConstraintWithFormat("V:|-125-[v0]-125-|", views: activityIndicatorView)
+        
+                loader.hidesWhenStopped = true
+                loader.startAnimating()
+                loader.color = UIColor.blackColor()
+                statusImg.addSubview(loader)
+                statusImg.addConstraintWithFormat("H:|[v0]|", views: loader)
+                statusImg.addConstraintWithFormat("V:|[v0]|", views: loader)
     }
     
 }
