@@ -24,7 +24,7 @@ class tabVC: UITabBarController {
         
         // color of background
         
-        self.tabBar.translucent = false
+        self.tabBar.translucent = true
 
      
     }

@@ -188,7 +188,6 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
             zoomImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(zoomOut)))
             
             // 動畫
-            
             UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .CurveEaseOut, animations: {
                 
                 let height = (self.view.frame.width / startingFrame.width) * startingFrame.height
@@ -267,11 +266,9 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                         
                         
                         self.posts.append(post)
-                        
-                        
                         print(subJson,"\n\n")
-                        
                         self.collectionView?.reloadData()
+                        
                     }
                     
                     

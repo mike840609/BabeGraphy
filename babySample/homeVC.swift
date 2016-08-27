@@ -21,9 +21,7 @@ var user : SwiftyJSON.JSON?
 // temp image
 var tempimage:UIImage?
 
-class homeVC: UICollectionViewController {
-    
-    
+class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout{
     
     @IBOutlet weak var logoutBtn: UIBarButtonItem!
     
@@ -33,40 +31,28 @@ class homeVC: UICollectionViewController {
     // user's posts
     var user_posts: Array<SwiftyJSON.JSON> = []
     
+    
     // pull to refresher
     var refresher:UIRefreshControl!
     
-
+    // identify
+    let PhotoBrowserCellIdentifier = "PhotoBrowserCell"
+    let PhotoBrowserFooterViewIdentifier = "PhotoBrowserFooterView"
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
-        // 初始化user
-        // getInfo()
         
         // 獲取所有使用者的貼文
-        //getPost()
+        getPost()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // alaways vertical
-        self.collectionView?.alwaysBounceVertical = true
+        setupView()
         
-        // background color
-        collectionView?.backgroundColor = .whiteColor()
-        
-        // logoutBtn Set
-        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
-        logoutBtn.setTitleTextAttributes(attributes, forState: .Normal)
-        logoutBtn.title = String.fontAwesomeIconWithName(.SignOut)
-        
-        
-        // pull to refresh
-        refresher = UIRefreshControl()
-        refresher.addTarget(self, action: #selector(homeVC.refresh), forControlEvents: UIControlEvents.ValueChanged)
-        collectionView?.addSubview(refresher)
         
         // 更新通知 =====================================
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.reload), name: "reload", object: nil)
@@ -196,27 +182,47 @@ class homeVC: UICollectionViewController {
         header.avaImg.userInteractionEnabled = true
         header.avaImg.addGestureRecognizer(avaTap)
         
-        
-        
         return header
     }
     
     
+    
+    
     // Customer func - cell size
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayOut:UICollectionViewLayout , sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize{
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        let size = CGSize(width: self.view.frame.width/3, height:  self.view.frame.width/3)
+        let itemWidth = (view.bounds.size.width - 5) / 3
+
+        
+        let size = CGSize(width: itemWidth, height: itemWidth)
+        
         return size
-        
+    }
+    
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return user_posts.count
     }
     
     
     // config cell
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath)
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PhotoBrowserCellIdentifier, forIndexPath: indexPath) as! PhotoBrowserCollectionViewCell
+        
+        cell.imageView.image = nil
+        
+//        let imageURL = self.user_posts[indexPath.item]["imgurl"].string
+        let imageURL = self.user_posts[indexPath.item]["small_imgurl"].string
+        
+        
+        if let url = imageURL{
+            cell.imageView.hnk_setImageFromURLAutoSize(NSURL(string: url)!)
+        }
+        
         
         return cell
     }
+    
     
     
     // MARK: - Customer Function
@@ -248,13 +254,6 @@ class homeVC: UICollectionViewController {
             alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action:{self.logout()}))
             self.presentViewController(alertVC, animated: true, completion:nil)
             
-            //            NSUserDefaults.standardUserDefaults().removeObjectForKey(ACCESS_TOKEN)
-            //            NSUserDefaults.standardUserDefaults().synchronize()
-            //
-            //            // 轉跳登入畫面
-            //            let signin = self.storyboard?.instantiateViewControllerWithIdentifier("LoginController") as! LoginController
-            //            let appDelegate : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            //            appDelegate.window?.rootViewController = signin
         }
         
         // token 有抓到 向 server 請求
@@ -275,16 +274,15 @@ class homeVC: UICollectionViewController {
                     
                     self.user_posts.append(subJson)
                     print(subJson)
+                    self.collectionView?.reloadData()
                     
                 }
                 
                 print("all user's post:" , self.user_posts.count)
-                
                 print("=====================================================\n\n")
                 
             case .Failure(let error):
                 print(error.localizedDescription)
-                
             }
         }
         
@@ -330,13 +328,6 @@ class homeVC: UICollectionViewController {
         
         let ava = self.storyboard?.instantiateViewControllerWithIdentifier("avaVC") as! avaVC
         
-        // pass url
-        /*
-        if let url = user!["data"][0]["avatar"].string{
-            ava.avaUrl = url
-        }
-        */
-        
         // image pass
         ava.ava = tempimage
         
@@ -379,4 +370,49 @@ class homeVC: UICollectionViewController {
     }
     
     
+    // MARK: - HELPER
+    func setupView(){
+        
+        // alaways vertical
+        self.collectionView?.alwaysBounceVertical = true
+        
+        // background color
+        collectionView?.backgroundColor = .whiteColor()
+        
+        // logoutBtn Set
+        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+        logoutBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        logoutBtn.title = String.fontAwesomeIconWithName(.SignOut)
+        
+        
+        // pull to refresh
+        refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(homeVC.refresh), forControlEvents: UIControlEvents.ValueChanged)
+        collectionView?.addSubview(refresher)
+        
+
+        
+    }
+    
+    
+}
+
+
+// MARK: - CollectionViewCell
+class PhotoBrowserCollectionViewCell: UICollectionViewCell {
+    
+    @IBOutlet weak var imageView:UIImageView!
+    var request:Alamofire.Request?      //用此屬性來儲存Alamofire得請求來載入圖片
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        backgroundColor = UIColor(white: 0.1, alpha: 1.0)
+        // imageView.frame = bounds
+        addSubview(imageView)
+    }
 }

@@ -34,7 +34,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
             
             if let statusImageUrl = post?.imgurl{
                 statusImg.hnk_setImageFromURLAutoSize(NSURL(string:statusImageUrl)!)
-                 loader.stopAnimating()
+                loader.stopAnimating()
             }
             
             setupNameLocationStatusAndProfileImage()
@@ -60,14 +60,14 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
     
     let profileImageView:UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "zuckprofile")
+                imageView.image = UIImage(named: "zuckprofile")
         imageView.contentMode = .ScaleAspectFit
         return imageView
     }()
     
     let statusTextView:UITextView = {
         let textView = UITextView()
-        textView.text = "Today is a good day"
+        //        textView.text = "Today is a good day"
         textView.font = UIFont.systemFontOfSize(14)
         textView.scrollEnabled = false
         return textView
@@ -180,7 +180,6 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
         }
         
         if let author_imgurl = post?.author_imgurl{
-            //            profileImageView.image = UIImage(named:profileImagename)
             profileImageView.hnk_setImageFromURLAutoSize(NSURL(string: author_imgurl)!)
         }
         
@@ -233,27 +232,27 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
     }
     
     
-     let loader = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+    let loader = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
     
     
     //let activityIndicatorView = NVActivityIndicatorView(frame: CGRect(x: 0 , y: 0, width: 50, height: 50),type: NVActivityIndicatorType.BallBeat)
     
     func setupStatusImageViewLoader() {
         
-//        activityIndicatorView.hidesWhenStopped = true
-//        activityIndicatorView.startAnimation()
-//        activityIndicatorView.color = UIColor.lightGrayColor()
-//        
-//        statusImg.addSubview(activityIndicatorView)
-//        statusImg.addConstraintWithFormat("H:|-125-[v0]-125-|", views: activityIndicatorView)
-//        statusImg.addConstraintWithFormat("V:|-125-[v0]-125-|", views: activityIndicatorView)
+        //        activityIndicatorView.hidesWhenStopped = true
+        //        activityIndicatorView.startAnimation()
+        //        activityIndicatorView.color = UIColor.lightGrayColor()
+        //
+        //        statusImg.addSubview(activityIndicatorView)
+        //        statusImg.addConstraintWithFormat("H:|-125-[v0]-125-|", views: activityIndicatorView)
+        //        statusImg.addConstraintWithFormat("V:|-125-[v0]-125-|", views: activityIndicatorView)
         
-                loader.hidesWhenStopped = true
-                loader.startAnimating()
-                loader.color = UIColor.blackColor()
-                statusImg.addSubview(loader)
-                statusImg.addConstraintWithFormat("H:|[v0]|", views: loader)
-                statusImg.addConstraintWithFormat("V:|[v0]|", views: loader)
+        loader.hidesWhenStopped = true
+        loader.startAnimating()
+        loader.color = UIColor.blackColor()
+        statusImg.addSubview(loader)
+        statusImg.addConstraintWithFormat("H:|[v0]|", views: loader)
+        statusImg.addConstraintWithFormat("V:|[v0]|", views: loader)
     }
     
 }
