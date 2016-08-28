@@ -13,6 +13,9 @@ import PMAlertController
 import FBSDKCoreKit
 import FBSDKLoginKit
 import Haneke
+import PeekPop
+
+
 
 
 // 儲存個人資訊 直接將整筆 json 存下來
@@ -21,7 +24,9 @@ var user : SwiftyJSON.JSON?
 // temp image
 var tempimage:UIImage?
 
-class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout{
+class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,PeekPopPreviewingDelegate{
+    
+    var peekPop: PeekPop?
     
     @IBOutlet weak var logoutBtn: UIBarButtonItem!
     
@@ -30,6 +35,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout{
     
     // user's posts
     var user_posts: Array<SwiftyJSON.JSON> = []
+    
     
     
     // pull to refresher
@@ -44,12 +50,18 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout{
         super.viewWillAppear(true)
         
         
-        // 獲取所有使用者的貼文
-        getPost()
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        // 獲取所有使用者的貼文
+        getPost()
+        
+        peekPop = PeekPop(viewController: self)
+        peekPop?.registerForPreviewingWithDelegate(self, sourceView: collectionView!)
         
         setupView()
         
@@ -192,7 +204,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout{
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
         let itemWidth = (view.bounds.size.width - 5) / 3
-
+        
         
         let size = CGSize(width: itemWidth, height: itemWidth)
         
@@ -211,7 +223,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout{
         
         cell.imageView.image = nil
         
-//        let imageURL = self.user_posts[indexPath.item]["imgurl"].string
+        
         let imageURL = self.user_posts[indexPath.item]["small_imgurl"].string
         
         
@@ -256,6 +268,11 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout{
             
         }
         
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)){
+            self.user_posts.removeAll(keepCapacity: false)
+        }
+        
+        
         // token 有抓到 向 server 請求
         Alamofire.request(.POST, "http://140.136.155.143/api/post/search",parameters:["token":AccessToken!]).validate().responseJSON{ (response) in
             
@@ -267,16 +284,22 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout{
                 
                 print("user's post=====================================================")
                 
-                self.user_posts.removeAll(keepCapacity: false)
+                // self.user_posts.removeAll(keepCapacity: false)
+                
+                let lastItem = self.user_posts.count
                 
                 // 走訪陣列
                 for (_,subJson):(String, SwiftyJSON.JSON) in json{
-                    
                     self.user_posts.append(subJson)
                     print(subJson)
-                    self.collectionView?.reloadData()
-                    
+                    // self.collectionView?.reloadData()
                 }
+                
+                
+                
+                 let indexPaths = (lastItem..<self.user_posts.count).map {NSIndexPath(forItem: $0, inSection: 0)}
+                
+                 self.collectionView?.insertItemsAtIndexPaths(indexPaths)
                 
                 print("all user's post:" , self.user_posts.count)
                 print("=====================================================\n\n")
@@ -312,6 +335,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout{
     
     // 追蹤中 的 tableView
     func followingTap(){
+        
         
         show = "followings"
         
@@ -390,12 +414,41 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout{
         refresher.addTarget(self, action: #selector(homeVC.refresh), forControlEvents: UIControlEvents.ValueChanged)
         collectionView?.addSubview(refresher)
         
-
+    }
+    
+    // MARK: PeekPopPreviewingDelegate
+    func previewingContext(previewingContext: PreviewingContext, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
+        let storyboard = UIStoryboard(name:"Main", bundle:nil)
+        
+        if let previewViewController = storyboard.instantiateViewControllerWithIdentifier("PreviewViewController") as? PreviewViewController {
+            
+            if let indexPath = collectionView!.indexPathForItemAtPoint(location) {
+                
+                
+                
+                if let layoutAttributes = collectionView!.layoutAttributesForItemAtIndexPath(indexPath) {
+                    previewingContext.sourceRect = layoutAttributes.frame
+                }
+                
+                let imageURL = self.user_posts[indexPath.item]["imgurl"].string
+                
+                previewViewController.imageView.hnk_setImageFromURLAutoSize(NSURL(string: imageURL!)!)
+                
+                return previewViewController
+            }
+        }
+        return nil
+    }
+    
+    func previewingContext(previewingContext: PreviewingContext, commitViewController viewControllerToCommit: UIViewController) {
+        self.navigationController?.pushViewController(viewControllerToCommit, animated: false)
     }
     
     
 }
+
+
 
 
 // MARK: - CollectionViewCell
