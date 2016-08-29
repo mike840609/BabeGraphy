@@ -356,7 +356,7 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
         let fb_token = FBSDKAccessToken.currentAccessToken().tokenString
         
         //  用 fb 資訊 註冊
-        Alamofire.request(.POST, "http://140.136.155.143/api/auth/fb_signup",parameters: ["fb_id":fb_id ,"name":name ,"picture": picture , "email":email , "fb_token":fb_token]).responseJSON { (response) in
+        Alamofire.request(.POST, "http://140.136.155.143/api/auth/fb_signup",parameters: ["fb_id":fb_id ,"name":name ,"picture": picture , "email":email , "fb_token":fb_token,"avatar":picture]).responseJSON { (response) in
             
             switch response.result{
             case .Success(let json):

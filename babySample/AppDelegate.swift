@@ -22,13 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // navigation bar
         UINavigationBar.appearance()
-        // UINavigationBar.appearance().barTintColor = UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1)
+
         UINavigationBar.appearance().barTintColor = UIColor(red: 1.0, green: 0.5, blue: 0.67, alpha: 0.3)
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
         
         // status bar
         application.statusBarStyle = .LightContent
         
+
+
 
         
         // facebook delegate

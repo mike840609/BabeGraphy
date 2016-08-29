@@ -36,6 +36,7 @@ https://github.com/Cassiszuoan/laravel-restapi
 - [HanekeSwift](https://github.com/Haneke/HanekeSwift)
 - [NVActivityIndicatorView](https://github.com/ninjaprox/NVActivityIndicatorView)
 - [PMAlertController](https://github.com/Codeido/PMAlertController)
+- [PeekPop](https://github.com/marmelroy/PeekPop)
 - [FBSDKLoginKit](https://cocoapods.org/pods/FBSDKLoginKit)
 - [FBSDKCoreKit](https://cocoapods.org/pods/FBSDKCoreKit)
 

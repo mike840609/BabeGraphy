@@ -12,14 +12,18 @@ import PMAlertController
 import Haneke
 import SwiftyJSON
 import NVActivityIndicatorView
+import SKPhotoBrowser
 
 private let reuseIdentifier = "Cell"
 
+// Global var
+// var posts = [Post]()
 
-class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLayout {
+class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLayout ,SKPhotoBrowserDelegate{
     
     // local var 測試用
-    var posts = [Post]()
+     var posts = [Post]()
+    
     
     var refresher:UIRefreshControl!
     
@@ -32,6 +36,14 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.hidesBarsOnSwipe = true
+        
+        // status bar background
+        let view = UIView(frame:
+            CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
+        )
+        view.backgroundColor = UIColor(red: 1.0, green: 0.5, blue: 0.67, alpha: 0.9)
+        self.view.addSubview(view)
+
     }
     
     
@@ -53,7 +65,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         
         // 底部載入
         setFooterView()
-
+        
     }
     
     // release memory
@@ -129,6 +141,44 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         return CGSizeMake(view.frame.width, 300)
     }
     
+    // 轉跳
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? FeedCell else {
+            return
+        }
+        
+        guard let originImage = cell.statusImg.image else {
+            return
+        }
+        
+        var images = [SKPhoto]()
+        
+        for post in posts{
+            if let url = post.imgurl{
+                let photo = SKPhoto.photoWithImageURL(url)
+                photo.caption = post.content
+                photo.shouldCachePhotoURLImage = false
+                images.append(photo)
+            }
+        }
+        
+        
+        let browser = SKPhotoBrowser(originImage: originImage, photos: images, animatedFromView: cell)
+        
+        browser.initializePageIndex(indexPath.row)
+        browser.delegate = self
+        browser.displayDeleteButton = true
+        browser.statusBarStyle = .LightContent
+        browser.bounceAnimation = true
+        
+        // Can hide the action button by setting to false
+        browser.displayAction = true
+        
+        
+        presentViewController(browser, animated: true, completion: nil)
+    }
+    
     // Rotation autolayout
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
@@ -164,7 +214,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
             navBarCoverView.backgroundColor = UIColor.blackColor()
             navBarCoverView.alpha = 0
             
-            //
+        
             if let keyWindow = UIApplication.sharedApplication().keyWindow{
                 
                 keyWindow.addSubview(navBarCoverView)
@@ -207,7 +257,6 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     func zoomOut() {
         
         if let startingFrame = statusImageView!.superview?.convertRect(statusImageView!.frame, toView: nil){
-            
             
             UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .CurveEaseOut, animations: {
                 
@@ -260,7 +309,6 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                         post.content = subJson["content"].string
                         post.imgurl = subJson["imgurl"].string
                         
-                        
                         post.numLikes = 1541
                         post.numComments = 124
                         
@@ -268,8 +316,8 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                         self.posts.append(post)
                         print(subJson,"\n\n")
                         self.collectionView?.reloadData()
-                        
                     }
+                    
                     
                     
                 case .Failure(let error):
@@ -306,5 +354,44 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         }
     }
     
+}
+
+//  MARK : - SKPhoto Delegate
+extension FeedController{
+    
+    func didShowPhotoAtIndex(index: Int) {
+        collectionView!.visibleCells().forEach({$0.hidden = false})
+        collectionView!.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0))?.hidden = true
+    }
+    
+    func willDismissAtPageIndex(index: Int) {
+        collectionView!.visibleCells().forEach({$0.hidden = false})
+        collectionView!.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0))?.hidden = true
+    }
+    
+    func willShowActionSheet(photoIndex: Int) {
+        // do some handle if you need
+    }
+    
+    func didDismissAtPageIndex(index: Int) {
+        collectionView!.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0))?.hidden = false
+    }
+    
+    func didDismissActionSheetWithButtonIndex(buttonIndex: Int, photoIndex: Int) {
+        // handle dismissing custom actions
+    }
+    
+    func removePhoto(browser: SKPhotoBrowser, index: Int, reload: (() -> Void)) {
+        reload()
+    }
+    
+    func viewForPhoto(browser: SKPhotoBrowser, index: Int) -> UIView? {
+        
+        return collectionView!.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0))
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
 }
 

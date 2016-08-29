@@ -50,7 +50,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         super.viewWillAppear(true)
         
         
-
+        
     }
     
     override func viewDidLoad() {
@@ -236,6 +236,12 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     }
     
     
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let postVC = PostVC()
+        self.navigationController?.pushViewController(postVC, animated: true)
+
+    }
     
     // MARK: - Customer Function
     
@@ -297,9 +303,9 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
                 
                 
                 
-                 let indexPaths = (lastItem..<self.user_posts.count).map {NSIndexPath(forItem: $0, inSection: 0)}
+                let indexPaths = (lastItem..<self.user_posts.count).map {NSIndexPath(forItem: $0, inSection: 0)}
                 
-                 self.collectionView?.insertItemsAtIndexPaths(indexPaths)
+                self.collectionView?.insertItemsAtIndexPaths(indexPaths)
                 
                 print("all user's post:" , self.user_posts.count)
                 print("=====================================================\n\n")

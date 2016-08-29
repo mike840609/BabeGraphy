@@ -20,7 +20,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
     
     
     func animate() {
-        feedController?.animateImageView(statusImg)
+        //feedController?.animateImageView(statusImg)
     }
     
     
@@ -28,7 +28,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
         
         didSet{
             
-            statusImg.image = nil
+            // statusImg.image = nil
             loader.startAnimating()
             
             
@@ -50,7 +50,11 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+    // prepare function
+    override func prepareForReuse() {
+        statusImg.image = nil
+    }
+
     let nameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
@@ -209,7 +213,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
         addSubview(shareButton)
         
         
-        statusImg.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animate)))
+        // statusImg.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animate)))
         
         setupStatusImageViewLoader()
         
