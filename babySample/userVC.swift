@@ -26,7 +26,7 @@ class userVC: UITableViewController, UISearchBarDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         searchBar.delegate = self
         searchBar.sizeToFit()
         searchBar.tintColor = UIColor.groupTableViewBackgroundColor()
@@ -43,7 +43,7 @@ class userVC: UITableViewController, UISearchBarDelegate  {
     
     // MARK: - Customer Function
     func loadUsers() {
-    
+        
     }
     
     func collectionViewLaunch() {
@@ -56,13 +56,25 @@ class userVC: UITableViewController, UISearchBarDelegate  {
     
     func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
+        
         Alamofire.request(.POST, "http://140.136.155.143/api/user/search",parameters: ["email":searchBar.text!]).responseJSON { (json) in
+            
             
             switch json.result{
                 
             case .Success(let json):
                 
-                let user = SwiftyJSON.JSON(json)
+                
+                // clean up
+                self.usernameArray.removeAll(keepCapacity: false)
+                self.users.removeAll(keepCapacity: false)
+                
+                
+                // 因為json 格式還不統一  先在手機端把 user json 字典賦值 作為到guestVC 的 id 辨識
+                // guestVC 陣列儲存使用者 供guestVC讀取
+                var user = SwiftyJSON.JSON(json)
+                let temp = user["data"][0]["id"]
+                user["user_id"] = temp
                 
                 self.users.append(user)
                 
@@ -78,10 +90,6 @@ class userVC: UITableViewController, UISearchBarDelegate  {
             
         }
         
-        // clean up
-        self.usernameArray.removeAll(keepCapacity: false)
-        self.users.removeAll(keepCapacity: false)
-        
         return true
     }
     
@@ -89,7 +97,7 @@ class userVC: UITableViewController, UISearchBarDelegate  {
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         
         // hide collectionView when started search
-//        collectionView.hidden = true
+        //        collectionView.hidden = true
         
         // show cancel button
         searchBar.showsCancelButton = true
@@ -99,7 +107,7 @@ class userVC: UITableViewController, UISearchBarDelegate  {
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         
         // unhide collectionView when tapped cancel button
-//        collectionView.hidden = false
+        //        collectionView.hidden = false
         
         // dismiss keyboard
         searchBar.resignFirstResponder()
@@ -119,7 +127,6 @@ class userVC: UITableViewController, UISearchBarDelegate  {
     
     // MARK: - Table view data source
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return users.count
     }
     
@@ -129,12 +136,16 @@ class userVC: UITableViewController, UISearchBarDelegate  {
         // define cell
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! followersCell
         
-        // hide follow button
-        cell.followBtn.hidden = true
         
-        cell.usernameLbl.text = users[indexPath.item]["data"][0]["name"].string
+        if let url = users[indexPath.item]["data"][0]["avatar"].string ,
+            name =  users[indexPath.item]["data"][0]["name"].string{
+            
+            cell.followBtn.hidden = true
+            cell.usernameLbl.text = name
+            cell.followBtn.hidden = true
+            cell.avaImg.hnk_setImageFromURL(NSURL(string: url)!)
+        }
         
-        cell.avaImg.hnk_setImageFromURL(NSURL(string: "http://www.sitesnobrasil.com/imagens-fotos/mulheres/l/lisa-simpson.png")!)
         
         return cell
     }
@@ -144,20 +155,21 @@ class userVC: UITableViewController, UISearchBarDelegate  {
         
         
         // calling cell again to call cell data
-        /*
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! followersCell
-
+        
         // if user tapped on his name go home, else go guest
-        if cell.usernameLbl.text! == user!["data"][0][JSON_ID].string {
+        if cell.usernameLbl.text! == users[indexPath.item]["data"][0]["id"].string {
             let home = self.storyboard?.instantiateViewControllerWithIdentifier("homeVC") as! homeVC
             self.navigationController?.pushViewController(home, animated: true)
         } else {
-            guestname.append(cell.usernameLbl.text!)
+            
+            guestJSON.append(users[indexPath.item])
+            
             let guest = self.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
             self.navigationController?.pushViewController(guest, animated: true)
         }
-        */
- 
+        
+        
         
     }
     

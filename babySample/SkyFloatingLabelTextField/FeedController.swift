@@ -36,6 +36,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.hidesBarsOnSwipe = true
+//        navigationController?.navigationBar.translucent = true
         
         // status bar background
         let view = UIView(frame:

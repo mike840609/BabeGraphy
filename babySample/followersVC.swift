@@ -115,7 +115,7 @@ class followersVC: UITableViewController {
                 // 走訪陣列
                 for (_,subJson):(String, SwiftyJSON.JSON) in json["data"] {
                     
-                    //                    print(subJson)
+                    // print(subJson)
                     
                     self.follow.append(subJson)
                     
@@ -205,9 +205,6 @@ class followersVC: UITableViewController {
                 
             }
             
-            
-            
-            
             // 圖片網址 未使用
             //print(follow[indexPath.item]["profile_picture"].string)
             
@@ -246,7 +243,7 @@ class followersVC: UITableViewController {
             
         }else{
             
-            guestname.append(cell.usernameLbl.text!)
+            // guestname.append(cell.usernameLbl.text!)
             
             print("\n\n",follow[indexPath.item])
             

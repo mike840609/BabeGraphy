@@ -14,7 +14,7 @@ import Haneke
 
 
 // 儲存用戶名的陣列
-var guestname = [String]()
+var guestID = [String]()
 var guestJSON : Array<SwiftyJSON.JSON> = []
 
 
@@ -80,9 +80,9 @@ class guestVC: UICollectionViewController {
         self.navigationController?.popViewControllerAnimated(true)
         
         //clean guest username or ddeduct the last guest username from guestname = Array
-        if !guestname.isEmpty{
-            guestname.removeLast()
-        }
+        // if !guestname.isEmpty{
+        //    guestname.removeLast()
+        // }
     }
     
     
@@ -135,8 +135,7 @@ class guestVC: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
         // guest user id
-        let id = guestJSON.last!["user_id"].string
-        
+8
         let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "Header", forIndexPath: indexPath) as! headerView
         
         

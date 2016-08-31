@@ -25,6 +25,7 @@ class navVC: UINavigationController {
         
         // alpha
         self.navigationBar.translucent = true
+
         
     }
     

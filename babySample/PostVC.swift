@@ -10,9 +10,11 @@ import UIKit
 
 class PostVC: UITableViewController {
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    }
-
+        }
+    
 }
