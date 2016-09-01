@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="FontAwesome.otf">
+        <mutableArray key="fontawesome-webfont.ttf">
             <string>FontAwesome</string>
         </mutableArray>
     </customFonts>
