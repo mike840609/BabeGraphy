@@ -73,7 +73,6 @@ class followersVC: UITableViewController {
             switch response.result{
                 
             case .Success(let json):
-                print(json)
                 
                 let json = SwiftyJSON.JSON(json)
                 
@@ -81,7 +80,6 @@ class followersVC: UITableViewController {
                 for (_,subJson):(String, SwiftyJSON.JSON) in json["data"] {
                     
                     print(subJson)
-                    
                     
                     self.follow.append(subJson)
                     

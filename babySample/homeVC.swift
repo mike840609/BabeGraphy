@@ -205,7 +205,6 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         
         let itemWidth = (view.bounds.size.width - 5) / 3
         
-        
         let size = CGSize(width: itemWidth, height: itemWidth)
         
         return size
@@ -240,7 +239,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         
         let postVC = PostVC()
         self.navigationController?.pushViewController(postVC, animated: true)
-
+        
     }
     
     // MARK: - Customer Function
@@ -254,7 +253,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     func refresh(){
         
         // 更新 user_posts 陣列資料 而後再刷新 collection view
-        getPost()
+           self.getPost()
         
         collectionView?.reloadData()
         refresher.endRefreshing()
@@ -430,7 +429,6 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         if let previewViewController = storyboard.instantiateViewControllerWithIdentifier("PreviewViewController") as? PreviewViewController {
             
             if let indexPath = collectionView!.indexPathForItemAtPoint(location) {
-                
                 
                 
                 if let layoutAttributes = collectionView!.layoutAttributesForItemAtIndexPath(indexPath) {

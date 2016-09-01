@@ -15,12 +15,9 @@ import Haneke
 class userVC: UITableViewController, UISearchBarDelegate  {
     
     var users: Array<SwiftyJSON.JSON> = []
-    
     var searchBar = UISearchBar()
     
-    
-    
-    
+
     var usernameArray = [String]()
     var collectionView : UICollectionView!
     
@@ -75,7 +72,7 @@ class userVC: UITableViewController, UISearchBarDelegate  {
                 var user = SwiftyJSON.JSON(json)
                 let temp = user["data"][0]["id"]
                 user["user_id"] = temp
-                
+                user["username"] = user["data"][0]["name"]
                 self.users.append(user)
                 
                 print(json)
@@ -159,17 +156,16 @@ class userVC: UITableViewController, UISearchBarDelegate  {
         
         // if user tapped on his name go home, else go guest
         if cell.usernameLbl.text! == users[indexPath.item]["data"][0]["id"].string {
+            
             let home = self.storyboard?.instantiateViewControllerWithIdentifier("homeVC") as! homeVC
             self.navigationController?.pushViewController(home, animated: true)
+            
         } else {
-            
+    
             guestJSON.append(users[indexPath.item])
-            
             let guest = self.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
             self.navigationController?.pushViewController(guest, animated: true)
         }
-        
-        
         
     }
     

@@ -11,6 +11,8 @@ import Alamofire
 import SwiftyJSON
 import PMAlertController
 import Haneke
+import PeekPop
+
 
 
 // 儲存用戶名的陣列
@@ -21,30 +23,46 @@ var guestJSON : Array<SwiftyJSON.JSON> = []
 private let reuseIdentifier = "Cell"
 
 
-class guestVC: UICollectionViewController {
+class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
     
     var refresher: UIRefreshControl!
     
     // 載入counter
-    var page:Int = 10
+    // var page:Int = 10
     
     // hold data from server
-    var postsJSON: Array<SwiftyJSON.JSON> = []
+    var guest_posts: Array<SwiftyJSON.JSON> = []
+    
+    
+    var peekPop: PeekPop?
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 該為使用者的資訊 user_id , profile_picture , username
-        print(guestJSON.last)
+        peekPop = PeekPop(viewController: self)
+        peekPop?.registerForPreviewingWithDelegate(self, sourceView: collectionView!)
         
+        
+        // 該為使用者的資訊 user_id , profile_picture , username
+        // print(guestJSON.last!["user_id"].string)
+        
+        setupView()
+        
+        // call load posts func
+        loadPosts()
+        
+        // FollowingStatusCheck()
+        
+    }
+    func setupView () {
         // CollectionView UI
         self.collectionView?.alwaysBounceVertical = true
         self.collectionView?.backgroundColor = .whiteColor()
-        
         
         // top title
         self.navigationItem.title = guestJSON.last!["username"].string
@@ -64,14 +82,7 @@ class guestVC: UICollectionViewController {
         refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(guestVC.refresh), forControlEvents: .ValueChanged)
         collectionView?.addSubview(refresher)
-        
-        // call load posts func
-        loadPosts()
-        
-//        FollowingStatusCheck()
-        
     }
-    
     
     // back function
     func back(sender: UIBarButtonItem) {
@@ -79,22 +90,57 @@ class guestVC: UICollectionViewController {
         // push back
         self.navigationController?.popViewControllerAnimated(true)
         
-        //clean guest username or ddeduct the last guest username from guestname = Array
-        // if !guestname.isEmpty{
-        //    guestname.removeLast()
-        // }
+        // 把當前這筆使用者資料從陣列清除
+        if !guestJSON.isEmpty{
+            guestJSON.removeLast()
+        }
+        
     }
     
     
     // refresh function
     func refresh() {
-        collectionView?.reloadData()
+        loadPosts()
+                collectionView?.reloadData()
+        
         refresher.endRefreshing()
     }
     
-    // 載入貼文
+    // 載入訪客貼文
     func loadPosts() {
         
+        guard let guest_id = guestJSON.last!["user_id"].string else {return }
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)){
+            self.guest_posts.removeAll(keepCapacity: false)
+        }
+        
+        Alamofire.request(.POST, "http://140.136.155.143/api/post/searchbyid",parameters: ["id": guest_id]).responseJSON { (response) in
+            switch response.result{
+                
+            case .Success( let json ):
+                
+                print("guest post====================================")
+                
+                let json = SwiftyJSON.JSON(json)
+                
+                let lastItem = self.guest_posts.count
+                
+                for (_,subJson):(String , SwiftyJSON.JSON) in json{
+                    self.guest_posts.append(subJson)
+                    print(subJson)
+                }
+                
+                let indexPaths = (lastItem..<self.guest_posts.count).map{NSIndexPath(forItem: $0, inSection: 0 )}
+                
+                self.collectionView?.insertItemsAtIndexPaths(indexPaths)
+                print("=====================================================\n\n")
+                
+                
+            case .Failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     // 往下載入
@@ -108,34 +154,47 @@ class guestVC: UICollectionViewController {
     
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return postsJSON.count
+        return guest_posts.count
     }
     
     // Customer func - cell size
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        let itemWidth = (view.bounds.size.width - 5) / 3
+        let size = CGSize(width: itemWidth, height: itemWidth)
+        return size
+    }
     
-    /*
-     func collectionView(collectionView: UICollectionView, layout collectionViewLayOut:UICollectionViewLayout , sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize{
-     let size = CGSize(width: self.view.frame.width/3, height:  self.view.frame.width/3)
-     return size
-     
-     }
-     */
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! pictureCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PhotoBrowserCell", forIndexPath: indexPath) as! PhotoBrowserCollectionViewCell
         
+        cell.imageView.image = nil
+        
+        let imageURL = self.guest_posts[indexPath.item]["small_imgurl"].string
+        
+        if let url = imageURL{
+            cell.imageView.hnk_setImageFromURLAutoSize(NSURL(string: url)!)
+        }
         
         return cell
     }
     
-    // MARK: UICollectionView Header
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let postVC = PostVC()
+        self.navigationController?.pushViewController(postVC, animated: true)
+        
+    }
     
+    // MARK: UICollectionView Header
     // header View
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
         // guest user id
-8
+        let id = guestJSON.last!["user_id"].string
+        
         let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "Header", forIndexPath: indexPath) as! headerView
         
         
@@ -145,7 +204,7 @@ class guestVC: UICollectionViewController {
                 
             case .Success(let json):
                 
-                // print("guestUserIfon:\n",json)
+                print("guestUserIfon:\n",json)
                 
                 let json = SwiftyJSON.JSON(json)
                 
@@ -154,10 +213,15 @@ class guestVC: UICollectionViewController {
                 header.followings.text = json[JSON_FOLLOWEING].stringValue
                 header.posts.text = json[JSON_POST].stringValue
                 
+                if let url = json["avatar"].string {
+                    header.avaImg.hnk_setImageFromURL(NSURL(string: url)!)
+                }
+                
+                
                 header.bioLbl.text = json["userbio"].stringValue
                 header.webTxt.text = json["userweb"].stringValue
                 
-
+                print("-------------------------------------------")
                 
                 
             case .Failure(let error):
@@ -168,13 +232,13 @@ class guestVC: UICollectionViewController {
             // 判斷追蹤按鈕 狀態
             self.FollowingStatusCheck(header)
             
-//            if (self.FollowingStatusCheck()){
-//                header.editBtn.setTitle("FOLLOWING", forState: .Normal)
-//                header.editBtn.backgroundColor = UIColor.greenColor()
-//            }else{
-//                header.editBtn.setTitle("FOLLOW", forState: .Normal)
-//                header.editBtn.backgroundColor = UIColor.lightGrayColor()
-//            }
+            //            if (self.FollowingStatusCheck()){
+            //                header.editBtn.setTitle("FOLLOWING", forState: .Normal)
+            //                header.editBtn.backgroundColor = UIColor.greenColor()
+            //            }else{
+            //                header.editBtn.setTitle("FOLLOW", forState: .Normal)
+            //                header.editBtn.backgroundColor = UIColor.lightGrayColor()
+            //            }
         }
         
         // 添加手勢 postBtn , followerBtn ,followingBtn
@@ -207,7 +271,7 @@ class guestVC: UICollectionViewController {
     // 回到最上方
     func postsTap(){
         
-        if !postsJSON.isEmpty{
+        if !guest_posts.isEmpty{
             let index = NSIndexPath(forItem: 0, inSection: 0)
             self.collectionView?.scrollToItemAtIndexPath(index, atScrollPosition: .Top, animated: true)
         }
@@ -230,6 +294,10 @@ class guestVC: UICollectionViewController {
         
         let followings = self.storyboard?.instantiateViewControllerWithIdentifier("followersVC") as! followersVC
         self.navigationController?.pushViewController(followings, animated: true)
+    }
+    
+    func reload(notification:NSNotification){
+        collectionView?.reloadData()
     }
     
     
@@ -266,6 +334,40 @@ class guestVC: UICollectionViewController {
         }
         
         
+    }
+    
+
+}
+
+extension guestVC {
+    
+    // MARK: PeekPopPreviewingDelegate
+    func previewingContext(previewingContext: PreviewingContext, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        let storyboard = UIStoryboard(name:"Main", bundle:nil)
+        
+        if let previewViewController = storyboard.instantiateViewControllerWithIdentifier("PreviewViewController") as? PreviewViewController {
+            
+            if let indexPath = collectionView!.indexPathForItemAtPoint(location) {
+                
+                
+                
+                if let layoutAttributes = collectionView!.layoutAttributesForItemAtIndexPath(indexPath) {
+                    previewingContext.sourceRect = layoutAttributes.frame
+                }
+                
+                let imageURL = self.guest_posts[indexPath.item]["imgurl"].string
+                
+                previewViewController.imageView.hnk_setImageFromURLAutoSize(NSURL(string: imageURL!)!)
+                
+                return previewViewController
+            }
+        }
+        return nil
+    }
+    
+    func previewingContext(previewingContext: PreviewingContext, commitViewController viewControllerToCommit: UIViewController) {
+        self.navigationController?.pushViewController(viewControllerToCommit, animated: false)
     }
     
     
