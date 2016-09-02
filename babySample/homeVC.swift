@@ -260,8 +260,16 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     }
     
     
+    var loadingStatus = false
+    
     // user po 文
     func getPost(){
+        
+        if loadingStatus {
+            return
+        }
+        
+        loadingStatus = true
         
         // 抓不到token ,token過期 ,重新登入一次
         guard let AccessToken:String? = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {
@@ -273,9 +281,9 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
             
         }
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)){
+        //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)){
             self.user_posts.removeAll(keepCapacity: false)
-        }
+        //}
         
         
         // token 有抓到 向 server 請求
@@ -304,6 +312,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
                 
                 let indexPaths = (lastItem..<self.user_posts.count).map {NSIndexPath(forItem: $0, inSection: 0)}
                 
+                
                 self.collectionView?.insertItemsAtIndexPaths(indexPaths)
                 
                 print("all user's post:" , self.user_posts.count)
@@ -313,6 +322,8 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
                 print(error.localizedDescription)
             }
         }
+        
+        self.loadingStatus = false
         
     }
     

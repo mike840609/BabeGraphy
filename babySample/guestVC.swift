@@ -101,19 +101,27 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
     // refresh function
     func refresh() {
         loadPosts()
-                collectionView?.reloadData()
+        collectionView?.reloadData()
         
         refresher.endRefreshing()
     }
     
+    var loadingStatus = false
+    
     // 載入訪客貼文
     func loadPosts() {
         
+        if loadingStatus {
+            return
+        }
+        
         guard let guest_id = guestJSON.last!["user_id"].string else {return }
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)){
-            self.guest_posts.removeAll(keepCapacity: false)
-        }
+        //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)){
+        self.guest_posts.removeAll(keepCapacity: false)
+        //}
+        
+        loadingStatus = true
         
         Alamofire.request(.POST, "http://140.136.155.143/api/post/searchbyid",parameters: ["id": guest_id]).responseJSON { (response) in
             switch response.result{
@@ -141,6 +149,7 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
                 print(error.localizedDescription)
             }
         }
+        self.loadingStatus = false
     }
     
     // 往下載入
@@ -336,7 +345,7 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
         
     }
     
-
+    
 }
 
 extension guestVC {

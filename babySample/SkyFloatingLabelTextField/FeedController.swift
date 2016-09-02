@@ -293,11 +293,14 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                 switch response.result{
                 case .Success(let json):
                     
+                    
                     self.posts.removeAll(keepCapacity: false)
                     
                     let json = SwiftyJSON.JSON(json)
                     
-                    for (_,subJson):(String, SwiftyJSON.JSON) in json[0] {
+                    // print(json)
+                    
+                    for (_,subJson):(String, SwiftyJSON.JSON) in json {
                         
                         let post = Post()
                         
@@ -313,13 +316,13 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                         post.numLikes = 1541
                         post.numComments = 124
                         
-                        
                         self.posts.append(post)
-                        print(subJson,"\n\n")
-                        self.collectionView?.reloadData()
+//                        self.collectionView?.reloadData()
                     }
                     
-                    
+                    // 排序先暫時用手機硬幹
+                    self.posts.sortInPlace({ $0.created_at > $1.created_at })
+                    self.collectionView?.reloadData()
                     
                 case .Failure(let error):
                     print(error.localizedDescription)
