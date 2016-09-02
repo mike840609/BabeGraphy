@@ -238,7 +238,6 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
     
     let loader = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
     
-    
     //let activityIndicatorView = NVActivityIndicatorView(frame: CGRect(x: 0 , y: 0, width: 50, height: 50),type: NVActivityIndicatorType.BallBeat)
     
     func setupStatusImageViewLoader() {

@@ -52,7 +52,8 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         super.viewDidLoad()
         
         // 抓取動態牆資料
-        getFeedPost()
+        
+        self.getFeedPost()
         
         refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(self.refresh), forControlEvents: UIControlEvents.ValueChanged)
@@ -65,7 +66,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         self.collectionView!.registerClass(FeedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         // 底部載入
-        setFooterView()
+         setFooterView()
         
     }
     
@@ -317,12 +318,13 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                         post.numComments = 124
                         
                         self.posts.append(post)
-//                        self.collectionView?.reloadData()
+                       
+                         self.collectionView?.reloadData()
                     }
                     
                     // 排序先暫時用手機硬幹
                     self.posts.sortInPlace({ $0.created_at > $1.created_at })
-                    self.collectionView?.reloadData()
+//                    self.collectionView?.reloadData()
                     
                 case .Failure(let error):
                     print(error.localizedDescription)

@@ -41,10 +41,6 @@ class followersVC: UITableViewController {
         usernameArray.removeAll(keepCapacity: false)
         myFollowingList.removeAll(keepCapacity: false)
         
-        // 載入追蹤者名單
-        if show == "followers"{
-            loadUserFollowingsList()
-        }
         
     }
     
@@ -54,7 +50,9 @@ class followersVC: UITableViewController {
         self.navigationItem.title = show?.uppercaseString
         
         if show == "followers"{
-            loadFollowers()
+            // 載入追蹤者名單 確定設值後在進行比對
+            loadUserFollowingsList()
+            
         }
         
         if show == "followings"{
@@ -74,7 +72,11 @@ class followersVC: UITableViewController {
                 
             case .Success(let json):
                 
+                print(json)
+                
                 let json = SwiftyJSON.JSON(json)
+                
+                
                 
                 // 走訪陣列
                 for (_,subJson):(String, SwiftyJSON.JSON) in json["data"] {
@@ -91,8 +93,6 @@ class followersVC: UITableViewController {
                 print(error)
             }
         }
-        
-        
     }
     
     
@@ -150,6 +150,8 @@ class followersVC: UITableViewController {
                     self.myFollowingList.append(subJson)
                 }
                 
+                self.loadFollowers()
+                
             case .Failure(let error):
                 
                 let alertVC = PMAlertController(title: "抱歉發生了某些問題", description: error.localizedDescription , image: UIImage(named: "error.png"), style: .Alert)
@@ -158,6 +160,7 @@ class followersVC: UITableViewController {
                 
             }
         }
+        
         
     }
     
@@ -179,16 +182,21 @@ class followersVC: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! followersCell
         
+        
+        cell.usernameLbl.text = follow[indexPath.item]["username"].string
+        cell.followUserId = follow[indexPath.item]["user_id"].string
+        
+        // 圖片安全解包
+        if let url = follow[indexPath.item]["profile_picture"].string {
+            cell.avaImg.hnk_setImageFromURL(NSURL(string: url)!)
+        }
+        
+        // 用id 判斷是否為本身
+        if cell.followUserId == user!["data"][0][JSON_ID].string{
+            cell.followBtn.hidden = true
+        }
         // 每一筆都要判斷是否有追蹤
         if show == "followers"{
-            
-            if cell.usernameLbl.text == user!["data"][0][JSON_NAME].string{
-                cell.followBtn.hidden = true
-            }
-            
-            cell.usernameLbl.text = follow[indexPath.item]["username"].string
-            cell.followUserId = follow[indexPath.item]["user_id"].string
-            cell.avaImg.hnk_setImageFromURL(NSURL(string: "http://www.sitesnobrasil.com/imagens-fotos/mulheres/l/lisa-simpson.png")!)
             
             // 追蹤按鈕判斷
             // 所有追蹤者 皆跟追蹤中的名單比對
@@ -200,28 +208,12 @@ class followersVC: UITableViewController {
                     cell.followBtn.setTitle("FOLLOWING", forState: .Normal)
                     cell.followBtn.backgroundColor = .greenColor()
                 }
-                
             }
-            
-            // 圖片網址 未使用
-            //print(follow[indexPath.item]["profile_picture"].string)
-            
-            
-            
         }
         
         // 必定所有使用者都是追蹤中的 不需額外判斷
         if show == "followings"{
-            
-            if cell.usernameLbl.text == user!["data"][0][JSON_NAME].string{
-                cell.followBtn.hidden = true
-            }
-            
-            cell.usernameLbl.text = follow[indexPath.item]["username"].string
-            cell.followUserId = follow[indexPath.item]["user_id"].string
-            cell.avaImg.hnk_setImageFromURL(NSURL(string: "http://www.sitesnobrasil.com/imagens-fotos/mulheres/l/lisa-simpson.png")!)
             cell.followBtn.setTitle("FOLLOWING", forState: .Normal)
-            
             cell.followBtn.backgroundColor = .greenColor()
         }
         

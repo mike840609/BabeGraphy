@@ -31,6 +31,8 @@ class headerView: UICollectionReusableView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        
+        
         /*
          
          // alignment

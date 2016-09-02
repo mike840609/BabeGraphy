@@ -31,7 +31,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     @IBOutlet weak var logoutBtn: UIBarButtonItem!
     
     // 儲存照片
-    var picArray = [String]()
+    // var picArray = [String]()
     
     // user's posts
     var user_posts: Array<SwiftyJSON.JSON> = []
@@ -48,9 +48,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        
-        
-        
+//        collectionView?.reloadData()
     }
     
     override func viewDidLoad() {
@@ -68,7 +66,6 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         
         // 更新通知 =====================================
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.reload), name: "reload", object: nil)
-        
     }
     
     
@@ -78,6 +75,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
         let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "Header", forIndexPath: indexPath) as! headerView
+        
         
         // 抓不到token ,token過期 ,重新登入一次
         guard let AccessToken:String? = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {
@@ -154,7 +152,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
                 NSUserDefaults.standardUserDefaults().setObject(id, forKey:USER_ID)
                 NSUserDefaults.standardUserDefaults().synchronize()
                 
-                
+                // follower 亂跳問題
                 print(" id:\(id)\n name:\(name)\n email:\(email)\n posts:\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")
                 
                 
@@ -331,7 +329,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     
     // 點擊回到 index 0
     func postsTap() {
-        if !picArray.isEmpty {
+        if !user_posts.isEmpty {
             let index = NSIndexPath(forItem: 0 ,inSection: 0)
             self.collectionView?.scrollToItemAtIndexPath(index, atScrollPosition: .Top, animated: true)
         }
