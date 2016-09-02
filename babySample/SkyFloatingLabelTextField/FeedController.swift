@@ -22,7 +22,7 @@ private let reuseIdentifier = "Cell"
 class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLayout ,SKPhotoBrowserDelegate{
     
     // local var 測試用
-     var posts = [Post]()
+    var posts = [Post]()
     
     
     var refresher:UIRefreshControl!
@@ -36,7 +36,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.hidesBarsOnSwipe = true
-//        navigationController?.navigationBar.translucent = true
+        //        navigationController?.navigationBar.translucent = true
         
         // status bar background
         let view = UIView(frame:
@@ -44,7 +44,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         )
         view.backgroundColor = UIColor(red: 1.0, green: 0.5, blue: 0.67, alpha: 0.9)
         self.view.addSubview(view)
-
+        
     }
     
     
@@ -66,7 +66,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         self.collectionView!.registerClass(FeedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         // 底部載入
-         setFooterView()
+        setFooterView()
         
     }
     
@@ -216,7 +216,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
             navBarCoverView.backgroundColor = UIColor.blackColor()
             navBarCoverView.alpha = 0
             
-        
+            
             if let keyWindow = UIApplication.sharedApplication().keyWindow{
                 
                 keyWindow.addSubview(navBarCoverView)
@@ -289,16 +289,17 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         
         guard let AccessToken:String? = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {return}
         
-        Alamofire.request(.POST, "http://140.136.155.143/api/post/feed",parameters: ["token":AccessToken!])
+        Alamofire.request(.POST, "http://140.136.155.143/api/post/feed",parameters: ["token":AccessToken!]).validate(statusCode: 200..<300)
             .responseJSON { (response) in
+            
                 switch response.result{
                 case .Success(let json):
-                    
-                    
+
                     self.posts.removeAll(keepCapacity: false)
                     
                     let json = SwiftyJSON.JSON(json)
                     
+
                     // print(json)
                     
                     for (_,subJson):(String, SwiftyJSON.JSON) in json {
@@ -318,20 +319,31 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                         post.numComments = 124
                         
                         self.posts.append(post)
-                       
-                         self.collectionView?.reloadData()
+                        
+                        self.collectionView?.reloadData()
                     }
                     
                     // 排序先暫時用手機硬幹
                     self.posts.sortInPlace({ $0.created_at > $1.created_at })
-//                    self.collectionView?.reloadData()
+                    // self.collectionView?.reloadData()
                     
                 case .Failure(let error):
+                    
                     print(error.localizedDescription)
+                    
+                    // token 已經失效
+                    if response.response?.statusCode == 500{
+                    
+                        let alertVC = PMAlertController(title: "重複登入", description: "您的帳號已經從遠方登入,請重新登入", image: UIImage(named: "warning.png"), style: .Alert)
+                        alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action:{self.logout()}))
+                        self.presentViewController(alertVC, animated: true, completion:nil)
+                        print("token failed")
+                        
+                        return
+                        
+                    }
                 }
-                
         }
-        
     }
     
     func refresh(){
@@ -360,6 +372,25 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         }
     }
     
+}
+
+extension FeedController{
+    // logout all controller can use it
+    func logout(){
+        
+        // 清空server token
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(ACCESS_TOKEN)
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
+        
+        // View Segue
+        let signin = self.storyboard?.instantiateViewControllerWithIdentifier("LoginController") as! LoginController
+        let appDelegate : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.window?.rootViewController = signin
+        
+        
+        
+    }
 }
 
 //  MARK : - SKPhoto Delegate

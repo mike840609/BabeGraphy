@@ -33,6 +33,9 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     // 儲存照片
     // var picArray = [String]()
     
+    // 共用變數
+    static let shareInstance = homeVC()
+    
     // user's posts
     var user_posts: Array<SwiftyJSON.JSON> = []
     
