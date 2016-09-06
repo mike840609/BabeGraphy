@@ -201,75 +201,78 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
     // header View
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
+         let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "Header", forIndexPath: indexPath) as! headerView
+        
         // guest user id
-        let id = guestJSON.last!["user_id"].string
-        
-        let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "Header", forIndexPath: indexPath) as! headerView
-        
-        
-        Alamofire.request(.GET, "http://140.136.155.143/api/user/id/\(id!)").validate().responseJSON { (response) in
-            
-            switch response.result{
+        if let id = guestJSON.last!["user_id"].string {
+           
+            Alamofire.request(.GET, "http://140.136.155.143/api/user/id/\(id)").validate().responseJSON { (response) in
                 
-            case .Success(let json):
-                
-                print("guestUserIfon:\n",json)
-                
-                let json = SwiftyJSON.JSON(json)
-                
-                header.fullnameLbl.text = json[JSON_NAME].stringValue.uppercaseString
-                header.followers.text = json[JSON_FOLLOWER].stringValue
-                header.followings.text = json[JSON_FOLLOWEING].stringValue
-                header.posts.text = json[JSON_POST].stringValue
-                
-                if let url = json["avatar"].string {
-                    header.avaImg.hnk_setImageFromURL(NSURL(string: url)!)
+                switch response.result{
+                    
+                case .Success(let json):
+                    
+                    print("guestUserIfon:\n",json)
+                    
+                    let json = SwiftyJSON.JSON(json)
+                    
+                    header.fullnameLbl.text = json[JSON_NAME].stringValue.uppercaseString
+                    header.followers.text = json[JSON_FOLLOWER].stringValue
+                    header.followings.text = json[JSON_FOLLOWEING].stringValue
+                    header.posts.text = json[JSON_POST].stringValue
+                    
+                    if let url = json["avatar"].string {
+                        header.avaImg.hnk_setImageFromURL(NSURL(string: url)!)
+                    }
+                    
+                    
+                    header.bioLbl.text = json["userbio"].stringValue
+                    header.webTxt.text = json["userweb"].stringValue
+                    
+                    print("-------------------------------------------")
+                    
+                    
+                case .Failure(let error):
+                    print(error.localizedDescription)
+                    
                 }
                 
+                // 判斷追蹤按鈕 狀態
+                self.FollowingStatusCheck(header)
                 
-                header.bioLbl.text = json["userbio"].stringValue
-                header.webTxt.text = json["userweb"].stringValue
-                
-                print("-------------------------------------------")
-                
-                
-            case .Failure(let error):
-                print(error.localizedDescription)
-                
+                //            if (self.FollowingStatusCheck()){
+                //                header.editBtn.setTitle("FOLLOWING", forState: .Normal)
+                //                header.editBtn.backgroundColor = UIColor.greenColor()
+                //            }else{
+                //                header.editBtn.setTitle("FOLLOW", forState: .Normal)
+                //                header.editBtn.backgroundColor = UIColor.lightGrayColor()
+                //            }
             }
             
-            // 判斷追蹤按鈕 狀態
-            self.FollowingStatusCheck(header)
+            // 添加手勢 postBtn , followerBtn ,followingBtn
             
-            //            if (self.FollowingStatusCheck()){
-            //                header.editBtn.setTitle("FOLLOWING", forState: .Normal)
-            //                header.editBtn.backgroundColor = UIColor.greenColor()
-            //            }else{
-            //                header.editBtn.setTitle("FOLLOW", forState: .Normal)
-            //                header.editBtn.backgroundColor = UIColor.lightGrayColor()
-            //            }
+            // tap post
+            let postsTap = UITapGestureRecognizer(target: self, action: #selector(guestVC.postsTap))
+            postsTap.numberOfTapsRequired = 1
+            header.posts.userInteractionEnabled = true
+            header.posts.addGestureRecognizer(postsTap)
+            
+            // tap followers
+            let followersTap = UITapGestureRecognizer(target: self, action: #selector(guestVC.followersTap))
+            followersTap.numberOfTapsRequired = 1
+            header.followers.userInteractionEnabled = true
+            header.followers.addGestureRecognizer(followersTap)
+            
+            
+            // tap following
+            let followingTap = UITapGestureRecognizer(target: self, action: #selector(guestVC.followingsTap))
+            followingTap.numberOfTapsRequired = 1
+            header.followings.userInteractionEnabled = true
+            header.followings.addGestureRecognizer(followingTap)
+            
+        
         }
         
-        // 添加手勢 postBtn , followerBtn ,followingBtn
-        
-        // tap post
-        let postsTap = UITapGestureRecognizer(target: self, action: #selector(guestVC.postsTap))
-        postsTap.numberOfTapsRequired = 1
-        header.posts.userInteractionEnabled = true
-        header.posts.addGestureRecognizer(postsTap)
-        
-        // tap followers
-        let followersTap = UITapGestureRecognizer(target: self, action: #selector(guestVC.followersTap))
-        followersTap.numberOfTapsRequired = 1
-        header.followers.userInteractionEnabled = true
-        header.followers.addGestureRecognizer(followersTap)
-        
-        
-        // tap following
-        let followingTap = UITapGestureRecognizer(target: self, action: #selector(guestVC.followingsTap))
-        followingTap.numberOfTapsRequired = 1
-        header.followings.userInteractionEnabled = true
-        header.followings.addGestureRecognizer(followingTap)
         
         return header
     }

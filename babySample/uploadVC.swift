@@ -23,8 +23,6 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
     @IBOutlet weak var publishBtn: MaterialButton!
     @IBOutlet weak var removeBtn: MaterialButton!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,8 +54,6 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
         showFusuma()
         
     }
-    
-    
     
     
     // MARK: FusumaDelegate Protocol

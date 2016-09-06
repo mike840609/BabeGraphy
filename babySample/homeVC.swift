@@ -51,7 +51,6 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-//        collectionView?.reloadData()
     }
     
     override func viewDidLoad() {
@@ -393,8 +392,9 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     // logout all controller can use it
     func logout(){
         
-        // 清空server token
+        // 清空server token id
         NSUserDefaults.standardUserDefaults().removeObjectForKey(ACCESS_TOKEN)
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(USER_ID)
         NSUserDefaults.standardUserDefaults().synchronize()
         
         // facebook logout 暫時不清空 只單用server token 判斷

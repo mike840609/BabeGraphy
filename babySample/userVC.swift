@@ -152,20 +152,48 @@ class userVC: UITableViewController, UISearchBarDelegate  {
         
         
         // calling cell again to call cell data
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! followersCell
+        // let cell = tableView.cellForRowAtIndexPath(indexPath) as! followersCell
+        
         
         // if user tapped on his name go home, else go guest
-        if cell.usernameLbl.text! == users[indexPath.item]["data"][0]["id"].string {
+        
+        // 有抓到 id
+        if let user_id = NSUserDefaults.standardUserDefaults().stringForKey(USER_ID){
             
-            let home = self.storyboard?.instantiateViewControllerWithIdentifier("homeVC") as! homeVC
-            self.navigationController?.pushViewController(home, animated: true)
+            if user_id == users[indexPath.item]["data"][0]["id"].string {
+                let home = self.storyboard?.instantiateViewControllerWithIdentifier("homeVC") as! homeVC
+                self.navigationController?.pushViewController(home, animated: true)
+                
+            } else {
+                guestJSON.append(users[indexPath.item])
+                let guest = self.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
+                self.navigationController?.pushViewController(guest, animated: true)
+            }
             
-        } else {
-    
-            guestJSON.append(users[indexPath.item])
-            let guest = self.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
-            self.navigationController?.pushViewController(guest, animated: true)
+        }else{
+            // 沒抓到  ->  request  id -> 儲存到 NSUserDefaults
+            ApiService.shareInstance.id_request(){ response in
+                
+                print("成功存取id :  \( response)")
+                
+                // 轉跳
+                if response == self.users[indexPath.item]["data"][0]["id"].string {
+                    
+                    let home = self.storyboard?.instantiateViewControllerWithIdentifier("homeVC") as! homeVC
+                    self.navigationController?.pushViewController(home, animated: true)
+                    
+                } else {
+                    
+                    guestJSON.append(self.users[indexPath.item])
+                    
+                    let guest = self.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
+                    self.navigationController?.pushViewController(guest, animated: true)
+                }
+                
+            }
         }
+        
+
         
     }
     

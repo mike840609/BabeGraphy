@@ -82,7 +82,6 @@ class ApiService: NSObject {
         }
     }
     
-    
     // post photo upload
     func postPhotoUpload (post_id:String, image:UIImage){
         
@@ -118,7 +117,6 @@ class ApiService: NSObject {
         
     }
     
-    
     // Get facebook photo path
     func getFBphotos() -> SwiftyJSON.JSON {
         
@@ -142,6 +140,33 @@ class ApiService: NSObject {
         return json
     }
     
+    // Get userID
+    func id_request(completion : (String) -> ()){
+        
+        guard let AccessToken:String? = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {return}
+        
+        Alamofire.request(.GET, "http://140.136.155.143/api/user/token/\(AccessToken!)").validate().responseJSON{ (response) in
+            
+            switch response.result{
+            case .Success(let json):
+                let json = SwiftyJSON.JSON(json)
+                
+                if let id = json["data"][0][JSON_ID].string{
+                    
+                    // 存取 user id 以供未來使用
+                    NSUserDefaults.standardUserDefaults().setObject(id, forKey:USER_ID)
+                    NSUserDefaults.standardUserDefaults().synchronize()
+                    
+                    // complete handerler
+                    completion(id)
+                }
+                
+                
+            case .Failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
     
     // helper
     // PHOTO FORMAT function
@@ -192,4 +217,7 @@ class ApiService: NSObject {
         
         return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
     }
+    
+    // request id
+    
 }

@@ -58,6 +58,14 @@
 		4D9AE7041D619279007AF70B /* avaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AE7031D619279007AF70B /* avaVC.swift */; };
 		4DA01D6A1D42170F0041B482 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA01D691D42170F0041B482 /* ApiService.swift */; };
 		4DAA53691D3202510099B78E /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA53681D3202510099B78E /* EditVC.swift */; };
+		4DABA2821D7E98D50098E6C1 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABA2811D7E98D50098E6C1 /* MenuViewController.swift */; };
+		4DABA2861D7E9BC60098E6C1 /* GuillotineMenuTransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABA2841D7E9BC60098E6C1 /* GuillotineMenuTransitionAnimation.swift */; };
+		4DABA2871D7E9BC60098E6C1 /* ic_menu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DABA2851D7E9BC60098E6C1 /* ic_menu@3x.png */; };
+		4DABA2921D7E9F040098E6C1 /* ic_activity@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DABA28B1D7E9F040098E6C1 /* ic_activity@3x.png */; };
+		4DABA2931D7E9F040098E6C1 /* ic_feed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DABA28C1D7E9F040098E6C1 /* ic_feed@3x.png */; };
+		4DABA2941D7E9F040098E6C1 /* ic_menuRotated@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DABA28D1D7E9F040098E6C1 /* ic_menuRotated@3x.png */; };
+		4DABA2951D7E9F040098E6C1 /* ic_profile@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DABA28E1D7E9F040098E6C1 /* ic_profile@3x.png */; };
+		4DABA2961D7E9F040098E6C1 /* ic_settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DABA28F1D7E9F040098E6C1 /* ic_settings@3x.png */; };
 		4DAFE8BE1D2588810000334F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFE8BD1D2588810000334F /* Constants.swift */; };
 		4DBA164C1D41EB6E009F35FC /* guestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBA164B1D41EB6E009F35FC /* guestVC.swift */; };
 		4DC669A51D5C5210006CBF6A /* AlbumVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC669A41D5C5210006CBF6A /* AlbumVC.swift */; };
@@ -128,6 +136,14 @@
 		4D9AE7031D619279007AF70B /* avaVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = avaVC.swift; sourceTree = "<group>"; };
 		4DA01D691D42170F0041B482 /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		4DAA53681D3202510099B78E /* EditVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
+		4DABA2811D7E98D50098E6C1 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		4DABA2841D7E9BC60098E6C1 /* GuillotineMenuTransitionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuillotineMenuTransitionAnimation.swift; sourceTree = "<group>"; };
+		4DABA2851D7E9BC60098E6C1 /* ic_menu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_menu@3x.png"; sourceTree = "<group>"; };
+		4DABA28B1D7E9F040098E6C1 /* ic_activity@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_activity@3x.png"; sourceTree = "<group>"; };
+		4DABA28C1D7E9F040098E6C1 /* ic_feed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_feed@3x.png"; sourceTree = "<group>"; };
+		4DABA28D1D7E9F040098E6C1 /* ic_menuRotated@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_menuRotated@3x.png"; sourceTree = "<group>"; };
+		4DABA28E1D7E9F040098E6C1 /* ic_profile@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_profile@3x.png"; sourceTree = "<group>"; };
+		4DABA28F1D7E9F040098E6C1 /* ic_settings@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_settings@3x.png"; sourceTree = "<group>"; };
 		4DAFE8BD1D2588810000334F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4DBA164B1D41EB6E009F35FC /* guestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = guestVC.swift; sourceTree = "<group>"; };
 		4DC669A41D5C5210006CBF6A /* AlbumVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumVC.swift; sourceTree = "<group>"; };
@@ -209,6 +225,7 @@
 			children = (
 				4D54494C1D2A20A1006461DC /* Icon */,
 				4D3749FC1D087D6400F57F68 /* Supporting Files */,
+				4DABA2831D7E9BC60098E6C1 /* GuillotineMenu */,
 				4D3749F21D087C8000F57F68 /* SkyFloatingLabelTextField */,
 				4D0476CB1D6F598C0004CCA1 /* KDCircularProgress */,
 				4D2D44CA1D0DB74500E6CE0D /* NewsFeed */,
@@ -295,6 +312,28 @@
 			path = Icon;
 			sourceTree = "<group>";
 		};
+		4DABA2831D7E9BC60098E6C1 /* GuillotineMenu */ = {
+			isa = PBXGroup;
+			children = (
+				4DABA2881D7E9F040098E6C1 /* Assets */,
+				4DABA2841D7E9BC60098E6C1 /* GuillotineMenuTransitionAnimation.swift */,
+				4DABA2851D7E9BC60098E6C1 /* ic_menu@3x.png */,
+			);
+			path = GuillotineMenu;
+			sourceTree = "<group>";
+		};
+		4DABA2881D7E9F040098E6C1 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				4DABA28B1D7E9F040098E6C1 /* ic_activity@3x.png */,
+				4DABA28C1D7E9F040098E6C1 /* ic_feed@3x.png */,
+				4DABA28D1D7E9F040098E6C1 /* ic_menuRotated@3x.png */,
+				4DABA28E1D7E9F040098E6C1 /* ic_profile@3x.png */,
+				4DABA28F1D7E9F040098E6C1 /* ic_settings@3x.png */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		4DC669A61D5C5641006CBF6A /* Album */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,6 +356,7 @@
 			isa = PBXGroup;
 			children = (
 				4DC669A41D5C5210006CBF6A /* AlbumVC.swift */,
+				4DABA2811D7E98D50098E6C1 /* MenuViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -407,6 +447,7 @@
 				4DEA614C1D2D3FA300C242B8 /* image.png in Resources */,
 				4D0476CF1D6F60B10004CCA1 /* notepad-2.png in Resources */,
 				4D54495F1D2A20A1006461DC /* info.png in Resources */,
+				4DABA2961D7E9F040098E6C1 /* ic_settings@3x.png in Resources */,
 				4D54495C1D2A20A1006461DC /* calendar.png in Resources */,
 				4D5449681D2A20A1006461DC /* users.png in Resources */,
 				4D5449651D2A20A1006461DC /* settings.png in Resources */,
@@ -421,11 +462,16 @@
 				4DEA614E1D2D415E00C242B8 /* key.png in Resources */,
 				4D5449641D2A20A1006461DC /* picture.png in Resources */,
 				4D54495B1D2A20A1006461DC /* add.png in Resources */,
+				4DABA2921D7E9F040098E6C1 /* ic_activity@3x.png in Resources */,
+				4DABA2951D7E9F040098E6C1 /* ic_profile@3x.png in Resources */,
 				4D54495E1D2A20A1006461DC /* error.png in Resources */,
 				4D3749E11D07FFD100F57F68 /* Main.storyboard in Resources */,
+				4DABA2871D7E9BC60098E6C1 /* ic_menu@3x.png in Resources */,
 				4D1258A41D2CD55600A7B6B9 /* shield-1.png in Resources */,
 				4D5449671D2A20A1006461DC /* user.png in Resources */,
+				4DABA2931D7E9F040098E6C1 /* ic_feed@3x.png in Resources */,
 				4DFD19081D64C00D003CEF78 /* file-14.png in Resources */,
+				4DABA2941D7E9F040098E6C1 /* ic_menuRotated@3x.png in Resources */,
 				4D5449611D2A20A1006461DC /* like_.png in Resources */,
 				4D5449621D2A20A1006461DC /* list.png in Resources */,
 			);
@@ -510,6 +556,7 @@
 				4DAA53691D3202510099B78E /* EditVC.swift in Sources */,
 				4D6EF6C41D3D1FFB00931BB6 /* userVC.swift in Sources */,
 				4D3749FA1D087CC500F57F68 /* LoginController.swift in Sources */,
+				4DABA2861D7E9BC60098E6C1 /* GuillotineMenuTransitionAnimation.swift in Sources */,
 				4DAFE8BE1D2588810000334F /* Constants.swift in Sources */,
 				4D6B1AAA1D2548D000405E2B /* headerView.swift in Sources */,
 				4DBA164C1D41EB6E009F35FC /* guestVC.swift in Sources */,
@@ -517,6 +564,7 @@
 				4D2D44C91D0DA6D000E6CE0D /* Post.swift in Sources */,
 				4D9AE7041D619279007AF70B /* avaVC.swift in Sources */,
 				4DE3388B1D27F455001373E3 /* MaterialView.swift in Sources */,
+				4DABA2821D7E98D50098E6C1 /* MenuViewController.swift in Sources */,
 				4DA01D6A1D42170F0041B482 /* ApiService.swift in Sources */,
 				4DE3388C1D27F455001373E3 /* MateriaTextField.swift in Sources */,
 				4DC669A51D5C5210006CBF6A /* AlbumVC.swift in Sources */,

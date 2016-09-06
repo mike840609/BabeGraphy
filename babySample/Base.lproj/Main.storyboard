@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="fontawesome-webfont.ttf">
+        <mutableArray key="FontAwesome.otf">
             <string>FontAwesome</string>
         </mutableArray>
     </customFonts>
@@ -637,7 +637,7 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="ujF-4I-3jR" customClass="InterestCollectionViewCell" customModule="babySample" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="19" width="280" height="380"/>
+                                                    <rect key="frame" x="20" y="18.5" width="280" height="380"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="280" height="380"/>
@@ -707,16 +707,136 @@
                             <constraint firstItem="QYJ-TB-sJz" firstAttribute="top" secondItem="Ztc-sb-iSt" secondAttribute="bottom" id="tkO-8U-CTc"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Album" id="7vi-rv-S1Z"/>
+                    <navigationItem key="navigationItem" title="Album" id="7vi-rv-S1Z">
+                        <barButtonItem key="leftBarButtonItem" id="Zhq-AG-S6w">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yBw-vR-Kla">
+                                <rect key="frame" x="16" y="4" width="20" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" image="ic_menuRotated"/>
+                                <connections>
+                                    <action selector="showMenuAction:" destination="6ZP-Jm-5TD" eventType="touchUpInside" id="Os1-0j-FDk"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="backgroundImageView" destination="zjZ-oi-832" id="0Vz-XG-guK"/>
                         <outlet property="collectionView" destination="LvR-ae-oKG" id="DJB-Sg-IP0"/>
+                        <outlet property="leftBarButton" destination="yBw-vR-Kla" id="YiH-rt-TpE"/>
+                        <segue destination="htY-KW-m8E" kind="show" identifier="showMenuSegue" id="obX-AV-yHt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ea1-ER-nZr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3954.5" y="2757.5"/>
+            <point key="canvasLocation" x="3991.5" y="2757.5"/>
+        </scene>
+        <!--Menu View Controller-->
+        <scene sceneID="vyB-LK-pNt">
+            <objects>
+                <viewController storyboardIdentifier="MenuViewController" id="htY-KW-m8E" customClass="MenuViewController" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hJq-wx-41x"/>
+                        <viewControllerLayoutGuide type="bottom" id="zPV-Dq-Hc9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fjd-1D-Iyp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1PN-cL-Kr0">
+                                <rect key="frame" x="112" y="140" width="150" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="Eb0-zU-jui"/>
+                                    <constraint firstAttribute="height" constant="42" id="bWT-zW-uhj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <state key="normal" title="Baby Info"/>
+                                <connections>
+                                    <action selector="infoClick:" destination="htY-KW-m8E" eventType="touchUpInside" id="cTs-tb-sxP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="soC-wQ-1sc">
+                                <rect key="frame" x="112" y="209" width="150" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="CJ4-L5-962"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <state key="normal" title="Create Baby"/>
+                                <connections>
+                                    <action selector="createClick:" destination="htY-KW-m8E" eventType="touchUpInside" id="ojQ-LZ-Cd8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TK8-aF-0l1">
+                                <rect key="frame" x="112" y="347" width="150" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="WU5-8g-BqE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <state key="normal" title="Delete Baby"/>
+                                <connections>
+                                    <action selector="deleteClick:" destination="htY-KW-m8E" eventType="touchUpInside" id="ynP-wE-b0W"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JIP-is-F7E">
+                                <rect key="frame" x="112" y="278" width="150" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="Tbb-10-evP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <state key="normal" title="Edit Baby"/>
+                                <connections>
+                                    <action selector="editClick:" destination="htY-KW-m8E" eventType="touchUpInside" id="O2o-SI-1Kd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uOd-b6-Ckx">
+                                <rect key="frame" x="112" y="424" width="150" height="49"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <state key="normal" title="Close"/>
+                                <connections>
+                                    <action selector="closeClick:" destination="htY-KW-m8E" eventType="touchUpInside" id="bRz-ac-pOe"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_profile@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="Kkm-JC-V9K">
+                                <rect key="frame" x="40" y="138" width="45" height="45"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_feed@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="u8O-Qj-1cC">
+                                <rect key="frame" x="40" y="207" width="45" height="45"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_activity@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="EKU-Gw-ix7">
+                                <rect key="frame" x="40" y="345" width="45" height="45"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_settings@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="c2X-ST-fQK">
+                                <rect key="frame" x="40" y="276" width="45" height="45"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.99976390600204468" green="0.81572824716567993" blue="0.93915057182312012" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="1PN-cL-Kr0" firstAttribute="top" secondItem="hJq-wx-41x" secondAttribute="bottom" constant="120" id="4l8-l8-mPN"/>
+                            <constraint firstItem="JIP-is-F7E" firstAttribute="leading" secondItem="TK8-aF-0l1" secondAttribute="leading" id="8aU-kf-Rlr"/>
+                            <constraint firstItem="1PN-cL-Kr0" firstAttribute="centerX" secondItem="fjd-1D-Iyp" secondAttribute="centerX" id="DwJ-mX-JW6"/>
+                            <constraint firstItem="soC-wQ-1sc" firstAttribute="trailing" secondItem="1PN-cL-Kr0" secondAttribute="trailing" id="Gg8-Gr-yol"/>
+                            <constraint firstItem="JIP-is-F7E" firstAttribute="trailing" secondItem="TK8-aF-0l1" secondAttribute="trailing" id="QPy-DF-48j"/>
+                            <constraint firstItem="JIP-is-F7E" firstAttribute="top" secondItem="soC-wQ-1sc" secondAttribute="bottom" constant="27" id="ZMz-Bl-1Dq"/>
+                            <constraint firstItem="TK8-aF-0l1" firstAttribute="leading" secondItem="uOd-b6-Ckx" secondAttribute="leading" id="ZPg-i5-hhG"/>
+                            <constraint firstItem="soC-wQ-1sc" firstAttribute="leading" secondItem="JIP-is-F7E" secondAttribute="leading" id="fu8-8w-scP"/>
+                            <constraint firstItem="soC-wQ-1sc" firstAttribute="leading" secondItem="1PN-cL-Kr0" secondAttribute="leading" id="gwY-nf-pUt"/>
+                            <constraint firstItem="soC-wQ-1sc" firstAttribute="top" secondItem="1PN-cL-Kr0" secondAttribute="bottom" constant="27" id="hlN-t2-3Ug"/>
+                            <constraint firstItem="uOd-b6-Ckx" firstAttribute="top" secondItem="TK8-aF-0l1" secondAttribute="bottom" constant="35" id="pcR-l3-RTc"/>
+                            <constraint firstItem="TK8-aF-0l1" firstAttribute="top" secondItem="JIP-is-F7E" secondAttribute="bottom" constant="27" id="pqy-Pq-bci"/>
+                            <constraint firstItem="TK8-aF-0l1" firstAttribute="trailing" secondItem="uOd-b6-Ckx" secondAttribute="trailing" id="r3W-26-EPI"/>
+                            <constraint firstItem="soC-wQ-1sc" firstAttribute="trailing" secondItem="JIP-is-F7E" secondAttribute="trailing" id="tYR-Kf-Xfp"/>
+                            <constraint firstItem="zPV-Dq-Hc9" firstAttribute="top" secondItem="uOd-b6-Ckx" secondAttribute="bottom" constant="194" id="yHZ-tk-EGS"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="r9F-N0-z33"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I6a-eT-V2Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4516.5" y="2757.5"/>
         </scene>
         <!--Friend-->
         <scene sceneID="KXc-w1-7MC">
@@ -761,7 +881,7 @@
         <!--HomeVC-->
         <scene sceneID="Sxm-iI-m18">
             <objects>
-                <collectionViewController id="QyW-p6-boT" customClass="homeVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="homeVC" id="QyW-p6-boT" customClass="homeVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="dLk-aT-SNz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -992,7 +1112,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1by-7x-oGC" id="Rhg-sc-i4a">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder2" translatesAutoresizingMaskIntoConstraints="NO" id="OHZ-nB-rCQ">
@@ -1700,6 +1820,11 @@
     </scenes>
     <resources>
         <image name="camera-icon" width="32" height="32"/>
+        <image name="ic_activity@3x.png" width="750" height="432"/>
+        <image name="ic_feed@3x.png" width="750" height="432"/>
+        <image name="ic_menuRotated" width="10" height="14"/>
+        <image name="ic_profile@3x.png" width="750" height="432"/>
+        <image name="ic_settings@3x.png" width="750" height="432"/>
         <image name="more_icon" width="30" height="30"/>
         <image name="news_feed_icon" width="30" height="30"/>
         <image name="p8" width="700" height="525"/>

@@ -17,6 +17,11 @@ class AlbumVC: UIViewController {
     @IBOutlet weak var currentUserProfileImageButton:UIButton!
     @IBOutlet weak var currentUserFullNameButton:UIButton!
     
+    // MenuBar
+    @IBOutlet weak var leftBarButton: UIButton!
+    private lazy var presentationAnimator = GuillotineTransitionAnimation()
+    
+    
     // MARK: - UICollectionViewDataSource
     private var interests = Interest.createInterests()
     
@@ -28,6 +33,22 @@ class AlbumVC: UIViewController {
     private struct Storyboard{
         static let CellIdentifier = "Cell"
     }
+    
+    @IBAction func showMenuAction(sender: UIButton) {
+        
+        let menuVC = storyboard!.instantiateViewControllerWithIdentifier("MenuViewController")
+        menuVC.modalPresentationStyle = .Custom
+        menuVC.transitioningDelegate = self
+        if menuVC is GuillotineAnimationDelegate {
+            presentationAnimator.animationDelegate = menuVC as? GuillotineAnimationDelegate
+        }
+        presentationAnimator.supportView = self.navigationController?.navigationBar
+        presentationAnimator.presentButton = sender
+        presentationAnimator.duration = 0.4
+        self.presentViewController(menuVC, animated: true, completion: nil)
+        
+    }
+    
 }
 
 extension AlbumVC:UICollectionViewDataSource{
@@ -74,4 +95,19 @@ extension AlbumVC : UIScrollViewDelegate {
     }
     
     
+}
+
+
+// MARK : - MenuDelegate
+extension AlbumVC: UIViewControllerTransitioningDelegate {
+    
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        presentationAnimator.mode = .Presentation
+        return presentationAnimator
+    }
+    
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        presentationAnimator.mode = .Dismissal
+        return presentationAnimator
+    }
 }
