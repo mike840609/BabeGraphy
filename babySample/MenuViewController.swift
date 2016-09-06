@@ -31,10 +31,15 @@ class MenuViewController: UIViewController , GuillotineMenu{
     }
     
     @IBAction func infoClick(sender: AnyObject) {
+        
     }
     
     
     @IBAction func createClick(sender: AnyObject) {
+        
+        let CreateController = BabyCreateController()
+//        navigationController?.pushViewController(CreateController, animated: true)
+        presentViewController(CreateController, animated: true, completion: nil)
     }
     
     
