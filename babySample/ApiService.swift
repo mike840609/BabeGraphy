@@ -20,7 +20,7 @@ class ApiService: NSObject {
     static let shareInstance = ApiService()
     
     // 相片上傳
-    func avaImgupload(image:UIImage)   {
+    func avaImgupload(image:UIImage) {
         
         guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey(ACCESS_TOKEN) else{ return }
         let image : NSData = UIImageJPEGRepresentation(image, 0.5)!
@@ -168,8 +168,65 @@ class ApiService: NSObject {
         }
     }
     
-    // helper
-    // PHOTO FORMAT function
+    // MARK: - Baby Function
+    /*
+     http://140.136.155.143/api/baby/store
+     http://140.136.155.143/api/baby/search
+     http://140.136.155.143/api/baby/searchbyid
+     http://140.136.155.143/api/baby/upload
+     http://140.136.155.143/api/baby/delete
+     */
+    
+    func baby_create( token:String, name:String , birth:String, blood:String ,completion : (SwiftyJSON.JSON)-> ()){
+        
+    }
+    
+    func baby_serach(token : String , completion : (SwiftyJSON.JSON)-> ()){
+        
+    }
+    
+    func baby_searchbyid(id : String , completion : (SwiftyJSON.JSON)-> ()){
+        
+    }
+    
+    func baby_upload(token:String , id : String , completion : (SwiftyJSON.JSON)-> ()){
+        
+    }
+    
+    func baby_delete(object id : String , completion : (SwiftyJSON.JSON)-> ()){
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    /*
+     func myFunction(cityName:String, completion : (JSON) -> ()) {
+     Alamofire.request(.POST, "url", parameters: ["city" : cityName], encoding: ParameterEncoding.JSON, headers: ["Authorization": "token"])
+     .validate()
+     .responseJSON { response in
+     switch response.result {
+     case .Success:
+     let jsonData = JSON(data: response.data!)
+     completion(jsonData)
+     case .Failure(let error):
+     MExceptionManager.handleNetworkErrors(error)
+     completion(JSON(data: NSData()))
+     }
+     }
+     }
+     
+     // Call function
+     myFunction("bodrum") { response in
+     print(response["yourParameter"].stringValue)
+     }
+     
+     */
+    
+    // MARK: - PHOTO FORMAT function
     func urlRequestWithComponents(urlString:String, parameters:NSDictionary) -> (URLRequestConvertible, NSData) {
         
         let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
@@ -217,7 +274,5 @@ class ApiService: NSObject {
         
         return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
     }
-    
-    // request id
     
 }
