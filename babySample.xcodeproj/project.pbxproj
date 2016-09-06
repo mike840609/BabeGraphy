@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3F2039D6DC947AA6FB6E13B4 /* Pods_babySample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2472A7F6351D4CF62F0C27 /* Pods_babySample.framework */; };
+		4D034CB11D7F117500A7DFB8 /* EZYGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D034CB01D7F117500A7DFB8 /* EZYGradientView.swift */; };
 		4D0476CD1D6F598C0004CCA1 /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0476CC1D6F598C0004CCA1 /* KDCircularProgress.swift */; };
 		4D0476CF1D6F60B10004CCA1 /* notepad-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0476CE1D6F60B10004CCA1 /* notepad-2.png */; };
 		4D1258A01D2CC4D100A7B6B9 /* followersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D12589F1D2CC4D100A7B6B9 /* followersVC.swift */; };
@@ -85,6 +86,7 @@
 
 /* Begin PBXFileReference section */
 		297DCA1CA735E14A1236D0C9 /* Pods-babySample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-babySample.release.xcconfig"; path = "Pods/Target Support Files/Pods-babySample/Pods-babySample.release.xcconfig"; sourceTree = "<group>"; };
+		4D034CB01D7F117500A7DFB8 /* EZYGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZYGradientView.swift; sourceTree = "<group>"; };
 		4D0476CC1D6F598C0004CCA1 /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
 		4D0476CE1D6F60B10004CCA1 /* notepad-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notepad-2.png"; sourceTree = "<group>"; };
 		4D12589F1D2CC4D100A7B6B9 /* followersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = followersVC.swift; sourceTree = "<group>"; };
@@ -185,6 +187,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4D034CAF1D7F117500A7DFB8 /* EZYGradientView */ = {
+			isa = PBXGroup;
+			children = (
+				4D034CB01D7F117500A7DFB8 /* EZYGradientView.swift */,
+			);
+			path = EZYGradientView;
+			sourceTree = "<group>";
+		};
 		4D0476CB1D6F598C0004CCA1 /* KDCircularProgress */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				4D54494C1D2A20A1006461DC /* Icon */,
+				4D034CAF1D7F117500A7DFB8 /* EZYGradientView */,
 				4D3749FC1D087D6400F57F68 /* Supporting Files */,
 				4DABA2831D7E9BC60098E6C1 /* GuillotineMenu */,
 				4D3749F21D087C8000F57F68 /* SkyFloatingLabelTextField */,
@@ -547,6 +558,7 @@
 				4D4B00601D0C5048007E45A9 /* FeedController.swift in Sources */,
 				4D6B1AA81D2546FD00405E2B /* homeVC.swift in Sources */,
 				4D2D44C71D0DA5BE00E6CE0D /* Extensions.swift in Sources */,
+				4D034CB11D7F117500A7DFB8 /* EZYGradientView.swift in Sources */,
 				4D0476CD1D6F598C0004CCA1 /* KDCircularProgress.swift in Sources */,
 				4DE7A6171D2FC16500753A1C /* followersCell.swift in Sources */,
 				4D9782681D744F960000F030 /* PostVC.swift in Sources */,

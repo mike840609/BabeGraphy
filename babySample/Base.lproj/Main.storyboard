@@ -605,7 +605,7 @@
             </objects>
             <point key="canvasLocation" x="3204.75" y="1940.5"/>
         </scene>
-        <!--Album-->
+        <!--Baby Menu-->
         <scene sceneID="elG-0s-GOU">
             <objects>
                 <viewController id="6ZP-Jm-5TD" customClass="AlbumVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
@@ -637,7 +637,7 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="ujF-4I-3jR" customClass="InterestCollectionViewCell" customModule="babySample" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="19" width="280" height="380"/>
+                                                    <rect key="frame" x="20" y="18.5" width="280" height="380"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="280" height="380"/>
@@ -707,7 +707,7 @@
                             <constraint firstItem="QYJ-TB-sJz" firstAttribute="top" secondItem="Ztc-sb-iSt" secondAttribute="bottom" id="tkO-8U-CTc"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Album" id="7vi-rv-S1Z">
+                    <navigationItem key="navigationItem" title="Baby Menu" id="7vi-rv-S1Z">
                         <barButtonItem key="leftBarButtonItem" id="Zhq-AG-S6w">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yBw-vR-Kla">
                                 <rect key="frame" x="16" y="4" width="20" height="36"/>
@@ -740,10 +740,22 @@
                         <viewControllerLayoutGuide type="top" id="hJq-wx-41x"/>
                         <viewControllerLayoutGuide type="bottom" id="zPV-Dq-Hc9"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="fjd-1D-Iyp">
+                    <view key="view" contentMode="scaleToFill" id="fjd-1D-Iyp" customClass="EZYGradientView" customModule="babySample" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uOd-b6-Ckx">
+                                <rect key="frame" x="112" y="497" width="150" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="0fM-9E-n5d"/>
+                                    <constraint firstAttribute="height" constant="49" id="GcC-o3-LcS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <state key="normal" title="Close"/>
+                                <connections>
+                                    <action selector="closeClick:" destination="htY-KW-m8E" eventType="touchUpInside" id="bRz-ac-pOe"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bah-Q7-Q1x">
                                 <rect key="frame" x="20" y="79" width="335" height="410"/>
                                 <subviews>
@@ -840,26 +852,32 @@
                                     <constraint firstItem="Kkm-JC-V9K" firstAttribute="leading" secondItem="bah-Q7-Q1x" secondAttribute="leading" constant="27" id="zJ1-WZ-CR6"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uOd-b6-Ckx">
-                                <rect key="frame" x="112" y="497" width="150" height="49"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="0fM-9E-n5d"/>
-                                    <constraint firstAttribute="height" constant="49" id="GcC-o3-LcS"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                <state key="normal" title="Close"/>
-                                <connections>
-                                    <action selector="closeClick:" destination="htY-KW-m8E" eventType="touchUpInside" id="bRz-ac-pOe"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.99976390600204468" green="0.81572824716567993" blue="0.93915057182312012" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.99974924325942993" green="0.83855915069580078" blue="0.94540220499038696" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="uOd-b6-Ckx" firstAttribute="top" secondItem="bah-Q7-Q1x" secondAttribute="bottom" constant="8" symbolic="YES" id="EQg-iF-sGE"/>
                             <constraint firstItem="bah-Q7-Q1x" firstAttribute="centerY" secondItem="fjd-1D-Iyp" secondAttribute="centerY" constant="-50" id="PbN-JN-io0"/>
                             <constraint firstItem="uOd-b6-Ckx" firstAttribute="centerX" secondItem="bah-Q7-Q1x" secondAttribute="centerX" id="ePa-gS-c5r"/>
                             <constraint firstItem="bah-Q7-Q1x" firstAttribute="centerX" secondItem="fjd-1D-Iyp" secondAttribute="centerX" id="gaS-ji-xcw"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
+                                <color key="value" red="0.89019638299942017" green="0.33444401621818542" blue="0.71202856302261353" alpha="0.68355855855855852" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="secondColor">
+                                <color key="value" red="0.56968611478805542" green="0.87028050422668457" blue="0.97903698682785034" alpha="0.8343362894144144" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="angleº">
+                                <real key="value" value="25"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="colorRatio">
+                                <real key="value" value="0.5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="fadeIntensity">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isBlur" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <navigationItem key="navigationItem" id="r9F-N0-z33"/>
                     <nil key="simulatedTopBarMetrics"/>
