@@ -212,8 +212,9 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
         addSubview(commentButton)
         addSubview(shareButton)
         
-        
         // statusImg.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animate)))
+        
+        shareButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(shareFunction)))
         
         setupStatusImageViewLoader()
         
@@ -235,20 +236,9 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
         
     }
     
-    
     let loader = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
     
-    //let activityIndicatorView = NVActivityIndicatorView(frame: CGRect(x: 0 , y: 0, width: 50, height: 50),type: NVActivityIndicatorType.BallBeat)
-    
     func setupStatusImageViewLoader() {
-        
-        //        activityIndicatorView.hidesWhenStopped = true
-        //        activityIndicatorView.startAnimation()
-        //        activityIndicatorView.color = UIColor.lightGrayColor()
-        //
-        //        statusImg.addSubview(activityIndicatorView)
-        //        statusImg.addConstraintWithFormat("H:|-125-[v0]-125-|", views: activityIndicatorView)
-        //        statusImg.addConstraintWithFormat("V:|-125-[v0]-125-|", views: activityIndicatorView)
         
         loader.hidesWhenStopped = true
         loader.startAnimating()
@@ -256,6 +246,44 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
         statusImg.addSubview(loader)
         statusImg.addConstraintWithFormat("H:|[v0]|", views: loader)
         statusImg.addConstraintWithFormat("V:|[v0]|", views: loader)
+    }
+    
+    
+    func shareFunction() {
+        let hokusai = Hokusai()
+        
+        // Add a button with a closure
+        hokusai.addButton("Facebook") {
+            print("facebook")
+        }
+        
+        hokusai.addButton("Instagram") {
+            print("Instagram")
+        }
+        
+        hokusai.addButton("Twitter") {
+            print("Twitter")
+        }
+        
+        
+        
+        // hokusai.addButton("Button 2", target: self, selector: Selector("button2Pressed"))
+        hokusai.fontName = "Verdana-Bold"
+        hokusai.colorScheme = HOKColorScheme.Tsubaki
+        
+
+        
+        
+        // Change a title for cancel button. Default is Cancel. (Optional)
+        hokusai.cancelButtonTitle = "Done"
+        
+        // Add a callback for cancel button (Optional)
+        hokusai.cancelButtonAction = {
+            print("canceled")
+        }
+        
+        // Show Hokusai
+        hokusai.show()
     }
     
 }

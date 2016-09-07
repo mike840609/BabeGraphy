@@ -160,10 +160,6 @@ class BabyCreateController: UIViewController {
         bloodTextFieldHeightAnchor = bloodTextField.heightAnchor.constraintEqualToAnchor(inputsContainerView.heightAnchor, multiplier: 1/3)
         bloodTextFieldHeightAnchor?.active = true
         
-        
-        
-
-        
     }
     
     func setupCreateButton(){

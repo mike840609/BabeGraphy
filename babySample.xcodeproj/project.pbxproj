@@ -74,6 +74,7 @@
 		4DC669A81D5C5676006CBF6A /* interest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC669A71D5C5676006CBF6A /* interest.swift */; };
 		4DC669AC1D5C59CD006CBF6A /* InterestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC669AB1D5C59CD006CBF6A /* InterestCollectionViewCell.swift */; };
 		4DDA2C891D3552560015C9FE /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDA2C881D3552560015C9FE /* AboutVC.swift */; };
+		4DDC7EE01D7FECBD00BCAF64 /* Hokusai.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDC7EDF1D7FECBD00BCAF64 /* Hokusai.swift */; };
 		4DE338861D27ED46001373E3 /* uploadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE338851D27ED46001373E3 /* uploadVC.swift */; };
 		4DE3388A1D27F455001373E3 /* MaterialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE338871D27F455001373E3 /* MaterialButton.swift */; };
 		4DE3388B1D27F455001373E3 /* MaterialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE338881D27F455001373E3 /* MaterialView.swift */; };
@@ -154,6 +155,7 @@
 		4DC669A71D5C5676006CBF6A /* interest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = interest.swift; sourceTree = "<group>"; };
 		4DC669AB1D5C59CD006CBF6A /* InterestCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestCollectionViewCell.swift; sourceTree = "<group>"; };
 		4DDA2C881D3552560015C9FE /* AboutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
+		4DDC7EDF1D7FECBD00BCAF64 /* Hokusai.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hokusai.swift; sourceTree = "<group>"; };
 		4DE338851D27ED46001373E3 /* uploadVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = uploadVC.swift; sourceTree = "<group>"; };
 		4DE338871D27F455001373E3 /* MaterialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialButton.swift; sourceTree = "<group>"; };
 		4DE338881D27F455001373E3 /* MaterialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialView.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				4D54494C1D2A20A1006461DC /* Icon */,
+				4DDC7EE11D7FED2000BCAF64 /* Hokusai */,
 				4D034CAF1D7F117500A7DFB8 /* EZYGradientView */,
 				4D3749FC1D087D6400F57F68 /* Supporting Files */,
 				4DABA2831D7E9BC60098E6C1 /* GuillotineMenu */,
@@ -389,6 +392,14 @@
 				4DC669AB1D5C59CD006CBF6A /* InterestCollectionViewCell.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		4DDC7EE11D7FED2000BCAF64 /* Hokusai */ = {
+			isa = PBXGroup;
+			children = (
+				4DDC7EDF1D7FECBD00BCAF64 /* Hokusai.swift */,
+			);
+			name = Hokusai;
 			sourceTree = "<group>";
 		};
 		C9087353A80D5D3050AB8CF2 /* Frameworks */ = {
@@ -582,6 +593,7 @@
 				4D3749FA1D087CC500F57F68 /* LoginController.swift in Sources */,
 				4DABA2861D7E9BC60098E6C1 /* GuillotineMenuTransitionAnimation.swift in Sources */,
 				4DAFE8BE1D2588810000334F /* Constants.swift in Sources */,
+				4DDC7EE01D7FECBD00BCAF64 /* Hokusai.swift in Sources */,
 				4D6B1AAA1D2548D000405E2B /* headerView.swift in Sources */,
 				4DBA164C1D41EB6E009F35FC /* guestVC.swift in Sources */,
 				4DDA2C891D3552560015C9FE /* AboutVC.swift in Sources */,
