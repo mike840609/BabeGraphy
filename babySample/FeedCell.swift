@@ -257,6 +257,9 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
         // 進到閉包區間 表示成功傳回按讚資料 到server
         ApiService.shareInstance.press_like(post_id) { (json) in
             print(json)
+            
+            self.post?.numLikes? += 1
+            self.feedController?.collectionView?.reloadData()
         }
         
         /* 收回讚

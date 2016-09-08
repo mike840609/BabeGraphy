@@ -335,11 +335,8 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                         post._id = subJson["_id"].string
                         
                         
-                        let likes = subJson["likes"].int  == nil ? 0 : subJson["likes"].int
-                        let comments = subJson["comments"].int == nil ? 0 : subJson["comments"].int
-                        
-                        post.numLikes = likes
-                        post.numComments = comments
+                        post.numLikes = subJson["likes"].int  == nil ? 0 : subJson["likes"].int
+                        post.numComments = subJson["comments"].int == nil ? 0 : subJson["comments"].int
                         
                         
                         self.posts.append(post)
