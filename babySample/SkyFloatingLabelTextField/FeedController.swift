@@ -109,7 +109,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         
         collectionView?.registerClass(PhotoBrowserCollectionViewLoadingCell.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: PhotoBrowserFooterViewIdentifier)
         
-
+        
     }
     
     
@@ -138,7 +138,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         //swipeGesture.numberOfTouchesRequired = 1
         //swipeGesture.direction = UISwipeGestureRecognizerDirection.Left
         //feedCell.addGestureRecognizer(swipeGesture)
-
+        
         return feedCell
     }
     
@@ -308,20 +308,21 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         
         Alamofire.request(.POST, "http://140.136.155.143/api/post/feed",parameters: ["token":AccessToken!]).validate(statusCode: 200..<300)
             .responseJSON { (response) in
-            
+                
                 switch response.result{
                 case .Success(let json):
-
+                    
                     self.posts.removeAll(keepCapacity: false)
                     
                     let json = SwiftyJSON.JSON(json)
                     
-
-                     // print(json)
+                    print(json)
+                    print("============================================================================")
                     
-                    for (_,subJson):(String, SwiftyJSON.JSON) in json {
+                    for (_ ,subJson):(String, SwiftyJSON.JSON) in json {
                         
                         let post = Post()
+                        
                         
                         post.author_name = subJson["author_name"].string
                         post.author_imgurl = subJson["author_imgurl"].string
@@ -333,16 +334,21 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                         post.imgurl = subJson["imgurl"].string
                         post._id = subJson["_id"].string
                         
-                        post.numLikes = 1541
-                        post.numComments = 124
+                        
+                        let likes = subJson["likes"].int  == nil ? 0 : subJson["likes"].int
+                        let comments = subJson["comments"].int == nil ? 0 : subJson["comments"].int
+                        
+                        post.numLikes = likes
+                        post.numComments = comments
+                        
                         
                         self.posts.append(post)
-                        
                         self.collectionView?.reloadData()
                     }
                     
                     // 排序先暫時用手機硬幹
                     self.posts.sortInPlace({ $0.created_at > $1.created_at })
+                    
                     // self.collectionView?.reloadData()
                     
                 case .Failure(let error):
@@ -351,7 +357,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                     
                     // token 已經失效
                     if response.response?.statusCode == 500{
-                    
+                        
                         let alertVC = PMAlertController(title: "重複登入", description: "您的帳號已經從遠方登入,請重新登入", image: UIImage(named: "warning.png"), style: .Alert)
                         alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action:{self.logout()}))
                         self.presentViewController(alertVC, animated: true, completion:nil)
@@ -390,7 +396,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         }
     }
     
-
+    
     
 }
 

@@ -59,7 +59,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
     
     let profileImageView:UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "zuckprofile")
+//        imageView.image = UIImage(named: "zuckprofile")
         imageView.contentMode = .ScaleAspectFit
         return imageView
     }()
@@ -82,7 +82,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
     
     let likesCommentsLabel:UILabel = {
         let label = UILabel()
-        label.text = "400 Likes  12 Comments"
+//        label.text = "400 Likes  12 Comments"
         label.font = UIFont.systemFontOfSize(12)
         label.textColor = UIColor.rgb(155, green: 161, blue: 161)
         return label

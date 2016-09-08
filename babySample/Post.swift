@@ -27,7 +27,6 @@ class Post{
     // post id
     var _id:String?
     
-    
 }
 
 class Location: NSObject {
