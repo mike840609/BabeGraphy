@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="fontawesome-webfont.ttf">
+        <mutableArray key="FontAwesome.otf">
             <string>FontAwesome</string>
         </mutableArray>
     </customFonts>
@@ -1133,7 +1133,7 @@
                                 <action selector="logout:" destination="QyW-p6-boT" id="1AC-Xc-sU0"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="About" id="KlR-j0-sZC">
+                        <barButtonItem key="rightBarButtonItem" image="settings" id="KlR-j0-sZC">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="0TM-Wl-6Qk" kind="show" id="67r-bL-9FE"/>
@@ -1881,6 +1881,7 @@
         <image name="picture-icon" width="32" height="32"/>
         <image name="placeholder2" width="600" height="600"/>
         <image name="requests_icon" width="30" height="30"/>
+        <image name="settings" width="32" height="32"/>
         <image name="upload" width="512" height="512"/>
     </resources>
 </document>

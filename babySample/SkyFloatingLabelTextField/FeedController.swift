@@ -160,7 +160,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         return CGSizeMake(view.frame.width, 300)
     }
     
-    // 轉跳
+    // 轉跳 相簿 下載
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
         guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? FeedCell else {
@@ -326,6 +326,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                         
                         post.author_name = subJson["author_name"].string
                         post.author_imgurl = subJson["author_imgurl"].string
+                        post.author_id = subJson["author_id"].string
                         
                         post.created_at = subJson["created_at"].string
                         post.updated_at = subJson["updated_at"].string

@@ -38,6 +38,16 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        
+        navigationController?.hidesBarsOnSwipe = true
+        //        navigationController?.navigationBar.translucent = true
+        
+        // status bar background
+        let view = UIView(frame:
+            CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
+        )
+        view.backgroundColor = UIColor(red: 1.0, green: 0.5, blue: 0.67, alpha: 0.9)
+        self.view.addSubview(view)
     }
     
     
@@ -69,7 +79,8 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
         
         // new back button
         self.navigationItem.hidesBackButton = true
-        let backBtn = UIBarButtonItem(title: "back", style: .Plain, target: self, action: #selector(guestVC.back(_:)))
+        let backBtn = UIBarButtonItem(image: UIImage(named:"previous"), style: .Plain, target: self, action: #selector(guestVC.back(_:)))
+        
         self.navigationItem.leftBarButtonItem = backBtn
         
         // swipe to go back

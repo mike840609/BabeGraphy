@@ -12,6 +12,8 @@ class Post{
     
     var author_name:String?
     var author_imgurl:String?
+    var author_id:String?
+    
     var content:String?
     var imgurl:String?
     

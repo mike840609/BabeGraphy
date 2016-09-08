@@ -8,6 +8,7 @@
 
 import UIKit
 import NVActivityIndicatorView
+import SwiftyJSON
 
 
 var imageCache = NSCache()
@@ -53,14 +54,15 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
-        
+        label.userInteractionEnabled = true
         return label
     }()
     
     let profileImageView:UIImageView = {
         let imageView = UIImageView()
-//        imageView.image = UIImage(named: "zuckprofile")
+        //        imageView.image = UIImage(named: "zuckprofile")
         imageView.contentMode = .ScaleAspectFit
+        imageView.userInteractionEnabled = true
         return imageView
     }()
     
@@ -82,7 +84,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
     
     let likesCommentsLabel:UILabel = {
         let label = UILabel()
-//        label.text = "400 Likes  12 Comments"
+        //        label.text = "400 Likes  12 Comments"
         label.font = UIFont.systemFontOfSize(12)
         label.textColor = UIColor.rgb(155, green: 161, blue: 161)
         return label
@@ -95,21 +97,58 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
     }()
     
     // static func call use: Classname.method
+    
+    
+    
     let likeButton:UIButton = FeedCell.buttonForTtitle("Like", imageName: "like")
     let commentButton:UIButton  = FeedCell.buttonForTtitle("Comment", imageName: "comment")
     let shareButton:UIButton  = FeedCell.buttonForTtitle("Share", imageName: "share")
     
+    
     static func buttonForTtitle(title:String,imageName:String) -> UIButton{
+        
         let button = UIButton()
         button.setTitle(title, forState: .Normal)
         button.setTitleColor(UIColor.rgb(143, green: 150, blue: 143), forState: .Normal)
         
+        // png UIImageRenderingMode  讓圖片可以上色
         button.setImage(UIImage(named: imageName), forState:.Normal)
         button.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0)
-        
         button.titleLabel?.font = UIFont.boldSystemFontOfSize(14)
         
+        
+        // 圖片色階
+        
+        //        iv.image = UIImage(named: "home")?.imageWithRenderingMode(.AlwaysTemplate)
+        
+        
         return button
+    }
+    
+    
+    
+    func likeFunction () {
+        
+        guard let post_id = post?._id else  {return}
+        
+        // 按讚
+        // 進到閉包區間 表示成功傳回按讚資料 到server
+        ApiService.shareInstance.press_like(post_id) { (json) in
+            
+            print(json)
+            
+            self.post?.numLikes? += 1
+            self.likeButton.tintColor = UIColor.blueColor()
+            
+            self.feedController?.collectionView?.reloadData()
+            
+        }
+        
+        /* 收回讚
+         ApiService.shareInstance.cancel_like(post_id) { (json) in
+         print(json)
+         }
+         */
     }
     
     // Set Cell Content
@@ -214,6 +253,8 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
         likeButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(likeFunction)))
         commentButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(commentFunction)))
         
+        profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showGuest)))
+        nameLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showGuest)))
         
         setupStatusImageViewLoader()
         
@@ -249,30 +290,41 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
     }
     
     
-    func likeFunction () {
-        
-        guard let post_id = post?._id else  {return}
-        
-        // 按讚
-        // 進到閉包區間 表示成功傳回按讚資料 到server
-        ApiService.shareInstance.press_like(post_id) { (json) in
-            print(json)
-            
-            self.post?.numLikes? += 1
-            self.feedController?.collectionView?.reloadData()
-        }
-        
-        /* 收回讚
-         ApiService.shareInstance.cancel_like(post_id) { (json) in
-         print(json)
-         }
-         */
-    }
-    
-    
     
     func commentFunction () {
         print("commentFunction_ Pressed ")
+    }
+    
+    func showGuest() {
+        print("show guest ")
+        
+        /* guest json structure
+         
+         "user_id" : "57c84aaa7214df73b5303f31",
+         "profile_picture" : "http:\/\/140.136.155.143\/uploads\/57c84aaa7214df73b5303f31\/avatar\/avatar",
+         "username" : "user100"
+         
+         */
+        
+        //  用字典 拼接 JSON
+        
+        guard let user_id = post?.author_id ,let profile = post?.author_imgurl , let username = post?.author_name  else {return}
+        
+        let jsonObject: [String: AnyObject] = [
+            "user_id": user_id,
+            "profile_picture": profile,
+            "username": username
+        ]
+        
+        let guestJson  = SwiftyJSON.JSON(jsonObject)
+
+        guestJSON.append(guestJson)
+        
+
+        
+         let destination = self.feedController!.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
+         self.feedController?.navigationController?.pushViewController(destination, animated: true)
+        
     }
     
     

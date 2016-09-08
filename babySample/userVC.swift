@@ -71,6 +71,7 @@ class userVC: UITableViewController, UISearchBarDelegate  {
                 // guestVC 陣列儲存使用者 供guestVC讀取
                 var user = SwiftyJSON.JSON(json)
                 let temp = user["data"][0]["id"]
+                
                 user["user_id"] = temp
                 user["username"] = user["data"][0]["name"]
                 self.users.append(user)
