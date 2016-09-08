@@ -68,7 +68,10 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         // 底部載入
         setFooterView()
         
+        
+        
     }
+    
     
     // release memory
     override func didReceiveMemoryWarning() {
@@ -105,6 +108,8 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         collectionView!.collectionViewLayout = layout
         
         collectionView?.registerClass(PhotoBrowserCollectionViewLoadingCell.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: PhotoBrowserFooterViewIdentifier)
+        
+
     }
     
     
@@ -126,7 +131,19 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         
         feedCell.feedController = self
         
+        
+        // 滑動換頁
+        //let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeToChangeView))
+        
+        //swipeGesture.numberOfTouchesRequired = 1
+        //swipeGesture.direction = UISwipeGestureRecognizerDirection.Left
+        //feedCell.addGestureRecognizer(swipeGesture)
+
         return feedCell
+    }
+    
+    func swipeToChangeView() {
+        print("123")
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -300,7 +317,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                     let json = SwiftyJSON.JSON(json)
                     
 
-                    // print(json)
+                     // print(json)
                     
                     for (_,subJson):(String, SwiftyJSON.JSON) in json {
                         
@@ -314,6 +331,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                         
                         post.content = subJson["content"].string
                         post.imgurl = subJson["imgurl"].string
+                        post._id = subJson["_id"].string
                         
                         post.numLikes = 1541
                         post.numComments = 124
@@ -371,6 +389,8 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
             addSubview(spinner)
         }
     }
+    
+
     
 }
 

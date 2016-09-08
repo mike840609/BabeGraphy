@@ -13,11 +13,9 @@ import NVActivityIndicatorView
 var imageCache = NSCache()
 
 // MARK: - CUSTOMER Cell
-class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
-    
+class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
     
     var feedController: FeedController?
-    
     
     func animate() {
         //feedController?.animateImageView(statusImg)
@@ -25,18 +23,15 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
     
     
     var post:Post?{
-        
         didSet{
             
             // statusImg.image = nil
             loader.startAnimating()
             
-            
             if let statusImageUrl = post?.imgurl{
                 statusImg.hnk_setImageFromURLAutoSize(NSURL(string:statusImageUrl)!)
                 loader.stopAnimating()
             }
-            
             setupNameLocationStatusAndProfileImage()
         }
     }
@@ -54,7 +49,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
     override func prepareForReuse() {
         statusImg.image = nil
     }
-
+    
     let nameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
@@ -64,7 +59,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
     
     let profileImageView:UIImageView = {
         let imageView = UIImageView()
-                imageView.image = UIImage(named: "zuckprofile")
+        imageView.image = UIImage(named: "zuckprofile")
         imageView.contentMode = .ScaleAspectFit
         return imageView
     }()
@@ -158,7 +153,6 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
                 time_after_cal = "  \(difference.weekOfMonth) 週前"
             }
             
-            
             attributedText.appendAttributedString(NSAttributedString(
                 string: time_after_cal,
                 attributes:[NSFontAttributeName:UIFont.boldSystemFontOfSize(12),
@@ -212,9 +206,14 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
         addSubview(commentButton)
         addSubview(shareButton)
         
+        
+        // MARK: - Add Gesture
         // statusImg.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animate)))
         
         shareButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(shareFunction)))
+        likeButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(likeFunction)))
+        commentButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(commentFunction)))
+        
         
         setupStatusImageViewLoader()
         
@@ -236,6 +235,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
         
     }
     
+    // MARK: - Button Function
     let loader = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
     
     func setupStatusImageViewLoader() {
@@ -249,9 +249,33 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
     }
     
     
-    func shareFunction() {
-        let hokusai = Hokusai()
+    func likeFunction () {
         
+        guard let post_id = post?._id else  {return}
+        
+        // 按讚
+        // 進到閉包區間 表示成功傳回按讚資料 到server
+        ApiService.shareInstance.press_like(post_id) { (json) in
+            print(json)
+        }
+        
+        /* 收回讚
+         ApiService.shareInstance.cancel_like(post_id) { (json) in
+         print(json)
+         }
+         */
+    }
+    
+    
+    
+    func commentFunction () {
+        print("commentFunction_ Pressed ")
+    }
+    
+    
+    func shareFunction() {
+        
+        let hokusai = Hokusai()
         // Add a button with a closure
         hokusai.addButton("Facebook") {
             print("facebook")
@@ -266,13 +290,9 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable{
         }
         
         
-        
         // hokusai.addButton("Button 2", target: self, selector: Selector("button2Pressed"))
         hokusai.fontName = "Verdana-Bold"
         hokusai.colorScheme = HOKColorScheme.Tsubaki
-        
-
-        
         
         // Change a title for cancel button. Default is Cancel. (Optional)
         hokusai.cancelButtonTitle = "Done"

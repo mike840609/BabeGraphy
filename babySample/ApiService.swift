@@ -197,6 +197,52 @@ class ApiService: NSObject {
         
     }
     
+    //  MARK: - Feed Function
+    /*
+     http://140.136.155.143/api/like/press_like   parameter: token , post_id
+     http://140.136.155.143/api/like/cancel_like  parameter: token,post_id
+     
+     */
+    func press_like (post_id:String , completion : (SwiftyJSON.JSON) -> ()) {
+        
+        guard let AccessToken:String = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {return}
+        
+        Alamofire.request(.POST,"http://140.136.155.143/api/like/press_like",
+            parameters: ["token":AccessToken , "post_id": post_id]).validate().responseJSON{ (response) in
+            
+            switch response.result{
+                
+            case .Success(let json):
+                let json = SwiftyJSON.JSON(json)
+                
+                    // complete handerler
+                    completion(json)
+                
+            case .Failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    
+    func cancel_like (post_id:String , completion:(SwiftyJSON.JSON) -> ()){
+        guard let AccessToken:String = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {return}
+        
+        Alamofire.request(.POST,"http://140.136.155.143/api/like/cancel_like",
+            parameters: ["token":AccessToken , "post_id": post_id]).validate().responseJSON{ (response) in
+                
+                switch response.result{
+                    
+                case .Success(let json):
+                    let json = SwiftyJSON.JSON(json)
+                    completion(json)
+                    
+                case .Failure(let error):
+                    print(error.localizedDescription)
+                }
+        }
+    }
+    
     
     
     
