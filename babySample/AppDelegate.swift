@@ -29,9 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // status bar
         application.statusBarStyle = .LightContent
         
-
-
-
         
         // facebook delegate
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)

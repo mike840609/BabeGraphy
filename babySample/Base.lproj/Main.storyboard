@@ -1881,7 +1881,7 @@
         <image name="picture-icon" width="32" height="32"/>
         <image name="placeholder2" width="600" height="600"/>
         <image name="requests_icon" width="30" height="30"/>
-        <image name="settings" width="32" height="32"/>
+        <image name="settings" width="21" height="21"/>
         <image name="upload" width="512" height="512"/>
     </resources>
 </document>

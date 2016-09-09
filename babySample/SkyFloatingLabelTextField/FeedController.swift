@@ -24,7 +24,6 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     // local var 測試用
     var posts = [Post]()
     
-    
     var refresher:UIRefreshControl!
     
     // 紀錄是否更新照片 以及正在瀏覽的頁面
@@ -36,7 +35,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.hidesBarsOnSwipe = true
-        //        navigationController?.navigationBar.translucent = true
+        // navigationController?.navigationBar.translucent = true
         
         // status bar background
         let view = UIView(frame:
@@ -44,6 +43,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         )
         view.backgroundColor = UIColor(red: 1.0, green: 0.5, blue: 0.67, alpha: 0.9)
         self.view.addSubview(view)
+        
         
     }
     
@@ -67,7 +67,6 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         
         // 底部載入
         setFooterView()
-        
         
         
     }
@@ -316,7 +315,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                     
                     let json = SwiftyJSON.JSON(json)
                     
-                    print(json)
+                    //                    print(json)
                     print("============================================================================")
                     
                     for (_ ,subJson):(String, SwiftyJSON.JSON) in json {
@@ -336,11 +335,23 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                         post._id = subJson["_id"].string
                         
                         
-                        post.numLikes = subJson["likes"].int  == nil ? 0 : subJson["likes"].int
+                        post.numLikes = subJson["likes_count"].int  == nil ? 0 : subJson["likes_count"].int
                         post.numComments = subJson["comments"].int == nil ? 0 : subJson["comments"].int
                         
-                        
+                        // 串 likes 的user
+                        for (_ ,sub):(String, SwiftyJSON.JSON) in subJson["likes"]{
+                            
+                            // print(sub)
+                            
+                            let user = User()
+                            user.user_id = sub["user_id"].string
+                            user.user_name = sub["user_name"].string
+                            
+                            post.likes_Users.append(user)
+                        }
+                
                         self.posts.append(post)
+                        
                         self.collectionView?.reloadData()
                     }
                     

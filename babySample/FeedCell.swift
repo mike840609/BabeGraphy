@@ -87,6 +87,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
         //        label.text = "400 Likes  12 Comments"
         label.font = UIFont.systemFontOfSize(12)
         label.textColor = UIColor.rgb(155, green: 161, blue: 161)
+        label.userInteractionEnabled = true
         return label
     }()
     
@@ -139,8 +140,9 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
             
             self.post?.numLikes? += 1
             self.likeButton.tintColor = UIColor.blueColor()
-            
-            self.feedController?.collectionView?.reloadData()
+            // self.post?.likes_Users.append(Friend(name: , picture: <#T##String?#>)
+            self.feedController?.getFeedPost()
+//            self.feedController?.collectionView?.reloadData()
             
         }
         
@@ -255,6 +257,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
         
         profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showGuest)))
         nameLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showGuest)))
+        likesCommentsLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showlikesUser)))
         
         setupStatusImageViewLoader()
         
@@ -307,7 +310,6 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
          */
         
         //  用字典 拼接 JSON
-        
         guard let user_id = post?.author_id ,let profile = post?.author_imgurl , let username = post?.author_name  else {return}
         
         let jsonObject: [String: AnyObject] = [
@@ -317,13 +319,37 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
         ]
         
         let guestJson  = SwiftyJSON.JSON(jsonObject)
-
+        
         guestJSON.append(guestJson)
         
-
+        let destination = self.feedController!.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
+        self.feedController?.navigationController?.pushViewController(destination, animated: true)
         
-         let destination = self.feedController!.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
-         self.feedController?.navigationController?.pushViewController(destination, animated: true)
+    }
+    
+    func showlikesUser () {
+        
+        var friends = [Friend]()
+        
+        let friendsController = FriendsController(collectionViewLayout: UICollectionViewFlowLayout())
+        
+        if let user = post?.likes_Users{
+            
+            for i in  user{
+                
+                let friend = Friend(name: i.user_name, picture: "http://140.136.155.143/uploads/57c84aaa7214df73b5303f31/avatar/avatar")
+                
+                friends.append(friend)
+            }
+            
+            
+        }
+        
+        
+        friendsController.friends = friends
+        self.feedController?.navigationController?.pushViewController(friendsController, animated: true)
+        //        self.feedController?.navigationBar.tintColor = UIColor.whiteColor()
+        
         
     }
     

@@ -55,5 +55,6 @@ https://github.com/Cassiszuoan/laravel-restapi
 
 
 ## License
+BabeGraphy is available under the MIT license. See the LICENSE file for more info . 
 Created by 蔡鈞 on 2016/7/2.
 Copyright © 2016年 蔡鈞. All rights reserved.
