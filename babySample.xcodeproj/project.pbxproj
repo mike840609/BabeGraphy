@@ -52,6 +52,8 @@
 		4D5449701D2A29B7006461DC /* list-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D54496F1D2A29B7006461DC /* list-4.png */; };
 		4D5449721D2A2FB0006461DC /* user-43.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D5449711D2A2FB0006461DC /* user-43.png */; };
 		4D5449741D2A467C006461DC /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D5449731D2A467C006461DC /* warning.png */; };
+		4D5B99181D86C06B0096D63A /* LikeUsersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5B99171D86C06B0096D63A /* LikeUsersVC.swift */; };
+		4D5B991A1D86C15C0096D63A /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5B99191D86C15C0096D63A /* UserCell.swift */; };
 		4D5C4D6D1D73664D007ADAFB /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C4D6C1D73664D007ADAFB /* PreviewViewController.swift */; };
 		4D6B1AA81D2546FD00405E2B /* homeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B1AA71D2546FD00405E2B /* homeVC.swift */; };
 		4D6B1AAA1D2548D000405E2B /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B1AA91D2548D000405E2B /* headerView.swift */; };
@@ -70,7 +72,6 @@
 		4DABA2951D7E9F040098E6C1 /* ic_profile@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DABA28E1D7E9F040098E6C1 /* ic_profile@3x.png */; };
 		4DABA2961D7E9F040098E6C1 /* ic_settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DABA28F1D7E9F040098E6C1 /* ic_settings@3x.png */; };
 		4DABA2981D7EC9620098E6C1 /* BabyCreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABA2971D7EC9620098E6C1 /* BabyCreateController.swift */; };
-		4DADDBED1D832A71008ABF14 /* FriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADDBEC1D832A71008ABF14 /* FriendsController.swift */; };
 		4DAFE8BE1D2588810000334F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFE8BD1D2588810000334F /* Constants.swift */; };
 		4DBA164C1D41EB6E009F35FC /* guestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBA164B1D41EB6E009F35FC /* guestVC.swift */; };
 		4DC669A51D5C5210006CBF6A /* AlbumVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC669A41D5C5210006CBF6A /* AlbumVC.swift */; };
@@ -136,6 +137,8 @@
 		4D54496F1D2A29B7006461DC /* list-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-4.png"; sourceTree = "<group>"; };
 		4D5449711D2A2FB0006461DC /* user-43.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-43.png"; sourceTree = "<group>"; };
 		4D5449731D2A467C006461DC /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning.png; sourceTree = "<group>"; };
+		4D5B99171D86C06B0096D63A /* LikeUsersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeUsersVC.swift; sourceTree = "<group>"; };
+		4D5B99191D86C15C0096D63A /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		4D5C4D6C1D73664D007ADAFB /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		4D6B1AA71D2546FD00405E2B /* homeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = homeVC.swift; sourceTree = "<group>"; };
 		4D6B1AA91D2548D000405E2B /* headerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
@@ -154,7 +157,6 @@
 		4DABA28E1D7E9F040098E6C1 /* ic_profile@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_profile@3x.png"; sourceTree = "<group>"; };
 		4DABA28F1D7E9F040098E6C1 /* ic_settings@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_settings@3x.png"; sourceTree = "<group>"; };
 		4DABA2971D7EC9620098E6C1 /* BabyCreateController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BabyCreateController.swift; sourceTree = "<group>"; };
-		4DADDBEC1D832A71008ABF14 /* FriendsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsController.swift; sourceTree = "<group>"; };
 		4DAFE8BD1D2588810000334F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4DBA164B1D41EB6E009F35FC /* guestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = guestVC.swift; sourceTree = "<group>"; };
 		4DC669A41D5C5210006CBF6A /* AlbumVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumVC.swift; sourceTree = "<group>"; };
@@ -218,7 +220,8 @@
 				4D2D44C41D0DA51000E6CE0D /* FeedCell.swift */,
 				4D2D44C61D0DA5BE00E6CE0D /* Extensions.swift */,
 				4D2D44C81D0DA6D000E6CE0D /* Post.swift */,
-				4DADDBEC1D832A71008ABF14 /* FriendsController.swift */,
+				4D5B99171D86C06B0096D63A /* LikeUsersVC.swift */,
+				4D5B99191D86C15C0096D63A /* UserCell.swift */,
 			);
 			name = NewsFeed;
 			sourceTree = "<group>";
@@ -597,11 +600,13 @@
 				4D1258A81D2CD96800A7B6B9 /* navVC.swift in Sources */,
 				4D1258A61D2CD94000A7B6B9 /* tabVC.swift in Sources */,
 				4D2D44C51D0DA51000E6CE0D /* FeedCell.swift in Sources */,
+				4D5B991A1D86C15C0096D63A /* UserCell.swift in Sources */,
 				4DE3388A1D27F455001373E3 /* MaterialButton.swift in Sources */,
 				4D3749DC1D07FFD100F57F68 /* AppDelegate.swift in Sources */,
 				4DAA53691D3202510099B78E /* EditVC.swift in Sources */,
 				4D6EF6C41D3D1FFB00931BB6 /* userVC.swift in Sources */,
 				4D3749FA1D087CC500F57F68 /* LoginController.swift in Sources */,
+				4D5B99181D86C06B0096D63A /* LikeUsersVC.swift in Sources */,
 				4DABA2861D7E9BC60098E6C1 /* GuillotineMenuTransitionAnimation.swift in Sources */,
 				4DAFE8BE1D2588810000334F /* Constants.swift in Sources */,
 				4DDC7EE01D7FECBD00BCAF64 /* Hokusai.swift in Sources */,
@@ -614,7 +619,6 @@
 				4DABA2821D7E98D50098E6C1 /* MenuViewController.swift in Sources */,
 				4DA01D6A1D42170F0041B482 /* ApiService.swift in Sources */,
 				4DE3388C1D27F455001373E3 /* MateriaTextField.swift in Sources */,
-				4DADDBED1D832A71008ABF14 /* FriendsController.swift in Sources */,
 				4DC669A51D5C5210006CBF6A /* AlbumVC.swift in Sources */,
 				4DC669A81D5C5676006CBF6A /* interest.swift in Sources */,
 			);

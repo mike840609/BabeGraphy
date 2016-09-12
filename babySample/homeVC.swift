@@ -458,9 +458,14 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
                     previewingContext.sourceRect = layoutAttributes.frame
                 }
                 
-                let imageURL = self.user_posts[indexPath.item]["imgurl"].string
                 
-                previewViewController.imageView.hnk_setImageFromURLAutoSize(NSURL(string: imageURL!)!)
+                
+                if  let  imageURL = self.user_posts[indexPath.item]["imgurl"].string {
+                    previewViewController.imageView.hnk_setImageFromURLAutoSize(NSURL(string: imageURL)!)
+                    
+                }
+                
+                
                 
                 return previewViewController
             }

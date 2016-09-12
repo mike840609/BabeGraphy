@@ -270,10 +270,9 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
         
         // button constraints Button Equal another
         addConstraintWithFormat("H:|[v0(v2)][v1(v2)][v2]|", views: likeButton,commentButton,shareButton)
+        
         addConstraintWithFormat("V:|-12-[v0]", views: nameLabel)
-        
-        
-        addConstraintWithFormat("V:|-8-[v0(44)]-4-[v1]-4-[v2(300)]-8-[v3(24)]-8-[v4(0.4)][v5(44)]|", views: profileImageView,statusTextView,statusImg,likesCommentsLabel,dividerLineView,likeButton)
+        addConstraintWithFormat("V:|-8-[v0(44)]-4-[v1]-4-[v2(320)]-8-[v3(24)]-8-[v4(0.4)][v5(44)]|", views: profileImageView,statusTextView,statusImg,likesCommentsLabel,dividerLineView,likeButton)
         addConstraintWithFormat("V:[v0(44)]|", views: commentButton)
         addConstraintWithFormat("V:[v0(44)]|", views: shareButton)
         
@@ -328,7 +327,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
     }
     
     func showlikesUser () {
-        
+        /*
         var friends = [Friend]()
         
         let friendsController = FriendsController(collectionViewLayout: UICollectionViewFlowLayout())
@@ -337,7 +336,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
             
             for i in  user{
                 
-                let friend = Friend(name: i.user_name, picture: "http://140.136.155.143/uploads/57c84aaa7214df73b5303f31/avatar/avatar")
+                let friend = Friend(name: i.user_name, picture: i.user_imgurl)
                 
                 friends.append(friend)
             }
@@ -348,7 +347,30 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
         
         friendsController.friends = friends
         self.feedController?.navigationController?.pushViewController(friendsController, animated: true)
-        //        self.feedController?.navigationBar.tintColor = UIColor.whiteColor()
+        */
+        
+        
+        
+        let usersController = LikeUsersVC()
+        
+        
+        if let user = post?.likes_Users{
+            
+//            for i in  user{
+//                
+//                let user = User()
+//                user.user_id = i.user_id
+//                user.user_imgurl =
+//                
+//                Users.append(user)
+//            }
+            
+            usersController.users = user
+        }
+        
+        
+        
+        self.feedController?.navigationController?.pushViewController(usersController, animated: true)
         
         
     }

@@ -43,4 +43,12 @@ class User:NSObject{
     var user_id:String?
     var user_name:String?
     var user_imgurl:String?
+    
+    
 }
+
+//struct User {
+//    var user_id:String?
+//    var user_name:String?
+//    var user_imgurl:String?
+//}

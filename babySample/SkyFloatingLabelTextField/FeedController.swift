@@ -151,7 +151,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
             
             let rect = NSString(string: statusText).boundingRectWithSize(CGSizeMake(view.frame.width, 1000), options: NSStringDrawingOptions.UsesFontLeading.union(NSStringDrawingOptions.UsesLineFragmentOrigin), attributes: [NSFontAttributeName:UIFont.systemFontOfSize(14)], context: nil)
             
-            let knownHeight: CGFloat = 8 + 44 + 4 + 4 + 300 + 8 + 24 + 8 + 44
+            let knownHeight: CGFloat = 8 + 44 + 4 + 4 + 320 + 8 + 24 + 8 + 44
             
             return CGSizeMake(view.frame.width, rect.height + knownHeight + 16)
         }
@@ -315,7 +315,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                     
                     let json = SwiftyJSON.JSON(json)
                     
-                    //                    print(json)
+                                        print(json)
                     print("============================================================================")
                     
                     for (_ ,subJson):(String, SwiftyJSON.JSON) in json {
@@ -335,7 +335,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                         post._id = subJson["_id"].string
                         
                         
-                        post.numLikes = subJson["likes_count"].int  == nil ? 0 : subJson["likes_count"].int
+                        // post.numLikes = subJson["likes_count"].int  == nil ? 0 : subJson["likes_count"].int
                         post.numComments = subJson["comments"].int == nil ? 0 : subJson["comments"].int
                         
                         // 串 likes 的user
@@ -346,10 +346,14 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                             let user = User()
                             user.user_id = sub["user_id"].string
                             user.user_name = sub["user_name"].string
+                            user.user_imgurl = sub["user_avatar"].string
+                            
                             
                             post.likes_Users.append(user)
                         }
                 
+                        post.numLikes = post.likes_Users.count
+                        
                         self.posts.append(post)
                         
                         self.collectionView?.reloadData()
