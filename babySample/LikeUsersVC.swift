@@ -70,6 +70,7 @@ class LikeUsersVC: UITableViewController {
         if cell?.user?.user_id == user_id{
             
             let destination = self.feedController!.storyboard?.instantiateViewControllerWithIdentifier("homeVC") as! homeVC
+//             let navigationController = UINavigationController(rootViewController: destination)
             self.feedController?.navigationController?.pushViewController(destination, animated: true)
             
         }else{
@@ -92,8 +93,9 @@ class LikeUsersVC: UITableViewController {
             guestJSON.append(user_json)
             
             
-            //
+            
             let destination = self.feedController!.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
+//            let navigationController = UINavigationController(rootViewController: destination)
             self.feedController?.navigationController?.pushViewController(destination, animated: true)
             
             

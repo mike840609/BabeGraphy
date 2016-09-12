@@ -273,6 +273,16 @@ class ApiService: NSObject {
      
      */
     
+    // MARK: - HomeVC function
+    /*
+     http://140.136.155.143/api/baby/store
+     http://140.136.155.143/api/baby/search
+     http://140.136.155.143/api/baby/searchbyid
+     http://140.136.155.143/api/baby/upload
+     http://140.136.155.143/api/baby/delete
+     */
+    
+    
     // MARK: - PHOTO FORMAT function
     func urlRequestWithComponents(urlString:String, parameters:NSDictionary) -> (URLRequestConvertible, NSData) {
         

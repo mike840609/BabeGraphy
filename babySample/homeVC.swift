@@ -44,9 +44,16 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     // pull to refresher
     var refresher:UIRefreshControl!
     
+    //    var PostCount:String?{
+    //        didSet{
+    //            collectionView?.reloadData()
+    //        }
+    //    }
+    
     // identify
     let PhotoBrowserCellIdentifier = "PhotoBrowserCell"
     let PhotoBrowserFooterViewIdentifier = "PhotoBrowserFooterView"
+    
     
     
     override func viewWillAppear(animated: Bool) {
@@ -69,7 +76,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         
         
         // 獲取所有使用者的貼文
-        getPost()
+        getPost(){ _ in}
         
         peekPop = PeekPop(viewController: self)
         peekPop?.registerForPreviewingWithDelegate(self, sourceView: collectionView!)
@@ -94,7 +101,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
         let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "Header", forIndexPath: indexPath) as! headerView
-        
+        print(indexPath)
         
         // 抓不到token ,token過期 ,重新登入一次
         guard let AccessToken:String? = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {
@@ -140,6 +147,8 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
                 header.followings.text = String(following_count)
                 header.posts.text = String(posts_count)
                 
+                //                header.posts.text = self.PostCount
+                
                 if let bio = json["data"][0][JSON_BIO].string{
                     header.bioLbl.text = bio
                 }
@@ -174,6 +183,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
                 // follower 亂跳問題
                 print(" id:\(id)\n name:\(name)\n email:\(email)\n posts:\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")
                 
+
                 
                 // self.getInfo()
                 
@@ -270,7 +280,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     func refresh(){
         
         // 更新 user_posts 陣列資料 而後再刷新 collection view
-           self.getPost()
+        self.getPost(){_ in }
         
         collectionView?.reloadData()
         refresher.endRefreshing()
@@ -280,7 +290,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     var loadingStatus = false
     
     // user po 文
-    func getPost(){
+    func getPost(completion:(Int) -> ()){
         
         if loadingStatus {
             return
@@ -299,7 +309,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         }
         
         //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)){
-            self.user_posts.removeAll(keepCapacity: false)
+        self.user_posts.removeAll(keepCapacity: false)
         //}
         
         
@@ -326,14 +336,24 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
                 }
                 
                 
-                
                 let indexPaths = (lastItem..<self.user_posts.count).map {NSIndexPath(forItem: $0, inSection: 0)}
-                
                 
                 self.collectionView?.insertItemsAtIndexPaths(indexPaths)
                 
                 print("all user's post:" , self.user_posts.count)
                 print("=====================================================\n\n")
+                
+                completion(json.count)
+                
+                
+                
+                //let v = self.collectionView?.supplementaryViewForElementKind(UICollectionElementKindSectionHeader, atIndexPath: NSIndexPath(index: 2)) as? headerView
+                // v.postTitle.text = String(self.user_posts.count)
+                
+                // 更新計數器 暫時這樣
+                // self.PostCount = String(self.user_posts.count)
+                
+                
                 
             case .Failure(let error):
                 print(error.localizedDescription)

@@ -71,6 +71,10 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
         //        textView.text = "Today is a good day"
         textView.font = UIFont.systemFontOfSize(14)
         textView.scrollEnabled = false
+        
+        textView.userInteractionEnabled = false
+        textView.editable = false
+        
         return textView
     }()
     

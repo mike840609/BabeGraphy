@@ -80,6 +80,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     
     // release memory
     override func didReceiveMemoryWarning() {
+        
     }
     
     // MARK: scrollView
