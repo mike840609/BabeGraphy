@@ -39,7 +39,7 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
-        navigationController?.hidesBarsOnSwipe = true
+        navigationController?.hidesBarsOnSwipe = false
         //        navigationController?.navigationBar.translucent = true
         
         // status bar background

@@ -14,6 +14,23 @@ import Haneke
 
 class UserCell: UITableViewCell {
     
+    
+    var user:User?{
+        didSet{
+            if let img = user?.user_imgurl{
+                profileImageView.hnk_setImageStringFromURLAutoSize(img)
+            }
+            if let name = user?.user_name{
+                textLabel?.text = name
+                
+            }
+            if let id = user?.user_id{
+                detailTextLabel?.text = id
+            }
+            
+        }
+    }
+    
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -25,7 +42,7 @@ class UserCell: UITableViewCell {
     
     let timeLabel: UILabel = {
         let label = UILabel()
-//        label.text = "HH:MM:SS"
+        //        label.text = "HH:MM:SS"
         label.font = UIFont.systemFontOfSize(13)
         label.textColor = UIColor.darkGrayColor()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -33,9 +50,9 @@ class UserCell: UITableViewCell {
     }()
     
     
-
     
-
+    
+    
     
     // MARK: - Layout
     override func layoutSubviews() {
@@ -48,6 +65,8 @@ class UserCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .Subtitle, reuseIdentifier: reuseIdentifier)
+        
+        
         
         addSubview(profileImageView)
         addSubview(timeLabel)

@@ -43,7 +43,7 @@ extension UIView{
     }
 }
 
-// MARK: - hnk 
+// MARK: - hnk
 // MARK: - Autolayoutextention
 // UIImageView 自動大小(程式碼佈局) haneke_swift
 extension UIImageView {
@@ -57,9 +57,22 @@ extension UIImageView {
         image = nil
         hnk_setImageFromURL(url, format: format)
     }
+    
+    func hnk_setImageStringFromURLAutoSize(url: String)  {
+        
+        var format: Format<UIImage>? = nil
+        if frame.size == CGSize.zero {
+            format = Format<UIImage>(name: "original")
+        }
+        // 先清空圖片 避免reuse cell 時 有之前的圖片
+        image = nil
+        
+        hnk_setImageFromURL(NSURL(string: url)!, format: format)
+        
+    }
 }
 
-// 
+//
 
 
 // 時間換算

@@ -327,50 +327,19 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
     }
     
     func showlikesUser () {
-        /*
-        var friends = [Friend]()
-        
-        let friendsController = FriendsController(collectionViewLayout: UICollectionViewFlowLayout())
-        
-        if let user = post?.likes_Users{
-            
-            for i in  user{
-                
-                let friend = Friend(name: i.user_name, picture: i.user_imgurl)
-                
-                friends.append(friend)
-            }
-            
-            
-        }
-        
-        
-        friendsController.friends = friends
-        self.feedController?.navigationController?.pushViewController(friendsController, animated: true)
-        */
-        
-        
-        
+
         let usersController = LikeUsersVC()
         
+        guard let user  = post?.likes_Users else{ return}
         
-        if let user = post?.likes_Users{
-            
-//            for i in  user{
-//                
-//                let user = User()
-//                user.user_id = i.user_id
-//                user.user_imgurl =
-//                
-//                Users.append(user)
-//            }
-            
-            usersController.users = user
-        }
-        
-        
+//        if let user = post?.likes_Users{
+//            usersController.users = user
+//        }
+         usersController.users = user
+        usersController.feedController = feedController
         
         self.feedController?.navigationController?.pushViewController(usersController, animated: true)
+        
         
         
     }

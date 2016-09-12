@@ -47,7 +47,6 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,6 +69,13 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         
         
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        self.navigationController?.navigationBarHidden = false
+    }
+    
     
     
     // release memory

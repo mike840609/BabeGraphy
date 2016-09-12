@@ -82,6 +82,12 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     }
     
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        self.navigationController?.navigationBarHidden = false
+    }
+    
     // MARK: - UICollectionViewDataSource
     
     // header View

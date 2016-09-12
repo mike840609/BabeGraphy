@@ -8,22 +8,33 @@
 
 import UIKit
 import Haneke
+import SwiftyJSON
 
 class LikeUsersVC: UITableViewController {
+    
+    var feedController: FeedController?
     
     let cellId = "cellId"
     
     var users = [User]()
     
     override func viewWillAppear(animated: Bool) {
-        navigationController?.hidesBarsOnSwipe = false
+        super.viewWillDisappear(true)
+        
+        navigationController?.hidesBarsOnSwipe = true
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         tableView.registerClass(UserCell.self, forCellReuseIdentifier: cellId)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        self.navigationController?.navigationBarHidden = false
     }
     
     
@@ -38,19 +49,63 @@ class LikeUsersVC: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! UserCell
         
         let user = users[indexPath.item]
-        cell.textLabel?.text = user.user_name
-        cell.detailTextLabel?.text = user.user_id
         
-        if let profileImageUrl = user.user_imgurl{
-            cell.profileImageView.hnk_setImageFromURLAutoSize(NSURL(string: profileImageUrl)!)
-        }
+        cell.user = user
         
         return cell
         
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as? UserCell
+        
+        
+        guard let user_id  = NSUserDefaults.standardUserDefaults().stringForKey(USER_ID) else {return}
+        
+        // print(user_id)
+        // print(cell?.user?.user_id)
+        // print("-------------------")
+        
+        if cell?.user?.user_id == user_id{
+            
+            let destination = self.feedController!.storyboard?.instantiateViewControllerWithIdentifier("homeVC") as! homeVC
+            self.feedController?.navigationController?.pushViewController(destination, animated: true)
+            
+        }else{
+            
+            guard let id = cell?.user?.user_id else{ return }
+            guard let img = cell?.user?.user_imgurl else{ return }
+            guard let name = cell?.user?.user_name else{ return }
+            
+            
+            let user_data:[String: AnyObject] = [
+                "user_id" : id,
+                "profile_picture" : img,
+                "username" : name
+            ]
+            
+            let user_json = SwiftyJSON.JSON(user_data)
+            
+            // 把要造訪的user 直接 append 到陣列中 供後面 guestVC用
+            
+            guestJSON.append(user_json)
+            
+            
+            //
+            let destination = self.feedController!.storyboard?.instantiateViewControllerWithIdentifier("guestVC") as! guestVC
+            self.feedController?.navigationController?.pushViewController(destination, animated: true)
+            
+            
+        }
+        
+    }
+    
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 72
     }
+    
+    
     
 }
