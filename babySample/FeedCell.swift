@@ -11,12 +11,28 @@ import NVActivityIndicatorView
 import SwiftyJSON
 
 
+
 var imageCache = NSCache()
 
+// Delegate
+protocol CollectionViewCellDelegate: class {
+    
+    func shareToFb(image:UIImage,text:String)
+    func shareToTwitter(image:UIImage,text:String)
+    func shareToInstagram(image:UIImage,text:String)
+    
+}
+
+
+
 // MARK: - CUSTOMER Cell
-class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
+class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
     
     var feedController: FeedController?
+    
+    // 為cell 設定 自定義 代理協定
+    weak var delegate: CollectionViewCellDelegate?
+
     
     func animate() {
         //feedController?.animateImageView(statusImg)
@@ -353,8 +369,16 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
         
         let hokusai = Hokusai()
         // Add a button with a closure
+        
         hokusai.addButton("Facebook") {
             print("facebook")
+            
+            guard let image = self.statusImg.image else { return}
+            guard let text = self.statusTextView.text else { return}
+            
+            self.delegate?.shareToFb(image, text: text)
+
+            
         }
         
         hokusai.addButton("Instagram") {
@@ -362,6 +386,10 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable {
         }
         
         hokusai.addButton("Twitter") {
+            guard let image = self.statusImg.image else { return}
+            guard let text = self.statusTextView.text else { return}
+            
+            self.delegate?.shareToTwitter(image, text: text)
             print("Twitter")
         }
         

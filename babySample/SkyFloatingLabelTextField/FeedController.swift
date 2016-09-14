@@ -14,12 +14,16 @@ import SwiftyJSON
 import NVActivityIndicatorView
 import SKPhotoBrowser
 
+import Social
+import Accounts
+
+
 private let reuseIdentifier = "Cell"
 
-// Global var
-// var posts = [Post]()
 
-class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLayout ,SKPhotoBrowserDelegate{
+class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLayout ,SKPhotoBrowserDelegate ,CollectionViewCellDelegate{
+    
+    
     
     // local var 測試用
     var posts = [Post]()
@@ -136,6 +140,9 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         feedCell.post = posts[indexPath.item]
         
         feedCell.feedController = self
+        
+        // 代理
+        feedCell.delegate = self
         
         
         // 滑動換頁
@@ -312,17 +319,25 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         
         guard let AccessToken:String? = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {return}
         
-        Alamofire.request(.POST, "http://140.136.155.143/api/post/feed",parameters: ["token":AccessToken!]).validate(statusCode: 200..<300)
+        Alamofire.request(.POST, "http://140.136.155.143/api/post/feed",parameters: ["token":AccessToken!])//.validate(statusCode: 200..<300)
             .responseJSON { (response) in
                 
+                
+                print(response.result.value)
+                
+                print(response.response?.statusCode)
+                
                 switch response.result{
+                    
+                    
                 case .Success(let json):
+                    
                     
                     self.posts.removeAll(keepCapacity: false)
                     
                     let json = SwiftyJSON.JSON(json)
                     
-                                        print(json)
+                    print(json)
                     print("============================================================================")
                     
                     for (_ ,subJson):(String, SwiftyJSON.JSON) in json {
@@ -358,7 +373,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                             
                             post.likes_Users.append(user)
                         }
-                
+                        
                         post.numLikes = post.likes_Users.count
                         
                         self.posts.append(post)
@@ -373,7 +388,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                     
                 case .Failure(let error):
                     
-                    print(error.localizedDescription)
+                    print(error)
                     
                     // token 已經失效
                     if response.response?.statusCode == 500{
@@ -394,6 +409,8 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         getFeedPost()
         refresher.endRefreshing()
     }
+    
+    
     
     
     // footer loading
@@ -476,5 +493,70 @@ extension FeedController{
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
+}
+
+// MARK : - Customer Delegate
+extension FeedController{
+    
+    // Share to Facebook
+    func shareToFb(image:UIImage,text:String) {
+        
+        // let url: NSURL = NSURL(string: "http://www.google.es")!
+        
+        let fbController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+        fbController.setInitialText(text)
+        fbController.addImage(image)
+        // fbController.addURL(url)
+        
+        let completionHandler = {(result:SLComposeViewControllerResult) -> () in
+            fbController.dismissViewControllerAnimated(true, completion:nil)
+            switch(result){
+            case SLComposeViewControllerResult.Cancelled:
+                print("User canceled", terminator: "")
+            case SLComposeViewControllerResult.Done:
+                print("User posted", terminator: "")
+            }
+        }
+        
+        fbController.completionHandler = completionHandler
+        self.presentViewController(fbController, animated: true, completion:nil)
+        
+    }
+    
+    // Share to Twitter
+    func shareToTwitter(image:UIImage,text:String) {
+        
+        // let image: UIImage = UIImage(named: "image2.png")!
+        
+        let twitterController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+        twitterController.setInitialText(text)
+        twitterController.addImage(image)
+        
+        let completionHandler = {(result:SLComposeViewControllerResult) -> () in
+            twitterController.dismissViewControllerAnimated(true, completion: nil)
+            switch(result){
+            case SLComposeViewControllerResult.Cancelled:
+                print("User canceled", terminator: "")
+            case SLComposeViewControllerResult.Done:
+                print("User tweeted", terminator: "")
+            }
+        }
+        twitterController.completionHandler = completionHandler
+        self.presentViewController(twitterController, animated: true, completion: nil)
+        
+    }
+    
+    
+    // Share to instagram
+    func shareToInstagram(image:UIImage,text:String){
+        print("share to instagram")
+        
+    }
+    
+    
+    
+    
+    
+    
 }
 
