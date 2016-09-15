@@ -319,7 +319,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         
         guard let AccessToken:String? = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {return}
         
-        Alamofire.request(.POST, "http://140.136.155.143/api/post/feed",parameters: ["token":AccessToken!])//.validate(statusCode: 200..<300)
+        Alamofire.request(.POST, "http://140.136.155.143/api/post/feed",parameters: ["token":AccessToken!]).validate(statusCode: 200..<300)
             .responseJSON { (response) in
                 
                 

@@ -19,6 +19,7 @@ class AlbumVC: UIViewController {
     
     // MenuBar
     @IBOutlet weak var leftBarButton: UIButton!
+    
     private lazy var presentationAnimator = GuillotineTransitionAnimation()
     
     
@@ -28,6 +29,15 @@ class AlbumVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+
+        
+        // Change the height for 3.5-inch screen
+        if UIScreen.mainScreen().bounds.size.height == 480.0 {
+            let flowLayout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+            flowLayout.itemSize = CGSizeMake(250.0, 300.0)
+        }
     }
     
     private struct Storyboard{
@@ -69,6 +79,11 @@ extension AlbumVC:UICollectionViewDataSource{
         // 類別內設值屬性 自動賦值
         cell.interest = self.interests[indexPath.item]
         
+        
+        cell.layer.cornerRadius = 4.0
+        
+
+        
         return cell
     }
 }
@@ -76,23 +91,23 @@ extension AlbumVC:UICollectionViewDataSource{
 // 自動置中
 extension AlbumVC : UIScrollViewDelegate {
     
-    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>){
-        
-        let layout = self.collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
-        
-        let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
-        
-        var offset = targetContentOffset.memory
-        
-        let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
-        
-        let roundedIndex = round(index)
-        
-        offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)
-        
-        targetContentOffset.memory = offset
-        
-    }
+//    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>){
+//        
+//        let layout = self.collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
+//        
+//        let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
+//        
+//        var offset = targetContentOffset.memory
+//        
+//        let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
+//        
+//        let roundedIndex = round(index)
+//        
+//        offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)
+//        
+//        targetContentOffset.memory = offset
+//        
+//    }
     
     
 }
