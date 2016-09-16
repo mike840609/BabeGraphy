@@ -37,7 +37,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         super.viewDidLoad()
         
         self.setTextTheme()
-        //        self.emailTxt.becomeFirstResponder()
+        // self.emailTxt.becomeFirstResponder()
         
         // 手勢添加
         let avaTap = UITapGestureRecognizer(target: self, action: #selector(signUpVC.loadImg))
@@ -103,8 +103,6 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         
         
         self.applySkyscannerThemeWithIcon(self.emailTxt)
-        //  self.emailTxt.iconText = "\u{f007}"
-        //  self.emailTxt.iconText = "\u{f01c}"
         self.emailTxt.iconText = "\u{f1d8}"
         self.emailTxt.placeholder = "Account"
         self.emailTxt.selectedTitle = "enter your email address"
@@ -190,6 +188,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
     }
     
     func hideTitleVisibleFromFields() {
+        
         self.emailTxt.setTitleVisible(false, animated: true)
         self.passwordTxt.setTitleVisible(false, animated: true)
         self.repeatPassword.setTitleVisible(false, animated: true)
@@ -236,7 +235,7 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
             var txtAfterUpdate:NSString = emailTxt.text! as NSString
             txtAfterUpdate = txtAfterUpdate.stringByReplacingCharactersInRange(range, withString: string)
             self.validateEmailTextFieldWithText(txtAfterUpdate as String)
-            
+    
         }
         
         
@@ -261,8 +260,6 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         
         return true
     }
-    
-    
     
     
     func validateEmailTextFieldWithText(email: String?) {
@@ -303,7 +300,6 @@ class signUpVC: UIViewController , UITextFieldDelegate, UIImagePickerControllerD
         }
         
     }
-    
     
     
     func  validateRepeatPasswordTextField(repeat_password: String?){

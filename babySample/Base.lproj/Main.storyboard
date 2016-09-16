@@ -7,7 +7,8 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="fontawesome-webfont.ttf">
+        <mutableArray key="FontAwesome.otf">
+            <string>FontAwesome</string>
             <string>FontAwesome</string>
         </mutableArray>
     </customFonts>
@@ -203,7 +204,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uJx-4B-smV" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uJx-4B-smV" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="45" width="311" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="xe9-WC-dLg"/>
@@ -211,7 +212,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i3F-yn-Tz8" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i3F-yn-Tz8" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="90" width="311" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="NOO-2n-QKQ"/>
@@ -219,7 +220,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjg-6c-lwJ" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjg-6c-lwJ" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="135" width="311" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="fgM-CF-t4U"/>
@@ -227,7 +228,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cqi-ER-DvA" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cqi-ER-DvA" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="180" width="311" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="6dG-kf-mmU"/>
@@ -235,7 +236,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gCB-ex-sTS" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gCB-ex-sTS" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="225" width="311" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Tbe-fD-VPh"/>
@@ -441,6 +442,10 @@
                                 <state key="normal" title="Create">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="createBtnDown:" destination="DVh-jG-3ha" eventType="touchDown" id="zrP-Tf-fVR"/>
+                                    <action selector="createBtnUpInside:" destination="DVh-jG-3ha" eventType="touchUpInside" id="Li7-rG-WMG"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder2" translatesAutoresizingMaskIntoConstraints="NO" id="JWd-Z0-8hZ">
                                 <rect key="frame" x="125" y="72" width="125" height="125"/>
@@ -462,6 +467,30 @@
                                     <action selector="birthEditing:" destination="DVh-jG-3ha" eventType="editingDidBegin" id="iVD-SM-OAw"/>
                                 </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ClD-1k-way">
+                                <rect key="frame" x="306" y="30" width="53" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="At5-hu-fLb"/>
+                                    <constraint firstAttribute="width" constant="53" id="BNW-bl-Y8e"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="62" id="KPc-gi-3gr"/>
+                                    <constraint firstAttribute="height" constant="38" id="Ttc-qY-yac"/>
+                                    <constraint firstAttribute="width" constant="62" id="fth-sW-loJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.12941176469999999" green="0.74117647060000003" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="At5-hu-fLb"/>
+                                        <exclude reference="KPc-gi-3gr"/>
+                                        <exclude reference="fth-sW-loJ"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="dimissVC:" destination="DVh-jG-3ha" eventType="touchUpInside" id="4hy-EF-Dlj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -477,6 +506,7 @@
                             <constraint firstItem="j1h-hP-VIe" firstAttribute="leading" secondItem="83L-ho-P0D" secondAttribute="leading" id="PKI-pJ-5YD"/>
                             <constraint firstItem="JWd-Z0-8hZ" firstAttribute="centerX" secondItem="i3b-Gt-4qx" secondAttribute="centerX" id="QeT-4O-97W"/>
                             <constraint firstItem="83L-ho-P0D" firstAttribute="leading" secondItem="i3b-Gt-4qx" secondAttribute="leadingMargin" constant="32" id="SpX-8o-TxG"/>
+                            <constraint firstItem="ClD-1k-way" firstAttribute="trailing" secondItem="i3b-Gt-4qx" secondAttribute="trailingMargin" id="XVY-Vm-U6T"/>
                             <constraint firstItem="Mw8-hL-Shz" firstAttribute="top" secondItem="1fJ-zg-zL7" secondAttribute="bottom" id="bIY-cS-div"/>
                             <constraint firstItem="D2N-eP-mbF" firstAttribute="top" secondItem="79c-O6-Yxg" secondAttribute="bottom" constant="50" id="dZS-Ej-jiJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="79c-O6-Yxg" secondAttribute="trailing" constant="12" id="fh6-p8-eXa"/>
@@ -485,6 +515,7 @@
                             <constraint firstItem="83L-ho-P0D" firstAttribute="leading" secondItem="i3b-Gt-4qx" secondAttribute="leadingMargin" id="l5f-bT-3mM"/>
                             <constraint firstItem="83L-ho-P0D" firstAttribute="top" secondItem="JWd-Z0-8hZ" secondAttribute="bottom" constant="33" id="lEm-a2-y1R"/>
                             <constraint firstItem="79c-O6-Yxg" firstAttribute="leading" secondItem="i3b-Gt-4qx" secondAttribute="leadingMargin" constant="12" id="lqS-Lp-oX8"/>
+                            <constraint firstItem="ClD-1k-way" firstAttribute="top" secondItem="1fJ-zg-zL7" secondAttribute="bottom" constant="10" id="o7g-Iu-Nv3"/>
                             <constraint firstItem="83L-ho-P0D" firstAttribute="leading" secondItem="i3b-Gt-4qx" secondAttribute="leadingMargin" constant="33" id="u7c-fT-Cyu"/>
                             <constraint firstItem="Mw8-hL-Shz" firstAttribute="centerX" secondItem="i3b-Gt-4qx" secondAttribute="centerX" id="uLQ-IJ-1pF"/>
                             <constraint firstItem="JWd-Z0-8hZ" firstAttribute="top" secondItem="Mw8-hL-Shz" secondAttribute="bottom" constant="8" id="xjU-Xc-jYT"/>
@@ -501,7 +532,10 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="babyImg" destination="JWd-Z0-8hZ" id="4jt-dg-B7M"/>
+                        <outlet property="backBtn" destination="ClD-1k-way" id="2A4-Pb-hEc"/>
                         <outlet property="bloodTextField" destination="j1h-hP-VIe" id="auw-oO-Fsh"/>
+                        <outlet property="createBtn" destination="79c-O6-Yxg" id="7xO-Is-5rF"/>
                         <outlet property="dateTextFiled" destination="HRB-hb-Gms" id="FzQ-Qf-vfe"/>
                         <outlet property="nameTextField" destination="83L-ho-P0D" id="Tke-JW-oZX"/>
                     </connections>
@@ -1300,7 +1334,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1by-7x-oGC" id="Rhg-sc-i4a">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder2" translatesAutoresizingMaskIntoConstraints="NO" id="OHZ-nB-rCQ">

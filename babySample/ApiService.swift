@@ -177,9 +177,35 @@ class ApiService: NSObject {
      http://140.136.155.143/api/baby/delete
      */
     
-    func baby_create( token:String, name:String , birth:String, blood:String ,completion : (SwiftyJSON.JSON)-> ()){
-        guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey(ACCESS_TOKEN) else{ return }
+    func baby_create( name:String , birth:String, blood:String, babyImg:UIImage ,completion : (SwiftyJSON.JSON)-> ()){
         
+        guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey(ACCESS_TOKEN) else{ return }
+    
+        
+        
+        Alamofire.request(.POST, "http://140.136.155.143/api/baby/store",parameters: ["token":AccessToken,"name":name,"birth":birth,"blood":blood]).responseJSON { (response) in
+            switch response.result{
+                
+            case .Success( let json):
+                
+                let json = SwiftyJSON.JSON(json)
+                
+                print(json)
+                
+                guard let babyID = json["_id"].string else { return}
+                
+                
+                ApiService.shareInstance.baby_ImgUpload(babyID, image: babyImg){ json in
+                    print(json)
+                }
+                
+                
+            case .Failure(let error):
+                print( error.localizedDescription)
+                
+            }
+            
+        }
         
     }
     
@@ -191,8 +217,40 @@ class ApiService: NSObject {
         
     }
     
-    func baby_upload(token:String , id : String , completion : (SwiftyJSON.JSON)-> ()){
+    
+    func baby_ImgUpload(babyID :String ,image:UIImage, completion : (SwiftyJSON.JSON)-> ()){
         
+        guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey(ACCESS_TOKEN) else{ return }
+        let image : NSData = UIImageJPEGRepresentation(image, 0.5)!
+        let uuid = NSUUID().UUIDString
+        let parameterTemp = [
+            "pic": NetData(data: image, mimeType: .ImageJpeg, filename: "\(uuid).jpg"),
+            "Baby_id": babyID,
+            "token" : AccessToken
+        ]
+        
+        // 新增 api/post/upload  parameter: token , post_id
+        let urlRequest = urlRequestWithComponents(
+            "http://140.136.155.143/api/baby/upload",
+            parameters: parameterTemp)
+        
+        Alamofire.upload(urlRequest.0, data: urlRequest.1)
+            .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
+                print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+                
+            }
+            .responseJSON { response in
+                
+                switch response.result{
+                    
+                case.Success(let json):
+                    let json = SwiftyJSON.JSON(json)
+                    completion(json)
+                    
+                case .Failure(let error):
+                    print(error)
+                }
+        }
     }
     
     func baby_delete(object id : String , completion : (SwiftyJSON.JSON)-> ()){

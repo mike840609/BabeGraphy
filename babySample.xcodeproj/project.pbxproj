@@ -32,6 +32,7 @@
 		4D3749FA1D087CC500F57F68 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3749F91D087CC500F57F68 /* LoginController.swift */; };
 		4D3749FE1D0884B900F57F68 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D3749FD1D0884B900F57F68 /* fontawesome-webfont.ttf */; };
 		4D3A38AB1D8BADBD001D0D8D /* BabyCreateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3A38AA1D8BADBD001D0D8D /* BabyCreateVC.swift */; };
+		4D3A38AD1D8C6FD2001D0D8D /* pacifier.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D3A38AC1D8C6FD2001D0D8D /* pacifier.png */; };
 		4D4B00601D0C5048007E45A9 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4B005F1D0C5048007E45A9 /* FeedController.swift */; };
 		4D54495B1D2A20A1006461DC /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D54494D1D2A20A1006461DC /* add.png */; };
 		4D54495C1D2A20A1006461DC /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D54494E1D2A20A1006461DC /* calendar.png */; };
@@ -118,6 +119,7 @@
 		4D3749F91D087CC500F57F68 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		4D3749FD1D0884B900F57F68 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "fontawesome-webfont.ttf"; path = "../fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		4D3A38AA1D8BADBD001D0D8D /* BabyCreateVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BabyCreateVC.swift; sourceTree = "<group>"; };
+		4D3A38AC1D8C6FD2001D0D8D /* pacifier.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pacifier.png; sourceTree = "<group>"; };
 		4D4B005F1D0C5048007E45A9 /* FeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedController.swift; path = SkyFloatingLabelTextField/FeedController.swift; sourceTree = "<group>"; };
 		4D54494D1D2A20A1006461DC /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		4D54494E1D2A20A1006461DC /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				4D5449711D2A2FB0006461DC /* user-43.png */,
 				4DEA614B1D2D3FA300C242B8 /* image.png */,
 				4DEA614D1D2D415E00C242B8 /* key.png */,
+				4D3A38AC1D8C6FD2001D0D8D /* pacifier.png */,
 			);
 			path = Icon;
 			sourceTree = "<group>";
@@ -505,6 +508,7 @@
 				4D5449741D2A467C006461DC /* warning.png in Resources */,
 				4D3749FE1D0884B900F57F68 /* fontawesome-webfont.ttf in Resources */,
 				4D54496E1D2A2970006461DC /* server-2.png in Resources */,
+				4D3A38AD1D8C6FD2001D0D8D /* pacifier.png in Resources */,
 				4D3749E61D07FFD100F57F68 /* Assets.xcassets in Resources */,
 				4D5449701D2A29B7006461DC /* list-4.png in Resources */,
 				4DEA614E1D2D415E00C242B8 /* key.png in Resources */,

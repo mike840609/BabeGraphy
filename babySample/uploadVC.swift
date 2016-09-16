@@ -145,6 +145,7 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
                 appDelegate.window?.rootViewController = signin
                 
             }))
+            
             presentViewController(alertVC, animated: true, completion:nil)
         }
         
@@ -162,7 +163,6 @@ class uploadVC: UIViewController , UITextViewDelegate ,FusumaDelegate{
                 print(json)
                 
                 guard let post_id = json["_id"].string else { return}
-                
                 
                 
                 // 照片上傳
