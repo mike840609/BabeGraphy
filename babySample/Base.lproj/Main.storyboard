@@ -402,6 +402,114 @@
             </objects>
             <point key="canvasLocation" x="1346.5" y="2939.5"/>
         </scene>
+        <!--Baby CreateVC-->
+        <scene sceneID="tCM-xu-Mrj">
+            <objects>
+                <viewController storyboardIdentifier="BabyCreateVC" id="DVh-jG-3ha" customClass="BabyCreateVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1fJ-zg-zL7"/>
+                        <viewControllerLayoutGuide type="bottom" id="D2N-eP-mbF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="i3b-Gt-4qx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Baby" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mw8-hL-Shz">
+                                <rect key="frame" x="100" y="20" width="175" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="8I7-F0-e8U"/>
+                                    <constraint firstAttribute="width" constant="175" id="iZr-be-qLK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="23"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="83L-ho-P0D" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
+                                <rect key="frame" x="48" y="230" width="279" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="ZSI-Uu-4Jg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79c-O6-Yxg">
+                                <rect key="frame" x="28" y="572" width="319" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="Ebd-7m-6JT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
+                                <state key="normal" title="Create">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder2" translatesAutoresizingMaskIntoConstraints="NO" id="JWd-Z0-8hZ">
+                                <rect key="frame" x="125" y="72" width="125" height="125"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="125" id="Dbx-ei-eAB"/>
+                                    <constraint firstAttribute="width" constant="125" id="KtQ-dT-RPp"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j1h-hP-VIe" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
+                                <rect key="frame" x="48" y="295" width="279" height="45"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HRB-hb-Gms" customClass="SkyFloatingLabelTextFieldWithIcon" customModule="babySample" customModuleProvider="target">
+                                <rect key="frame" x="48" y="360" width="279" height="45"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="birthEditing:" destination="DVh-jG-3ha" eventType="editingDidBegin" id="iVD-SM-OAw"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="83L-ho-P0D" firstAttribute="leading" secondItem="i3b-Gt-4qx" secondAttribute="leadingMargin" constant="35" id="1pq-al-byJ"/>
+                            <constraint firstItem="HRB-hb-Gms" firstAttribute="leading" secondItem="j1h-hP-VIe" secondAttribute="leading" id="3UK-Iu-zzC"/>
+                            <constraint firstItem="HRB-hb-Gms" firstAttribute="leading" secondItem="83L-ho-P0D" secondAttribute="leading" id="9Ed-eb-Lta"/>
+                            <constraint firstItem="HRB-hb-Gms" firstAttribute="height" secondItem="j1h-hP-VIe" secondAttribute="height" id="B7V-mO-MdQ"/>
+                            <constraint firstItem="83L-ho-P0D" firstAttribute="trailing" secondItem="i3b-Gt-4qx" secondAttribute="trailingMargin" constant="-33" id="FJW-6d-lNi"/>
+                            <constraint firstItem="j1h-hP-VIe" firstAttribute="trailing" secondItem="83L-ho-P0D" secondAttribute="trailing" id="GVH-Wa-4R6"/>
+                            <constraint firstItem="HRB-hb-Gms" firstAttribute="top" secondItem="j1h-hP-VIe" secondAttribute="bottom" constant="20" id="Ify-7Y-i4e"/>
+                            <constraint firstItem="j1h-hP-VIe" firstAttribute="height" secondItem="83L-ho-P0D" secondAttribute="height" id="Jmy-Z3-2HW"/>
+                            <constraint firstItem="j1h-hP-VIe" firstAttribute="top" secondItem="83L-ho-P0D" secondAttribute="bottom" constant="20" id="PDn-FB-Stm"/>
+                            <constraint firstItem="j1h-hP-VIe" firstAttribute="leading" secondItem="83L-ho-P0D" secondAttribute="leading" id="PKI-pJ-5YD"/>
+                            <constraint firstItem="JWd-Z0-8hZ" firstAttribute="centerX" secondItem="i3b-Gt-4qx" secondAttribute="centerX" id="QeT-4O-97W"/>
+                            <constraint firstItem="83L-ho-P0D" firstAttribute="leading" secondItem="i3b-Gt-4qx" secondAttribute="leadingMargin" constant="32" id="SpX-8o-TxG"/>
+                            <constraint firstItem="Mw8-hL-Shz" firstAttribute="top" secondItem="1fJ-zg-zL7" secondAttribute="bottom" id="bIY-cS-div"/>
+                            <constraint firstItem="D2N-eP-mbF" firstAttribute="top" secondItem="79c-O6-Yxg" secondAttribute="bottom" constant="50" id="dZS-Ej-jiJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="79c-O6-Yxg" secondAttribute="trailing" constant="12" id="fh6-p8-eXa"/>
+                            <constraint firstItem="HRB-hb-Gms" firstAttribute="trailing" secondItem="j1h-hP-VIe" secondAttribute="trailing" id="gda-vN-WsE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="83L-ho-P0D" secondAttribute="trailing" constant="32" id="kW4-UU-iG1"/>
+                            <constraint firstItem="83L-ho-P0D" firstAttribute="leading" secondItem="i3b-Gt-4qx" secondAttribute="leadingMargin" id="l5f-bT-3mM"/>
+                            <constraint firstItem="83L-ho-P0D" firstAttribute="top" secondItem="JWd-Z0-8hZ" secondAttribute="bottom" constant="33" id="lEm-a2-y1R"/>
+                            <constraint firstItem="79c-O6-Yxg" firstAttribute="leading" secondItem="i3b-Gt-4qx" secondAttribute="leadingMargin" constant="12" id="lqS-Lp-oX8"/>
+                            <constraint firstItem="83L-ho-P0D" firstAttribute="leading" secondItem="i3b-Gt-4qx" secondAttribute="leadingMargin" constant="33" id="u7c-fT-Cyu"/>
+                            <constraint firstItem="Mw8-hL-Shz" firstAttribute="centerX" secondItem="i3b-Gt-4qx" secondAttribute="centerX" id="uLQ-IJ-1pF"/>
+                            <constraint firstItem="JWd-Z0-8hZ" firstAttribute="top" secondItem="Mw8-hL-Shz" secondAttribute="bottom" constant="8" id="xjU-Xc-jYT"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="1pq-al-byJ"/>
+                                <exclude reference="FJW-6d-lNi"/>
+                                <exclude reference="l5f-bT-3mM"/>
+                                <exclude reference="u7c-fT-Cyu"/>
+                                <exclude reference="9Ed-eb-Lta"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="bloodTextField" destination="j1h-hP-VIe" id="auw-oO-Fsh"/>
+                        <outlet property="dateTextFiled" destination="HRB-hb-Gms" id="FzQ-Qf-vfe"/>
+                        <outlet property="nameTextField" destination="83L-ho-P0D" id="Tke-JW-oZX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zdl-PA-GBN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1909.5" y="2939.5"/>
+        </scene>
         <!--Feed Controller-->
         <scene sceneID="T7E-G8-7uk">
             <objects>

@@ -6,14 +6,14 @@
 //  Copyright © 2016年 蔡鈞. All rights reserved.
 //
 
+// 文章內頁
+
 import UIKit
 
 class PostVC: UITableViewController {
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         }
-    
 }

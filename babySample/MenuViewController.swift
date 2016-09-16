@@ -37,9 +37,14 @@ class MenuViewController: UIViewController , GuillotineMenu{
     
     @IBAction func createClick(sender: AnyObject) {
         
-        let CreateController = BabyCreateController()
-//        navigationController?.pushViewController(CreateController, animated: true)
-        presentViewController(CreateController, animated: true, completion: nil)
+        // let CreateController = BabyCreateController()
+        // presentViewController(CreateController, animated: true, completion: nil)
+        
+        let baby_CreateVC = self.storyboard?.instantiateViewControllerWithIdentifier("BabyCreateVC") as! BabyCreateVC
+        
+//        let navigationController = UINavigationController(rootViewController: baby_CreateVC)
+        
+        self.presentViewController(baby_CreateVC, animated: true, completion: nil)
     }
     
     

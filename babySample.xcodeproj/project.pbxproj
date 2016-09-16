@@ -31,6 +31,7 @@
 		4D3749F81D087C8000F57F68 /* UITextField+fixCaretPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3749F51D087C8000F57F68 /* UITextField+fixCaretPosition.swift */; };
 		4D3749FA1D087CC500F57F68 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3749F91D087CC500F57F68 /* LoginController.swift */; };
 		4D3749FE1D0884B900F57F68 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D3749FD1D0884B900F57F68 /* fontawesome-webfont.ttf */; };
+		4D3A38AB1D8BADBD001D0D8D /* BabyCreateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3A38AA1D8BADBD001D0D8D /* BabyCreateVC.swift */; };
 		4D4B00601D0C5048007E45A9 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4B005F1D0C5048007E45A9 /* FeedController.swift */; };
 		4D54495B1D2A20A1006461DC /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D54494D1D2A20A1006461DC /* add.png */; };
 		4D54495C1D2A20A1006461DC /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D54494E1D2A20A1006461DC /* calendar.png */; };
@@ -71,7 +72,7 @@
 		4DABA2941D7E9F040098E6C1 /* ic_menuRotated@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DABA28D1D7E9F040098E6C1 /* ic_menuRotated@3x.png */; };
 		4DABA2951D7E9F040098E6C1 /* ic_profile@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DABA28E1D7E9F040098E6C1 /* ic_profile@3x.png */; };
 		4DABA2961D7E9F040098E6C1 /* ic_settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DABA28F1D7E9F040098E6C1 /* ic_settings@3x.png */; };
-		4DABA2981D7EC9620098E6C1 /* BabyCreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABA2971D7EC9620098E6C1 /* BabyCreateController.swift */; };
+		4DABA2981D7EC9620098E6C1 /* BabyCreate_Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABA2971D7EC9620098E6C1 /* BabyCreate_Anchor.swift */; };
 		4DAFE8BE1D2588810000334F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFE8BD1D2588810000334F /* Constants.swift */; };
 		4DBA164C1D41EB6E009F35FC /* guestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBA164B1D41EB6E009F35FC /* guestVC.swift */; };
 		4DC669A51D5C5210006CBF6A /* AlbumVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC669A41D5C5210006CBF6A /* AlbumVC.swift */; };
@@ -116,6 +117,7 @@
 		4D3749F51D087C8000F57F68 /* UITextField+fixCaretPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+fixCaretPosition.swift"; sourceTree = "<group>"; };
 		4D3749F91D087CC500F57F68 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		4D3749FD1D0884B900F57F68 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "fontawesome-webfont.ttf"; path = "../fontawesome-webfont.ttf"; sourceTree = "<group>"; };
+		4D3A38AA1D8BADBD001D0D8D /* BabyCreateVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BabyCreateVC.swift; sourceTree = "<group>"; };
 		4D4B005F1D0C5048007E45A9 /* FeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedController.swift; path = SkyFloatingLabelTextField/FeedController.swift; sourceTree = "<group>"; };
 		4D54494D1D2A20A1006461DC /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		4D54494E1D2A20A1006461DC /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
@@ -156,7 +158,7 @@
 		4DABA28D1D7E9F040098E6C1 /* ic_menuRotated@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_menuRotated@3x.png"; sourceTree = "<group>"; };
 		4DABA28E1D7E9F040098E6C1 /* ic_profile@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_profile@3x.png"; sourceTree = "<group>"; };
 		4DABA28F1D7E9F040098E6C1 /* ic_settings@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_settings@3x.png"; sourceTree = "<group>"; };
-		4DABA2971D7EC9620098E6C1 /* BabyCreateController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BabyCreateController.swift; sourceTree = "<group>"; };
+		4DABA2971D7EC9620098E6C1 /* BabyCreate_Anchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BabyCreate_Anchor.swift; sourceTree = "<group>"; };
 		4DAFE8BD1D2588810000334F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4DBA164B1D41EB6E009F35FC /* guestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = guestVC.swift; sourceTree = "<group>"; };
 		4DC669A41D5C5210006CBF6A /* AlbumVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumVC.swift; sourceTree = "<group>"; };
@@ -366,7 +368,8 @@
 		4DABA2991D7EC96D0098E6C1 /* BabyApi */ = {
 			isa = PBXGroup;
 			children = (
-				4DABA2971D7EC9620098E6C1 /* BabyCreateController.swift */,
+				4D3A38AA1D8BADBD001D0D8D /* BabyCreateVC.swift */,
+				4DABA2971D7EC9620098E6C1 /* BabyCreate_Anchor.swift */,
 			);
 			name = BabyApi;
 			sourceTree = "<group>";
@@ -592,7 +595,7 @@
 				4D1258A01D2CC4D100A7B6B9 /* followersVC.swift in Sources */,
 				4D33C0771D5D865100CEEDFB /* NetData.swift in Sources */,
 				4D3749E41D07FFD100F57F68 /* babySample.xcdatamodeld in Sources */,
-				4DABA2981D7EC9620098E6C1 /* BabyCreateController.swift in Sources */,
+				4DABA2981D7EC9620098E6C1 /* BabyCreate_Anchor.swift in Sources */,
 				4D9761491D227F4F00FE9C80 /* signUpVC.swift in Sources */,
 				4D5C4D6D1D73664D007ADAFB /* PreviewViewController.swift in Sources */,
 				4D3749F61D087C8000F57F68 /* SkyFloatingLabelTextField.swift in Sources */,
@@ -607,6 +610,7 @@
 				4D6EF6C41D3D1FFB00931BB6 /* userVC.swift in Sources */,
 				4D3749FA1D087CC500F57F68 /* LoginController.swift in Sources */,
 				4D5B99181D86C06B0096D63A /* LikeUsersVC.swift in Sources */,
+				4D3A38AB1D8BADBD001D0D8D /* BabyCreateVC.swift in Sources */,
 				4DABA2861D7E9BC60098E6C1 /* GuillotineMenuTransitionAnimation.swift in Sources */,
 				4DAFE8BE1D2588810000334F /* Constants.swift in Sources */,
 				4DDC7EE01D7FECBD00BCAF64 /* Hokusai.swift in Sources */,

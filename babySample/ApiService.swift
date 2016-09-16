@@ -178,6 +178,7 @@ class ApiService: NSObject {
      */
     
     func baby_create( token:String, name:String , birth:String, blood:String ,completion : (SwiftyJSON.JSON)-> ()){
+        guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey(ACCESS_TOKEN) else{ return }
         
         
     }
