@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -7,7 +7,7 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="FontAwesome.otf">
+        <mutableArray key="fontawesome-webfont.ttf">
             <string>FontAwesome</string>
             <string>FontAwesome</string>
         </mutableArray>
@@ -1121,20 +1121,32 @@
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6br-z8-8VM">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6br-z8-8VM" customClass="SpringImageView" customModule="Spring">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
+                                    <constraint firstItem="6br-z8-8VM" firstAttribute="top" secondItem="ATc-kH-hQh" secondAttribute="top" id="GLj-Ir-5vS"/>
                                     <constraint firstAttribute="trailing" secondItem="6br-z8-8VM" secondAttribute="trailing" id="Qvm-W4-rKK"/>
+                                    <constraint firstAttribute="trailing" secondItem="6br-z8-8VM" secondAttribute="trailing" id="RWS-Hg-zJo"/>
                                     <constraint firstItem="6br-z8-8VM" firstAttribute="leading" secondItem="ATc-kH-hQh" secondAttribute="leading" id="ZaJ-4S-BwF"/>
+                                    <constraint firstItem="6br-z8-8VM" firstAttribute="leading" secondItem="ATc-kH-hQh" secondAttribute="leading" id="fyX-iK-Yz4"/>
                                     <constraint firstItem="6br-z8-8VM" firstAttribute="top" secondItem="ATc-kH-hQh" secondAttribute="top" id="piO-pU-gre"/>
                                     <constraint firstAttribute="bottom" secondItem="6br-z8-8VM" secondAttribute="bottom" id="xu8-WU-WgM"/>
+                                    <constraint firstAttribute="bottom" secondItem="6br-z8-8VM" secondAttribute="bottom" id="xx3-LN-6xG"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Qvm-W4-rKK"/>
+                                        <exclude reference="ZaJ-4S-BwF"/>
+                                        <exclude reference="piO-pU-gre"/>
+                                        <exclude reference="xu8-WU-WgM"/>
+                                    </mask>
+                                </variation>
                                 <connections>
-                                    <outlet property="imageView" destination="6br-z8-8VM" id="apo-Uc-xzh"/>
+                                    <outlet property="imageView" destination="6br-z8-8VM" id="CV0-oO-0dk"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -1334,7 +1346,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1by-7x-oGC" id="Rhg-sc-i4a">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder2" translatesAutoresizingMaskIntoConstraints="NO" id="OHZ-nB-rCQ">
@@ -1624,20 +1636,32 @@
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KQ5-pF-gRi">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QvN-8K-OeS">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                        </imageView>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KQ5-pF-gRi" customClass="SpringImageView" customModule="Spring">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="KQ5-pF-gRi" secondAttribute="trailing" id="95y-KJ-B2I"/>
+                                                <constraint firstItem="KQ5-pF-gRi" firstAttribute="leading" secondItem="QvN-8K-OeS" secondAttribute="leading" id="BhX-LO-5Jy"/>
+                                                <constraint firstAttribute="bottom" secondItem="KQ5-pF-gRi" secondAttribute="bottom" id="HTp-le-4dr"/>
+                                                <constraint firstItem="KQ5-pF-gRi" firstAttribute="top" secondItem="QvN-8K-OeS" secondAttribute="top" id="shO-h0-SFa"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="KQ5-pF-gRi" secondAttribute="bottom" id="HGz-bB-vLV"/>
-                                    <constraint firstItem="KQ5-pF-gRi" firstAttribute="leading" secondItem="9rH-Iu-Qk3" secondAttribute="leading" id="itd-12-a0S"/>
-                                    <constraint firstItem="KQ5-pF-gRi" firstAttribute="top" secondItem="9rH-Iu-Qk3" secondAttribute="top" id="mnJ-zX-twH"/>
-                                    <constraint firstAttribute="trailing" secondItem="KQ5-pF-gRi" secondAttribute="trailing" id="zqy-WS-Hfz"/>
+                                    <constraint firstAttribute="trailing" secondItem="QvN-8K-OeS" secondAttribute="trailing" id="LHm-Dx-Fm0"/>
+                                    <constraint firstAttribute="bottom" secondItem="QvN-8K-OeS" secondAttribute="bottom" id="ZI0-QE-lVm"/>
+                                    <constraint firstItem="QvN-8K-OeS" firstAttribute="top" secondItem="9rH-Iu-Qk3" secondAttribute="top" id="g5z-bV-CNA"/>
+                                    <constraint firstItem="QvN-8K-OeS" firstAttribute="leading" secondItem="9rH-Iu-Qk3" secondAttribute="leading" id="wSx-rn-2fd"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="imageView" destination="KQ5-pF-gRi" id="q6E-iX-bZF"/>
+                                    <outlet property="imageView" destination="KQ5-pF-gRi" id="tUs-AB-vlL"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

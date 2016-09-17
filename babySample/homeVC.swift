@@ -14,7 +14,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import Haneke
 import PeekPop
-
+import Spring
 
 
 
@@ -225,8 +225,6 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     }
     
     
-    
-    
     // Customer func - cell size
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
@@ -266,6 +264,21 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         
         let postVC = PostVC()
         self.navigationController?.pushViewController(postVC, animated: true)
+        
+    }
+    
+    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let cell = cell as! PhotoBrowserCollectionViewCell
+        
+        cell.imageView.animation = "zoomIn"
+//        cell.imageView.animation = "fadeInUp"
+        cell.imageView.curve = "easeIn"
+        cell.imageView.duration = 3
+        cell.imageView.scaleX = 5.0
+        cell.imageView.scaleY = 5.0
+        
+        cell.imageView.animate()
         
     }
     
@@ -485,13 +498,10 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
                 }
                 
                 
-                
                 if  let  imageURL = self.user_posts[indexPath.item]["imgurl"].string {
                     previewViewController.imageView.hnk_setImageFromURLAutoSize(NSURL(string: imageURL)!)
                     
                 }
-                
-                
                 
                 return previewViewController
             }
@@ -512,7 +522,11 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
 // MARK: - CollectionViewCell
 class PhotoBrowserCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var imageView:UIImageView!
+//    @IBOutlet weak var imageView:UIImageView!
+    
+    @IBOutlet weak var imageView: SpringImageView!
+    
+    
     var request:Alamofire.Request?      //用此屬性來儲存Alamofire得請求來載入圖片
     
     required init(coder aDecoder: NSCoder) {
@@ -523,7 +537,7 @@ class PhotoBrowserCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         backgroundColor = UIColor(white: 0.1, alpha: 1.0)
-        // imageView.frame = bounds
+        imageView.frame = bounds
         addSubview(imageView)
     }
 }

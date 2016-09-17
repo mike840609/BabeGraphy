@@ -208,6 +208,20 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
         
     }
     
+    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let cell = cell as! PhotoBrowserCollectionViewCell
+        
+        cell.imageView.animation = "zoomIn"
+//                cell.imageView.animation = "fadeInDown"
+        cell.imageView.curve = "easeIn"
+        cell.imageView.duration = 3
+        cell.imageView.scaleX = 5.0
+        cell.imageView.scaleY = 5.0
+        
+        cell.imageView.animate()
+    }
+    
     // MARK: UICollectionView Header
     // header View
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {

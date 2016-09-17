@@ -15,7 +15,7 @@ pod 'PMAlertController','1.0.4'
 pod 'FBSDKLoginKit','4.13.1'
 pod 'FBSDKCoreKit','4.13.1'
 pod 'PeekPop', '~> 0.1'
-
+pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'
 
 
 

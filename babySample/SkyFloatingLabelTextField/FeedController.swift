@@ -21,12 +21,15 @@ import Accounts
 private let reuseIdentifier = "Cell"
 
 
+
 class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLayout ,SKPhotoBrowserDelegate ,CollectionViewCellDelegate{
     
     
-    
+
     // local var 測試用
     var posts = [Post]()
+    
+    
     
     var refresher:UIRefreshControl!
     
@@ -76,7 +79,6 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(true)
-        
         self.navigationController?.navigationBarHidden = false
     }
     
@@ -124,6 +126,9 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     
     
     // MARK: UICollectionViewDataSource
+    var cellShown = [Bool](count: 1000 , repeatedValue: false)
+    
+    // MARK: UICollectionViewDelegate
     
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         return collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: PhotoBrowserFooterViewIdentifier, forIndexPath: indexPath) as UICollectionReusableView
@@ -172,6 +177,32 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         
         return CGSizeMake(view.frame.width, 300)
     }
+    
+    // MARK: UICollectionView Animation
+    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        
+        
+        if cellShown[indexPath.row] == false{
+        
+              cell.alpha = 0
+        
+            let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, -250, 10, 0)
+            cell.layer.transform = rotationTransform
+            
+            UIView.animateWithDuration(1) {
+                
+                cell.alpha = 1
+                
+                cell.layer.transform = CATransform3DIdentity
+            }
+        
+            cellShown[indexPath.row] = true
+        }
+        
+
+        
+    }
+    
     
     // 轉跳 相簿 下載
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {

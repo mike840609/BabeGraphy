@@ -17,6 +17,7 @@ PODS:
   - PeekPop (0.1.5)
   - PMAlertController (1.0.4)
   - SKPhotoBrowser (1.9.1)
+  - Spring (1.0.3)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
@@ -30,7 +31,18 @@ DEPENDENCIES:
   - PeekPop (~> 0.1)
   - PMAlertController (= 1.0.4)
   - SKPhotoBrowser (= 1.9.1)
+  - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift2`)
   - SwiftyJSON (= 2.3.2)
+
+EXTERNAL SOURCES:
+  Spring:
+    :branch: swift2
+    :git: https://github.com/MengTo/Spring.git
+
+CHECKOUT OPTIONS:
+  Spring:
+    :commit: 18d5c7b74489de8044e34767f856d1e574f0820e
+    :git: https://github.com/MengTo/Spring.git
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
@@ -44,8 +56,9 @@ SPEC CHECKSUMS:
   PeekPop: 9a6b77f3af1d634878ef143790782ef5a78aa34a
   PMAlertController: 7f969c937a80bea634a5bf957b66943b493e1aca
   SKPhotoBrowser: 45fad9ae67bdd24217d7808f91245c9b16fe3df9
+  Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: fd6356b809ba2f4935d099b692afbc2afe3b9a29
+PODFILE CHECKSUM: c6f20301e86a1d217a5dfd42fa522707075d2eb6
 
 COCOAPODS: 1.0.1
