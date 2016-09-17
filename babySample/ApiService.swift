@@ -171,9 +171,9 @@ class ApiService: NSObject {
     // MARK: - Baby Function
     /*
      http://140.136.155.143/api/baby/store
+     http://140.136.155.143/api/baby/upload
      http://140.136.155.143/api/baby/search
      http://140.136.155.143/api/baby/searchbyid
-     http://140.136.155.143/api/baby/upload
      http://140.136.155.143/api/baby/delete
      */
     
@@ -181,8 +181,6 @@ class ApiService: NSObject {
         
         guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey(ACCESS_TOKEN) else{ return }
     
-        
-        
         Alamofire.request(.POST, "http://140.136.155.143/api/baby/store",parameters: ["token":AccessToken,"name":name,"birth":birth,"blood":blood]).responseJSON { (response) in
             switch response.result{
                 
@@ -194,27 +192,14 @@ class ApiService: NSObject {
                 
                 guard let babyID = json["_id"].string else { return}
                 
-                
                 ApiService.shareInstance.baby_ImgUpload(babyID, image: babyImg){ json in
                     print(json)
                 }
-                
-                
             case .Failure(let error):
                 print( error.localizedDescription)
-                
             }
             
         }
-        
-    }
-    
-    func baby_serach(token : String , completion : (SwiftyJSON.JSON)-> ()){
-        
-    }
-    
-    func baby_searchbyid(id : String , completion : (SwiftyJSON.JSON)-> ()){
-        
     }
     
     
@@ -253,7 +238,65 @@ class ApiService: NSObject {
         }
     }
     
-    func baby_delete(object id : String , completion : (SwiftyJSON.JSON)-> ()){
+    
+    func baby_serach(token : String , completion : (SwiftyJSON.JSON)-> ()){
+        
+        guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey(ACCESS_TOKEN) else{ return }
+        
+        Alamofire.request(.POST, "http://140.136.155.143/api/baby/search",parameters: ["token":AccessToken]).responseJSON { (response) in
+            switch response.result{
+                
+            case .Success( let json):
+
+                let json = SwiftyJSON.JSON(json)
+                completion(json)
+                
+            case .Failure(let error):
+                print( error.localizedDescription)
+            }
+            
+        }
+
+        
+    }
+    
+    
+    func baby_searchbyid(Baby_id : String , completion : (SwiftyJSON.JSON)-> ()){
+        
+        Alamofire.request(.POST, "http://140.136.155.143/api/baby/searchbyid",parameters: ["Baby_id":Baby_id]).responseJSON { (response) in
+            switch response.result{
+                
+            case .Success( let json):
+                
+                let json = SwiftyJSON.JSON(json)
+                completion(json)
+                
+            case .Failure(let error):
+                print( error.localizedDescription)
+            }
+            
+        }
+
+    }
+    
+
+    
+    func baby_delete(Baby_id : String , completion : (SwiftyJSON.JSON)-> ()){
+
+        Alamofire.request(.POST, "http://140.136.155.143/api/baby/delete",parameters: ["Baby_id":Baby_id]).responseJSON { (response) in
+            switch response.result{
+                
+            case .Success( let json):
+                
+                let json = SwiftyJSON.JSON(json)
+                completion(json)
+                
+            case .Failure(let error):
+                print( error.localizedDescription)
+            }
+            
+        }
+
         
     }
     
@@ -261,8 +304,8 @@ class ApiService: NSObject {
     /*
      http://140.136.155.143/api/like/press_like   parameter: token , post_id
      http://140.136.155.143/api/like/cancel_like  parameter: token,post_id
-     
      */
+    
     func press_like (post_id:String , completion : (SwiftyJSON.JSON) -> ()) {
         
         guard let AccessToken:String = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {return}
@@ -390,5 +433,9 @@ class ApiService: NSObject {
         
         return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
     }
+    
+    
+    
+
     
 }
