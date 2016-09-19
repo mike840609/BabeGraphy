@@ -32,7 +32,10 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
     
     // 為cell 設定 自定義 代理協定
     weak var delegate: CollectionViewCellDelegate?
-
+    
+    
+    // 判斷使用者對這篇　po 文是否說過讚
+    var isLiked:Bool = false
     
     func animate() {
         //feedController?.animateImageView(statusImg)
@@ -49,12 +52,38 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
                 statusImg.hnk_setImageFromURLAutoSize(NSURL(string:statusImageUrl)!)
                 loader.stopAnimating()
             }
+            
+            
+            guard let UserID:String? = NSUserDefaults.standardUserDefaults().stringForKey(USER_ID) else {return}
+            
+            // 走訪陣列 判斷 說過讚的陣列中有沒有使用者ID
+            for i in (post?.likes_Users)!{
+                
+                if i.user_id == UserID{
+                    print("說過讚")
+                    let tintedImage = UIImage(named: "like")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+                    
+                    likeButton.setImage(tintedImage, forState:.Normal)
+                    
+                    // 載入cell 前先判斷是否按過讚
+                    // likeButton.tintColor = UIColor(red: 0.00, green: 0.58, blue: 1.00, alpha: 1.00)
+                    // likeButton.tintColor = UIColor(red:0.478, green:0.878, blue:0.944, alpha:0.53)
+                    likeButton.tintColor = UIColor(red:1.00, green:0.55, blue:0.70, alpha:1.00)
+                    isLiked = true
+                }
+                
+            }
+            
+            
             setupNameLocationStatusAndProfileImage()
         }
     }
     
+    
+    // Wakeup initialize
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setupViews()
     }
     
@@ -64,7 +93,10 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
     
     // prepare function
     override func prepareForReuse() {
+
         statusImg.image = nil
+        likeButton.setImage(UIImage(named:"like" ), forState: .Normal)
+        isLiked = false
     }
     
     let nameLabel: UILabel = {
@@ -126,6 +158,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
     let shareButton:UIButton  = FeedCell.buttonForTtitle("Share", imageName: "share")
     
     
+    // Generate Button
     static func buttonForTtitle(title:String,imageName:String) -> UIButton{
         
         let button = UIButton()
@@ -133,20 +166,22 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
         button.setTitleColor(UIColor.rgb(143, green: 150, blue: 143), forState: .Normal)
         
         // png UIImageRenderingMode  讓圖片可以上色
-        button.setImage(UIImage(named: imageName), forState:.Normal)
+        //        let tintedImage = UIImage(named: imageName)?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        //        button.setImage(tintedImage, forState:.Normal)
+        
+        button.setImage(UIImage(named: imageName), forState: .Normal)
         button.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0)
         button.titleLabel?.font = UIFont.boldSystemFontOfSize(14)
         
         
         // 圖片色階
-        
-        //        iv.image = UIImage(named: "home")?.imageWithRenderingMode(.AlwaysTemplate)
-        
+        //        let origImage = UIImage(named: "imageName");
+        //        let tintedImage = origImage?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        //        btn.setImage(tintedImage, forState: .Normal)
+        //        btn.tintColor = UIColor.redColor()
         
         return button
     }
-    
-    
     
     func likeFunction () {
         
@@ -154,17 +189,38 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
         
         // 按讚
         // 進到閉包區間 表示成功傳回按讚資料 到server
-        ApiService.shareInstance.press_like(post_id) { (json) in
+        // 沒按過讚
+        if !isLiked{
+            ApiService.shareInstance.press_like(post_id) { (json) in
+                
+                print(json)
+                
+                self.post?.numLikes? += 1
+                
+                self.feedController?.getFeedPost()
+                
+                self.isLiked = true
+                // self.feedController?.collectionView?.reloadData()
+                
+            }
             
-            print(json)
-            
-            self.post?.numLikes? += 1
-            self.likeButton.tintColor = UIColor.blueColor()
-            // self.post?.likes_Users.append(Friend(name: , picture: <#T##String?#>)
-            self.feedController?.getFeedPost()
-//            self.feedController?.collectionView?.reloadData()
+        }else{
+            // isLiked = true   需要收回讚
+            ApiService.shareInstance.cancel_like(post_id) { (json) in
+                
+                print(json)
+                
+                self.post?.numLikes? -= 1
+                
+                self.feedController?.getFeedPost()
+                
+                self.isLiked = false
+                
+            }
             
         }
+        
+        
         
         /* 收回讚
          ApiService.shareInstance.cancel_like(post_id) { (json) in
@@ -172,6 +228,8 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
          }
          */
     }
+    
+    
     
     // Set Cell Content
     func setupNameLocationStatusAndProfileImage(){
@@ -301,6 +359,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
     // MARK: - Button Function
     let loader = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
     
+    // loading View
     func setupStatusImageViewLoader() {
         
         loader.hidesWhenStopped = true
@@ -310,7 +369,6 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
         statusImg.addConstraintWithFormat("H:|[v0]|", views: loader)
         statusImg.addConstraintWithFormat("V:|[v0]|", views: loader)
     }
-    
     
     
     func commentFunction () {
@@ -347,15 +405,15 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
     }
     
     func showlikesUser () {
-
+        
         let usersController = LikeUsersVC()
         
         guard let user  = post?.likes_Users else{ return}
         
-//        if let user = post?.likes_Users{
-//            usersController.users = user
-//        }
-         usersController.users = user
+        //        if let user = post?.likes_Users{
+        //            usersController.users = user
+        //        }
+        usersController.users = user
         usersController.feedController = feedController
         
         self.feedController?.navigationController?.pushViewController(usersController, animated: true)
@@ -363,7 +421,6 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
         
         
     }
-    
     
     func shareFunction() {
         
@@ -377,7 +434,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
             guard let text = self.statusTextView.text else { return}
             
             self.delegate?.shareToFb(image, text: text)
-
+            
             
         }
         

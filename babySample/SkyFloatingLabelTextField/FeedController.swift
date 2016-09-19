@@ -24,12 +24,8 @@ private let reuseIdentifier = "Cell"
 
 class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLayout ,SKPhotoBrowserDelegate ,CollectionViewCellDelegate{
     
-    
-
     // local var 測試用
     var posts = [Post]()
-    
-    
     
     var refresher:UIRefreshControl!
     
@@ -142,6 +138,8 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         
         let feedCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! FeedCell
         
+    
+        
         feedCell.post = posts[indexPath.item]
         
         feedCell.feedController = self
@@ -186,10 +184,13 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         
               cell.alpha = 0
         
-            let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, -250, 10, 0)
+             let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, -250, 10, 0)
+            
+//            let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 500, 0)
+            
             cell.layer.transform = rotationTransform
             
-            UIView.animateWithDuration(1) {
+            UIView.animateWithDuration(0.5) {
                 
                 cell.alpha = 1
                 
@@ -577,7 +578,6 @@ extension FeedController{
         
     }
     
-    
     // Share to instagram
     func shareToInstagram(image:UIImage,text:String){
         print("share to instagram")
@@ -585,9 +585,6 @@ extension FeedController{
     }
     
     
-    
-    
-    
-    
+
 }
 

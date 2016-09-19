@@ -31,6 +31,9 @@ class Post{
     
     //store who say this like
     var likes_Users:[User] = [User]()
+    
+    
+    var isliked = false
 }
 
 class Location: NSObject {
