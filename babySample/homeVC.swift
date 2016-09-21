@@ -257,11 +257,15 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
         // segue to post VC
+//        
+//        let postVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostVC") as! PostVC
+//        postVC.post = posts[indexPath.item]
+//        self.navigationController?.pushViewController(postVC, animated: true)
+//        
         
-        let postVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostVC") as! PostVC
-        
+        // segue to post_comment
+        let postVC = self.storyboard?.instantiateViewControllerWithIdentifier("post_comment") as! post_comment
         postVC.post = posts[indexPath.item]
-        
         self.navigationController?.pushViewController(postVC, animated: true)
         
     }

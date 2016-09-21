@@ -461,11 +461,7 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
                 print(error)
             }
         }
-        
-        
     }
-    
-    
 }
 
 extension guestVC {
