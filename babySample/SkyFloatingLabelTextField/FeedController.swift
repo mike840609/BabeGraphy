@@ -138,8 +138,6 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         
         let feedCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! FeedCell
         
-    
-        
         feedCell.post = posts[indexPath.item]
         
         feedCell.feedController = self
@@ -392,7 +390,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                         // post.numLikes = subJson["likes_count"].int  == nil ? 0 : subJson["likes_count"].int
                         post.numComments = subJson["comments"].int == nil ? 0 : subJson["comments"].int
                         
-                        // 串 likes 的user
+                        // 串 likes 的 user
                         for (_ ,sub):(String, SwiftyJSON.JSON) in subJson["likes"]{
                             
                             // print(sub)
@@ -406,7 +404,22 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                             post.likes_Users.append(user)
                         }
                         
+                        // 串 comment 的 user
+                        for (_ ,sub):(String, SwiftyJSON.JSON) in subJson["comments"]{
+                            
+                            // print(sub)
+                            
+                            let comment = Comment()
+                            comment.user_id = sub["user_id"].string
+                            comment.user_name = sub["user_name"].string
+                            comment.user_avatar = sub["user_avatar"].string
+                            comment.content = sub["content"].string
+                            
+                            post.comment_Users.append(comment)
+                        }
+                        
                         post.numLikes = post.likes_Users.count
+                        post.numComments = post.comment_Users.count
                         
                         self.posts.append(post)
                         
@@ -584,6 +597,20 @@ extension FeedController{
         
     }
     
+    // segue to commentViewController
+    func showCommentViewController(post:Post?){
+        
+//        let postVC = PostVC()
+//        self.navigationController?.pushViewController(postVC, animated: true)
+        
+        // segue to post VC
+        let postVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostVC") as! PostVC
+        postVC.post = post
+        
+        self.navigationController?.pushViewController(postVC, animated: true)
+
+        
+    }
     
 
 }

@@ -17,10 +17,13 @@ var imageCache = NSCache()
 // Delegate
 protocol CollectionViewCellDelegate: class {
     
+    // Share Delegate
     func shareToFb(image:UIImage,text:String)
     func shareToTwitter(image:UIImage,text:String)
     func shareToInstagram(image:UIImage,text:String)
     
+    // Segue Function Delegate
+    func showCommentViewController (post:Post?)
 }
 
 
@@ -208,7 +211,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
             // isLiked = true   需要收回讚
             ApiService.shareInstance.cancel_like(post_id) { (json) in
                 
-                print(json)
+                print("this post you already said like")
                 
                 self.post?.numLikes? -= 1
                 
@@ -372,7 +375,13 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
     
     
     func commentFunction () {
+        
         print("commentFunction_ Pressed ")
+        
+        
+            self.delegate?.showCommentViewController(post)
+        
+        
     }
     
     func showGuest() {
@@ -413,6 +422,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
         //        if let user = post?.likes_Users{
         //            usersController.users = user
         //        }
+        
         usersController.users = user
         usersController.feedController = feedController
         

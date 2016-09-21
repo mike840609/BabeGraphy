@@ -16,8 +16,6 @@ import Haneke
 import PeekPop
 import Spring
 
-
-
 // 儲存個人資訊 直接將整筆 json 存下來
 var user : SwiftyJSON.JSON?
 
@@ -30,25 +28,18 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     
     @IBOutlet weak var logoutBtn: UIBarButtonItem!
     
-    // 儲存照片
-    // var picArray = [String]()
     
     // 共用變數
     static let shareInstance = homeVC()
     
-    // user's posts
-    var user_posts: Array<SwiftyJSON.JSON> = []
     
-    
+    // 存每一篇po 文的屬性 comment & comment user property
+    var posts = [Post]()
     
     // pull to refresher
     var refresher:UIRefreshControl!
     
-    //    var PostCount:String?{
-    //        didSet{
-    //            collectionView?.reloadData()
-    //        }
-    //    }
+
     
     // identify
     let PhotoBrowserCellIdentifier = "PhotoBrowserCell"
@@ -59,7 +50,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
-        navigationController?.hidesBarsOnSwipe = true
+        //        navigationController?.hidesBarsOnSwipe = true
         //        navigationController?.navigationBar.translucent = true
         
         // status bar background
@@ -68,6 +59,8 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         )
         view.backgroundColor = UIColor(red: 1.0, green: 0.5, blue: 0.67, alpha: 0.9)
         self.view.addSubview(view)
+        
+        self.navigationController?.navigationBarHidden = false
     }
     
     
@@ -94,6 +87,8 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         
         self.navigationController?.navigationBarHidden = false
     }
+    
+    
     
     // MARK: - UICollectionViewDataSource
     
@@ -183,7 +178,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
                 // follower 亂跳問題
                 print(" id:\(id)\n name:\(name)\n email:\(email)\n posts:\(posts_count)\n follower:\(follower_count)\n following:\(following_count)")
                 
-
+                
                 
                 // self.getInfo()
                 
@@ -236,7 +231,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return user_posts.count
+        return posts.count
     }
     
     
@@ -248,7 +243,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         cell.imageView.image = nil
         
         
-        let imageURL = self.user_posts[indexPath.item]["small_imgurl"].string
+        let imageURL = self.posts[indexPath.item].small_imgurl
         
         
         if let url = imageURL{
@@ -262,7 +257,11 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        let postVC = PostVC()
+        // let postVC = PostVC()
+        // self.navigationController?.pushViewController(postVC, animated: true)
+        
+        // segue to post VC
+        let postVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostVC") as! PostVC
         self.navigationController?.pushViewController(postVC, animated: true)
         
     }
@@ -272,7 +271,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         let cell = cell as! PhotoBrowserCollectionViewCell
         
         cell.imageView.animation = "zoomIn"
-//        cell.imageView.animation = "fadeInUp"
+        //        cell.imageView.animation = "fadeInUp"
         cell.imageView.curve = "easeIn"
         cell.imageView.duration = 3
         cell.imageView.scaleX = 5.0
@@ -322,7 +321,8 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         }
         
         //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)){
-        self.user_posts.removeAll(keepCapacity: false)
+//        self.user_posts.removeAll(keepCapacity: false)
+        self.posts.removeAll(keepCapacity: false)
         //}
         
         
@@ -337,34 +337,74 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
                 
                 print("user's post=====================================================")
                 
-                // self.user_posts.removeAll(keepCapacity: false)
+
                 
-                let lastItem = self.user_posts.count
-                
-                // 走訪陣列
-                for (_,subJson):(String, SwiftyJSON.JSON) in json{
-                    self.user_posts.append(subJson)
-                    print(subJson)
-                    // self.collectionView?.reloadData()
+                // =================================================================================
+                for (_ ,subJson):(String, SwiftyJSON.JSON) in json {
+                    
+                    let post = Post()
+                    
+                    post.author_name = subJson["author_name"].string
+                    post.author_imgurl = subJson["author_imgurl"].string
+                    post.author_id = subJson["author_id"].string
+                    
+                    post.created_at = subJson["created_at"].string
+                    post.updated_at = subJson["updated_at"].string
+                    
+                    post.content = subJson["content"].string
+                    post.small_imgurl = subJson["small_imgurl"].string
+                    post.imgurl = subJson["imgurl"].string
+                    post._id = subJson["_id"].string
+                    
+                    
+                    // post.numLikes = subJson["likes_count"].int  == nil ? 0 : subJson["likes_count"].int
+                    post.numComments = subJson["comments"].int == nil ? 0 : subJson["comments"].int
+                    
+                    // 串 likes 的 user
+                    for (_ ,sub):(String, SwiftyJSON.JSON) in subJson["likes"]{
+                        
+                        // print(sub)
+                        
+                        let user = User()
+                        user.user_id = sub["user_id"].string
+                        user.user_name = sub["user_name"].string
+                        user.user_imgurl = sub["user_avatar"].string
+                        
+                        post.likes_Users.append(user)
+                    }
+                    
+                    // 串 comment 的 user
+                    for (_ ,sub):(String, SwiftyJSON.JSON) in subJson["comments"]{
+                        
+                        let comment = Comment()
+                        comment.user_id = sub["user_id"].string
+                        comment.user_name = sub["user_name"].string
+                        comment.user_avatar = sub["user_avatar"].string
+                        comment.content = sub["content"].string
+                        
+                        post.comment_Users.append(comment)
+                    }
+                    
+                    post.numLikes = post.likes_Users.count
+                    post.numComments = post.comment_Users.count
+                    
+                    self.posts.append(post)
+                    
+                    
                 }
                 
+                // ==================
                 
-                let indexPaths = (lastItem..<self.user_posts.count).map {NSIndexPath(forItem: $0, inSection: 0)}
+                self.collectionView?.reloadData()
                 
-                self.collectionView?.insertItemsAtIndexPaths(indexPaths)
+                //let indexPaths = (lastItem..<self.user_posts.count).map {NSIndexPath(forItem: $0, inSection: 0)}
+                //self.collectionView?.insertItemsAtIndexPaths(indexPaths)
                 
-                print("all user's post:" , self.user_posts.count)
+                print("all user's post:" , self.posts.count)
                 print("=====================================================\n\n")
                 
                 completion(json.count)
                 
-                
-                
-                //let v = self.collectionView?.supplementaryViewForElementKind(UICollectionElementKindSectionHeader, atIndexPath: NSIndexPath(index: 2)) as? headerView
-                // v.postTitle.text = String(self.user_posts.count)
-                
-                // 更新計數器 暫時這樣
-                // self.PostCount = String(self.user_posts.count)
                 
                 
                 
@@ -381,7 +421,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     
     // 點擊回到 index 0
     func postsTap() {
-        if !user_posts.isEmpty {
+        if !posts.isEmpty {
             let index = NSIndexPath(forItem: 0 ,inSection: 0)
             self.collectionView?.scrollToItemAtIndexPath(index, atScrollPosition: .Top, animated: true)
         }
@@ -497,8 +537,8 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
                     previewingContext.sourceRect = layoutAttributes.frame
                 }
                 
-                
-                if  let  imageURL = self.user_posts[indexPath.item]["imgurl"].string {
+                if  let imageURL = self.posts[indexPath.item].imgurl {
+                    
                     previewViewController.imageView.hnk_setImageFromURLAutoSize(NSURL(string: imageURL)!)
                     
                 }
@@ -522,7 +562,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
 // MARK: - CollectionViewCell
 class PhotoBrowserCollectionViewCell: UICollectionViewCell {
     
-//    @IBOutlet weak var imageView:UIImageView!
+    //    @IBOutlet weak var imageView:UIImageView!
     
     @IBOutlet weak var imageView: SpringImageView!
     

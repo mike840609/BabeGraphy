@@ -347,8 +347,53 @@ class ApiService: NSObject {
     }
     
     
+    //  MARK: - Comment API
+    /*
+     http://140.136.155.143/api/comment/comment       parameter: token , post_id , content
+     http://140.136.155.143/api/comment/delete        parameter: token , comment_id
+    */
+
+    // 新增回覆
+    func comment_post (post_id:String ,content:String, completion:(SwiftyJSON.JSON) -> ()){
+        
+        guard let AccessToken:String = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {return}
+        
+        Alamofire.request(.POST,"http://140.136.155.143/api/comment/comment",
+            parameters: ["token":AccessToken , "post_id": post_id, "content":content]).validate().responseJSON{ (response) in
+                
+                switch response.result{
+                    
+                case .Success(let json):
+                    let json = SwiftyJSON.JSON(json)
+                    completion(json)
+                    
+                case .Failure(let error):
+                    print(error.localizedDescription)
+                }
+        }
+    }
     
-    
+    // 刪除回覆
+    func comment_delete (comment_id:String , completion:(SwiftyJSON.JSON) -> ()){
+        
+        guard let AccessToken:String = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {return}
+        
+        Alamofire.request(.POST,"http://140.136.155.143/api/comment/delete",
+            parameters: ["token":AccessToken , "comment_id": comment_id]).validate().responseJSON{ (response) in
+                
+                switch response.result{
+                    
+                case .Success(let json):
+                    let json = SwiftyJSON.JSON(json)
+                    completion(json)
+                    
+                case .Failure(let error):
+                    print(error.localizedDescription)
+                }
+        }
+    }
+
+
     
     
     

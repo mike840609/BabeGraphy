@@ -16,6 +16,7 @@ class Post{
     
     var content:String?
     var imgurl:String?
+    var small_imgurl:String?
     
     var numLikes:Int?
     var numComments:Int?
@@ -29,8 +30,11 @@ class Post{
     // post id
     var _id:String?
     
-    //store who say this like
+    // store who say this like
     var likes_Users:[User] = [User]()
+    
+    // store who comment this post
+    var comment_Users:[Comment] = [Comment]()
     
     
     var isliked = false
