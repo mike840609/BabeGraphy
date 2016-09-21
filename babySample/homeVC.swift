@@ -254,14 +254,14 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         return cell
     }
     
-    
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        // let postVC = PostVC()
-        // self.navigationController?.pushViewController(postVC, animated: true)
-        
         // segue to post VC
+        
         let postVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostVC") as! PostVC
+        
+        postVC.post = posts[indexPath.item]
+        
         self.navigationController?.pushViewController(postVC, animated: true)
         
     }
@@ -490,7 +490,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         // facebook logout 暫時不清空 只單用server token 判斷
         
         
-        
+    
         // View Segue
         let signin = self.storyboard?.instantiateViewControllerWithIdentifier("LoginController") as! LoginController
         let appDelegate : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -553,7 +553,6 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         self.navigationController?.pushViewController(viewControllerToCommit, animated: false)
     }
     
-    
 }
 
 
@@ -562,10 +561,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
 // MARK: - CollectionViewCell
 class PhotoBrowserCollectionViewCell: UICollectionViewCell {
     
-    //    @IBOutlet weak var imageView:UIImageView!
-    
     @IBOutlet weak var imageView: SpringImageView!
-    
     
     var request:Alamofire.Request?      //用此屬性來儲存Alamofire得請求來載入圖片
     

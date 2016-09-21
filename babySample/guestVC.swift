@@ -202,10 +202,102 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        /*
+         {
+         "created_at" : "2016-09-12 13:32:21",
+         "content" : "Test",
+         "imgurl" : "http:\/\/140.136.155.143\/uploads\/57baade17214df4708424b41\/posts\/57d63de57214df14d04e8e41",
+         "_id" : "57d63de57214df14d04e8e41",
+         "author_imgurl" : "http:\/\/140.136.155.143\/uploads\/57baade17214df4708424b41\/avatar\/avatar",
+         "updated_at" : "2016-09-12 17:07:59",
+         "likes" : [
+         {
+         "user_avatar" : "http:\/\/140.136.155.143\/uploads\/57baade17214df4708424b41\/avatar\/avatar",
+         "_id" : [
+         
+         ],
+         "post_id" : "57d63de57214df14d04e8e41",
+         "created_at" : [
+         
+         ],
+         "user_id" : "57baade17214df4708424b41",
+         "user_name" : "mike",
+         "updated_at" : [
+         
+         ]
+         },
+         {
+         "user_avatar" : "http:\/\/140.136.155.143\/uploads\/57a5fa6d7214df15cf06e5b1\/avatar\/avatar",
+         "_id" : [
+         
+         ],
+         "post_id" : "57d63de57214df14d04e8e41",
+         "created_at" : [
+         
+         ],
+         "user_id" : "57a5fa6d7214df15cf06e5b1",
+         "user_name" : "mike",
+         "updated_at" : [
+         
+         ]
+         }
+         ],
+         "small_imgurl" : "http:\/\/140.136.155.143\/uploads\/57baade17214df4708424b41\/posts\/57d63de57214df14d04e8e41_300*300",
+         "author_name" : "mike",
+         "author_id" : "57baade17214df4708424b41",
+         "likes_count" : 1
+         }
+         */
         
-        let postVC = PostVC()
+        let json = guest_posts[indexPath.item]
+        
+        let post = Post()
+        
+        // root information
+        post.author_name = json["author_name"].string
+        post.author_imgurl = json["author_imgurl"].string
+        post.author_id = json["author_id"].string
+        
+        post.created_at = json["created_at"].string
+        post.updated_at = json["updated_at"].string
+        
+        post.content = json["content"].string
+        post.small_imgurl = json["small_imgurl"].string
+        post.imgurl = json["imgurl"].string
+        post._id = json["_id"].string
+        
+        post.numComments = json["comments"].int == nil ? 0 : json["comments"].int
+        
+        // loop for comments
+        for (_ ,sub):(String, SwiftyJSON.JSON) in json["comments"]{
+            
+            let comment = Comment()
+            comment.user_id = sub["user_id"].string
+            comment.user_name = sub["user_name"].string
+            comment.user_avatar = sub["user_avatar"].string
+            comment.content = sub["content"].string
+            
+            post.comment_Users.append(comment)
+        }
+        
+        // loop for users who liked
+        for (_ ,sub):(String, SwiftyJSON.JSON) in json["likes"]{
+            
+            let user = User()
+            user.user_id = sub["user_id"].string
+            user.user_name = sub["user_name"].string
+            user.user_imgurl = sub["user_avatar"].string
+            
+            post.likes_Users.append(user)
+        }
+        
+        post.numLikes = post.likes_Users.count
+        post.numComments = post.comment_Users.count
+        
+        
+        let postVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostVC") as! PostVC
+        postVC.post = post
         self.navigationController?.pushViewController(postVC, animated: true)
-        
     }
     
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
@@ -213,7 +305,7 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
         let cell = cell as! PhotoBrowserCollectionViewCell
         
         cell.imageView.animation = "zoomIn"
-//                cell.imageView.animation = "fadeInDown"
+        //      cell.imageView.animation = "fadeInDown"
         cell.imageView.curve = "easeIn"
         cell.imageView.duration = 3
         cell.imageView.scaleX = 5.0
@@ -226,11 +318,11 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
     // header View
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
-         let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "Header", forIndexPath: indexPath) as! headerView
+        let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "Header", forIndexPath: indexPath) as! headerView
         
         // guest user id
         if let id = guestJSON.last!["user_id"].string {
-           
+            
             Alamofire.request(.GET, "http://140.136.155.143/api/user/id/\(id)").validate().responseJSON { (response) in
                 
                 switch response.result{
@@ -295,7 +387,7 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
             header.followings.userInteractionEnabled = true
             header.followings.addGestureRecognizer(followingTap)
             
-        
+            
         }
         
         

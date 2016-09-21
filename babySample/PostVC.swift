@@ -181,9 +181,9 @@ class PostVC: UITableViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 50
-    }
+//    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        return 50
+//    }
     
     // MARK: - UIScrollViewDelegate
     override func scrollViewDidScroll(scrollView: UIScrollView) {
