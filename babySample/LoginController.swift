@@ -263,8 +263,6 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
     }
     
     
-    
-    
     func showingTitleInAnimationComplete() {
         // If a field is not filled out, display the highlighted title for 0.3 seco
         let displayTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(0.3 * Double(NSEC_PER_SEC)))
@@ -275,6 +273,7 @@ class LoginController: UIViewController,UITextFieldDelegate,NVActivityIndicatorV
             }
         })
     }
+    
     func hideTitleVisibleFromFields() {
         self.idText.setTitleVisible(false, animated: true)
         self.pwdText.setTitleVisible(false, animated: true)

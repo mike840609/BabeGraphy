@@ -88,6 +88,8 @@ class post_comment: UIViewController ,UITableViewDataSource,UITableViewDelegate 
         
         NSNotificationCenter.defaultCenter().removeObserver(self)
         
+        self.navigationController?.navigationBarHidden = false
+        
         self.tabBarController?.tabBar.hidden = false
     }
     

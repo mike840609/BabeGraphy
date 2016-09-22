@@ -32,17 +32,19 @@ class MenuViewController: UIViewController , GuillotineMenu{
     
     @IBAction func infoClick(sender: AnyObject) {
         
+        let baby_InfoVC = self.storyboard?.instantiateViewControllerWithIdentifier("BabyInfoVC") as! BabyInfoVC
+        
+        self.presentViewController(baby_InfoVC, animated: true, completion: nil)
+        
     }
     
     
     @IBAction func createClick(sender: AnyObject) {
         
-        // let CreateController = BabyCreateController()
-        // presentViewController(CreateController, animated: true, completion: nil)
+ 
         
         let baby_CreateVC = self.storyboard?.instantiateViewControllerWithIdentifier("BabyCreateVC") as! BabyCreateVC
         
-//        let navigationController = UINavigationController(rootViewController: baby_CreateVC)
         
         self.presentViewController(baby_CreateVC, animated: true, completion: nil)
     }

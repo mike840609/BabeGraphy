@@ -249,6 +249,7 @@ class ApiService: NSObject {
             case .Success( let json):
 
                 let json = SwiftyJSON.JSON(json)
+                
                 completion(json)
                 
             case .Failure(let error):
