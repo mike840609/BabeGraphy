@@ -284,7 +284,7 @@ class ApiService: NSObject {
     
     func baby_delete(Baby_id : String , completion : (SwiftyJSON.JSON)-> ()){
 
-        Alamofire.request(.POST, "http://140.136.155.143/api/baby/delete",parameters: ["Baby_id":Baby_id]).responseJSON { (response) in
+        Alamofire.request(.POST, "http://140.136.155.143/api/baby/delete",parameters: ["object_id":Baby_id]).responseJSON { (response) in
             switch response.result{
                 
             case .Success( let json):

@@ -15,20 +15,20 @@ class BabyInfoVC: UITableViewController {
     
     
     var babys:[Baby] = [Baby]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         dimissBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
         dimissBtn.setTitle(String.fontAwesomeIconWithCode("fa-chevron-down"), forState: .Normal)
         
         
-         getBaby ()
+        getBaby ()
         
     }
-
+    
     @IBAction func dismiss(sender: AnyObject) {
-    self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
         
     }
     
@@ -57,6 +57,7 @@ class BabyInfoVC: UITableViewController {
                 baby.parent_name = subJson["parent_name"].string
                 baby.parent_id = subJson["parent_id"].string
                 baby.updated_at = subJson["updated_at"].string
+                baby._id = subJson["_id"].string
                 
                 self.babys.append(baby)
             }
@@ -67,17 +68,13 @@ class BabyInfoVC: UITableViewController {
             print(json)
         }
     }
-
+    
     // MARK: - Table view data source
-
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        
         return babys.count
     }
     
@@ -90,8 +87,56 @@ class BabyInfoVC: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+        cell.alpha = 0
+        
+        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, -250, 10, 0)
+        
+        // let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 500, 0)
+        
+        cell.layer.transform = rotationTransform
+        
+        UIView.animateWithDuration(0.5) {
+            
+            cell.alpha = 1
+            cell.layer.transform = CATransform3DIdentity
+        }
+        
+    }
+    
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+
+        let Delete = UITableViewRowAction(style: .Normal, title: "Delete") { action, index in
+            
+            if let id = self.babys[indexPath.item]._id {
+                
+                ApiService.shareInstance.baby_delete(id, completion: { (json) in
+                    
+                    print(json)
+                    
+                    self.babys.removeAtIndex(index.item)
+                    
+                self.tableView.reloadData()
+
+                })
+            }
+
+        }
+        
+        Delete.backgroundColor = UIColor(red:0.933, green:0.191, blue:0.469, alpha:0.53)
+        
+        return [Delete ]
+        
+    }
     
 
     
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
 
 }

@@ -230,7 +230,6 @@ class post_comment: UIViewController ,UITableViewDataSource,UITableViewDelegate 
         
         let Delete = UITableViewRowAction(style: .Normal, title: "Delete") { action, index in
             print("Delete button tapped")
-            
         }
         
         Delete.backgroundColor = UIColor(red:0.933, green:0.191, blue:0.469, alpha:0.53)
@@ -240,7 +239,7 @@ class post_comment: UIViewController ,UITableViewDataSource,UITableViewDelegate 
         }
         share.backgroundColor = UIColor(red:0.10, green:0.81, blue:0.97, alpha:1.00)
         
-        return [Delete ,share  ]
+        return [Delete ,share ]
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

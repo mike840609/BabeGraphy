@@ -42,7 +42,6 @@ class MenuViewController: UIViewController , GuillotineMenu{
     @IBAction func createClick(sender: AnyObject) {
         
  
-        
         let baby_CreateVC = self.storyboard?.instantiateViewControllerWithIdentifier("BabyCreateVC") as! BabyCreateVC
         
         
@@ -51,9 +50,11 @@ class MenuViewController: UIViewController , GuillotineMenu{
     
     
     @IBAction func editClick(sender: AnyObject) {
+        
     }
     
     @IBAction func deleteClick(sender: AnyObject) {
+        
     }
     
     @IBAction func closeClick(sender: AnyObject) {
