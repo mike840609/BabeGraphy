@@ -389,6 +389,8 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
                         post.comment_Users.append(comment)
                     }
                     
+                    
+                    
                     post.numLikes = post.likes_Users.count
                     post.numComments = post.comment_Users.count
                     
@@ -566,6 +568,8 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
 class PhotoBrowserCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: SpringImageView!
+    
+    var post: Post?
     
     var request:Alamofire.Request?      //用此屬性來儲存Alamofire得請求來載入圖片
     

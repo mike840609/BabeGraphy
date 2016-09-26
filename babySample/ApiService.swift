@@ -297,9 +297,33 @@ class ApiService: NSObject {
             }
             
         }
-
-        
     }
+    
+    
+    //  MARK: - Self Function
+    /*
+    http://140.136.155.143/api/post/search  parameter: token
+     */
+    func getUser_post(completion : (SwiftyJSON.JSON) -> ()){
+        guard let AccessToken:String? = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {return}
+        
+        Alamofire.request(.POST, "http://140.136.155.143/api/post/search",parameters:["token":AccessToken!]).validate().responseJSON{ (response) in
+            switch response.result{
+                
+            case . Success( let json ):
+                
+                let json  = SwiftyJSON.JSON(json)
+                
+                completion(json)
+                
+            case . Failure( let error):
+                print(error.localizedDescription)
+                
+            }
+            
+        }
+    }
+
     
     //  MARK: - Feed Function
     /*
@@ -395,8 +419,63 @@ class ApiService: NSObject {
     }
 
 
+    //  MARK: - PDF  API
+    /*
+     http://140.136.155.143/api/album/html2pdf       parameter: token , album_name , baby_name , url1 , url2, url3, url4, url5, url6 , url7 , url8
+      http://140.136.155.143/api/album/search       parameter: token ,
+     */
     
+    func pdf_create (album_name:String, baby_name:String , url1:String, url2:String,url3:String,url4:String,url5:String,url6:String,url7:String,url8:String,  completion:(SwiftyJSON.JSON) -> ()){
+        
+        guard let AccessToken:String = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {return}
+        
+        print(url1)
+        print(url2)
+        print(url3)
+        print(url4)
+        print(url5)
+        print(url6)
+        print(url7)
+        print(url8)
     
+        
+        Alamofire.request(.POST,"http://140.136.155.143/api/album/html2pdf",
+            parameters: ["token":AccessToken , "album_name": album_name , "baby_name":baby_name ,"url1":url1 , "url2":url2, "url3":url3, "url4":url4,"url5":url5,"url6":url6,"url7":url7 ,"url8":url8]).validate().responseJSON{ (response) in
+                
+                switch response.result{
+                    
+                case .Success(let json):
+                    
+                    let json = SwiftyJSON.JSON(json)
+                    
+                    completion(json)
+                    
+                case .Failure(let error):
+                    print(error.localizedDescription)
+                }
+        }
+    }
+    
+    func pdf_search ( completion:(SwiftyJSON.JSON) -> ()){
+        
+        guard let AccessToken:String = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {return}
+        
+        Alamofire.request(.POST,"http://140.136.155.143/api/album/search",
+            parameters: ["token":AccessToken ]).validate().responseJSON{ (response) in
+                
+                switch response.result{
+                    
+                case .Success(let json):
+                    
+                    let json = SwiftyJSON.JSON(json)
+                    
+                    completion(json)
+                    
+                case .Failure(let error):
+                    print(error.localizedDescription)
+                }
+        }
+    }
     
     /*
      func myFunction(cityName:String, completion : (JSON) -> ()) {

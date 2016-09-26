@@ -59,6 +59,11 @@
 		4D5C4D6D1D73664D007ADAFB /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C4D6C1D73664D007ADAFB /* PreviewViewController.swift */; };
 		4D6B1AA81D2546FD00405E2B /* homeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B1AA71D2546FD00405E2B /* homeVC.swift */; };
 		4D6B1AAA1D2548D000405E2B /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B1AA91D2548D000405E2B /* headerView.swift */; };
+		4D6DBB4D1D983E200039533C /* Baby_Fascicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6DBB4C1D983E200039533C /* Baby_Fascicle.swift */; };
+		4D6DBB4F1D98C1B10039533C /* multipleChoseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6DBB4E1D98C1B10039533C /* multipleChoseVC.swift */; };
+		4D6DBB511D98D3F80039533C /* album_searchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6DBB501D98D3F80039533C /* album_searchVC.swift */; };
+		4D6DBB531D98D5780039533C /* album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6DBB521D98D5780039533C /* album.swift */; };
+		4D6DBB561D98D93F0039533C /* albumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6DBB551D98D93F0039533C /* albumCell.swift */; };
 		4D6EF6C41D3D1FFB00931BB6 /* userVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6EF6C31D3D1FFB00931BB6 /* userVC.swift */; };
 		4D9761491D227F4F00FE9C80 /* signUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9761481D227F4F00FE9C80 /* signUpVC.swift */; };
 		4D9782681D744F960000F030 /* PostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9782671D744F960000F030 /* PostVC.swift */; };
@@ -154,6 +159,11 @@
 		4D5C4D6C1D73664D007ADAFB /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		4D6B1AA71D2546FD00405E2B /* homeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = homeVC.swift; sourceTree = "<group>"; };
 		4D6B1AA91D2548D000405E2B /* headerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
+		4D6DBB4C1D983E200039533C /* Baby_Fascicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Baby_Fascicle.swift; sourceTree = "<group>"; };
+		4D6DBB4E1D98C1B10039533C /* multipleChoseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = multipleChoseVC.swift; sourceTree = "<group>"; };
+		4D6DBB501D98D3F80039533C /* album_searchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = album_searchVC.swift; sourceTree = "<group>"; };
+		4D6DBB521D98D5780039533C /* album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = album.swift; sourceTree = "<group>"; };
+		4D6DBB551D98D93F0039533C /* albumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = albumCell.swift; sourceTree = "<group>"; };
 		4D6EF6C31D3D1FFB00931BB6 /* userVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userVC.swift; sourceTree = "<group>"; };
 		4D9761481D227F4F00FE9C80 /* signUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signUpVC.swift; sourceTree = "<group>"; };
 		4D9782671D744F960000F030 /* PostVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostVC.swift; sourceTree = "<group>"; };
@@ -360,6 +370,34 @@
 			path = Icon;
 			sourceTree = "<group>";
 		};
+		4D6DBB441D9834EE0039533C /* Baby_ Fascicle */ = {
+			isa = PBXGroup;
+			children = (
+				4D6DBB4C1D983E200039533C /* Baby_Fascicle.swift */,
+				4D6DBB4E1D98C1B10039533C /* multipleChoseVC.swift */,
+				4D6DBB501D98D3F80039533C /* album_searchVC.swift */,
+				4D6DBB571D98D9440039533C /* View */,
+				4D6DBB541D98D5DF0039533C /* Model */,
+			);
+			name = "Baby_ Fascicle";
+			sourceTree = "<group>";
+		};
+		4D6DBB541D98D5DF0039533C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4D6DBB521D98D5780039533C /* album.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		4D6DBB571D98D9440039533C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4D6DBB551D98D93F0039533C /* albumCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		4D9EC4C51D93A478004F9120 /* Baby_Create */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,6 +444,7 @@
 			children = (
 				4D9EC4C51D93A478004F9120 /* Baby_Create */,
 				4D9EC4C61D93A4E5004F9120 /* Baby_Info */,
+				4D6DBB441D9834EE0039533C /* Baby_ Fascicle */,
 			);
 			name = BabyApi;
 			sourceTree = "<group>";
@@ -668,6 +707,7 @@
 				4D9782681D744F960000F030 /* PostVC.swift in Sources */,
 				4DE338861D27ED46001373E3 /* uploadVC.swift in Sources */,
 				4D9EC4C81D93A63C004F9120 /* BabyInfoVC.swift in Sources */,
+				4D6DBB4F1D98C1B10039533C /* multipleChoseVC.swift in Sources */,
 				4D3749F81D087C8000F57F68 /* UITextField+fixCaretPosition.swift in Sources */,
 				4D3749F71D087C8000F57F68 /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */,
 				4D1258A01D2CC4D100A7B6B9 /* followersVC.swift in Sources */,
@@ -682,9 +722,12 @@
 				4D1258A81D2CD96800A7B6B9 /* navVC.swift in Sources */,
 				4D1258A61D2CD94000A7B6B9 /* tabVC.swift in Sources */,
 				4DF05C6A1D929E0F0036A7C1 /* post_comment.swift in Sources */,
+				4D6DBB511D98D3F80039533C /* album_searchVC.swift in Sources */,
+				4D6DBB4D1D983E200039533C /* Baby_Fascicle.swift in Sources */,
 				4D2D44C51D0DA51000E6CE0D /* FeedCell.swift in Sources */,
 				4D5B991A1D86C15C0096D63A /* UserCell.swift in Sources */,
 				4DE3388A1D27F455001373E3 /* MaterialButton.swift in Sources */,
+				4D6DBB531D98D5780039533C /* album.swift in Sources */,
 				4D3749DC1D07FFD100F57F68 /* AppDelegate.swift in Sources */,
 				4DAA53691D3202510099B78E /* EditVC.swift in Sources */,
 				4D6EF6C41D3D1FFB00931BB6 /* userVC.swift in Sources */,
@@ -706,6 +749,7 @@
 				4DABA2821D7E98D50098E6C1 /* MenuViewController.swift in Sources */,
 				4DE34F081D92665100CB265B /* Comment.swift in Sources */,
 				4DA01D6A1D42170F0041B482 /* ApiService.swift in Sources */,
+				4D6DBB561D98D93F0039533C /* albumCell.swift in Sources */,
 				4DE3388C1D27F455001373E3 /* MateriaTextField.swift in Sources */,
 				4DC669A51D5C5210006CBF6A /* AlbumVC.swift in Sources */,
 				4DC669A81D5C5676006CBF6A /* interest.swift in Sources */,
