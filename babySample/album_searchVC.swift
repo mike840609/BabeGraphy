@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import SafariServices
 
 class album_searchVC: UITableViewController {
     
@@ -16,8 +17,10 @@ class album_searchVC: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        albums.removeAll(keepCapacity: false)
+        self.tableView.reloadData()
         
-//        getAlbums()
+        getAlbums()
     }
 
     
@@ -26,7 +29,7 @@ class album_searchVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        getAlbums()
+//        getAlbums()
     }
 
 
@@ -78,6 +81,17 @@ class album_searchVC: UITableViewController {
         cell.album = album
         
         return cell
+    }
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        guard let url = albums[indexPath.item].pdf_url else { return}
+        
+        let safariController = SFSafariViewController(URL:NSURL(string: url)!, entersReaderIfAvailable: true)
+        
+        presentViewController(safariController, animated: true, completion: nil)
+        
     }
 
 

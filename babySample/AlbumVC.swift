@@ -79,13 +79,12 @@ extension AlbumVC:UICollectionViewDataSource{
         // 類別內設值屬性 自動賦值
         cell.interest = self.interests[indexPath.item]
         
-        
         cell.layer.cornerRadius = 4.0
-        
 
-        
         return cell
     }
+    
+    
 }
 
 // 自動置中

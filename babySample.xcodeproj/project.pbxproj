@@ -11,6 +11,9 @@
 		4D034CB11D7F117500A7DFB8 /* EZYGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D034CB01D7F117500A7DFB8 /* EZYGradientView.swift */; };
 		4D0476CD1D6F598C0004CCA1 /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0476CC1D6F598C0004CCA1 /* KDCircularProgress.swift */; };
 		4D0476CF1D6F60B10004CCA1 /* notepad-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0476CE1D6F60B10004CCA1 /* notepad-2.png */; };
+		4D0D2FA21D98FA8C00B2A1B7 /* MedicineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0D2FA11D98FA8C00B2A1B7 /* MedicineVC.swift */; };
+		4D0D2FA71D9903BD00B2A1B7 /* medicineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0D2FA61D9903BD00B2A1B7 /* medicineCell.swift */; };
+		4D0D2FA91D9906A900B2A1B7 /* Medicine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0D2FA81D9906A900B2A1B7 /* Medicine.swift */; };
 		4D1258A01D2CC4D100A7B6B9 /* followersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D12589F1D2CC4D100A7B6B9 /* followersVC.swift */; };
 		4D1258A41D2CD55600A7B6B9 /* shield-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D1258A31D2CD55600A7B6B9 /* shield-1.png */; };
 		4D1258A61D2CD94000A7B6B9 /* tabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1258A51D2CD94000A7B6B9 /* tabVC.swift */; };
@@ -109,6 +112,9 @@
 		4D034CB01D7F117500A7DFB8 /* EZYGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZYGradientView.swift; sourceTree = "<group>"; };
 		4D0476CC1D6F598C0004CCA1 /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
 		4D0476CE1D6F60B10004CCA1 /* notepad-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notepad-2.png"; sourceTree = "<group>"; };
+		4D0D2FA11D98FA8C00B2A1B7 /* MedicineVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicineVC.swift; sourceTree = "<group>"; };
+		4D0D2FA61D9903BD00B2A1B7 /* medicineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = medicineCell.swift; sourceTree = "<group>"; };
+		4D0D2FA81D9906A900B2A1B7 /* Medicine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Medicine.swift; sourceTree = "<group>"; };
 		4D12589F1D2CC4D100A7B6B9 /* followersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = followersVC.swift; sourceTree = "<group>"; };
 		4D1258A31D2CD55600A7B6B9 /* shield-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shield-1.png"; sourceTree = "<group>"; };
 		4D1258A51D2CD94000A7B6B9 /* tabVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tabVC.swift; sourceTree = "<group>"; };
@@ -243,6 +249,16 @@
 			path = KDCircularProgress;
 			sourceTree = "<group>";
 		};
+		4D0D2FA31D98FACB00B2A1B7 /* MedicineVC */ = {
+			isa = PBXGroup;
+			children = (
+				4D0D2FA11D98FA8C00B2A1B7 /* MedicineVC.swift */,
+				4D0D2FA61D9903BD00B2A1B7 /* medicineCell.swift */,
+				4D0D2FA81D9906A900B2A1B7 /* Medicine.swift */,
+			);
+			name = MedicineVC;
+			sourceTree = "<group>";
+		};
 		4D2D44CA1D0DB74500E6CE0D /* NewsFeed */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +301,7 @@
 				4D0476CB1D6F598C0004CCA1 /* KDCircularProgress */,
 				4D3749DB1D07FFD100F57F68 /* AppDelegate.swift */,
 				4D2D44CA1D0DB74500E6CE0D /* NewsFeed */,
+				4D0D2FA31D98FACB00B2A1B7 /* MedicineVC */,
 				4DD7EF861D912BBF00809E5C /* PostVC */,
 				4DC669A61D5C5641006CBF6A /* Album */,
 				4DABA2991D7EC96D0098E6C1 /* BabyApi */,
@@ -703,6 +720,7 @@
 				4D034CB11D7F117500A7DFB8 /* EZYGradientView.swift in Sources */,
 				4D34AC541D82570000BD4DD2 /* SwipeViewController.swift in Sources */,
 				4D0476CD1D6F598C0004CCA1 /* KDCircularProgress.swift in Sources */,
+				4D0D2FA91D9906A900B2A1B7 /* Medicine.swift in Sources */,
 				4DE7A6171D2FC16500753A1C /* followersCell.swift in Sources */,
 				4D9782681D744F960000F030 /* PostVC.swift in Sources */,
 				4DE338861D27ED46001373E3 /* uploadVC.swift in Sources */,
@@ -710,6 +728,7 @@
 				4D6DBB4F1D98C1B10039533C /* multipleChoseVC.swift in Sources */,
 				4D3749F81D087C8000F57F68 /* UITextField+fixCaretPosition.swift in Sources */,
 				4D3749F71D087C8000F57F68 /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */,
+				4D0D2FA21D98FA8C00B2A1B7 /* MedicineVC.swift in Sources */,
 				4D1258A01D2CC4D100A7B6B9 /* followersVC.swift in Sources */,
 				4D33C0771D5D865100CEEDFB /* NetData.swift in Sources */,
 				4D3749E41D07FFD100F57F68 /* babySample.xcdatamodeld in Sources */,
@@ -724,6 +743,7 @@
 				4DF05C6A1D929E0F0036A7C1 /* post_comment.swift in Sources */,
 				4D6DBB511D98D3F80039533C /* album_searchVC.swift in Sources */,
 				4D6DBB4D1D983E200039533C /* Baby_Fascicle.swift in Sources */,
+				4D0D2FA71D9903BD00B2A1B7 /* medicineCell.swift in Sources */,
 				4D2D44C51D0DA51000E6CE0D /* FeedCell.swift in Sources */,
 				4D5B991A1D86C15C0096D63A /* UserCell.swift in Sources */,
 				4DE3388A1D27F455001373E3 /* MaterialButton.swift in Sources */,

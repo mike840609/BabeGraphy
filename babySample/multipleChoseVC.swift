@@ -16,10 +16,15 @@ class multipleChoseVC: UICollectionViewController {
     
     var selectedPhotos = [String]()
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        selectedPhotos.removeAll(keepCapacity: false)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectedPhotos.removeAll(keepCapacity:  false)
+        
     }
 
 
@@ -78,16 +83,13 @@ class multipleChoseVC: UICollectionViewController {
             print(selectedPhotos.last)
             
             if selectedPhotos.count == 8 {
+                
+                let  uuid = NSUUID().UUIDString
+                
+                print(uuid)
+
     
-                ApiService.shareInstance.pdf_create("album", baby_name: "mike", url1: self.selectedPhotos[0], url2: self.selectedPhotos[1], url3: self.selectedPhotos[2], url4: self.selectedPhotos[3], url5: self.selectedPhotos[4], url6: self.selectedPhotos[5], url7: self.selectedPhotos[6], url8: self.selectedPhotos[7], completion: { (json) in
-                    
-                    print(json)
-                    
-                    
-//                    let tabbar = self.storyboard?.instantiateViewControllerWithIdentifier("tabBar") as! tabVC
-//                    let appDelegate : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//                    appDelegate.window?.rootViewController = tabbar
-                    
+                ApiService.shareInstance.pdf_create(uuid, baby_name: "mike_test", url1: self.selectedPhotos[0], url2: self.selectedPhotos[1], url3: self.selectedPhotos[2], url4: self.selectedPhotos[3], url5: self.selectedPhotos[4], url6: self.selectedPhotos[5], url7: self.selectedPhotos[6], url8: self.selectedPhotos[7], completion: { (json) in
                     
                     self.dismissViewControllerAnimated(true, completion: nil)
                     

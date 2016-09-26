@@ -479,6 +479,17 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     }
     
     
+    @IBAction func showMedicineVC(sender: AnyObject) {
+        let medicine_VC = self.storyboard?.instantiateViewControllerWithIdentifier("MedicineVC") as! MedicineVC
+        
+        self.navigationController?.pushViewController(medicine_VC, animated: true)
+        
+    }
+    
+    @IBAction func showAlarmVC(sender: AnyObject) {
+        
+        
+    }
     
 }
 
