@@ -72,7 +72,6 @@ extension UIImageView {
     }
 }
 
-//
 
 
 // 時間換算
@@ -86,4 +85,14 @@ extension NSDate
         let d = dateStringFormatter.dateFromString(dateString)!
         self.init(timeInterval:0, sinceDate:d)
     }
+}
+
+
+
+// Core Data
+extension UIViewController {
+    var appDelegate:AppDelegate {
+        return UIApplication.sharedApplication().delegate as! AppDelegate
+    }
+    
 }

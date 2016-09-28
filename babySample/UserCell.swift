@@ -37,6 +37,13 @@ class UserCell: UITableViewCell {
         imageView.layer.cornerRadius = 24
         imageView.layer.masksToBounds = true
         imageView.contentMode = .ScaleAspectFill
+        
+        // CORNER RTADIUS
+//        imageView.contentMode = .ScaleAspectFill
+//        imageView.layer.cornerRadius = imageView.frame.size.width / 2
+//        imageView.clipsToBounds = true
+        
+        
         return imageView
     }()
     
@@ -77,6 +84,8 @@ class UserCell: UITableViewCell {
         profileImageView.centerYAnchor.constraintEqualToAnchor(self.centerYAnchor).active = true
         profileImageView.widthAnchor.constraintEqualToConstant(48).active = true
         profileImageView.heightAnchor.constraintEqualToConstant(48).active = true
+        
+
         
         
         //need x,y,width,height anchors

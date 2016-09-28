@@ -36,6 +36,11 @@
 		4D3749FE1D0884B900F57F68 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D3749FD1D0884B900F57F68 /* fontawesome-webfont.ttf */; };
 		4D3A38AB1D8BADBD001D0D8D /* BabyCreateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3A38AA1D8BADBD001D0D8D /* BabyCreateVC.swift */; };
 		4D3A38AD1D8C6FD2001D0D8D /* pacifier.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D3A38AC1D8C6FD2001D0D8D /* pacifier.png */; };
+		4D41AE781D9C06E000AF772F /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D41AE771D9C06E000AF772F /* NewViewController.swift */; };
+		4D41AE7A1D9C075B00AF772F /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D41AE791D9C075B00AF772F /* EditViewController.swift */; };
+		4D41AE7C1D9C089900AF772F /* NoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D41AE7B1D9C089900AF772F /* NoteVC.swift */; };
+		4D41AE811D9C10DA00AF772F /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D41AE801D9C10DA00AF772F /* TodoItem.swift */; };
+		4D41AE831D9C111A00AF772F /* TodoItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D41AE821D9C111A00AF772F /* TodoItem+CoreDataProperties.swift */; };
 		4D4B00601D0C5048007E45A9 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4B005F1D0C5048007E45A9 /* FeedController.swift */; };
 		4D54495B1D2A20A1006461DC /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D54494D1D2A20A1006461DC /* add.png */; };
 		4D54495C1D2A20A1006461DC /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D54494E1D2A20A1006461DC /* calendar.png */; };
@@ -139,6 +144,11 @@
 		4D3749FD1D0884B900F57F68 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "fontawesome-webfont.ttf"; path = "../fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		4D3A38AA1D8BADBD001D0D8D /* BabyCreateVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BabyCreateVC.swift; sourceTree = "<group>"; };
 		4D3A38AC1D8C6FD2001D0D8D /* pacifier.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pacifier.png; sourceTree = "<group>"; };
+		4D41AE771D9C06E000AF772F /* NewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
+		4D41AE791D9C075B00AF772F /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		4D41AE7B1D9C089900AF772F /* NoteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteVC.swift; sourceTree = "<group>"; };
+		4D41AE801D9C10DA00AF772F /* TodoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
+		4D41AE821D9C111A00AF772F /* TodoItem+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TodoItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4D4B005F1D0C5048007E45A9 /* FeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedController.swift; path = SkyFloatingLabelTextField/FeedController.swift; sourceTree = "<group>"; };
 		4D54494D1D2A20A1006461DC /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		4D54494E1D2A20A1006461DC /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
@@ -252,9 +262,9 @@
 		4D0D2FA31D98FACB00B2A1B7 /* MedicineVC */ = {
 			isa = PBXGroup;
 			children = (
-				4D0D2FA11D98FA8C00B2A1B7 /* MedicineVC.swift */,
-				4D0D2FA61D9903BD00B2A1B7 /* medicineCell.swift */,
-				4D0D2FA81D9906A900B2A1B7 /* Medicine.swift */,
+				4D41AE731D9C046F00AF772F /* Controller */,
+				4D41AE741D9C047B00AF772F /* View */,
+				4D41AE751D9C048100AF772F /* Model */,
 			);
 			name = MedicineVC;
 			sourceTree = "<group>";
@@ -290,8 +300,7 @@
 		4D3749DA1D07FFD100F57F68 /* babySample */ = {
 			isa = PBXGroup;
 			children = (
-				4D34AC511D82570000BD4DD2 /* InterfaceController.swift */,
-				4D34AC521D82570000BD4DD2 /* SwipeViewController.swift */,
+				4D41AE701D9C03F200AF772F /* PageViewDelegate */,
 				4D54494C1D2A20A1006461DC /* Icon */,
 				4DDC7EE11D7FED2000BCAF64 /* Hokusai */,
 				4D034CAF1D7F117500A7DFB8 /* EZYGradientView */,
@@ -302,6 +311,7 @@
 				4D3749DB1D07FFD100F57F68 /* AppDelegate.swift */,
 				4D2D44CA1D0DB74500E6CE0D /* NewsFeed */,
 				4D0D2FA31D98FACB00B2A1B7 /* MedicineVC */,
+				4D41AE761D9C048F00AF772F /* NoteVC */,
 				4DD7EF861D912BBF00809E5C /* PostVC */,
 				4DC669A61D5C5641006CBF6A /* Album */,
 				4DABA2991D7EC96D0098E6C1 /* BabyApi */,
@@ -352,6 +362,51 @@
 				4D3749FD1D0884B900F57F68 /* fontawesome-webfont.ttf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4D41AE701D9C03F200AF772F /* PageViewDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				4D34AC511D82570000BD4DD2 /* InterfaceController.swift */,
+				4D34AC521D82570000BD4DD2 /* SwipeViewController.swift */,
+			);
+			name = PageViewDelegate;
+			sourceTree = "<group>";
+		};
+		4D41AE731D9C046F00AF772F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4D0D2FA11D98FA8C00B2A1B7 /* MedicineVC.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		4D41AE741D9C047B00AF772F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4D0D2FA61D9903BD00B2A1B7 /* medicineCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		4D41AE751D9C048100AF772F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4D0D2FA81D9906A900B2A1B7 /* Medicine.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		4D41AE761D9C048F00AF772F /* NoteVC */ = {
+			isa = PBXGroup;
+			children = (
+				4D41AE801D9C10DA00AF772F /* TodoItem.swift */,
+				4D41AE821D9C111A00AF772F /* TodoItem+CoreDataProperties.swift */,
+				4D41AE771D9C06E000AF772F /* NewViewController.swift */,
+				4D41AE791D9C075B00AF772F /* EditViewController.swift */,
+				4D41AE7B1D9C089900AF772F /* NoteVC.swift */,
+			);
+			name = NoteVC;
 			sourceTree = "<group>";
 		};
 		4D54494C1D2A20A1006461DC /* Icon */ = {
@@ -727,6 +782,7 @@
 				4D9EC4C81D93A63C004F9120 /* BabyInfoVC.swift in Sources */,
 				4D6DBB4F1D98C1B10039533C /* multipleChoseVC.swift in Sources */,
 				4D3749F81D087C8000F57F68 /* UITextField+fixCaretPosition.swift in Sources */,
+				4D41AE811D9C10DA00AF772F /* TodoItem.swift in Sources */,
 				4D3749F71D087C8000F57F68 /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */,
 				4D0D2FA21D98FA8C00B2A1B7 /* MedicineVC.swift in Sources */,
 				4D1258A01D2CC4D100A7B6B9 /* followersVC.swift in Sources */,
@@ -735,6 +791,7 @@
 				4DABA2981D7EC9620098E6C1 /* BabyCreate_Anchor.swift in Sources */,
 				4D9761491D227F4F00FE9C80 /* signUpVC.swift in Sources */,
 				4D5C4D6D1D73664D007ADAFB /* PreviewViewController.swift in Sources */,
+				4D41AE7C1D9C089900AF772F /* NoteVC.swift in Sources */,
 				4D9EC4CC1D93C2E4004F9120 /* Baby.swift in Sources */,
 				4D3749F61D087C8000F57F68 /* SkyFloatingLabelTextField.swift in Sources */,
 				4D34AC531D82570000BD4DD2 /* InterfaceController.swift in Sources */,
@@ -746,6 +803,7 @@
 				4D0D2FA71D9903BD00B2A1B7 /* medicineCell.swift in Sources */,
 				4D2D44C51D0DA51000E6CE0D /* FeedCell.swift in Sources */,
 				4D5B991A1D86C15C0096D63A /* UserCell.swift in Sources */,
+				4D41AE781D9C06E000AF772F /* NewViewController.swift in Sources */,
 				4DE3388A1D27F455001373E3 /* MaterialButton.swift in Sources */,
 				4D6DBB531D98D5780039533C /* album.swift in Sources */,
 				4D3749DC1D07FFD100F57F68 /* AppDelegate.swift in Sources */,
@@ -769,10 +827,12 @@
 				4DABA2821D7E98D50098E6C1 /* MenuViewController.swift in Sources */,
 				4DE34F081D92665100CB265B /* Comment.swift in Sources */,
 				4DA01D6A1D42170F0041B482 /* ApiService.swift in Sources */,
+				4D41AE831D9C111A00AF772F /* TodoItem+CoreDataProperties.swift in Sources */,
 				4D6DBB561D98D93F0039533C /* albumCell.swift in Sources */,
 				4DE3388C1D27F455001373E3 /* MateriaTextField.swift in Sources */,
 				4DC669A51D5C5210006CBF6A /* AlbumVC.swift in Sources */,
 				4DC669A81D5C5676006CBF6A /* interest.swift in Sources */,
+				4D41AE7A1D9C075B00AF772F /* EditViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

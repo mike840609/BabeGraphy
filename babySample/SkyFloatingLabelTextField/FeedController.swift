@@ -611,13 +611,18 @@ extension FeedController{
     // segue to commentViewController
     func showCommentViewController(post:Post?){
         
-//        let postVC = PostVC()
-//        self.navigationController?.pushViewController(postVC, animated: true)
+        
         
         // segue to post VC
-        let postVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostVC") as! PostVC
-        postVC.post = post
+        // let postVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostVC") as! PostVC
+        // postVC.post = post
         
+        // self.navigationController?.pushViewController(postVC, animated: true)
+        
+        
+        // segue to post_comment
+        let postVC = self.storyboard?.instantiateViewControllerWithIdentifier("post_comment") as! post_comment
+        postVC.post = post
         self.navigationController?.pushViewController(postVC, animated: true)
 
         

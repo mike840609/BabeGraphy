@@ -96,7 +96,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
     
     // prepare function
     override func prepareForReuse() {
-
+        
         statusImg.image = nil
         likeButton.setImage(UIImage(named:"like" ), forState: .Normal)
         isLiked = false
@@ -379,7 +379,7 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
         print("commentFunction_ Pressed ")
         
         
-            self.delegate?.showCommentViewController(post)
+        self.delegate?.showCommentViewController(post)
         
         
     }
