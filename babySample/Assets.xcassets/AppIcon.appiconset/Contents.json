@@ -81,6 +81,12 @@
     {
       "size" : "60x60",
       "idiom" : "car",
+      "filename" : "Icon-App-60x60@2x-1.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "60x60",
+      "idiom" : "car",
       "filename" : "Icon-App-60x60@3x-1.png",
       "scale" : "3x"
     }

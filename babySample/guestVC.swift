@@ -33,6 +33,8 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
     // hold data from server
     var guest_posts: Array<SwiftyJSON.JSON> = []
     
+    // avaImg temp url
+    var avaUrl:String?
     
     var peekPop: PeekPop?
     
@@ -295,9 +297,15 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
         post.numComments = post.comment_Users.count
         
         
-        let postVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostVC") as! PostVC
+        // let postVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostVC") as! PostVC
+        // postVC.post = post
+        // self.navigationController?.pushViewController(postVC, animated: true)
+        
+        // segue to post_comment
+        let postVC = self.storyboard?.instantiateViewControllerWithIdentifier("post_comment") as! post_comment
         postVC.post = post
         self.navigationController?.pushViewController(postVC, animated: true)
+        
     }
     
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
@@ -340,6 +348,7 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
                     
                     if let url = json["avatar"].string {
                         header.avaImg.hnk_setImageFromURL(NSURL(string: url)!)
+                        self.avaUrl = url
                     }
                     
                     
@@ -388,6 +397,11 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
             header.followings.addGestureRecognizer(followingTap)
             
             
+            // show img
+            let avaTap = UITapGestureRecognizer(target: self, action: #selector(self.avaTap))
+            avaTap.numberOfTapsRequired = 1
+            header.avaImg.userInteractionEnabled = true
+            header.avaImg.addGestureRecognizer(avaTap)
         }
         
         
@@ -397,6 +411,19 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
     
     
     // MARK: - Customer function
+    
+    func avaTap() {
+        
+        let ava = self.storyboard?.instantiateViewControllerWithIdentifier("avaVC") as! avaVC
+        
+        // 非同步載入
+        ava.avaUrl = self.avaUrl
+        
+        let navigationController = UINavigationController(rootViewController: ava)
+        
+        self.presentViewController(navigationController, animated: true, completion: nil)
+    }
+    
     // 回到最上方
     func postsTap(){
         
@@ -444,7 +471,8 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
                 let json = SwiftyJSON.JSON(json)
                 
                 // guest
-                let gusetId = guestJSON.last!["user_id"].string
+                
+                guard let gusetId = guestJSON.last?["user_id"].string else {return}
                 
                 for (_,subJson):(String, SwiftyJSON.JSON) in json["data"] {
                     

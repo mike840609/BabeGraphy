@@ -22,6 +22,12 @@ class followersCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        
+        // CORNER RTADIUS
+        avaImg.contentMode = .ScaleAspectFill
+        avaImg.layer.cornerRadius = avaImg.frame.size.width / 2
+        avaImg.clipsToBounds = true
+        
     }
     
     

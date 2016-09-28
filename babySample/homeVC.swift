@@ -39,7 +39,9 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     // pull to refresher
     var refresher:UIRefreshControl!
     
-
+    
+    // temp for segue uiimage
+    var avaUrl :String?
     
     // identify
     let PhotoBrowserCellIdentifier = "PhotoBrowserCell"
@@ -153,19 +155,23 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
                 
                 // 解包圖片
                 if let avaImg = json["data"][0]["avatar"].string{
+                    
                     // 快取
-                    // header.avaImg.hnk_setImageFromURL(NSURL(string: avaImg)!)
+                    header.avaImg.hnk_setImageFromURL(NSURL(string: avaImg)!)
+                    self.avaUrl = avaImg
                     
                     // 非同步載入
-                    let url = NSURL(string: avaImg)
-                    
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                        let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
-                        dispatch_async(dispatch_get_main_queue(), {
-                            header.avaImg.image = UIImage(data: data!)
-                            tempimage = UIImage(data: data!)
-                        });
-                    }
+                    /*
+                     let url = NSURL(string: avaImg)
+                     
+                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                     let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
+                     dispatch_async(dispatch_get_main_queue(), {
+                     header.avaImg.image = UIImage(data: data!)
+                     tempimage = UIImage(data: data!)
+                     });
+                     }
+                     */
                 }
                 
                 // 設定navigation 標題
@@ -257,11 +263,11 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
         // segue to post VC
-//        
-//        let postVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostVC") as! PostVC
-//        postVC.post = posts[indexPath.item]
-//        self.navigationController?.pushViewController(postVC, animated: true)
-//        
+        //
+        //        let postVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostVC") as! PostVC
+        //        postVC.post = posts[indexPath.item]
+        //        self.navigationController?.pushViewController(postVC, animated: true)
+        //
         
         // segue to post_comment
         let postVC = self.storyboard?.instantiateViewControllerWithIdentifier("post_comment") as! post_comment
@@ -325,7 +331,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         }
         
         //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)){
-//        self.user_posts.removeAll(keepCapacity: false)
+        //        self.user_posts.removeAll(keepCapacity: false)
         self.posts.removeAll(keepCapacity: false)
         //}
         
@@ -341,7 +347,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
                 
                 print("user's post=====================================================")
                 
-
+                
                 
                 // =================================================================================
                 for (_ ,subJson):(String, SwiftyJSON.JSON) in json {
@@ -465,7 +471,9 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         let ava = self.storyboard?.instantiateViewControllerWithIdentifier("avaVC") as! avaVC
         
         // image pass
-        ava.ava = tempimage
+//        ava.ava = tempimage
+        
+        ava.avaUrl = self.avaUrl
         
         let navigationController = UINavigationController(rootViewController: ava)
         
@@ -496,7 +504,7 @@ class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,Pe
         // facebook logout 暫時不清空 只單用server token 判斷
         
         
-    
+        
         // View Segue
         let signin = self.storyboard?.instantiateViewControllerWithIdentifier("LoginController") as! LoginController
         let appDelegate : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

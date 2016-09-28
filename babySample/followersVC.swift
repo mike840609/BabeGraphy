@@ -49,6 +49,8 @@ class followersVC: UITableViewController {
         
         self.navigationItem.title = show?.uppercaseString
         
+        
+        
         if show == "followers"{
             // 載入追蹤者名單 確定設值後在進行比對
             loadUserFollowingsList()
@@ -58,11 +60,17 @@ class followersVC: UITableViewController {
         if show == "followings"{
             loadFollowings()
         }
+       
+        if show == "guestFollower"{
+            loadFollowerForGuest()
+        }
         
-        
+        if show == "guestFollowing"{
+            loadFollowingForGuest()
+        }
     }
     
-    // MARK: - Customer function
+    // MARK: - Customer function for Self
     func loadFollowers(){
         guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else{ return }
         
@@ -95,7 +103,6 @@ class followersVC: UITableViewController {
         }
     }
     
-    
     func loadFollowings(){
         
         guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else{ return }
@@ -112,8 +119,6 @@ class followersVC: UITableViewController {
                 
                 // 走訪陣列
                 for (_,subJson):(String, SwiftyJSON.JSON) in json["data"] {
-                    
-                    // print(subJson)
                     
                     self.follow.append(subJson)
                     
@@ -132,7 +137,7 @@ class followersVC: UITableViewController {
         
     }
     
-    // 追蹤中名單
+    // 追蹤中名單 追蹤比對用 比對用
     func loadUserFollowingsList(){
         
         guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else{ return }
@@ -164,14 +169,18 @@ class followersVC: UITableViewController {
         
     }
     
+    // MARK: - Customer function for Guest
+    func loadFollowerForGuest(){
+        
+    }
+    
+    func loadFollowingForGuest(){
+        
+    }
+    
+    
     
     // MARK: - Table view data source
-    
-    // cell height
-    //    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-    //        //  320 / 4 = 80
-    //        return self.view.frame.size.width / 4
-    //    }
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
