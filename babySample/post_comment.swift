@@ -58,7 +58,7 @@ class post_comment: UIViewController ,UITableViewDataSource,UITableViewDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         //        tableView.delegate = self
         //        tableView.dataSource = self
         
@@ -150,7 +150,7 @@ class post_comment: UIViewController ,UITableViewDataSource,UITableViewDelegate 
                                                          object: nil)
     }
     
-
+    
     
     func textFieldDidBeginEditing(textField: UITextField) {
         commentTextField = textField
@@ -166,7 +166,7 @@ class post_comment: UIViewController ,UITableViewDataSource,UITableViewDelegate 
         self.view.endEditing(true)
     }
     
-
+    
     
     func keyboardWasShown(notification: NSNotification) {
         let info = notification.userInfo!
@@ -178,7 +178,7 @@ class post_comment: UIViewController ,UITableViewDataSource,UITableViewDelegate 
     }
     
     func keyboardWillHide(notification: NSNotification) {
-
+        
         UIView.animateWithDuration(0.1, animations: { () -> Void in
             self.bottomAnchor.constant = 0
         })
@@ -207,6 +207,8 @@ class post_comment: UIViewController ,UITableViewDataSource,UITableViewDelegate 
         
         cell.comments = post?.comment_Users[indexPath.item]
         
+
+        
         
         return cell
     }
@@ -221,12 +223,12 @@ class post_comment: UIViewController ,UITableViewDataSource,UITableViewDelegate 
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
-//        let more = UITableViewRowAction(style: .Normal, title: "More") { action, index in
-//            print("more button tapped")
-//        }
-//        more.backgroundColor = UIColor(red:0.81, green:0.85, blue:0.87, alpha:1.00)
+        //        let more = UITableViewRowAction(style: .Normal, title: "More") { action, index in
+        //            print("more button tapped")
+        //        }
+        //        more.backgroundColor = UIColor(red:0.81, green:0.85, blue:0.87, alpha:1.00)
         
-        let comment = post?.comment_Users[indexPath.item]
+        _ = post?.comment_Users[indexPath.item]
         
         let Delete = UITableViewRowAction(style: .Normal, title: "Delete") { action, index in
             print("Delete button tapped")
@@ -264,28 +266,28 @@ class post_comment: UIViewController ,UITableViewDataSource,UITableViewDelegate 
         
         guard let content = commentTextField.text else {return}
         
-        ApiService.shareInstance.comment_post(post_id, content: content) { (json) in
-            
-            print(json)
-            
-            // 從本地端直接載入當前留言資料 =========================================
-            let comment = Comment()
-            if let user = user{
-                comment.user_name = user["data"][0][JSON_NAME].string
-                comment.content = content
-                comment.user_avatar = user["data"][0]["avatar"].string
-                comment.user_id = user["data"][0][JSON_ID].string
-            }
         
-            self.post?.comment_Users.append(comment)
-        
-            // ==========================================
-            self.commentTextField.text = nil
-            self.view.endEditing(true)
-            self.tableView.reloadData()
-            
-            
+        // 從本地端直接載入當前留言資料 =========================================
+        let comment = Comment()
+        if let user = user{
+            comment.user_name = user["data"][0][JSON_NAME].string
+            comment.content = content
+            comment.user_avatar = user["data"][0]["avatar"].string
+            comment.user_id = user["data"][0][JSON_ID].string
         }
+        
+        self.post?.comment_Users.append(comment)
+        self.commentTextField.text = nil
+        self.view.endEditing(true)
+        self.tableView.reloadData()
+        
+        
+        
+        // post to server =========================================
+        ApiService.shareInstance.comment_post(post_id, content: content) { (json) in
+                        print(json)
+        }
+        
     }
     
     

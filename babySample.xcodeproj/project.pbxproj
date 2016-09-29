@@ -243,6 +243,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4D0140B71D9CFDD800F33D46 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4D6DBB4C1D983E200039533C /* Baby_Fascicle.swift */,
+				4D6DBB4E1D98C1B10039533C /* multipleChoseVC.swift */,
+				4D6DBB501D98D3F80039533C /* album_searchVC.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		4D034CAF1D7F117500A7DFB8 /* EZYGradientView */ = {
 			isa = PBXGroup;
 			children = (
@@ -445,9 +455,7 @@
 		4D6DBB441D9834EE0039533C /* Baby_ Fascicle */ = {
 			isa = PBXGroup;
 			children = (
-				4D6DBB4C1D983E200039533C /* Baby_Fascicle.swift */,
-				4D6DBB4E1D98C1B10039533C /* multipleChoseVC.swift */,
-				4D6DBB501D98D3F80039533C /* album_searchVC.swift */,
+				4D0140B71D9CFDD800F33D46 /* Controller */,
 				4D6DBB571D98D9440039533C /* View */,
 				4D6DBB541D98D5DF0039533C /* Model */,
 			);

@@ -16,4 +16,6 @@ class Comment{
     var user_id:String?
     var user_name:String?
     
+    var create_time:String?
+    
 }

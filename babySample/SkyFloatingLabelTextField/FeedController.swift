@@ -407,7 +407,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                         // 串 comment 的 user
                         for (_ ,sub):(String, SwiftyJSON.JSON) in subJson["comments"]{
                             
-                            // print(sub)
+                             print(sub)
                             
                             let comment = Comment()
                             comment.user_id = sub["user_id"].string

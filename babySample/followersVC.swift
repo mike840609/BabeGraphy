@@ -243,14 +243,12 @@ class followersVC: UITableViewController {
         // 用id 判斷是否為本身
         // USER_ID
         if let id = NSUserDefaults.standardUserDefaults().stringForKey(USER_ID) {
+            
             if cell.followUserId == id{
                 cell.followBtn.hidden = true
             }
+            
         }
-        
-//        if cell.followUserId == user!["data"][0][JSON_ID].string{
-//            cell.followBtn.hidden = true
-//        }
         
         
         

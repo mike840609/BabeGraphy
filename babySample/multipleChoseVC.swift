@@ -24,7 +24,7 @@ class multipleChoseVC: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationItem.title = "0/8"
     }
 
 
@@ -85,16 +85,16 @@ class multipleChoseVC: UICollectionViewController {
             if selectedPhotos.count == 8 {
                 
                 let  uuid = NSUUID().UUIDString
-                
                 print(uuid)
-
     
                 ApiService.shareInstance.pdf_create(uuid, baby_name: "mike_test", url1: self.selectedPhotos[0], url2: self.selectedPhotos[1], url3: self.selectedPhotos[2], url4: self.selectedPhotos[3], url5: self.selectedPhotos[4], url6: self.selectedPhotos[5], url7: self.selectedPhotos[6], url8: self.selectedPhotos[7], completion: { (json) in
                     
                     self.dismissViewControllerAnimated(true, completion: nil)
-                    
+            
                 })
             }
+            
+            self.navigationController?.navigationItem.title = "\(selectedPhotos.count)/8"
             
         }else{
            
