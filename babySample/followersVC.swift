@@ -50,28 +50,35 @@ class followersVC: UITableViewController {
         self.navigationItem.title = show?.uppercaseString
         
         
-        
         if show == "followers"{
             // 載入追蹤者名單 確定設值後在進行比對
-            loadUserFollowingsList()
-            
+            loadUserFollowingsList(){
+                self.loadFollowers()
+            }
         }
         
         if show == "followings"{
             loadFollowings()
         }
-       
+        
         if show == "guestFollower"{
-            loadFollowerForGuest()
+            loadUserFollowingsList(){
+                self.loadFollowerForGuest()
+            }
         }
         
         if show == "guestFollowing"{
-            loadFollowingForGuest()
+            loadUserFollowingsList(){
+                self.loadFollowingForGuest()
+            }
         }
+        
+        
     }
     
     // MARK: - Customer function for Self
     func loadFollowers(){
+        
         guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else{ return }
         
         Alamofire.request(.POST, "http://140.136.155.143/api/connection/search_followers",parameters:["token":AccessToken]).validate().responseJSON { (response) in
@@ -83,7 +90,6 @@ class followersVC: UITableViewController {
                 print(json)
                 
                 let json = SwiftyJSON.JSON(json)
-                
                 
                 
                 // 走訪陣列
@@ -138,9 +144,12 @@ class followersVC: UITableViewController {
     }
     
     // 追蹤中名單 追蹤比對用 比對用
-    func loadUserFollowingsList(){
+    func loadUserFollowingsList(complection:()-> ()){
         
         guard let AccessToken = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else{ return }
+        
+        // 清空
+        self.myFollowingList.removeAll(keepCapacity: false)
         
         Alamofire.request(.POST, "http://140.136.155.143/api/connection/search_following",parameters: ["token":AccessToken]).validate().responseJSON { (response) in
             
@@ -155,7 +164,7 @@ class followersVC: UITableViewController {
                     self.myFollowingList.append(subJson)
                 }
                 
-                self.loadFollowers()
+                complection()
                 
             case .Failure(let error):
                 
@@ -172,10 +181,40 @@ class followersVC: UITableViewController {
     // MARK: - Customer function for Guest
     func loadFollowerForGuest(){
         
+        guard let gusetId = guestJSON.last?["user_id"].string else {return}
+        
+        follow.removeAll(keepCapacity: false)
+        
+        ApiService.shareInstance.getGuestFollowers(gusetId){ json in
+
+            
+            for (_,subJson):(String, SwiftyJSON.JSON) in json["data"] {
+                
+                self.follow.append(subJson)
+                
+            }
+            
+            self.tableView.reloadData()
+        }
+        
     }
     
     func loadFollowingForGuest(){
         
+        follow.removeAll(keepCapacity: false)
+        
+        guard let gusetId = guestJSON.last?["user_id"].string else {return}
+        
+        ApiService.shareInstance.getGuestFollowings(gusetId) { (json) in
+            
+            for (_,subJson):(String, SwiftyJSON.JSON) in json["data"] {
+                
+                self.follow.append(subJson)
+                
+            }
+            
+            self.tableView.reloadData()
+        }
     }
     
     
@@ -200,13 +239,23 @@ class followersVC: UITableViewController {
             cell.avaImg.hnk_setImageFromURL(NSURL(string: url)!)
         }
         
+        
         // 用id 判斷是否為本身
-        if cell.followUserId == user!["data"][0][JSON_ID].string{
-            cell.followBtn.hidden = true
+        // USER_ID
+        if let id = NSUserDefaults.standardUserDefaults().stringForKey(USER_ID) {
+            if cell.followUserId == id{
+                cell.followBtn.hidden = true
+            }
         }
+        
+//        if cell.followUserId == user!["data"][0][JSON_ID].string{
+//            cell.followBtn.hidden = true
+//        }
+        
+        
+        
         // 每一筆都要判斷是否有追蹤
         if show == "followers"{
-            
             // 追蹤按鈕判斷
             // 所有追蹤者 皆跟追蹤中的名單比對
             // 效率不好 會跑到 O(n^2) 效能需要改善
@@ -226,6 +275,30 @@ class followersVC: UITableViewController {
             cell.followBtn.backgroundColor = .greenColor()
         }
         
+        
+        if show == "guestFollower"{
+            
+            for item in myFollowingList {
+                
+                if (item["user_id"].string == follow[indexPath.item]["user_id"].string){
+                    cell.followBtn.setTitle("FOLLOWING", forState: .Normal)
+                    cell.followBtn.backgroundColor = .greenColor()
+                }
+            }
+
+        }
+        
+        
+        if show == "guestFollowing"{
+            
+            for item in myFollowingList {
+                if (item["user_id"].string == follow[indexPath.item]["user_id"].string){
+                    cell.followBtn.setTitle("FOLLOWING", forState: .Normal)
+                    cell.followBtn.backgroundColor = .greenColor()
+                }
+            }
+        }
+    
         return cell
     }
     

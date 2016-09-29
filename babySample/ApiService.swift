@@ -505,6 +505,54 @@ class ApiService: NSObject {
         
     }
     
+    // MARK: - GuestVC function
+    /*
+     http://140.136.155.143/api/connection/search_following_byid
+     http://140.136.155.143/api/connection/search_followers_byid
+     */
+
+    func getGuestFollowings(user_id :String,complection :(SwiftyJSON.JSON)->()){
+        
+        Alamofire.request(.POST, "http://140.136.155.143/api/connection/search_following_byid",parameters: ["user_id":user_id]).responseJSON { (response) in
+            
+            switch response.result{
+            case .Success(let json):
+                
+                let json = SwiftyJSON.JSON(json)
+                
+                
+                complection(json)
+                
+            case .Failure(let error):
+                print(error.localizedDescription)
+                
+            }
+        }
+        
+    }
+    
+    func getGuestFollowers(user_id :String,complection :(SwiftyJSON.JSON)->()){
+        
+        Alamofire.request(.POST, "http://140.136.155.143/api/connection/search_followers_byid",parameters: ["user_id":user_id]).responseJSON { (response) in
+            
+            switch response.result{
+            case .Success(let json):
+                
+                let json = SwiftyJSON.JSON(json)
+                
+                
+                complection(json)
+                
+            case .Failure(let error):
+                print(error.localizedDescription)
+                
+            }
+        }
+
+    }
+
+    
+    
     
     
     /*

@@ -437,7 +437,7 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
     func followersTap(){
         
         user = guestJSON.last!
-        show = "followers"
+        show = "guestFollower"
         
         let followers = self.storyboard?.instantiateViewControllerWithIdentifier("followersVC") as! followersVC
         self.navigationController?.pushViewController(followers, animated: true)
@@ -446,7 +446,7 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
     // 進到 guest 的追蹤中列表
     func followingsTap(){
         user = guestJSON.last!
-        show = "followings"
+        show = "guestFollowing"
         
         let followings = self.storyboard?.instantiateViewControllerWithIdentifier("followersVC") as! followersVC
         self.navigationController?.pushViewController(followings, animated: true)
