@@ -284,7 +284,11 @@ class ApiService: NSObject {
     
     func baby_delete(Baby_id : String , completion : (SwiftyJSON.JSON)-> ()){
         
-        Alamofire.request(.POST, "http://140.136.155.143/api/baby/delete",parameters: ["object_id":Baby_id]).responseJSON { (response) in
+//        Alamofire.request( BabyRouter.Router.baby_delete(Baby_id)).responseJSON {
+        
+        Alamofire.request(.POST, "\(BabyRouter.Router.baseURLString)/baby/delete",parameters: ["object_id":Baby_id]).responseJSON {
+        
+            (response) in
             switch response.result{
                 
             case .Success( let json):
@@ -636,9 +640,5 @@ class ApiService: NSObject {
         
         return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
     }
-    
-    
-    
-    
     
 }

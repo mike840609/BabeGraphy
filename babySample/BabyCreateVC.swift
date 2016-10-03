@@ -14,7 +14,7 @@ import PMAlertController
 
 class BabyCreateVC: UIViewController,UIPickerViewDataSource, UIPickerViewDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
-    let boolds = ["A","B","AB","O"]
+    let boolds = ["A","B","AB","O" , "Rh+", "Rh-" ,"Hh","P"]
     
     
     @IBOutlet weak var nameTextField: SkyFloatingLabelTextFieldWithIcon!

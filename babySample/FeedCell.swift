@@ -273,6 +273,10 @@ class FeedCell: UICollectionViewCell , NVActivityIndicatorViewable  {
             }
             if difference.weekOfMonth > 0 {
                 time_after_cal = "  \(difference.weekOfMonth) 週前"
+                
+                if difference.weekOfMonth > 3 {
+                    time_after_cal = "  \(created_at)"
+                }
             }
             
             attributedText.appendAttributedString(NSAttributedString(
