@@ -612,7 +612,6 @@ extension FeedController{
     func showCommentViewController(post:Post?){
         
         
-        
         // segue to post VC
         // let postVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostVC") as! PostVC
         // postVC.post = post

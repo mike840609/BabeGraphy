@@ -19,10 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-
+        
         // navigation bar
         UINavigationBar.appearance()
-
+        
         UINavigationBar.appearance().barTintColor = UIColor(red: 1.0, green: 0.5, blue: 0.67, alpha: 0.3)
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
         
@@ -37,8 +37,80 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // auto login
         login()
         
+        
+        
+        //添加icon 3d Touch
+        let firstItemIcon:UIApplicationShortcutIcon = UIApplicationShortcutIcon(type: .Compose)
+        let firstItem = UIMutableApplicationShortcutItem(type: "1", localizedTitle: "Post", localizedSubtitle: nil, icon: firstItemIcon, userInfo: nil)
+        
+        let firstItemIcon1:UIApplicationShortcutIcon = UIApplicationShortcutIcon(type: .Search)
+        let firstItem1 = UIMutableApplicationShortcutItem(type: "2", localizedTitle: "Search", localizedSubtitle: nil, icon: firstItemIcon1, userInfo: nil)
+        
+        let firstItemIcon2:UIApplicationShortcutIcon = UIApplicationShortcutIcon(type: .Home)
+        let firstItem2 = UIMutableApplicationShortcutItem(type: "3", localizedTitle: "Home", localizedSubtitle: nil, icon: firstItemIcon2, userInfo: nil)
+        
+        
+        
+        application.shortcutItems = [firstItem,firstItem1,firstItem2]
+        
         return true
     }
+    
+    
+    
+    /**
+     3D Segue
+     
+     - parameter application:       application
+     - parameter shortcutItem:      item
+     - parameter completionHandler: handler
+     */
+    
+    
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+        
+        let handledShortCutItem = handleShortCutItem(shortcutItem)
+        completionHandler(handledShortCutItem)
+    }
+    
+    
+    func handleShortCutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
+        
+        var handled = false
+        
+        if shortcutItem.type == "1" { //貼文
+            let storyboard:UIStoryboard = UIStoryboard(name:"Main",bundle: nil)
+            let myTabBar = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! UITabBarController
+            myTabBar.selectedIndex = 2
+            window?.rootViewController = myTabBar
+            handled = true
+            
+        }
+        
+        if shortcutItem.type == "2" { //搜尋
+            let storyboard:UIStoryboard = UIStoryboard(name:"Main",bundle: nil)
+            let myTabBar = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! UITabBarController
+            myTabBar.selectedIndex = 1
+            window?.rootViewController = myTabBar
+            handled = true
+            
+            
+        }
+        
+        if shortcutItem.type == "3" { //Home
+            
+            let storyboard:UIStoryboard = UIStoryboard(name:"Main",bundle: nil)
+            let myTabBar = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! UITabBarController
+            myTabBar.selectedIndex = 4
+            window?.rootViewController = myTabBar
+            handled = true
+        }
+        
+        return handled
+    }
+    
+    
+    
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         
@@ -69,6 +141,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
+    
+    
+    
     
     // MARK: - Core Data stack
     
@@ -146,8 +221,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let storyboard:UIStoryboard = UIStoryboard(name:"Main",bundle: nil)
             let myTabBar = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! UITabBarController
-            
             window?.rootViewController = myTabBar
+            
         }
         
     }
@@ -165,6 +240,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //    }
     
     
-
+    
 }
 
