@@ -543,7 +543,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zdl-PA-GBN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6373.5" y="2959.5"/>
+            <point key="canvasLocation" x="7185.5" y="2959.5"/>
         </scene>
         <!--Feed Controller-->
         <scene sceneID="T7E-G8-7uk">
@@ -830,11 +830,11 @@
             </objects>
             <point key="canvasLocation" x="2040.75" y="1974.5"/>
         </scene>
-        <!--Album-->
+        <!--Friend-->
         <scene sceneID="7dv-Aj-Azh">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KvY-bE-FQN" customClass="navVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Album" image="picture-icon" id="r1D-wY-zSO"/>
+                    <tabBarItem key="tabBarItem" title="Friend" image="requests_icon" id="r1D-wY-zSO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2rm-sO-tda">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1354,11 +1354,11 @@
             </objects>
             <point key="canvasLocation" x="5507.5" y="1929.5"/>
         </scene>
-        <!--Friend-->
+        <!--Album-->
         <scene sceneID="KXc-w1-7MC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ttc-Dt-5VM" customClass="navVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Friend" image="requests_icon" id="8kh-gk-Z8b"/>
+                    <tabBarItem key="tabBarItem" title="Album" image="picture-icon" id="8kh-gk-Z8b"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ygb-0c-isy">
@@ -2173,7 +2173,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VDG-1x-OMq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7920.5" y="866.5"/>
+            <point key="canvasLocation" x="8296.5" y="892.5"/>
         </scene>
         <!--Album searchVC-->
         <scene sceneID="nhU-2r-SpC">
@@ -2245,7 +2245,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VQH-87-Iql" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7108.5" y="2188.5"/>
+            <point key="canvasLocation" x="6844.5" y="2188.5"/>
         </scene>
         <!--Baby InfoVC-->
         <scene sceneID="daR-ak-MeG">
@@ -3108,6 +3108,149 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EUy-pc-fxC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5469.5" y="3.5"/>
+        </scene>
+        <!--Scanner-->
+        <scene sceneID="O4W-Dv-pD9">
+            <objects>
+                <viewController storyboardIdentifier="ScanVC" id="Bcw-6R-rWY" customClass="ScanVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uvx-sp-oCZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="0Zm-qk-UuK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PUw-QH-B3g">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No QR Code is detected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJW-yq-2LG">
+                                <rect key="frame" x="0.0" y="627" width="375" height="40"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="R5t-oq-eea"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="MJW-yq-2LG" firstAttribute="bottom" secondItem="0Zm-qk-UuK" secondAttribute="top" id="BRR-lr-ST4"/>
+                            <constraint firstAttribute="trailing" secondItem="MJW-yq-2LG" secondAttribute="trailing" id="eGe-jO-EDb"/>
+                            <constraint firstItem="MJW-yq-2LG" firstAttribute="leading" secondItem="PUw-QH-B3g" secondAttribute="leading" id="zLc-M4-IUy"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Scanner" id="xie-Bf-bfI">
+                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="3ZJ-vs-a7O">
+                            <color key="tintColor" red="0.99087923765182495" green="1" blue="0.97168034315109253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="dismiss:" destination="Bcw-6R-rWY" id="3rO-2e-Uk5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="messageLabel" destination="MJW-yq-2LG" id="105-wB-5nP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l0q-9S-Z8r" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7764.5" y="892.5"/>
+        </scene>
+        <!--NavVC-->
+        <scene sceneID="owx-Af-xQR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vIl-aB-BOW" customClass="navVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qoa-kf-iMm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Bcw-6R-rWY" kind="relationship" relationship="rootViewController" id="iSH-E5-0oc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zjn-Mi-qXX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7273" y="893"/>
+        </scene>
+        <!--QR-Code-->
+        <scene sceneID="Nc0-FI-hPx">
+            <objects>
+                <viewController storyboardIdentifier="GenVC" id="awv-cG-3Cu" customClass="GenVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5Fz-5Z-aai"/>
+                        <viewControllerLayoutGuide type="bottom" id="eye-Jn-ojf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JR5-lC-CFi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rTW-uU-Wwx">
+                                <rect key="frame" x="87" y="233" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="1m3-nq-O23"/>
+                                    <constraint firstAttribute="width" constant="200" id="ixM-bn-i8G"/>
+                                </constraints>
+                            </imageView>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="exo-TS-zjW">
+                                <rect key="frame" x="76" y="617" width="223" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="1RB-uW-jSU"/>
+                                    <constraint firstAttribute="width" constant="219" id="NgO-dM-RDA"/>
+                                </constraints>
+                                <color key="minimumTrackTintColor" red="0.75294117650000003" green="0.22352941179999999" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="thumbTintColor" red="0.82745098039999998" green="0.3294117647" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="changeImageViewScale:" destination="awv-cG-3Cu" eventType="valueChanged" id="3Qj-X9-9iX"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="exo-TS-zjW" secondAttribute="centerX" id="4rE-fE-YAb"/>
+                            <constraint firstAttribute="centerY" secondItem="rTW-uU-Wwx" secondAttribute="centerY" id="73l-Ir-c0n"/>
+                            <constraint firstAttribute="bottom" secondItem="exo-TS-zjW" secondAttribute="bottom" constant="20" symbolic="YES" id="F07-Fz-ECR"/>
+                            <constraint firstAttribute="centerX" secondItem="rTW-uU-Wwx" secondAttribute="centerX" id="F8G-ED-zB2"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="QR-Code" id="7WR-hm-emD">
+                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="iDG-Kl-Pd7">
+                            <color key="tintColor" red="0.99963909387588501" green="1" blue="0.99975615739822388" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="dismiss:" destination="awv-cG-3Cu" id="5YQ-hS-bS0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="imgQRCode" destination="rTW-uU-Wwx" id="qbu-4d-vte"/>
+                        <outlet property="slider" destination="exo-TS-zjW" id="AC3-Ka-23c"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8WA-Ps-bVQ" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7764.5" y="1649.5"/>
+        </scene>
+        <!--NavVC-->
+        <scene sceneID="dFJ-Ot-hxQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uow-4F-N5o" customClass="navVC" customModule="babySample" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="j1a-O9-3Y4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="awv-cG-3Cu" kind="relationship" relationship="rootViewController" id="1hD-mN-ro5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GCV-76-Dzl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7272.5" y="1649.5"/>
         </scene>
     </scenes>
     <resources>

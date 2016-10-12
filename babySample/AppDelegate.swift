@@ -43,15 +43,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let firstItemIcon:UIApplicationShortcutIcon = UIApplicationShortcutIcon(type: .Compose)
         let firstItem = UIMutableApplicationShortcutItem(type: "1", localizedTitle: "Post", localizedSubtitle: nil, icon: firstItemIcon, userInfo: nil)
         
-        let firstItemIcon1:UIApplicationShortcutIcon = UIApplicationShortcutIcon(type: .Search)
-        let firstItem1 = UIMutableApplicationShortcutItem(type: "2", localizedTitle: "Search", localizedSubtitle: nil, icon: firstItemIcon1, userInfo: nil)
+//        let firstItemIcon1:UIApplicationShortcutIcon = UIApplicationShortcutIcon(type: .Search)
+//        let firstItem1 = UIMutableApplicationShortcutItem(type: "2", localizedTitle: "Search", localizedSubtitle: nil, icon: firstItemIcon1, userInfo: nil)
         
         let firstItemIcon2:UIApplicationShortcutIcon = UIApplicationShortcutIcon(type: .Home)
         let firstItem2 = UIMutableApplicationShortcutItem(type: "3", localizedTitle: "Home", localizedSubtitle: nil, icon: firstItemIcon2, userInfo: nil)
         
+        let qrcodeIcon:UIApplicationShortcutIcon = UIApplicationShortcutIcon(templateImageName: "qrcode.png")
+        let qrcode = UIMutableApplicationShortcutItem(type: "4", localizedTitle: "Show Qrcode", localizedSubtitle: nil, icon: qrcodeIcon, userInfo: nil)
+
+        let scanIcon:UIApplicationShortcutIcon = UIApplicationShortcutIcon(templateImageName: "scanner.png")
+        let scanner = UIMutableApplicationShortcutItem(type: "5", localizedTitle: "Scan Qrcode", localizedSubtitle: nil, icon: scanIcon, userInfo: nil)
         
         
-        application.shortcutItems = [firstItem,firstItem1,firstItem2]
+        application.shortcutItems = [firstItem, /*firstItem1,*/ firstItem2,qrcode, scanner]
         
         return true
     }
@@ -98,11 +103,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if shortcutItem.type == "3" { //Home
-            
             let storyboard:UIStoryboard = UIStoryboard(name:"Main",bundle: nil)
             let myTabBar = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! UITabBarController
             myTabBar.selectedIndex = 4
             window?.rootViewController = myTabBar
+            handled = true
+        }
+        
+        if shortcutItem.type == "4" { //show
+            
+            // instance tabbarController.seledcted 4
+            let storyboard:UIStoryboard = UIStoryboard(name:"Main",bundle: nil)
+            let myTabBar = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! UITabBarController
+            myTabBar.selectedIndex = 4
+            window?.rootViewController = myTabBar
+            
+            // present scanner
+            let scannerVC = storyboard.instantiateViewControllerWithIdentifier("GenVC") as! GenVC
+            let navigationController = UINavigationController(rootViewController: scannerVC)
+            myTabBar.presentViewController(navigationController, animated: true, completion: nil)
+            
+            handled = true
+        }
+        
+        if shortcutItem.type == "5" { //scanne
+            
+            // instance tabbarController.seledcted 4
+            let storyboard:UIStoryboard = UIStoryboard(name:"Main",bundle: nil)
+            let myTabBar = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! UITabBarController
+            myTabBar.selectedIndex = 4
+            window?.rootViewController = myTabBar
+            
+            // present scanner
+            let scannerVC = storyboard.instantiateViewControllerWithIdentifier("ScanVC") as! ScanVC
+            let navigationController = UINavigationController(rootViewController: scannerVC)
+            myTabBar.presentViewController(navigationController, animated: true, completion: nil)
+            
             handled = true
         }
         

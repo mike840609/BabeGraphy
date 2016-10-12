@@ -32,7 +32,6 @@ class headerView: UICollectionReusableView {
         super.awakeFromNib()
         
         
-        
         /*
          
          // alignment

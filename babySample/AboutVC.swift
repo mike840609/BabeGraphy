@@ -12,24 +12,24 @@ import SafariServices
 
 class AboutVC: UITableViewController {
     
-    var sectionTitles = ["Leave Feedback", "Follow Us"]
-    var sectionContent = [["Rate us on App Store", "Tell us your feedback"],["Twitter", "Facebook", "Pinterest"]]
+    var sectionTitles = ["Leave Feedback", "Follow Us","QR Code"]
+    var sectionContent = [["Rate us on App Store", "Tell us your feedback"],["Twitter", "Facebook", "Pinterest"],["Scan QR-Code","My QR-Code"]]
     var links = [ "https://github.com/Cassiszuoan/laravel-restapi", "https://github.com/mike840609/BabeGraphy","https://www.google.com.tw/"]
-
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // 移除第二個區塊的空白列
         tableView.tableFooterView = UIView(frame: CGRectZero)
-
+        
     }
-
+    
     // MARK: - Table view data source
-
+    
     // Section
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     // Row
@@ -37,20 +37,22 @@ class AboutVC: UITableViewController {
         
         if section == 0{
             return 2
-        }else{
+        }else if section == 1{
             return 3
+        }else{
+            return 2
         }
     }
-
+    
     // title
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-     
+        
         return sectionTitles[section]
     }
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
         cell.textLabel?.text = sectionContent[indexPath.section][indexPath.row]
@@ -74,7 +76,7 @@ class AboutVC: UITableViewController {
             else if indexPath.row == 1{
                 
                 //tell us your feedback
-
+                
                 let safariController = SFSafariViewController(URL:NSURL(string: "https://www.google.com.tw/")!, entersReaderIfAvailable: true)
                 
                 presentViewController(safariController, animated: true, completion: nil)
@@ -86,6 +88,26 @@ class AboutVC: UITableViewController {
                 
                 let safariController = SFSafariViewController(URL:url, entersReaderIfAvailable: true)
                 presentViewController(safariController, animated: true, completion: nil)
+            }
+        // QR Code
+        case 2:
+            if indexPath.row == 0{
+                
+                let scannerVC = self.storyboard?.instantiateViewControllerWithIdentifier("ScanVC") as! ScanVC
+                
+                let navigationController = UINavigationController(rootViewController: scannerVC)
+                
+                self.presentViewController(navigationController, animated: true, completion: nil)
+                
+                
+            }else if indexPath.row == 1{
+                
+                
+                let genVC  = self.storyboard?.instantiateViewControllerWithIdentifier("GenVC") as! GenVC
+                
+                let navigationController = UINavigationController(rootViewController: genVC)
+                
+                self.presentViewController(navigationController, animated: true, completion: nil)
             }
             
         default:

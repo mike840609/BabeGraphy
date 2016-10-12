@@ -38,6 +38,10 @@ class guestVC: UICollectionViewController ,PeekPopPreviewingDelegate{
     
     var peekPop: PeekPop?
     
+    
+    
+    
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         

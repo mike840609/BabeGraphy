@@ -22,7 +22,7 @@ var user : SwiftyJSON.JSON?
 // temp image
 var tempimage:UIImage?
 
-class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,PeekPopPreviewingDelegate{
+class homeVC: UICollectionViewController ,UICollectionViewDelegateFlowLayout ,PeekPopPreviewingDelegate {
     
     var peekPop: PeekPop?
     
@@ -593,3 +593,4 @@ class PhotoBrowserCollectionViewCell: UICollectionViewCell {
         addSubview(imageView)
     }
 }
+
