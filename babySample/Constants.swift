@@ -34,4 +34,5 @@ let JSON_ACCESS_TOKEN = "access_token"
 let JSON_API_TOKEN = "api_accesstoken"
 let JSON_FB_TOKEN = "facebook_accesstoken"
 
-
+// Touch ID
+let TouchID = "TouchID"

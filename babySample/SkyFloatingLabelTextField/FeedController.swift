@@ -62,7 +62,12 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         collectionView?.addSubview(refresher)
         
         // Mark: - CollectionView Set
-        navigationItem.title = "BabeGraphy"
+        navigationItem.title = "BebeGraphy"
+        
+        self.navigationController?.navigationBar.titleTextAttributes =
+            [ NSFontAttributeName: UIFont(name: "Zapfino", size: 15)!,
+              NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
         collectionView!.alwaysBounceVertical = true
         collectionView!.backgroundColor = UIColor(white: 0.95, alpha: 1)
         self.collectionView!.registerClass(FeedCell.self, forCellWithReuseIdentifier: reuseIdentifier)

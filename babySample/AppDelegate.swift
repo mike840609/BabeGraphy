@@ -252,6 +252,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let AccessToken:String? = NSUserDefaults.standardUserDefaults().stringForKey(ACCESS_TOKEN)
         print("Auto login \n\(AccessToken)\n")
         
+        
+        // 判斷是否有開啟指紋辨識
+        if (NSUserDefaults.standardUserDefaults().boolForKey(TouchID)){
+            
+            print("指紋辨識狀態 :\(NSUserDefaults.standardUserDefaults().boolForKey(TouchID))")
+            
+            
+            
+        }
+        
+        
         // if logged in
         if AccessToken != nil {
             

@@ -40,7 +40,7 @@
                                     <action selector="loginBtnUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ers-uc-qq8"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BabeGraphy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eo6-be-bza">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BebeGraphy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eo6-be-bza">
                                 <rect key="frame" x="46" y="44" width="283" height="114"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="114" id="Z7y-wT-BUz"/>

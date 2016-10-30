@@ -8,14 +8,17 @@
 
 import UIKit
 import SafariServices
-
+import PMAlertController
 
 class AboutVC: UITableViewController {
     
-    var sectionTitles = ["Leave Feedback", "Follow Us","QR Code"]
-    var sectionContent = [["Rate us on App Store", "Tell us your feedback"],["Twitter", "Facebook", "Pinterest"],["Scan QR-Code","My QR-Code"]]
+    var sectionTitles = ["Leave Feedback", "Follow Us","QR Code" ,"Security"]
+    var sectionContent = [["Rate us on App Store", "Tell us your feedback"],["Twitter", "Facebook", "Pinterest"],["Scan QR-Code","My QR-Code"],["Touch ID (指紋識別)"]]
     var links = [ "https://github.com/Cassiszuoan/laravel-restapi", "https://github.com/mike840609/BabeGraphy","https://www.google.com.tw/"]
     
+    
+    let defaults = NSUserDefaults.standardUserDefaults()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +32,7 @@ class AboutVC: UITableViewController {
     
     // Section
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     // Row
@@ -39,14 +42,15 @@ class AboutVC: UITableViewController {
             return 2
         }else if section == 1{
             return 3
-        }else{
+        }else if section == 2{
             return 2
+        }else{
+            return 1
         }
     }
     
     // title
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
         return sectionTitles[section]
     }
     
@@ -56,6 +60,30 @@ class AboutVC: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
         cell.textLabel?.text = sectionContent[indexPath.section][indexPath.row]
+        
+        
+        
+        // 指紋識別
+        if (indexPath.section == 3 ){
+            if (indexPath.row == 0 ){
+                
+                let enabledSwitch = UISwitch(frame: CGRectZero) as UISwitch
+                cell.accessoryView = enabledSwitch
+                
+                // 變更同步按鈕設定 第一次跟用戶要權限
+                if (defaults.objectForKey(TouchID) != nil) {
+                    
+                    enabledSwitch.on = defaults.boolForKey(TouchID)
+                    enabledSwitch.addTarget(self, action: #selector (onClickMySwicth), forControlEvents: UIControlEvents.ValueChanged)
+                    
+                }else{ // first time
+                    
+                    enabledSwitch.on = false
+                    defaults.setBool(false, forKey: TouchID)
+                }
+                
+            }
+        }
         
         return cell
         
@@ -109,12 +137,44 @@ class AboutVC: UITableViewController {
                 
                 self.presentViewController(navigationController, animated: true, completion: nil)
             }
-            
+        case 3:
+            if  indexPath.row == 0{
+                print ("touch id")
+                
+            }
         default:
             break
         }
         
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
+    
+    
+    // TOUCH ID : 繼聰要求 安全性
+    
+    
+    internal func onClickMySwicth(sender: UISwitch){
+        
+        if sender.on {
+            
+            // 設定default data
+            defaults.setBool(true, forKey: TouchID)
+            
+            
+            
+            let alertVC = PMAlertController(title: "已為您開啟指紋識別", description: "注意:若非本人無法開啟", image: UIImage(named: "fingerprint.png"), style: .Alert)
+            alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: {
+                
+            }))
+            self.presentViewController(alertVC, animated: true, completion: nil)
+            
+            
+            
+        }
+        else {
+            defaults.setBool(false, forKey: TouchID)
+            
+        }
     }
     
 }
