@@ -14,6 +14,7 @@ import SwiftyJSON
 import NVActivityIndicatorView
 import SKPhotoBrowser
 
+
 import Social
 import Accounts
 
@@ -48,6 +49,10 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         self.view.addSubview(view)
         
         
+        
+        
+        
+        
     }
     
     override func viewDidLoad() {
@@ -65,7 +70,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
         navigationItem.title = "BebeGraphy"
         
         self.navigationController?.navigationBar.titleTextAttributes =
-            [ NSFontAttributeName: UIFont(name: "Zapfino", size: 15)!,
+            [ NSFontAttributeName: UIFont(name: "Avenir-Book", size: 18)!,
               NSForegroundColorAttributeName: UIColor.whiteColor()]
         
         collectionView!.alwaysBounceVertical = true
@@ -183,27 +188,46 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         
         
+        let rotationTransform: CATransform3D!
+        
+        
         if cellShown[indexPath.row] == false{
-        
-              cell.alpha = 0
-        
-             let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, -250, 10, 0)
             
-//            let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 500, 0)
+            // 未看過 用下方彈出
+            cell.alpha = 0
+            
+            /*
+             基偶判斷 左右彈出
+             if indexPath.row%2 == 0{
+             rotationTransform = CATransform3DTranslate(CATransform3DIdentity, -250, 10, 0)
+             }else{
+             rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 250,10 , 0)
+             }*/
+            
+            rotationTransform = CATransform3DTranslate(CATransform3DIdentity,0, 400, 0)
             
             cell.layer.transform = rotationTransform
             
             UIView.animateWithDuration(0.5) {
-                
                 cell.alpha = 1
-                
                 cell.layer.transform = CATransform3DIdentity
             }
-        
+            
             cellShown[indexPath.row] = true
-        }
+        }/*else{
+            //查看過 上方拉下動畫
+            rotationTransform = CATransform3DTranslate(CATransform3DIdentity,0, -50, 0)
+            
+            cell.layer.transform = rotationTransform
+            
+            UIView.animateWithDuration(0.5) {
+                cell.alpha = 1
+                cell.layer.transform = CATransform3DIdentity
+            }
+            
+        }*/
         
-
+        
         
     }
     
@@ -412,7 +436,7 @@ class FeedController: UICollectionViewController,UICollectionViewDelegateFlowLay
                         // 串 comment 的 user
                         for (_ ,sub):(String, SwiftyJSON.JSON) in subJson["comments"]{
                             
-                             print(sub)
+                            print(sub)
                             
                             let comment = Comment()
                             comment.user_id = sub["user_id"].string
@@ -628,10 +652,10 @@ extension FeedController{
         let postVC = self.storyboard?.instantiateViewControllerWithIdentifier("post_comment") as! post_comment
         postVC.post = post
         self.navigationController?.pushViewController(postVC, animated: true)
-
+        
         
     }
     
-
+    
 }
 

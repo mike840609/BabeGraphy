@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 import FBSDKCoreKit
 import FBSDKLoginKit
+import LocalAuthentication
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,39 +21,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        
         // navigation bar
         UINavigationBar.appearance()
-        
         UINavigationBar.appearance().barTintColor = UIColor(red: 1.0, green: 0.5, blue: 0.67, alpha: 0.3)
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
         
         // status bar
         application.statusBarStyle = .LightContent
         
-        
         // facebook delegate
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        
         // auto login
         login()
-        
-        
         
         //添加icon 3d Touch
         let firstItemIcon:UIApplicationShortcutIcon = UIApplicationShortcutIcon(type: .Compose)
         let firstItem = UIMutableApplicationShortcutItem(type: "1", localizedTitle: "Post", localizedSubtitle: nil, icon: firstItemIcon, userInfo: nil)
         
-//        let firstItemIcon1:UIApplicationShortcutIcon = UIApplicationShortcutIcon(type: .Search)
-//        let firstItem1 = UIMutableApplicationShortcutItem(type: "2", localizedTitle: "Search", localizedSubtitle: nil, icon: firstItemIcon1, userInfo: nil)
+        //        let firstItemIcon1:UIApplicationShortcutIcon = UIApplicationShortcutIcon(type: .Search)
+        //        let firstItem1 = UIMutableApplicationShortcutItem(type: "2", localizedTitle: "Search", localizedSubtitle: nil, icon: firstItemIcon1, userInfo: nil)
         
         let firstItemIcon2:UIApplicationShortcutIcon = UIApplicationShortcutIcon(type: .Home)
         let firstItem2 = UIMutableApplicationShortcutItem(type: "3", localizedTitle: "Home", localizedSubtitle: nil, icon: firstItemIcon2, userInfo: nil)
         
         let qrcodeIcon:UIApplicationShortcutIcon = UIApplicationShortcutIcon(templateImageName: "qrcode.png")
         let qrcode = UIMutableApplicationShortcutItem(type: "4", localizedTitle: "Show Qrcode", localizedSubtitle: nil, icon: qrcodeIcon, userInfo: nil)
-
+        
         let scanIcon:UIApplicationShortcutIcon = UIApplicationShortcutIcon(templateImageName: "scanner.png")
         let scanner = UIMutableApplicationShortcutItem(type: "5", localizedTitle: "Scan Qrcode", localizedSubtitle: nil, icon: scanIcon, userInfo: nil)
         
@@ -169,7 +165,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+    
     }
     
     func applicationWillTerminate(application: UIApplication) {
@@ -252,19 +249,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let AccessToken:String? = NSUserDefaults.standardUserDefaults().stringForKey(ACCESS_TOKEN)
         print("Auto login \n\(AccessToken)\n")
         
-        
-        // 判斷是否有開啟指紋辨識
-        if (NSUserDefaults.standardUserDefaults().boolForKey(TouchID)){
-            
-            print("指紋辨識狀態 :\(NSUserDefaults.standardUserDefaults().boolForKey(TouchID))")
-            
-            
-            
-        }
-        
-        
         // if logged in
-        if AccessToken != nil {
+        if AccessToken != nil{
+            /*
+            dispatch_async(dispatch_get_main_queue()) {
+                // MARK: - TouchID
+                // 判斷 是否 開啟 指紋辨識
+                if (NSUserDefaults.standardUserDefaults().boolForKey(TouchID)){
+                    
+                    print("指紋辨識狀態 :\(NSUserDefaults.standardUserDefaults().boolForKey(TouchID))")
+                    
+                    let authContext : LAContext = LAContext()
+                    var error : NSError?
+                    
+                    if  authContext.canEvaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, error: &error){
+                        
+                        authContext.evaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, localizedReason: "Touch ID", reply: { (wasSuccessful, error) in
+                            
+                            if wasSuccessful{
+                                print( "success")
+                                
+                            }else{
+                                
+                                
+                                
+                            }
+                            
+                            
+                        })
+                    }
+                }
+                
+                
+            }
+            
+            */
             
             let storyboard:UIStoryboard = UIStoryboard(name:"Main",bundle: nil)
             let myTabBar = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! UITabBarController
@@ -283,9 +302,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //        let rootNavigationViewController = UINavigationController(rootViewController: loginVC)
     //
     //        self.window!.rootViewController = rootNavigationViewController
-    //        
+    //
     //    }
     
+    
+    // MARK: - Security: TOUCHID
+    func checkIdentify () {
+    }
     
     
 }

@@ -161,14 +161,12 @@ class AboutVC: UITableViewController {
             defaults.setBool(true, forKey: TouchID)
             
             
-            
             let alertVC = PMAlertController(title: "已為您開啟指紋識別", description: "注意:若非本人無法開啟", image: UIImage(named: "fingerprint.png"), style: .Alert)
             alertVC.addAction(PMAlertAction(title: "OK", style: .Default, action: {
                 
             }))
+            
             self.presentViewController(alertVC, animated: true, completion: nil)
-            
-            
             
         }
         else {

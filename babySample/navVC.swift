@@ -14,8 +14,10 @@ class navVC: UINavigationController {
         super.viewDidLoad()
 
         // title color
-        self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
-        
+     navigationBar.titleTextAttributes =
+            [ NSFontAttributeName: UIFont(name: "Avenir-Book", size: 18)!,
+              NSForegroundColorAttributeName: UIColor.whiteColor()]
+
         // button tint color
         self.navigationBar.tintColor = .whiteColor()
 
