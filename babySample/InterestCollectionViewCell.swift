@@ -26,13 +26,14 @@ class InterestCollectionViewCell: UICollectionViewCell {
     private func updateUI()
     {
         interestTitleLabel?.text! = interest.title
-        featuredImageView.hnk_setImageFromURL(interest.featuredImage!)
+        
+        // featuredImageView.hnk_setImageFromURL(interest.featuredImage!)
+        
+        featuredImageView.image = UIImage(named: (interest.featuredImage?.absoluteString)!)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        
         self.layer.cornerRadius = 10.0
         self.clipsToBounds = true
     }

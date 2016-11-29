@@ -7,7 +7,7 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="FontAwesome.otf">
+        <mutableArray key="fontawesome-webfont.ttf">
             <string>FontAwesome</string>
             <string>FontAwesome</string>
             <string>FontAwesome</string>
@@ -991,6 +991,9 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="250" height="380"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ewx-Rh-apD">
+                                                                <rect key="frame" x="0.0" y="0.0" width="250" height="311"/>
+                                                            </imageView>
                                                             <view clipsSubviews="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="urw-WA-z9D" customClass="EZYGradientView" customModule="babySample" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="311" width="250" height="69"/>
                                                                 <subviews>
@@ -1027,9 +1030,6 @@
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isBlur" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ewx-Rh-apD">
-                                                                <rect key="frame" x="0.0" y="0.0" width="250" height="311"/>
-                                                            </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </view>
@@ -1064,7 +1064,7 @@
                                         <constraint firstItem="LvR-ae-oKG" firstAttribute="centerY" secondItem="21g-qC-D1o" secondAttribute="centerY" id="qPP-5a-gax"/>
                                     </constraints>
                                 </view>
-                                <blurEffect style="extraLight"/>
+                                <blurEffect style="light"/>
                             </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

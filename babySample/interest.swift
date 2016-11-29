@@ -31,6 +31,7 @@ class Interest
     
     // MARK: - Private
     // dummy data
+    /*
     static func createInterests() -> [Interest]
     {
         return [
@@ -42,7 +43,19 @@ class Interest
             Interest(title: "Reading News", description: "Get up to date with breaking-news. We walked to Antartica yesterday, and camped with some cute pinguines, and talked about this wonderful app idea. 🐧⛺️✨", featuredImage: "http://gd3.alicdn.com/bao/uploaded/i3/TB1cH8QIVXXXXXUaXXXXXXXXXXX_!!0-item_pic.jpg_400x400.jpg"),
         ]
     }
-    /*
-     
-     */
+    */
+    
+    static func createInterests() -> [Interest]
+    {
+        return [
+            Interest(title: "We Love Traveling Around the World", description: "We love backpack and adventures! We walked to Antartica yesterday, and camped with some cute pinguines, and talked about this wonderful app idea. 🐧⛺️✨", featuredImage: "album_cover.png"),
+            Interest(title: "Romance Stories", description: "We love romantic stories. We walked to Antartica yesterday, and camped with some cute pinguines, and talked about this wonderful app idea. 🐧⛺️✨", featuredImage: "album_cover_2.png"),
+            Interest(title: "iOS Dev", description: "Create beautiful apps. We walked to Antartica yesterday, and camped with some cute pinguines, and talked about this wonderful app idea. 🐧⛺️✨", featuredImage:"album_cover_3.png"),
+            Interest(title: "Race", description: "Cars and aircrafts and boats and sky. We walked to Antartica yesterday, and camped with some cute pinguines, and talked about this wonderful app idea. 🐧⛺️✨", featuredImage: "album_cover_4.png"),
+            Interest(title: "Personal Development", description: "Meet life with full presence. We walked to Antartica yesterday, and camped with some cute pinguines, and talked about this wonderful app idea. 🐧⛺️✨", featuredImage: "album_cover_5.png"),
+        ]
+    }
+    
+    
+    
 }

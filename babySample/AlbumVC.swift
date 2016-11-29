@@ -54,6 +54,7 @@ class AlbumVC: UIViewController {
         if menuVC is GuillotineAnimationDelegate {
             presentationAnimator.animationDelegate = menuVC as? GuillotineAnimationDelegate
         }
+        
         presentationAnimator.supportView = self.navigationController?.navigationBar
         presentationAnimator.presentButton = sender
         presentationAnimator.duration = 0.4
@@ -96,8 +97,6 @@ extension AlbumVC:UICollectionViewDataSource,UICollectionViewDelegate{
         
         // 判斷基數偶數(基數同一模板 偶數 同一模板) 參數值
         templateItems = indexPath.item%2 == 0 ?  8 : 5
-        
-        
         
         // 選好模板好跳頁
         getPosts {
