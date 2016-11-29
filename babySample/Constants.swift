@@ -36,3 +36,7 @@ let JSON_FB_TOKEN = "facebook_accesstoken"
 
 // Touch ID
 let TouchID = "TouchID"
+
+
+// 用來暫存 當前模板所需要的照片參數個數
+var templateItems:Int?

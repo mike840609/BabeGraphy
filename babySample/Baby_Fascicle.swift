@@ -27,6 +27,9 @@ class Baby_Fascicle: UIViewController , UIImagePickerControllerDelegate, UINavig
         
         ApiService.shareInstance.getUser_post(){ json  in
             
+            
+            self.posts.removeAll(keepCapacity: false)
+            
             for (_ ,subJson):(String, SwiftyJSON.JSON) in json {
                 
                 let post = Post()

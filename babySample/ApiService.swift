@@ -284,10 +284,10 @@ class ApiService: NSObject {
     
     func baby_delete(Baby_id : String , completion : (SwiftyJSON.JSON)-> ()){
         
-//        Alamofire.request( BabyRouter.Router.baby_delete(Baby_id)).responseJSON {
+        //        Alamofire.request( BabyRouter.Router.baby_delete(Baby_id)).responseJSON {
         
         Alamofire.request(.POST, "\(BabyRouter.Router.baseURLString)/baby/delete",parameters: ["object_id":Baby_id]).responseJSON {
-        
+            
             (response) in
             switch response.result{
                 
@@ -425,12 +425,18 @@ class ApiService: NSObject {
     
     //  MARK: - PDF  API
     /*
+     (模板一)
      http://140.136.155.143/api/album/html2pdf       parameter: token , album_name , baby_name , url1 , url2, url3, url4, url5, url6 , url7 , url8
-     http://140.136.155.143/api/album/search       parameter: token ,
+     
+     (模板二)
+     http://140.136.155.143/api/album/html2pdf2
+     
+     http://140.136.155.143/api/album/search         parameter: token
      */
     
+    
+    // 模板一
     func pdf_create (album_name:String, baby_name:String , url1:String, url2:String,url3:String,url4:String,url5:String,url6:String,url7:String,url8:String,  completion:(SwiftyJSON.JSON) -> ()){
-        
         guard let AccessToken:String = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {return}
         
         print(url1)
@@ -442,16 +448,13 @@ class ApiService: NSObject {
         print(url7)
         print(url8)
         
-        
         Alamofire.request(.POST,"http://140.136.155.143/api/album/html2pdf",
             parameters: ["token":AccessToken , "album_name": album_name , "baby_name":baby_name ,"url1":url1 , "url2":url2, "url3":url3, "url4":url4,"url5":url5,"url6":url6,"url7":url7 ,"url8":url8]).validate().responseJSON{ (response) in
                 
                 switch response.result{
-                    
                 case .Success(let json):
                     
                     let json = SwiftyJSON.JSON(json)
-                    
                     completion(json)
                     
                 case .Failure(let error):
@@ -459,6 +462,35 @@ class ApiService: NSObject {
                 }
         }
     }
+    
+    
+    // 模板二
+    func pdf_create2(album_name:String, baby_name:String , url1:String, url2:String,url3:String,url4:String,url5:String , completion:(SwiftyJSON.JSON) -> ()){
+        
+        guard let AccessToken:String = NSUserDefaults.standardUserDefaults().stringForKey("AccessToken") else {return}
+        
+        print(url1)
+        print(url2)
+        print(url3)
+        print(url4)
+        print(url5)
+
+        
+        Alamofire.request(.POST,"http://140.136.155.143/api/album/html2pdf2",
+            parameters: ["token":AccessToken , "album_name": album_name , "baby_name":baby_name ,"url1":url1 , "url2":url2, "url3":url3, "url4":url4,"url5":url5]).validate().responseJSON{ (response) in
+                
+                switch response.result{
+                case .Success(let json):
+                    
+                    let json = SwiftyJSON.JSON(json)
+                    completion(json)
+                    
+                case .Failure(let error):
+                    print(error.localizedDescription)
+                }
+        }
+    }
+
     
     func pdf_search ( completion:(SwiftyJSON.JSON) -> ()){
         
@@ -514,7 +546,7 @@ class ApiService: NSObject {
      http://140.136.155.143/api/connection/search_following_byid
      http://140.136.155.143/api/connection/search_followers_byid
      */
-
+    
     func getGuestFollowings(user_id :String,complection :(SwiftyJSON.JSON)->()){
         
         Alamofire.request(.POST, "http://140.136.155.143/api/connection/search_following_byid",parameters: ["user_id":user_id]).responseJSON { (response) in
@@ -552,9 +584,9 @@ class ApiService: NSObject {
                 
             }
         }
-
+        
     }
-
+    
     
     
     

@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class AlbumVC: UIViewController {
     
+    // 存每一篇po 文的屬性 comment & comment user property
+    var posts = [Post]()
+
     // MARK: - IBOutlet
     @IBOutlet weak var backgroundImageView:UIImageView!
     @IBOutlet weak var collectionView:UICollectionView!
@@ -30,8 +34,6 @@ class AlbumVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-
         
         // Change the height for 3.5-inch screen
         if UIScreen.mainScreen().bounds.size.height == 480.0 {
@@ -59,9 +61,11 @@ class AlbumVC: UIViewController {
         
     }
     
+    
+    
 }
 
-extension AlbumVC:UICollectionViewDataSource{
+extension AlbumVC:UICollectionViewDataSource,UICollectionViewDelegate{
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -71,6 +75,7 @@ extension AlbumVC:UICollectionViewDataSource{
     {
         return interests.count
     }
+    
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
@@ -84,6 +89,83 @@ extension AlbumVC:UICollectionViewDataSource{
         return cell
     }
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        print(indexPath.item)
+        
+        
+        // 判斷基數偶數(基數同一模板 偶數 同一模板) 參數值
+        templateItems = indexPath.item%2 == 0 ?  8 : 5
+        
+        
+        
+        // 選好模板好跳頁
+        getPosts {
+            let choiseVC = self.storyboard?.instantiateViewControllerWithIdentifier("multipleChoseVC") as! multipleChoseVC
+            choiseVC.posts = self.posts
+            self.navigationController?.pushViewController(choiseVC, animated: true)
+        }
+        
+    }
+    
+    
+    
+    
+    // get all posts
+    func getPosts (completion:() -> ()) {
+        
+        ApiService.shareInstance.getUser_post(){ json  in
+            
+            // 先清空陣列
+            self.posts.removeAll(keepCapacity: false)
+            
+            for (_ ,subJson):(String, SwiftyJSON.JSON) in json {
+                
+                let post = Post()
+                
+                post.author_name = subJson["author_name"].string
+                post.author_imgurl = subJson["author_imgurl"].string
+                post.author_id = subJson["author_id"].string
+                
+                post.created_at = subJson["created_at"].string
+                post.updated_at = subJson["updated_at"].string
+                
+                post.content = subJson["content"].string
+                post.small_imgurl = subJson["small_imgurl"].string
+                post.imgurl = subJson["imgurl"].string
+                post._id = subJson["_id"].string
+                
+                post.numComments = subJson["comments"].int == nil ? 0 : subJson["comments"].int
+                
+                // 串 likes 的 user
+                for (_ ,sub):(String, SwiftyJSON.JSON) in subJson["likes"]{
+                    
+                    // print(sub)
+                    
+                    let user = User()
+                    user.user_id = sub["user_id"].string
+                    user.user_name = sub["user_name"].string
+                    user.user_imgurl = sub["user_avatar"].string
+                    
+                    post.likes_Users.append(user)
+                }
+                
+                // 串 comment 的 user
+                for (_ ,sub):(String, SwiftyJSON.JSON) in subJson["comments"]{
+                    
+                    let comment = Comment()
+                    comment.user_id = sub["user_id"].string
+                    comment.user_name = sub["user_name"].string
+                    comment.user_avatar = sub["user_avatar"].string
+                    comment.content = sub["content"].string
+                    
+                    post.comment_Users.append(comment)
+                }
+                self.posts.append(post)
+            }
+            completion()
+        }
+    }
     
 }
 
@@ -107,7 +189,6 @@ extension AlbumVC : UIScrollViewDelegate {
 //        targetContentOffset.memory = offset
 //        
 //    }
-    
     
 }
 

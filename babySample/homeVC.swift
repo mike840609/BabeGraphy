@@ -579,6 +579,17 @@ class PhotoBrowserCollectionViewCell: UICollectionViewCell {
     
     var post: Post?
     
+    
+    // 判斷選取
+    
+    override var selected: Bool {
+        didSet {
+            self.alpha = self.selected ? 0.5 : 1.0
+            
+        }
+    }
+    
+    
     var request:Alamofire.Request?      //用此屬性來儲存Alamofire得請求來載入圖片
     
     required init(coder aDecoder: NSCoder) {
