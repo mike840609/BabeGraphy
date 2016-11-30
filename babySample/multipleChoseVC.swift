@@ -31,7 +31,10 @@ class multipleChoseVC: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationItem.title = "0/8"
+        
+        navigationItem.title = "Create"
+        
+        
         
         collectionView?.allowsMultipleSelection = true
         
@@ -97,22 +100,88 @@ class multipleChoseVC: UICollectionViewController {
                 
                 
                 // 輸入 相簿名稱
-                let  uuid = NSUUID().UUIDString
-                print(uuid)
-                
+                // let  uuid = NSUUID().UUIDString
+                // print(uuid)
+//                var nametemp:String?
                 
                 //  版型判斷
                 if templateItems == 8{
-                    ApiService.shareInstance.pdf_create(uuid, baby_name: "mike_test", url1: self.selectedPhotos[0], url2: self.selectedPhotos[1], url3: self.selectedPhotos[2], url4: self.selectedPhotos[3], url5: self.selectedPhotos[4], url6: self.selectedPhotos[5], url7: self.selectedPhotos[6], url8: self.selectedPhotos[7], completion: { (json) in
-//                        self.dismissViewControllerAnimated(true, completion: nil)
-                        self.navigationController?.popViewControllerAnimated(true)
+                    
+                    let alertController = UIAlertController(title: "Add New Name", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.Default, handler: {
+                        alert -> Void in
+                        
+                        let _ = alertController.textFields![0] as UITextField
+
+                        guard let name =  alertController.textFields![0].text else { return }
+                        
+                        ApiService.shareInstance.pdf_create(name, baby_name: "mike_test", url1: self.selectedPhotos[0], url2: self.selectedPhotos[1], url3: self.selectedPhotos[2], url4: self.selectedPhotos[3], url5: self.selectedPhotos[4], url6: self.selectedPhotos[5], url7: self.selectedPhotos[6], url8: self.selectedPhotos[7], completion: { (json) in
+                            
+                            self.navigationController?.popViewControllerAnimated(true)
+                        })
+                        
+                        
+                        
                     })
+                    
+                    let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
+                        (action : UIAlertAction!) -> Void in
+                        
+                    })
+                    
+                    alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+                        textField.placeholder = "Enter First Name"
+                    }
+
+                    
+                    alertController.addAction(saveAction)
+                    alertController.addAction(cancelAction)
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                    
+                 
 
                 }else if templateItems == 5 {
-                    ApiService.shareInstance.pdf_create2(uuid, baby_name: "mike_test", url1: self.selectedPhotos[0], url2: self.selectedPhotos[1], url3: self.selectedPhotos[2], url4: self.selectedPhotos[3], url5: self.selectedPhotos[4], completion: { (json) in
+                    
+                    
+                    let alertController = UIAlertController(title: "Add New Name", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.Default, handler: {
+                        alert -> Void in
+                        
+                        let _ = alertController.textFields![0] as UITextField
+                        guard let name =  alertController.textFields![0].text else { return }
+                        
+                        ApiService.shareInstance.pdf_create2(name, baby_name: "mike_test", url1: self.selectedPhotos[0], url2: self.selectedPhotos[1], url3: self.selectedPhotos[2], url4: self.selectedPhotos[3], url5: self.selectedPhotos[4], completion: { (json) in
+                            
+                            self.navigationController?.popViewControllerAnimated(true)
+                        })
 
-                        self.navigationController?.popViewControllerAnimated(true)
+                        
+                        
+
+                        
                     })
+                    
+                    let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
+                        (action : UIAlertAction!) -> Void in
+                        
+                    })
+                    
+                    alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+                        textField.placeholder = "Enter First Name"
+                    }
+                    
+                    
+                    alertController.addAction(saveAction)
+                    alertController.addAction(cancelAction)
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                    
+
+                    
+                    
 
                     
                 }

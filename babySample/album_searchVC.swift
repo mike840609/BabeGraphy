@@ -18,8 +18,8 @@ class album_searchVC: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         albums.removeAll(keepCapacity: false)
-        self.tableView.reloadData()
         
+        self.tableView.reloadData()
         getAlbums()
     }
 
@@ -28,8 +28,7 @@ class album_searchVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-//        getAlbums()
+        
     }
 
 
@@ -57,8 +56,6 @@ class album_searchVC: UITableViewController {
             }
             self.tableView.reloadData()
         }
-        
-
         
     }
     

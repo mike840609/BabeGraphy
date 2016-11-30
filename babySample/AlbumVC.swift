@@ -23,7 +23,6 @@ class AlbumVC: UIViewController {
     
     // MenuBar
     @IBOutlet weak var leftBarButton: UIButton!
-    
     private lazy var presentationAnimator = GuillotineTransitionAnimation()
     
     
@@ -34,12 +33,12 @@ class AlbumVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         // Change the height for 3.5-inch screen
         if UIScreen.mainScreen().bounds.size.height == 480.0 {
             let flowLayout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
             flowLayout.itemSize = CGSizeMake(250.0, 300.0)
         }
+        
     }
     
     private struct Storyboard{

@@ -28,7 +28,6 @@ class InterestCollectionViewCell: UICollectionViewCell {
         interestTitleLabel?.text! = interest.title
         
         // featuredImageView.hnk_setImageFromURL(interest.featuredImage!)
-        
         featuredImageView.image = UIImage(named: (interest.featuredImage?.absoluteString)!)
     }
     

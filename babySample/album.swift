@@ -12,11 +12,13 @@ class Album {
     
     var  _id:String?
     var  author_name:String?
+    
+    var  album_name:String?
     var  author_id:String?
     var  pdf_url:String?
     var  updated_at:String?
     var  created_at:String?
-
+    
     
     
     /*

@@ -8,90 +8,127 @@
 
 import UIKit
 import SwiftyJSON
+import SafariServices
 
-class Baby_Fascicle: UIViewController , UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class Baby_Fascicle: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate{
     
-    // 存每一篇po 文的屬性 comment & comment user property
-    var posts = [Post]()
+    
+    @IBOutlet weak var backgroundImageView:UIImageView!
+    @IBOutlet weak var collectionView:UICollectionView!
+    
+    
+    var albums :[Album] = []
+    
+    var fakeImage :[String] = [
+        "http://www.bayuche.com/uploads/files/image/image/200907071143181890.jpg",
+        "http://i.telegraph.co.uk/multimedia/archive/02464/baby_2464393b.jpg",
+        "http://www.thebabyshows.com/images/baby-landing.png",
+        "http://media.irishcentral.com/images/MI+Baby+brown+hair+blue+eyes+Irish+baby+names+iStock.jpg",
+        "http://gb.cri.cn/mmsource/images/2010/11/01/21/1770902844571060725.jpg",
+        "http://gd3.alicdn.com/bao/uploaded/i3/TB1cH8QIVXXXXXUaXXXXXXXXXXX_!!0-item_pic.jpg_400x400.jpg"
+    ]
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        navigationItem.title = "Album"
+        
+        
+        
+    }
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Change the height for 3.5-inch screen
+        if UIScreen.mainScreen().bounds.size.height == 480.0 {
+            let flowLayout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+            flowLayout.itemSize = CGSizeMake(250.0, 300.0)
+        }
+        
+        getAlbums()
+        
+    }
+    
+    private struct Storyboard{
+        static let CellIdentifier = "Cell"
+    }
+    
+    // collectionview datasource && delegate
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return   1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return albums.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Storyboard.CellIdentifier, forIndexPath: indexPath) as! InterestCollectionViewCell
+        
+        
+        cell.interestTitleLabel.text = albums[indexPath.item].album_name
+        cell.featuredImageView.hnk_setImageFromURL(NSURL(string:fakeImage[indexPath.item])!)
+        
+        cell.layer.cornerRadius = 4.0
+        
+        return cell
         
     }
     
     
     
     // MARK: - Customer function
-    // 獲取 user's posts
-    func getPosts (completion:() -> ()) {
-        
-        ApiService.shareInstance.getUser_post(){ json  in
+    
+    func getAlbums () {
+        ApiService.shareInstance.pdf_search { (json) in
             
-            
-            self.posts.removeAll(keepCapacity: false)
+            self.albums.removeAll(keepCapacity: false)
             
             for (_ ,subJson):(String, SwiftyJSON.JSON) in json {
                 
-                let post = Post()
+                print(subJson)
                 
-                post.author_name = subJson["author_name"].string
-                post.author_imgurl = subJson["author_imgurl"].string
-                post.author_id = subJson["author_id"].string
+                let album = Album()
                 
-                post.created_at = subJson["created_at"].string
-                post.updated_at = subJson["updated_at"].string
+                album._id = subJson["_id"].string
                 
-                post.content = subJson["content"].string
-                post.small_imgurl = subJson["small_imgurl"].string
-                post.imgurl = subJson["imgurl"].string
-                post._id = subJson["_id"].string
+                album.author_id = subJson["author_id"].string
+                album.pdf_url = subJson["pdf_url"].string
+                album.author_name = subJson["author_name"].string
+                album.album_name = subJson["album_name"].string
+                album.created_at = subJson["created_at"].string
+                album.updated_at = subJson["updated_at"].string
                 
-                post.numComments = subJson["comments"].int == nil ? 0 : subJson["comments"].int
+                self.albums.append(album)
                 
-                // 串 likes 的 user
-                for (_ ,sub):(String, SwiftyJSON.JSON) in subJson["likes"]{
-                    
-                    // print(sub)
-                    
-                    let user = User()
-                    user.user_id = sub["user_id"].string
-                    user.user_name = sub["user_name"].string
-                    user.user_imgurl = sub["user_avatar"].string
-                    
-                    post.likes_Users.append(user)
-                }
-                
-                // 串 comment 的 user
-                for (_ ,sub):(String, SwiftyJSON.JSON) in subJson["comments"]{
-                    
-                    let comment = Comment()
-                    comment.user_id = sub["user_id"].string
-                    comment.user_name = sub["user_name"].string
-                    comment.user_avatar = sub["user_avatar"].string
-                    comment.content = sub["content"].string
-                    
-                    post.comment_Users.append(comment)
-                }
-                
-                self.posts.append(post)
             }
-            
-            completion()
+            self.collectionView.reloadData()
         }
         
     }
     
-    @IBAction func CreateBook(sender: AnyObject) {
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+     
+        print(indexPath.item)
         
-        getPosts {
-            
-            let choiseVC = self.storyboard?.instantiateViewControllerWithIdentifier("multipleChoseVC") as! multipleChoseVC
-            
-            choiseVC.posts = self.posts
-            
-            self.navigationController?.pushViewController(choiseVC, animated: true)
-            
-        }
+        guard let url = albums[indexPath.item].pdf_url else { return}
+        
+        
+        
+        let safariController = SFSafariViewController(URL:NSURL(string: url)!, entersReaderIfAvailable: true)
+        
+        presentViewController(safariController, animated: true, completion: nil)
+    }
+    
+    
+    
+    @IBAction func CreateBook(sender: AnyObject) {
         
     }
     
@@ -101,7 +138,7 @@ class Baby_Fascicle: UIViewController , UIImagePickerControllerDelegate, UINavig
         let albumSearchVC = self.storyboard?.instantiateViewControllerWithIdentifier("album_searchVC") as! album_searchVC
         
         self.navigationController?.pushViewController(albumSearchVC, animated: true)
-
+        
         
     }
     
@@ -109,6 +146,6 @@ class Baby_Fascicle: UIViewController , UIImagePickerControllerDelegate, UINavig
     @IBAction func dismissVC(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion:nil)
     }
-    
-    
 }
+
+
