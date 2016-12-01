@@ -100,14 +100,14 @@ class multipleChoseVC: UICollectionViewController {
                 
                 
                 // 輸入 相簿名稱
-                // let  uuid = NSUUID().UUIDString
-                // print(uuid)
+                 let  uuid = NSUUID().UUIDString
+                 print(uuid)
 //                var nametemp:String?
                 
                 //  版型判斷
                 if templateItems == 8{
                     
-                    let alertController = UIAlertController(title: "Add New Name", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alertController = UIAlertController(title: "輸入相簿名稱", message: "", preferredStyle: UIAlertControllerStyle.Alert)
                     
                     let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.Default, handler: {
                         alert -> Void in
@@ -131,7 +131,7 @@ class multipleChoseVC: UICollectionViewController {
                     })
                     
                     alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
-                        textField.placeholder = "Enter First Name"
+                        textField.placeholder = "快為相簿輸入名字吧"
                     }
 
                     
@@ -145,7 +145,7 @@ class multipleChoseVC: UICollectionViewController {
                 }else if templateItems == 5 {
                     
                     
-                    let alertController = UIAlertController(title: "Add New Name", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alertController = UIAlertController(title: "輸入相簿名稱", message: "", preferredStyle: UIAlertControllerStyle.Alert)
                     
                     let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.Default, handler: {
                         alert -> Void in
@@ -170,7 +170,7 @@ class multipleChoseVC: UICollectionViewController {
                     })
                     
                     alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
-                        textField.placeholder = "Enter First Name"
+                        textField.placeholder = "快為相簿輸入名字吧"
                     }
                     
                     
@@ -179,17 +179,10 @@ class multipleChoseVC: UICollectionViewController {
                     
                     self.presentViewController(alertController, animated: true, completion: nil)
                     
-
-                    
-                    
-
-                    
                 }
                 
             }
-            
-            self.navigationController?.navigationItem.title = "\(selectedPhotos.count)/8"
-            
+                        
         }
     }
     

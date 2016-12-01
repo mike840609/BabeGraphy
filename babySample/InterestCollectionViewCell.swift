@@ -18,6 +18,8 @@ class InterestCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    var album: Album!
+    
     // MARK: - Private
     @IBOutlet weak var featuredImageView: UIImageView!
     @IBOutlet weak var interestTitleLabel: UILabel!

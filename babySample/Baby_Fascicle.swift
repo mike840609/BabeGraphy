@@ -32,9 +32,6 @@ class Baby_Fascicle: UIViewController,UIImagePickerControllerDelegate, UINavigat
         super.viewWillAppear(true)
         
         navigationItem.title = "Album"
-        
-        
-        
     }
     
     
@@ -73,7 +70,8 @@ class Baby_Fascicle: UIViewController,UIImagePickerControllerDelegate, UINavigat
         
         
         cell.interestTitleLabel.text = albums[indexPath.item].album_name
-        cell.featuredImageView.hnk_setImageFromURL(NSURL(string:fakeImage[indexPath.item])!)
+        
+        cell.featuredImageView.hnk_setImageFromURL(NSURL(string:fakeImage[indexPath.item%6])!)
         
         cell.layer.cornerRadius = 4.0
         
@@ -97,7 +95,6 @@ class Baby_Fascicle: UIViewController,UIImagePickerControllerDelegate, UINavigat
                 let album = Album()
                 
                 album._id = subJson["_id"].string
-                
                 album.author_id = subJson["author_id"].string
                 album.pdf_url = subJson["pdf_url"].string
                 album.author_name = subJson["author_name"].string
@@ -114,16 +111,21 @@ class Baby_Fascicle: UIViewController,UIImagePickerControllerDelegate, UINavigat
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-     
-        print(indexPath.item)
+    
+        if let url =  albums[indexPath.item].pdf_url{
+            
+            let url = NSURL(string: url)
+            
+            print(url)
+            
+            let safariController = SFSafariViewController(URL:url!, entersReaderIfAvailable: true)
+            
+            
+            
+            presentViewController(safariController, animated: true, completion: nil)
+            
+        }
         
-        guard let url = albums[indexPath.item].pdf_url else { return}
-        
-        
-        
-        let safariController = SFSafariViewController(URL:NSURL(string: url)!, entersReaderIfAvailable: true)
-        
-        presentViewController(safariController, animated: true, completion: nil)
     }
     
     
